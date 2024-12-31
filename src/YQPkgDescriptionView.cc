@@ -256,8 +256,6 @@ YQPkgDescriptionView::readDesktopFile( const QString & fileName ) const
     QString name;
 
     QSettings file( fileName, QSettings::IniFormat );
-    file.setIniCodec( "UTF-8");
-
     file.beginGroup( "Desktop Entry" );
     desktopEntries["Icon"] = file.value( "Icon" ).toString();
     desktopEntries["Exec"] = file.value( "Exec" ).toString();
