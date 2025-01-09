@@ -86,7 +86,7 @@ QPixmap
 YQIconPool::cachedIcon( const QString icon_name, const bool enabled )
 {
     Q_INIT_RESOURCE( icons );
-    QPixmap iconPixmap = _iconCache[ icon_name + enabled ];
+    QPixmap iconPixmap = _iconCache[ icon_name + (enabled ? 'e' : 'd') ];
 
     if ( !iconPixmap )
     {
@@ -101,7 +101,7 @@ YQIconPool::cachedIcon( const QString icon_name, const bool enabled )
         }
     }
 
-    _iconCache.insert( icon_name + enabled, iconPixmap );
+    _iconCache.insert( icon_name + (enabled ? 'e' : 'd'), iconPixmap );
 
     return iconPixmap;
 }
@@ -110,7 +110,7 @@ YQIconPool::cachedIcon( const QString icon_name, const bool enabled )
 QPixmap
 YQIconPool::loadIcon( const QString icon_name, const bool enabled )
 {
-    QPixmap iconPixmap = _iconCache[ icon_name + enabled ];
+    QPixmap iconPixmap = _iconCache[ icon_name + (enabled ? 'e' : 'd') ];
 
     if ( QIcon::hasThemeIcon( icon_name ) )
     {
