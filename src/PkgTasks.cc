@@ -245,7 +245,7 @@ PkgTasks::PkgTasks()
     , _done     ( "done"      )
     , _failed   ( "failed"    )
 {
-    logDebug() << endl;
+    logDebug() << Qt::endl;
 }
 
 
@@ -253,7 +253,7 @@ PkgTasks::~PkgTasks()
 {
     clearAll();
 
-    logDebug() << "Destroying PkgTasks done" << endl;
+    logDebug() << "Destroying PkgTasks done" << Qt::endl;
 }
 
 
@@ -273,7 +273,7 @@ void PkgTasks::nuke( PkgTaskList & list )
     {
         logDebug() << "Nuking PkgTaskList \"" << list.name()
                    << "\"  size:" << list.size()
-                   << endl;
+                   << Qt::endl;
 
         qDeleteAll( list );
         list.clear();
@@ -289,7 +289,7 @@ void PkgTasks::moveTask( PkgTask *      task,
 
     if ( index < 0 )
     {
-        logError() << "Task " << task->name() << " not found in this list" << endl;
+        logError() << "Task " << task->name() << " not found in this list" << Qt::endl;
         return;
     }
 
@@ -361,7 +361,7 @@ void PkgTasks::initFromZypp()
                     task->setInstalledSize( installed->installSize() );
             }
 
-            logInfo() << "New task " << task << endl;
+            logInfo() << "New task " << task << Qt::endl;
             _todo.append( task );
         }
     }

@@ -123,7 +123,7 @@ YQPkgList::addPkgItem( ZyppSel  selectable,
 
     if ( ! selectable )
     {
-        logError() << "NULL zypp::ui::Selectable!" << endl;
+        logError() << "NULL zypp::ui::Selectable!" << Qt::endl;
         return;
     }
 
@@ -498,7 +498,7 @@ YQPkgList::globalSetPkgStatus( ZyppStatus newStatus, bool force, bool countOnly 
                     selectable->setStatus( newStatus );
 
                 changedCount++;
-                // logInfo() << "Updating " << selectable->name() << endl;
+                // logInfo() << "Updating " << selectable->name() << Qt::endl;
             }
         }
     }

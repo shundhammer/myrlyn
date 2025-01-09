@@ -62,14 +62,14 @@ SummaryPage::SummaryPage( QWidget * parent )
 
 SummaryPage::~SummaryPage()
 {
-    logDebug() << "Destroying SummaryPage..." << endl;
+    logDebug() << "Destroying SummaryPage..." << Qt::endl;
     writeSettings();
 
     if ( _countdownMenu )
         delete _countdownMenu;
 
     delete _ui;
-    logDebug() << "Destroying SummaryPage done" << endl;
+    logDebug() << "Destroying SummaryPage done" << Qt::endl;
 }
 
 
@@ -152,7 +152,7 @@ void SummaryPage::stopCountdown()
 
 void SummaryPage::timeout()
 {
-    logInfo() << "Summary page timeout -> finishing" << endl;
+    logInfo() << "Summary page timeout -> finishing" << Qt::endl;
     // _ui->countdownLabel->setText( "0" );
     MainWindow::processEvents();
 
@@ -207,7 +207,7 @@ void SummaryPage::configureCountdown( QAction * action )
     if ( action )
     {
         _countdownSec = action->data().toInt();
-        logDebug() << "Setting new countdown: " << _countdownSec << endl;
+        logDebug() << "Setting new countdown: " << _countdownSec << Qt::endl;
 
         startCountdown();  // this also updates the widgets
     }

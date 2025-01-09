@@ -50,21 +50,21 @@ MyrlynWorkflowStep::MyrlynWorkflowStep( MyrlynApp * app,
     , _doProcessEvents( false )
     , _doDeletePage( true )
 {
-    logDebug() << "Creating step " << _id << endl;
+    logDebug() << "Creating step " << _id << Qt::endl;
 }
 
 
 MyrlynWorkflowStep::~MyrlynWorkflowStep()
 {
-    logDebug() << "Destroying step " << _id << "..." << endl;
+    logDebug() << "Destroying step " << _id << "..." << Qt::endl;
 
     if ( _doDeletePage && _page )
     {
-        logDebug() << "  Deleting page of step " << _id << endl;
+        logDebug() << "  Deleting page of step " << _id << Qt::endl;
         delete _page;
     }
 
-    logDebug() << "Destroying step " << _id << " done" << endl;
+    logDebug() << "Destroying step " << _id << " done" << Qt::endl;
 }
 
 
@@ -87,7 +87,7 @@ void MyrlynWorkflowStep::ensurePage()
 
     if ( ! _page )      // Still no page?
     {
-        logError() << "FATAL: Implement one of page() or createPage()" << endl;
+        logError() << "FATAL: Implement one of page() or createPage()" << Qt::endl;
         CHECK_PTR( _page );
     }
 
@@ -98,7 +98,7 @@ void MyrlynWorkflowStep::ensurePage()
 void MyrlynWorkflowStep::activate( bool goingForward )
 {
     Q_UNUSED( goingForward );
-    logDebug() << "Activating step " << _id << endl;
+    logDebug() << "Activating step " << _id << Qt::endl;
 
     ensurePage();
     _app->mainWin()->showPage( _page );
@@ -114,12 +114,12 @@ void MyrlynWorkflowStep::nextPage( bool goingForward )
 
     if ( goingForward || _app->workflow()->historyEmpty() )
     {
-        logDebug() << "_app->next()" << endl;
+        logDebug() << "_app->next()" << Qt::endl;
         _app->next();
     }
     else
     {
-        logDebug() << "_app->back()" << endl;
+        logDebug() << "_app->back()" << Qt::endl;
         _app->back();
     }
 }
@@ -152,7 +152,7 @@ void InitReposStep::initRepos()
     if ( _reposInitialized )
         return;
 
-    logDebug() << "Initializing zypp..." << endl;
+    logDebug() << "Initializing zypp..." << Qt::endl;
 
     MyrlynRepoManager * repoMan = _app->repoManager();
     CHECK_PTR( repoMan );
@@ -176,7 +176,7 @@ void InitReposStep::initRepos()
     repoMan->initTarget();
     repoMan->attachRepos();
 
-    logDebug() << "Initializing zypp done" << endl;
+    logDebug() << "Initializing zypp done" << Qt::endl;
     _reposInitialized = true;
 }
 

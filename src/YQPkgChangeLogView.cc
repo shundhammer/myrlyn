@@ -48,7 +48,7 @@ YQPkgChangeLogView::showDetails( ZyppSel selectable )
 	return;
     }
 
-    // logVerbose() << "Generating changelog..." << endl;
+    // logVerbose() << "Generating changelog..." << Qt::endl;
 
     QString html = htmlStart();
     html += htmlHeading( selectable, false );
@@ -81,7 +81,7 @@ YQPkgChangeLogView::showDetails( ZyppSel selectable )
 
 QString YQPkgChangeLogView::changeLogTable( const zypp::Changelog & changeLog ) const
 {
-    // logVerbose () << "Changelog size: " << changeLog.size() << " entries" << endl;
+    // logVerbose () << "Changelog size: " << changeLog.size() << " entries" << Qt::endl;
 
     QString html;
     int count = 0;

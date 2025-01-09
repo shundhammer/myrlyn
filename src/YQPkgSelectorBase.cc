@@ -78,13 +78,13 @@ YQPkgSelectorBase::YQPkgSelectorBase( QWidget * parent,
     zyppPool().saveState<zypp::Patch    >();
 
     _blockResolver = false;
-    logInfo() << "PackageSelectorBase init done" << endl;
+    logInfo() << "PackageSelectorBase init done" << Qt::endl;
 }
 
 
 YQPkgSelectorBase::~YQPkgSelectorBase()
 {
-    logInfo() << "Destroying PackageSelectorBase" << endl;
+    logInfo() << "Destroying PackageSelectorBase" << Qt::endl;
 }
 
 
@@ -92,14 +92,14 @@ void YQPkgSelectorBase::reset()
 {
     resetResolver();
 
-    // logDebug() << "Sending resetNotify()" << endl;
+    // logDebug() << "Sending resetNotify()" << Qt::endl;
     emit resetNotify();
 }
 
 
 void YQPkgSelectorBase::resetResolver()
 {
-    logInfo() << "Resetting resolver" << endl;
+    logInfo() << "Resetting resolver" << Qt::endl;
 
     zypp::getZYpp()->resolver()->setUpdateMode( false );  // No package update  mode
     zypp::getZYpp()->resolver()->setUpgradeMode( false ); // No dist    upgrade mode
@@ -113,7 +113,7 @@ int YQPkgSelectorBase::resolveDependencies()
 
     if ( ! _pkgConflictDialog )
     {
-        logError() << "No package conflict dialog existing" << endl;
+        logError() << "No package conflict dialog existing" << Qt::endl;
         return QDialog::Rejected;
     }
 
@@ -134,7 +134,7 @@ int YQPkgSelectorBase::verifySystem()
 {
     if ( ! _pkgConflictDialog )
     {
-        logError() << "No package conflict dialog existing" << endl;
+        logError() << "No package conflict dialog existing" << Qt::endl;
         return QDialog::Accepted;
     }
 
@@ -210,13 +210,13 @@ bool YQPkgSelectorBase::pendingChanges()
     if ( changes )
     {
         if ( zyppPool().diffState<zypp::Package>() )
-            logInfo() << "diffState() reports changed packages" << endl;
+            logInfo() << "diffState() reports changed packages" << Qt::endl;
 
         if ( zyppPool().diffState<zypp::Pattern>() )
-            logInfo() << "diffState() reports changed patterns" << endl;
+            logInfo() << "diffState() reports changed patterns" << Qt::endl;
 
         if ( zyppPool().diffState<zypp::Patch>() )
-            logInfo() << "diffState() reports changed patches" << endl;
+            logInfo() << "diffState() reports changed patches" << Qt::endl;
     }
 
     return changes;
@@ -230,7 +230,7 @@ void YQPkgSelectorBase::reject()
 
     if ( ! MyrlynApp::runningAsRoot() && changes )
     {
-        logInfo() << "Read-only mode (no root privileges) - abandoning changes" << endl;
+        logInfo() << "Read-only mode (no root privileges) - abandoning changes" << Qt::endl;
         changes = false;
     }
 
@@ -254,13 +254,13 @@ void YQPkgSelectorBase::reject()
         zyppPool().restoreState<zypp::Pattern  >();
         zyppPool().restoreState<zypp::Patch    >();
 
-        logInfo() << "Quitting the application" << endl;
+        logInfo() << "Quitting the application" << Qt::endl;
 
         MyrlynApp::instance()->quit();
     }
     else
     {
-        logInfo() << "Returning to package selector" << endl;
+        logInfo() << "Returning to package selector" << Qt::endl;
 
         // User changed his mind - don't reject
     }
@@ -308,7 +308,7 @@ void YQPkgSelectorBase::accept()
 
     if ( confirmUnsupported() )
     {
-        logInfo() << "Confirm unsupported packages enabled." << endl;
+        logInfo() << "Confirm unsupported packages enabled." << Qt::endl;
         // Show which packages are unsupported
 
         QString msg =
@@ -343,12 +343,12 @@ void YQPkgSelectorBase::accept()
     if ( ! MyrlynApp::instance()->pkgTasks()->todo().isEmpty()
          || pendingChanges() )
     {
-        logInfo() << "Closing PackageSelector with 'commit'" << endl;
+        logInfo() << "Closing PackageSelector with 'commit'" << Qt::endl;
         emit commit();
     }
     else
     {
-        logInfo() << "No changes - closing PackageSelector with 'finished'" << endl;
+        logInfo() << "No changes - closing PackageSelector with 'finished'" << Qt::endl;
         emit finished();
     }
 }
@@ -356,7 +356,7 @@ void YQPkgSelectorBase::accept()
 
 bool YQPkgSelectorBase::showPendingLicenseAgreements()
 {
-    logInfo() << "Showing all pending license agreements" << endl;
+    logInfo() << "Showing all pending license agreements" << Qt::endl;
 
     bool allConfirmed = true;
 
@@ -390,17 +390,17 @@ bool YQPkgSelectorBase::showPendingLicenseAgreements( ZyppPoolIterator begin, Zy
 
                     if ( ! licenseText.empty() )
                     {
-                        logInfo() << "Resolvable " << sel->name() << " has a license agreement" << endl;
+                        logInfo() << "Resolvable " << sel->name() << " has a license agreement" << Qt::endl;
 
                         if( ! sel->hasLicenceConfirmed() )
                         {
-                            logDebug() << "Showing license agreement for resolvable " << sel->name() << endl;
+                            logDebug() << "Showing license agreement for resolvable " << sel->name() << Qt::endl;
                             allConfirmed = YQPkgObjListItem::showLicenseAgreement( sel ) && allConfirmed;
                         }
                         else
                         {
                             logInfo() << "Resolvable " << sel->name()
-                                      << "'s  license is already confirmed" << endl;
+                                      << "'s  license is already confirmed" << Qt::endl;
                         }
                     }
                 }
@@ -431,7 +431,7 @@ void YQPkgSelectorBase::resetIgnoredDependencyProblems()
 
 void YQPkgSelectorBase::closeEvent( QCloseEvent * event )
 {
-    logInfo() << "Caught WM_CLOSE" << endl;
+    logInfo() << "Caught WM_CLOSE" << Qt::endl;
 
     event->ignore();
     reject();

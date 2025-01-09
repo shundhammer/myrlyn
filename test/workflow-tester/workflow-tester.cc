@@ -30,13 +30,13 @@ public:
 
 void TestWfStep::activate( bool goingForward )
 {
-    logDebug() << "  +++ " << _id << endl;
+    logDebug() << "  +++ " << _id << Qt::endl;
 }
 
 
 void TestWfStep::deactivate( bool goingForward )
 {
-    logDebug() << "--- " << _id << endl;
+    logDebug() << "--- " << _id << Qt::endl;
 }
 
 
@@ -59,7 +59,7 @@ int main( int argc, char *argv[] )
     workflow->start();
 
 
-    logDebug() << "Going through the workflow past the end" << endl;
+    logDebug() << "Going through the workflow past the end" << Qt::endl;
 
     for ( int i=0; i < workflowSteps.size() + 2; i++ )
     {
@@ -68,7 +68,7 @@ int main( int argc, char *argv[] )
 
     sleep( 1 );
     logNewline();
-    logDebug() << "Going back 3 steps" << endl;
+    logDebug() << "Going back 3 steps" << Qt::endl;
 
     for ( int i=0; i < 3; i++ )
     {
@@ -77,35 +77,35 @@ int main( int argc, char *argv[] )
 
     sleep( 1 );
     logNewline();
-    logDebug() << "Going to page 104 directly" << endl;
+    logDebug() << "Going to page 104 directly" << Qt::endl;
 
     workflow->gotoStep( "Page 104" );
 
     sleep( 1 );
     logNewline();
-    logDebug() << "Restarting the workflow" << endl;
+    logDebug() << "Restarting the workflow" << Qt::endl;
 
     workflow->restart();
 
     logDebug() << "The history should be empty now: "
                << QString( workflow->historyEmpty() ? "empty" : "not empty" )
-               << endl;
+               << Qt::endl;
 
     sleep( 1 );
     logNewline();
-    logDebug() << "Trying to go back 2 times" << endl;
+    logDebug() << "Trying to go back 2 times" << Qt::endl;
     workflow->back();
     workflow->back();
 
-    logDebug() << "Current step: " << workflow->currentStep()->id() << endl;
+    logDebug() << "Current step: " << workflow->currentStep()->id() << Qt::endl;
 
     sleep( 1 );
     logNewline();
-    logDebug() << "Going forward until the end" << endl;
+    logDebug() << "Going forward until the end" << Qt::endl;
 
     while ( ! workflow->atLastStep() )
     {
-        logDebug() << "Next" << endl;
+        logDebug() << "Next" << Qt::endl;
 
         workflow->next();
     }
@@ -113,11 +113,11 @@ int main( int argc, char *argv[] )
 
     sleep( 1 );
     logNewline();
-    logDebug() << "Going backward until the start of the history" << endl;
+    logDebug() << "Going backward until the start of the history" << Qt::endl;
 
     while ( ! workflow->historyEmpty() )
     {
-        logDebug() << "Back" << endl;
+        logDebug() << "Back" << Qt::endl;
 
         workflow->back();
     }
@@ -125,7 +125,7 @@ int main( int argc, char *argv[] )
 
     sleep( 1 );
     logNewline();
-    logDebug() << "Going on a wild ride" << endl;
+    logDebug() << "Going on a wild ride" << Qt::endl;
 
     workflow->gotoStep( "Rare Page 99" ); // the one that is usually skipped
     workflow->gotoStep( "Page 104" );
@@ -136,7 +136,7 @@ int main( int argc, char *argv[] )
 
     sleep( 1 );
     logNewline();
-    logDebug() << "Going backward until the start of the history" << endl;
+    logDebug() << "Going backward until the start of the history" << Qt::endl;
 
     while ( ! workflow->historyEmpty() )
     {

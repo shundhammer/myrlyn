@@ -287,7 +287,7 @@ YQPkgFilterTab::showPage( const QString & internalName )
     if ( page )
         showPage( page );
     else
-        logWarning() << "No page with ID \"" << internalName << "\"" << endl;
+        logWarning() << "No page with ID \"" << internalName << "\"" << Qt::endl;
 }
 
 
@@ -628,8 +628,8 @@ YQPkgFilterTab::readSettings()
     settings.endGroup();
 
 
-    logDebug() << "Restoring pages " << pages << endl;
-    logDebug() << "Current page:   " << current << endl;
+    logDebug() << "Restoring pages " << pages << Qt::endl;
+    logDebug() << "Current page:   " << current << Qt::endl;
 
     {
         // Prevent an event cascade as pages are added: Each one would cause
@@ -647,7 +647,7 @@ YQPkgFilterTab::readSettings()
             if ( page )
                 showPage( page );
             else
-                logWarning() << "No page with ID \"" << id << "\"" << endl;
+                logWarning() << "No page with ID \"" << id << "\"" << Qt::endl;
         }
     }
 
@@ -658,7 +658,7 @@ YQPkgFilterTab::readSettings()
         if ( page )
             showPage( page ); // We want this to emit signals to fill the pkg list
         else
-            logWarning() << "Can't restore current page with ID \"" << current << "\"" << endl;
+            logWarning() << "Can't restore current page with ID \"" << current << "\"" << Qt::endl;
     }
 }
 
@@ -675,7 +675,7 @@ YQPkgFilterTab::writeSettings()
         if ( page )
         {
             if ( page->id.isEmpty() )
-                logWarning() << "No ID for tab page \"" << page->label << "\"" << endl;
+                logWarning() << "No ID for tab page \"" << page->label << "\"" << Qt::endl;
             else
                 pages << page->id;
         }

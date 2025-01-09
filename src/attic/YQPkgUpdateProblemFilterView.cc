@@ -90,7 +90,7 @@ YQPkgUpdateProblemFilterView::filter()
 	    {
 		logInfo() << "Problematic package: "
                           << pkg->name() << "-" << pkg->edition().asString()
-                          << endl;
+                          << Qt::endl;
 
 		emit filterMatch( sel, pkg );
 	    }

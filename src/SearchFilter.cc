@@ -44,7 +44,7 @@ void SearchFilter::guessFilterMode()
 #if 1
     logDebug() << "using filter mode " << toString( _filterMode )
                << " from \"" << _pattern << "\""
-               << endl;
+               << Qt::endl;
 #endif
 
     if ( _filterMode == ExactMatch && _pattern.startsWith( "=" ) )
@@ -108,11 +108,11 @@ bool SearchFilter::matches( const QString & str ) const
         case RegExp:     return str.contains( _regexp );
         case SelectAll:  return true;
         case Auto:
-            logWarning() << "Unexpected filter mode 'Auto' - assuming 'Contains'" << endl;
+            logWarning() << "Unexpected filter mode 'Auto' - assuming 'Contains'" << Qt::endl;
             return str.contains( _pattern );
     }
 
-    logError() << "Undefined filter mode " << toString( _filterMode ) << endl;
+    logError() << "Undefined filter mode " << toString( _filterMode ) << Qt::endl;
     return false;
 }
 

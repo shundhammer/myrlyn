@@ -95,7 +95,7 @@ PkgTaskListWidgetItem::PkgTaskListWidgetItem( PkgTask *           task,
     if ( parent )
     {
         logDebug() << "New PkgTask item for " << parent->objectName()
-                   << ": " << txt << endl;
+                   << ": " << txt << Qt::endl;
     }
 #endif
 }
