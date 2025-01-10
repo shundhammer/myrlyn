@@ -42,7 +42,7 @@ using std::string;
 YQPkgServiceList::YQPkgServiceList( QWidget * parent )
     : QY2ListView( parent )
 {
-    logDebug() << "Creating service list" << endl;
+    logDebug() << "Creating service list" << Qt::endl;
 
     QStringList headers;
     headers <<  _("Name");
@@ -63,7 +63,7 @@ YQPkgServiceList::YQPkgServiceList( QWidget * parent )
     sortByColumn( nameCol(), Qt::AscendingOrder );
     selectSomething();
 
-    logDebug() << "Creating service list done" << endl;
+    logDebug() << "Creating service list done" << Qt::endl;
 }
 
 
@@ -77,7 +77,7 @@ void
 YQPkgServiceList::fillList()
 {
     clear();
-    logDebug() << "Filling service list" << endl;
+    logDebug() << "Filling service list" << Qt::endl;
 
     std::set<std::string> added_services;
     zypp::RepoManager repo_manager;
@@ -109,7 +109,7 @@ YQPkgServiceList::fillList()
                        }
                    );
 
-    logDebug() << "Service list filled" << endl;
+    logDebug() << "Service list filled" << Qt::endl;
 }
 
 
@@ -118,7 +118,7 @@ YQPkgServiceList::filter()
 {
     emit filterStart();
 
-    // logInfo() << "Collecting packages in selected services..." << endl;
+    // logInfo() << "Collecting packages in selected services..." << Qt::endl;
 
     //
     // Collect all packages from repositories belonging to this service
@@ -134,7 +134,7 @@ YQPkgServiceList::filter()
 
         if ( serviceItem )
         {
-            // logVerbose() << "Selected service: " << serviceItem->zyppService() << endl;
+            // logVerbose() << "Selected service: " << serviceItem->zyppService() << Qt::endl;
 
             zypp::PoolQuery query;
 
@@ -144,7 +144,7 @@ YQPkgServiceList::filter()
                                {
                                    if (serviceItem->zyppService() == repo.info().service())
                                    {
-                                       // logVerbose() << "Adding repo filter: " << repo.info().alias() << endl;
+                                       // logVerbose() << "Adding repo filter: " << repo.info().alias() << Qt::endl;
                                        query.addRepo( repo.info().alias() );
                                    }
                                }

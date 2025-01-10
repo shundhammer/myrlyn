@@ -143,7 +143,7 @@ PkgTasks * PkgCommitPage::pkgTasks()
 
 void PkgCommitPage::fakeCommit()
 {
-    logInfo() << "Simulating package transactions" << endl;
+    logInfo() << "Simulating package transactions" << Qt::endl;
 
     QListWidgetItem * item = _ui->todoList->count() > 0 ?
         _ui->todoList->item( 0 ) : 0;
@@ -164,7 +164,7 @@ void PkgCommitPage::fakeCommit()
         processEvents();
     }
 
-    logInfo() << "Simulating transactions done" << endl;
+    logInfo() << "Simulating transactions done" << Qt::endl;
 }
 
 
@@ -179,15 +179,15 @@ void PkgCommitPage::realCommit()
 
     try
     {
-        logInfo() << "Starting package transactions" << endl;
+        logInfo() << "Starting package transactions" << Qt::endl;
 
         zypp::getZYpp()->commit( commitPolicy() );
 
-        logInfo() << "Package transactions done" << endl;
+        logInfo() << "Package transactions done" << Qt::endl;
     }
     catch ( const zypp::target::TargetAbortedException & ex )
     {
-        logInfo() << "libzypp aborted as requested" << endl;
+        logInfo() << "libzypp aborted as requested" << Qt::endl;
     }
 
 }
@@ -200,13 +200,13 @@ PkgCommitPage::commitPolicy() const
 
     if ( MyrlynApp::isOptionSet( OptDryRun ) )
     {
-        logInfo() << "dry run" << endl;
+        logInfo() << "dry run" << Qt::endl;
         policy.dryRun( true );
     }
 
     if ( MyrlynApp::isOptionSet( OptDownloadOnly ) )
     {
-        logInfo() << "download only" << endl;
+        logInfo() << "download only" << Qt::endl;
         policy.downloadMode( zypp::DownloadOnly );
     }
 
@@ -275,7 +275,7 @@ void PkgCommitPage::cancelCommit()
 
     if ( confirm )
     {
-        logInfo() << "Aborting commit. Notifying libzypp..." << endl;
+        logInfo() << "Aborting commit. Notifying libzypp..." << Qt::endl;
         emit abortCommit();
 
         // Wait for libzypp to return from its commit() so it can shut down
@@ -290,7 +290,7 @@ void PkgCommitPage::wmClose()
 
     if ( confirm )
     {
-        logInfo() << "Aborting commit. Notifying libzypp..." << endl;
+        logInfo() << "Aborting commit. Notifying libzypp..." << Qt::endl;
         emit abortCommit();
 
         // Give libzypp some time to shut down properly: Execute yqapp->quit()
@@ -372,9 +372,9 @@ void PkgCommitPage::initProgressData()
             _totalInstalledSize += task->installedSize();
     }
 
-    logDebug() << "total download size:  " << _totalDownloadSize.asString()  << endl;
-    logDebug() << "total installed size: " << _totalInstalledSize.asString() << endl;
-    logDebug() << "total tasks: "          << _totalTasksCount << endl;
+    logDebug() << "total download size:  " << _totalDownloadSize.asString()  << Qt::endl;
+    logDebug() << "total installed size: " << _totalInstalledSize.asString() << Qt::endl;
+    logDebug() << "total tasks: "          << _totalTasksCount << Qt::endl;
 
     // Weights for different sub-tasks of downloading and installing packages:
     // There is a constant cost for doing anything with a package, no matter if
@@ -389,9 +389,9 @@ void PkgCommitPage::initProgressData()
     _pkgActionWeight    = 0.30;
     _pkgFixedCostWeight = 0.10;
 
-    logDebug() << "pkgDownloadWeight:  " << _pkgDownloadWeight  << endl;
-    logDebug() << "pkgActionWeight:    " << _pkgActionWeight    << endl;
-    logDebug() << "pkgFixedCostWeight: " << _pkgFixedCostWeight << endl;
+    logDebug() << "pkgDownloadWeight:  " << _pkgDownloadWeight  << Qt::endl;
+    logDebug() << "pkgActionWeight:    " << _pkgActionWeight    << Qt::endl;
+    logDebug() << "pkgFixedCostWeight: " << _pkgFixedCostWeight << Qt::endl;
 }
 
 
@@ -425,7 +425,7 @@ int PkgCommitPage::currentProgressPercent()
     logVerbose() << "Download  %: "  << downloadPercent
                  << "  weight: "     << _pkgDownloadWeight
                  << "  raw %: "      << percent
-                 << endl;
+                 << Qt::endl;
 #endif
 
     //
@@ -445,7 +445,7 @@ int PkgCommitPage::currentProgressPercent()
         logVerbose() << "Installed %: " << installedPercent
                      << "  weight: "    << _pkgActionWeight
                      << "  raw %: "     << percent
-                     << endl;
+                     << Qt::endl;
 #endif
     }
 
@@ -464,7 +464,7 @@ int PkgCommitPage::currentProgressPercent()
         logVerbose() << "Tasks     %: " << tasksPercent
                      << "  weight: "    << _pkgFixedCostWeight
                      << "  raw %: "     << percent
-                     << endl;
+                     << Qt::endl;
 #endif
     }
 
@@ -476,7 +476,7 @@ int PkgCommitPage::currentProgressPercent()
     float progress   = tasksPercent + downloadPercent + installedPercent;
 
 #if VERBOSE_PROGRESS
-    logVerbose() << "Progress: " << progress << "%" << endl;
+    logVerbose() << "Progress: " << progress << "%" << Qt::endl;
 #endif
 
     return qBound( 0, (int) ( progress + 0.5 ), 100 );
@@ -492,7 +492,7 @@ bool PkgCommitPage::updateTotalProgressBar()
     if ( progress >= 0 && progress > oldProgress )
     {
 #if VERBOSE_PROGRESS
-        logVerbose() << "Updating with " << progress << "%" << endl;
+        logVerbose() << "Updating with " << progress << "%" << Qt::endl;
 #endif
         _ui->totalProgressBar->setValue( progress );
         didUpdate = true;
@@ -529,12 +529,12 @@ void PkgCommitPage::pkgDownloadStart( ZyppRes zyppRes )
 
     if ( ! task )
     {
-        logError() << "Can't find task for " << zyppRes << " in todo" << endl;
+        logError() << "Can't find task for " << zyppRes << " in todo" << Qt::endl;
         return;
     }
 
 #if VERBOSE_TRANSACT
-    logVerbose() << task << endl;
+    logVerbose() << task << Qt::endl;
 #endif
 
     // Move the task from the todo list to the downloads list
@@ -567,12 +567,12 @@ void PkgCommitPage::pkgDownloadProgress( ZyppRes zyppRes, int percent )
 
     if ( ! task )
     {
-        logError() << "Can't find task for " << zyppRes << " in downloads" << endl;
+        logError() << "Can't find task for " << zyppRes << " in downloads" << Qt::endl;
         return;
     }
 
 #if VERBOSE_PROGRESS
-    logVerbose() << task << ": downloaded " << percent << "%" << endl;
+    logVerbose() << task << ": downloaded " << percent << "%" << Qt::endl;
 #endif
 
     if ( percent != task->downloadedPercent() ) // only if there really was a change
@@ -594,12 +594,12 @@ void PkgCommitPage::pkgDownloadEnd( ZyppRes zyppRes )
 
     if ( ! task )
     {
-        logError() << "Can't find task for " << zyppRes << " in downloads" << endl;
+        logError() << "Can't find task for " << zyppRes << " in downloads" << Qt::endl;
         return;
     }
 
 #if VERBOSE_TRANSACT
-    logVerbose() << task << endl;
+    logVerbose() << task << Qt::endl;
 #endif
 
     task->setDownloadedPercent( 100 );
@@ -624,12 +624,12 @@ void PkgCommitPage::pkgCachedNotify( ZyppRes zyppRes )
 
     if ( ! task )
     {
-        logError() << "Can't find task for " << zyppRes << " in todo" << endl;
+        logError() << "Can't find task for " << zyppRes << " in todo" << Qt::endl;
         return;
     }
 
 #if VERBOSE_TRANSACT
-    logVerbose() << task << endl;
+    logVerbose() << task << Qt::endl;
 #endif
 
     // Move the task from the todo list to the downloads list
@@ -777,7 +777,7 @@ void PkgCommitPage::pkgActionStart( ZyppRes       zyppRes,
         {
             logError() << caller << "(): "
                        << "Can't find task for " << zyppRes
-                       << " in either downloads or todo" << endl;
+                       << " in either downloads or todo" << Qt::endl;
             return;
         }
 
@@ -791,7 +791,7 @@ void PkgCommitPage::pkgActionStart( ZyppRes       zyppRes,
     }
 
 #if VERBOSE_TRANSACT
-    logVerbose() << task << endl;
+    logVerbose() << task << Qt::endl;
 #endif
 
     task->setDownloadedPercent( 100 ); // The download is complete for sure
@@ -834,12 +834,12 @@ void PkgCommitPage::pkgActionProgress( ZyppRes       zyppRes,
     {
         logError() << caller << "(): "
                    << "Can't find task for "
-                   << zyppRes << " in doing" << endl;
+                   << zyppRes << " in doing" << Qt::endl;
         return;
     }
 
 #if VERBOSE_PROGRESS
-    logVerbose() << task << ": " << percent << "%" << endl;
+    logVerbose() << task << ": " << percent << "%" << Qt::endl;
 #endif
 
     if ( percent != task->completedPercent() )
@@ -866,12 +866,12 @@ void PkgCommitPage::pkgActionEnd( ZyppRes       zyppRes,
     {
         logError() << caller << "(): "
                    << "Can't find task for " << zyppRes
-                   << " in doing" << endl;
+                   << " in doing" << Qt::endl;
         return;
     }
 
 #if VERBOSE_TRANSACT
-    logVerbose() << task << endl;
+    logVerbose() << task << Qt::endl;
 #endif
 
 
@@ -913,7 +913,7 @@ void PkgCommitPage::pkgActionError( ZyppRes         zyppRes,
 {
     CHECK_PTR( zyppRes );
 
-    logError() << caller << "(): " << zyppRes << ": " << errorMsg << endl;
+    logError() << caller << "(): " << zyppRes << ": " << errorMsg << Qt::endl;
 
     QString msg;
 
@@ -951,7 +951,7 @@ void PkgCommitPage::pkgActionError( ZyppRes         zyppRes,
 
 void PkgCommitPage::fileConflictsCheckStart()
 {
-    logDebug() << endl;
+    logDebug() << Qt::endl;
 
     fileConflictsProgressDialog()->reset();
 
@@ -967,7 +967,7 @@ void PkgCommitPage::fileConflictsCheckStart()
 
 void PkgCommitPage::fileConflictsCheckProgress( int percent )
 {
-    // logVerbose() << percent << "%" << endl;
+    // logVerbose() << percent << "%" << Qt::endl;
 
 
     // Show the progress dialog if it's not shown yet
@@ -991,14 +991,14 @@ void PkgCommitPage::fileConflictsCheckProgress( int percent )
 
 void PkgCommitPage::fileConflictsCheckResult( const QStringList & conflicts )
 {
-    logDebug() << endl;
+    logDebug() << Qt::endl;
 
     fileConflictsProgressDialog()->hide();
     processEvents();
 
     logInfo() << "File conflicts check finished after "
               << fileConflictsProgressDialog()->elapsed() / 1000.0 << " sec"
-              << endl;
+              << Qt::endl;
 
     if ( conflicts.isEmpty() )
          return;
@@ -1007,7 +1007,7 @@ void PkgCommitPage::fileConflictsCheckResult( const QStringList & conflicts )
 
     foreach ( const QString & conflict, conflicts )
     {
-        logError() << "FILE CONFLICT: " << conflict.simplified() << endl;
+        logError() << "FILE CONFLICT: " << conflict.simplified() << Qt::endl;
 
         if ( ++count < 6 )
         {

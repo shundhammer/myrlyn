@@ -34,7 +34,7 @@ YQPkgLangList::YQPkgLangList( QWidget * parent )
     // FIXME: The base class works with zypp::Resolvable, but zypp::Locale
     // isn't one any longer!
 
-    logVerbose() << "Creating language list" << endl;
+    logVerbose() << "Creating language list" << Qt::endl;
 
     // Translators: Table column heading for a language ISO code like "de_DE",
     // "en_US". Please keep this short to avoid stretching the column too wide!
@@ -69,7 +69,7 @@ YQPkgLangList::YQPkgLangList( QWidget * parent )
     selectSomething();
     resizeColumnToContents(_statusCol);
 
-    logVerbose() << "Creating language list done" << endl;
+    logVerbose() << "Creating language list done" << Qt::endl;
 }
 
 
@@ -83,7 +83,7 @@ void
 YQPkgLangList::fillList()
 {
     clear();
-    // logVerbose() << "Filling language list" << endl;
+    // logVerbose() << "Filling language list" << Qt::endl;
 
     zypp::LocaleSet locales = zypp::getZYpp()->pool().getAvailableLocales();
 
@@ -94,7 +94,7 @@ YQPkgLangList::fillList()
         addLangItem( *it );
     }
 
-    // logVerbose() << "Language list filled" << endl;
+    // logVerbose() << "Language list filled" << Qt::endl;
 }
 
 
@@ -110,7 +110,7 @@ void
 YQPkgLangList::filter()
 {
 #if VERBOSE_FILTER_VIEWS
-    logVerbose() << "Filtering" << endl;
+    logVerbose() << "Filtering" << Qt::endl;
 #endif
 
     emit filterStart();

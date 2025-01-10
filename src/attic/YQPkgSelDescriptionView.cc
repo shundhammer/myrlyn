@@ -99,7 +99,7 @@ YQPkgSelDescriptionView::htmlHeading( ZyppSel selectable )
             iconName.remove( 0, sizeof( "./" ) );
 
 	if ( pattern && iconName.isEmpty() )
-	    logWarning() << "No icon for pattern " << zyppObj->name() << endl;
+	    logWarning() << "No icon for pattern " << zyppObj->name() << Qt::endl;
     }
 
 

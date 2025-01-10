@@ -177,14 +177,14 @@ YQSimplePatchSelector::makeConnections()
 		 _diskUsageList, SLOT  ( updateDiskUsage() ) );
     }
 
-    logInfo() << "Connection set up" << endl;
+    logInfo() << "Connection set up" << Qt::endl;
 }
 
 
 void
 YQSimplePatchSelector::detailedPackageSelection()
 {
-    logInfo() << "\"Details..\" button clicked" << endl;
+    logInfo() << "\"Details..\" button clicked" << Qt::endl;
     YQUI::ui()->sendEvent( new YMenuEvent( "details" ) );
 }
 
@@ -192,7 +192,7 @@ YQSimplePatchSelector::detailedPackageSelection()
 void
 YQSimplePatchSelector::debugTrace()
 {
-    logWarning() << "debugTrace" << endl;
+    logWarning() << "debugTrace" << Qt::endl;
 }
 
 

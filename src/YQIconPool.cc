@@ -86,7 +86,7 @@ QPixmap
 YQIconPool::cachedIcon( const QString icon_name, const bool enabled )
 {
     Q_INIT_RESOURCE( icons );
-    QPixmap iconPixmap = _iconCache[ icon_name + enabled ];
+    QPixmap iconPixmap = _iconCache[ icon_name + (enabled ? 'e' : 'd') ];
 
     if ( !iconPixmap )
     {
@@ -101,7 +101,7 @@ YQIconPool::cachedIcon( const QString icon_name, const bool enabled )
         }
     }
 
-    _iconCache.insert( icon_name + enabled, iconPixmap );
+    _iconCache.insert( icon_name + (enabled ? 'e' : 'd'), iconPixmap );
 
     return iconPixmap;
 }
@@ -110,25 +110,25 @@ YQIconPool::cachedIcon( const QString icon_name, const bool enabled )
 QPixmap
 YQIconPool::loadIcon( const QString icon_name, const bool enabled )
 {
-    QPixmap iconPixmap = _iconCache[ icon_name + enabled ];
+    QPixmap iconPixmap = _iconCache[ icon_name + (enabled ? 'e' : 'd') ];
 
     if ( QIcon::hasThemeIcon( icon_name ) )
     {
-        // logVerbose() << "Loading theme icon " << icon_name << endl;
+        // logVerbose() << "Loading theme icon " << icon_name << Qt::endl;
 
         QIcon icon = QIcon::fromTheme( icon_name, QIcon( ":/" + icon_name ) );
         iconPixmap = icon.pixmap( QSize( 16, 16 ), enabled ? QIcon::Normal : QIcon::Disabled );
     }
     else
     {
-        // logVerbose() << "Loading built-in icon " << icon_name << endl;
+        // logVerbose() << "Loading built-in icon " << icon_name << Qt::endl;
 
         QIcon icon = QIcon( ":/" + icon_name );
         iconPixmap = icon.pixmap( QSize( 16, 16 ), enabled ? QIcon::Normal : QIcon::Disabled );
     }
 
     if ( !iconPixmap )
-        logError() << "Could not load icon " << icon_name << endl;
+        logError() << "Could not load icon " << icon_name << Qt::endl;
 
     return iconPixmap;
 }

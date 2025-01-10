@@ -95,7 +95,7 @@ void
 YQPkgUpdatesFilterView::filter()
 {
  #if VERBOSE_FILTER_VIEWS
-    logVerbose() << "Filtering" << endl;
+    logVerbose() << "Filtering" << Qt::endl;
 #endif
 
     emit filterStart();

@@ -5,22 +5,7 @@
 include( ../VERSION.cmake )
 include( GNUInstallDirs )       # set CMAKE_INSTALL_INCLUDEDIR, ..._LIBDIR
 
-#
-# Qt-specific
-#
-# See also
-#  https://doc.qt.io/qt-5/cmake-get-started.html
-#
-
 set( TARGETBIN myrlyn )
-
-find_package( Qt5 5.15 COMPONENTS Core Gui Widgets REQUIRED )
-# find_library( zypp ) is pointless because there is a libzypp on every SUSE
-
-set( CMAKE_AUTOMOC on ) # Automatically handle "moc" preprocessor (Q_OBJECTs)
-set( CMAKE_AUTORCC on ) # Automatically handle Qt resource (.rcc) files
-set( CMAKE_AUTOUIC on ) # Automatically handle Qt Designer (.uic) files
-
 
 set( SOURCES
 
@@ -121,23 +106,16 @@ set( UI_FILES
    )
 
 # Putting it all together
-add_executable( ${TARGETBIN}
+qt_add_executable(${TARGETBIN}
   ${SOURCES}
-  ${QRC_FILES}
   ${UI_FILES}
 )
+qt_add_resources(${TARGETBIN} "icons" FILES icons.qrc)
 
 
 #
 # Compile options and definitions
 #
-
-# Fix things that were introduced with Qt 5.15 for Qt 6.x compatibility,
-# but that completely disregard that this introduces incompatibilities
-# with older code.
-
-target_compile_options( ${TARGETBIN} PUBLIC "-Wno-deprecated" )
-target_compile_options( ${TARGETBIN} PUBLIC "-Wno-deprecated-declarations" )
 
 # Make the version from ../../VERSION.cmake available as a #define
 target_compile_definitions( ${TARGETBIN} PUBLIC VERSION="${VERSION}" )
@@ -199,10 +177,11 @@ target_compile_definitions( ${TARGETBIN} PUBLIC FIX_CMAKE_FILENAME_BUG=1 )
 #
 # If in doubt what is really needed, check with "ldd -u" which libs are unused.
 target_link_libraries( myrlyn
+  PRIVATE
   zypp
-  Qt5::Core
-  Qt5::Gui
-  Qt5::Widgets
+  Qt6::Core
+  Qt6::Gui
+  Qt6::Widgets
   )
 
 # Notice that we don't link against Qt5::Svg, but we need it at runtime:

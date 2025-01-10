@@ -28,7 +28,7 @@ YQPkgSelMapper::Cache YQPkgSelMapper::_cache;
 
 YQPkgSelMapper::YQPkgSelMapper()
 {
-    logDebug() << "Creating YQPkgSelMapper; refCount: " << _refCount + 1 << endl;
+    logDebug() << "Creating YQPkgSelMapper; refCount: " << _refCount + 1 << Qt::endl;
 
     if ( ++_refCount == 1 )
         rebuildCache();
@@ -39,18 +39,18 @@ YQPkgSelMapper::~YQPkgSelMapper()
 {
     if ( --_refCount == 0 )
     {
-        logDebug() << "Destroying pkg -> selectable cache"  << endl;
+        logDebug() << "Destroying pkg -> selectable cache"  << Qt::endl;
         _cache.clear();
     }
 
-    logDebug() << "Destroying YQPkgSelMapper done." << endl;
+    logDebug() << "Destroying YQPkgSelMapper done." << Qt::endl;
 }
 
 
 void YQPkgSelMapper::rebuildCache()
 {
     _cache.clear();
-    logDebug() << "Building pkg -> selectable cache" << endl;
+    logDebug() << "Building pkg -> selectable cache" << Qt::endl;
 
     for ( ZyppPoolIterator sel_it = zyppPkgBegin();
           sel_it != zyppPkgEnd();
@@ -82,7 +82,7 @@ void YQPkgSelMapper::rebuildCache()
         }
     }
 
-    logDebug() << "Building pkg -> selectable cache done" << endl;
+    logDebug() << "Building pkg -> selectable cache done" << Qt::endl;
 }
 
 
@@ -99,7 +99,7 @@ YQPkgSelMapper::findZyppSel( ZyppPkg pkg )
     else
     {
 #if VERBOSE_MAPPER
-        logInfo() << "No selectable found for package " << pkg->name() << endl;
+        logInfo() << "No selectable found for package " << pkg->name() << Qt::endl;
 #endif
     }
 

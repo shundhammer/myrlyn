@@ -372,7 +372,7 @@ void _throw_helper( const EX_t	  &exception,
 	<< "THROW "
 	<< exception.className() << ": "
 	<< exception.what()
-	<< endl;
+	<< Qt::endl;
 
     throw( exception );
 }
@@ -389,7 +389,7 @@ void _caught_helper( const EX_t	   &exception,
 	<< "CAUGHT "
 	<< exception.className() << ": "
 	<< exception.what()
-	<< endl;
+	<< Qt::endl;
 }
 
 
@@ -406,7 +406,7 @@ void _rethrow_helper( const EX_t    &exception,
 	<< "RETHROW "
 	<< exception.className() << ": "
 	<< exception.what()
-	<< endl;
+	<< Qt::endl;
 
     throw;
 }

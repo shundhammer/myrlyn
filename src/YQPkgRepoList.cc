@@ -37,7 +37,7 @@ using std::string;
 YQPkgRepoList::YQPkgRepoList( QWidget * parent )
     : QY2ListView( parent )
 {
-    // logVerbose() << "Creating repository list" << endl;
+    // logVerbose() << "Creating repository list" << Qt::endl;
 
     _nameCol = -1;
 
@@ -76,7 +76,7 @@ YQPkgRepoList::YQPkgRepoList( QWidget * parent )
     selectSomething();
 #endif
 
-    // logVerbose() << "Creating repository list done" << endl;
+    // logVerbose() << "Creating repository list done" << Qt::endl;
 }
 
 

@@ -104,7 +104,7 @@ YQPkgGenericDetailsView::showDetailsIfVisible( ZyppSel selectable )
 
             logVerbose() << metaObject()->className() << ": Showing "
                          << ( selectable ? fromUTF8( selectable->name() ) : "NULL" )
-                         << endl;
+                         << Qt::endl;
 #endif
             showDetails( selectable );
         }
@@ -176,7 +176,7 @@ QString
 YQPkgGenericDetailsView::htmlEscape( const QString & plainText )
 {
     QString html = plainText;
-    // logDebug() << "Escaping \"" << plainText << "\"" << endl;
+    // logDebug() << "Escaping \"" << plainText << "\"" << Qt::endl;
 
     html.replace( "&", "&amp;" );
     html.replace( "<", "&lt;" );

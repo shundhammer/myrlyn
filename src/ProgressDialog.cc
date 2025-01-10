@@ -60,7 +60,7 @@ bool ProgressDialog::showDelayed( int delayMillisec )
 
     logDebug() << "Showing progress dialog \""
                << _ui->label->text() << "\""
-               << endl;
+               << Qt::endl;
     show();
     _shown = true;
 

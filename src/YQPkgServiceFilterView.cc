@@ -55,7 +55,7 @@ bool YQPkgServiceFilterView::any_service()
 
     // if the repository does not belong to any service then the service name is empty
 
-    // logDebug() << "Found a libzypp service: " << ret << endl;
+    // logDebug() << "Found a libzypp service: " << ret << Qt::endl;
 
     return ret;
 }
