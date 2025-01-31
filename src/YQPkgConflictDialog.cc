@@ -171,11 +171,11 @@ int
 YQPkgConflictDialog::solveAndShowConflicts()
 {
     prepareSolving();
-    logInfo() << "Resolving dependencies..." << endl;
+    logInfo() << "Resolving dependencies..." << Qt::endl;
 
     bool success = zypp::getZYpp()->resolver()->resolvePool();
 
-    logDebug() << "Resolving dependencies done." << endl;
+    logDebug() << "Resolving dependencies done." << Qt::endl;
 
     return processSolverResult( success );
 }
@@ -191,11 +191,11 @@ YQPkgConflictDialog::verifySystem( bool showBusyPopup )
                                    MainWindow::instance() );
 
     prepareSolving();
-    logInfo() << "Verifying all system dependencies..." << endl;
+    logInfo() << "Verifying all system dependencies..." << Qt::endl;
 
     bool success = zypp::getZYpp()->resolver()->verifySystem();
 
-    logDebug() << "System dependencies verified." << endl;
+    logDebug() << "System dependencies verified." << Qt::endl;
 
     if ( busyPopup )
         delete busyPopup;
@@ -216,12 +216,12 @@ int
 YQPkgConflictDialog::doPackageUpdate()
 {
     prepareSolving();
-    logInfo() << "Starting a global package update ('zypper up' counterpart)..." << endl;
+    logInfo() << "Starting a global package update ('zypper up' counterpart)..." << Qt::endl;
 
     bool success = true;
     zypp::getZYpp()->resolver()->doUpdate(); // No return value, assume success.
 
-    logDebug() << "Package update done." << endl;
+    logDebug() << "Package update done." << Qt::endl;
 
     return processSolverResult( success );
 }
@@ -231,11 +231,11 @@ int
 YQPkgConflictDialog::doDistUpgrade()
 {
     prepareSolving();
-    logInfo() << "Starting a dist upgrade ('zypper dup' counterpart)" << endl;
+    logInfo() << "Starting a dist upgrade ('zypper dup' counterpart)" << Qt::endl;
 
     bool success = zypp::getZYpp()->resolver()->doUpgrade();
 
-    logDebug() << "Dist upgrade done." << endl;
+    logDebug() << "Dist upgrade done." << Qt::endl;
 
     return processSolverResult( success );
 }
@@ -282,7 +282,7 @@ YQPkgConflictDialog::processSolverResult( bool success )
     }
     else                // There were solving problems.
     {
-        logDebug() << "Dependency conflict!" << endl;
+        logDebug() << "Dependency conflict!" << Qt::endl;
         busyCursor();
 
         _conflictList->fill( zypp::getZYpp()->resolver()->problems() );
@@ -327,11 +327,11 @@ YQPkgConflictDialog::askCreateSolverTestCase()
     if ( button_no == 1 )  // Cancel
         return;
 
-    logInfo() << "Generating solver test case START" << endl;
+    logInfo() << "Generating solver test case START" << Qt::endl;
 
     bool success = zypp::getZYpp()->resolver()->createSolverTestcase( qPrintable( testCaseDir ) );
 
-    logInfo() << "Generating solver test case END" << endl;
+    logInfo() << "Generating solver test case END" << Qt::endl;
 
     if ( success )
     {

@@ -234,7 +234,7 @@ void YQPkgFilterTab::createActions()
     _priv->actionMovePageLeft  = new QAction( YQIconPool::arrowLeft(), _( "Move page &left"  ), actionParent );
     CHECK_NEW( _priv->actionMovePageLeft );
 
-    QShortcut * shortcut = new QShortcut( QKeySequence( Qt::CTRL + Qt::Key_Left ), this, SLOT( movePageLeft() ) );
+    QShortcut * shortcut = new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_Left ), this, SLOT( movePageLeft() ) );
     CHECK_NEW( shortcut );
     _priv->actionMovePageLeft->setShortcut( shortcut->key() );
 
@@ -242,7 +242,7 @@ void YQPkgFilterTab::createActions()
     _priv->actionMovePageRight = new QAction( YQIconPool::arrowRight(), _( "Move page &right" ), actionParent );
     CHECK_NEW( _priv->actionMovePageRight );
 
-    shortcut = new QShortcut( QKeySequence( Qt::CTRL + Qt::Key_Right ), this, SLOT( movePageRight() ) );
+    shortcut = new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_Right ), this, SLOT( movePageRight() ) );
     CHECK_NEW( shortcut );
     _priv->actionMovePageRight->setShortcut( shortcut->key() );
 
@@ -250,7 +250,7 @@ void YQPkgFilterTab::createActions()
     _priv->actionClosePage = new QAction( YQIconPool::tabRemove(), _( "&Close page" ), actionParent );
     CHECK_NEW( _priv->actionClosePage );
 
-    shortcut = new QShortcut( QKeySequence( Qt::CTRL + Qt::Key_W ), this, SLOT( closePage() ) );
+    shortcut = new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_W ), this, SLOT( closePage() ) );
     CHECK_NEW( shortcut );
     _priv->actionClosePage->setShortcut( shortcut->key() );
 
@@ -327,7 +327,7 @@ YQPkgFilterTab::showPage( const QString & internalName )
     if ( page )
         showPage( page );
     else
-        logWarning() << "No page with ID \"" << internalName << "\"" << endl;
+        logWarning() << "No page with ID \"" << internalName << "\"" << Qt::endl;
 }
 
 
@@ -380,7 +380,7 @@ YQPkgFilterTab::reloadCurrentPage()
 
     if ( currentPage )
     {
-        logDebug() << "Reloading page " << currentPage->id << endl;
+        logDebug() << "Reloading page " << currentPage->id << Qt::endl;
         emit currentChanged( currentPage->content );
     }
 }
@@ -541,7 +541,7 @@ YQPkgFilterTab::closePage()
 {
     if ( tabBar()->count() == 1 )
     {
-        logWarning() << "Can't close the last page" << endl;
+        logWarning() << "Can't close the last page" << Qt::endl;
         return;
     }
 
@@ -674,8 +674,8 @@ YQPkgFilterTab::readSettings()
 
     settings.endGroup();
 
-    logInfo() << "Restoring pages " << savedPages << endl;
-    logInfo() << "Current page:   " << currentPageId << endl;
+    logInfo() << "Restoring pages " << savedPages << Qt::endl;
+    logInfo() << "Current page:   " << currentPageId << Qt::endl;
 
     {
         // Prevent an event cascade as pages are added: Each one would cause
@@ -693,7 +693,7 @@ YQPkgFilterTab::readSettings()
             if ( page )
                 showPage( page );
             else
-                logWarning() << "No page with ID \"" << pageId << "\"" << endl;
+                logWarning() << "No page with ID \"" << pageId << "\"" << Qt::endl;
         }
     }
 
@@ -704,7 +704,7 @@ YQPkgFilterTab::readSettings()
         if ( page )
             showPage( page ); // We want this to emit signals to fill the pkg list
         else
-            logWarning() << "Can't restore current page with ID \"" << currentPageId << "\"" << endl;
+            logWarning() << "Can't restore current page with ID \"" << currentPageId << "\"" << Qt::endl;
     }
 }
 
@@ -721,7 +721,7 @@ YQPkgFilterTab::writeSettings()
         if ( page )
         {
             if ( page->id.isEmpty() )
-                logWarning() << "No ID for tab page \"" << page->label << "\"" << endl;
+                logWarning() << "No ID for tab page \"" << page->label << "\"" << Qt::endl;
             else
                 openPages << page->id;
         }

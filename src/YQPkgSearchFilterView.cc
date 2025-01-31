@@ -207,7 +207,7 @@ void
 YQPkgSearchFilterView::filter()
 {
 #if VERBOSE_FILTER_VIEWS
-    logVerbose() << "Filtering" << endl;
+    logVerbose() << "Filtering" << Qt::endl;
 #endif
 
     emit filterStart();
@@ -256,7 +256,7 @@ YQPkgSearchFilterView::filter()
                     logError() << "Unexpected search mode "
                                << SearchFilter::toString( searchFilter.filterMode() )
                                << " - falling back to 'Contains'"
-                               << endl;
+                               << Qt::endl;
                     query.setMatchSubstring();
                     break;
             }
@@ -312,7 +312,7 @@ YQPkgSearchFilterView::filter()
     }
     catch ( const std::exception & exception )
     {
-        logWarning() << "CAUGHT zypp exception: " << exception.what() << endl;
+        logWarning() << "CAUGHT zypp exception: " << exception.what() << Qt::endl;
 
         QMessageBox msgBox;
 

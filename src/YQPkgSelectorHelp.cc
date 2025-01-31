@@ -72,7 +72,7 @@ void YQPkgSelector::openActionUrl()
 
 void YQPkgSelector::openInBrowser( const QString & url )
 {
-    logDebug() << "Opening URL " << url << endl;
+    logDebug() << "Opening URL " << url << Qt::endl;
 
     QProcess::startDetached( "/usr/bin/xdg-open", QStringList() << url );
 }

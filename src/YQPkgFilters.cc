@@ -43,7 +43,7 @@ YQPkgFilters::singleProductFilter(std::function<bool( const zypp::PoolItem & ite
 
     if ( it == product_end )
     {
-        // logDebug() << "No product found " << endl;
+        // logDebug() << "No product found " << Qt::endl;
         return product;
     }
 
@@ -57,13 +57,13 @@ YQPkgFilters::singleProductFilter(std::function<bool( const zypp::PoolItem & ite
 
     if ( it == product_end )
     {
-        logInfo() << "Found single product " << product->name() << endl;
+        logInfo() << "Found single product " << product->name() << Qt::endl;
 
         return product;
     }
 
     product = zypp::asKind<zypp::Product>( it->resolvable() );
-    // logVerbose() << "Found another product " << product->name() << endl;
+    // logVerbose() << "Found another product " << product->name() << Qt::endl;
 
     return ZyppProduct(); // NULL pointer
 }

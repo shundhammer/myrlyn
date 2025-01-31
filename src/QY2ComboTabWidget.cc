@@ -96,7 +96,7 @@ QY2ComboTabWidget::showPageIndex( int index )
         _widgetStack->setCurrentWidget( page );
         _widgetStack->setVisible( page != _minimizePage );
 
-        // yuiDebug() << "Changing current page" << endl;
+        // yuiDebug() << "Changing current page" << Qt::endl;
         emit currentChanged( page );
     }
     else

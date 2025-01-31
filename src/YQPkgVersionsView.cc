@@ -96,7 +96,7 @@ YQPkgVersionsView::showDetailsIfVisible( ZyppSel selectable )
 
             logVerbose() << ": Showing "
                          << ( selectable ? fromUTF8( selectable->name() ) : "NULL" )
-                         << endl;
+                         << Qt::endl;
 #endif
             showDetails( selectable );
         }
@@ -307,7 +307,7 @@ YQPkgVersionsView::checkForChangedCandidate()
 
             if ( _selectable && *newCandidate != _selectable->candidateObj() )
             {
-                logInfo() << "Candidate changed" << endl;
+                logInfo() << "Candidate changed" << Qt::endl;
 
                 // Change status of selectable
 
@@ -376,11 +376,11 @@ YQPkgVersionsView::handleMixedMultiVersion( YQPkgMultiVersion * newSelected )
     logInfo() << "Selected: "
               << ( multiVersion ? "Multiversion " : "Non-Multiversion " )
               << newSelected->text()
-              << endl;
+              << Qt::endl;
 
     if ( anyMultiVersionToInstall( !multiVersion ) )
     {
-        logInfo() << "Multiversion and non-multiversion conflict!" << endl;
+        logInfo() << "Multiversion and non-multiversion conflict!" << Qt::endl;
         bool forceContinue = mixedMultiVersionPopup( multiVersion );
 
         if ( forceContinue )
@@ -439,7 +439,7 @@ YQPkgVersionsView::mixedMultiVersionPopup( bool multiversion ) const
                                           msg,
                                           _( "C&ontinue" ),     // button #0
                                           _( "&Cancel" ) );     // button #1
-    logInfo() << "User hit " << (buttonNo == 0 ? "[Continue]" : "[Cancel]" ) << endl;
+    logInfo() << "User hit " << (buttonNo == 0 ? "[Continue]" : "[Cancel]" ) << Qt::endl;
 
     return buttonNo == 0;
 }
@@ -463,7 +463,7 @@ YQPkgVersionsView::anyMultiVersionToInstall( bool multiversion ) const
                 case S_Install:
                 case S_AutoInstall:
                     logInfo() << "Found " << ( multiversion ? "multiversion" : "non-multiversion" )
-                              << " to install" << endl;
+                              << " to install" << Qt::endl;
                     return true;
 
                 default:
@@ -475,7 +475,7 @@ YQPkgVersionsView::anyMultiVersionToInstall( bool multiversion ) const
     }
 
     logInfo() << "No " << ( multiversion ? "multiversion" : "non-multiversion" )
-              << " to install" << endl;
+              << " to install" << Qt::endl;
     return false;
 }
 
@@ -526,7 +526,7 @@ YQPkgVersionsView::isMixedMultiVersion( ZyppSel selectable )
     {
         if ( it->multiversionInstall() != multiversion )
         {
-            logInfo() << "Mixed multiversion" << endl;
+            logInfo() << "Mixed multiversion" << Qt::endl;
             return true;
         }
 
@@ -689,14 +689,14 @@ void YQPkgMultiVersion::cycleStatus()
     if ( ! handled )
         setStatus( newStatus );
 
-    logInfo() << "oldStatus: " << oldStatus << endl;
+    logInfo() << "oldStatus: " << oldStatus << Qt::endl;
     ZyppStatus actualStatus = _selectable->pickStatus( _zyppPoolItem );
 
     if ( actualStatus != newStatus )
         logWarning() << "FAILED to set new status: " << newStatus
-                     << "  actual Status: " << actualStatus << endl;
+                     << "  actual Status: " << actualStatus << Qt::endl;
     else
-        logInfo() << "newStatus:" << newStatus << endl;
+        logInfo() << "newStatus:" << newStatus << Qt::endl;
 
     if ( oldStatus != actualStatus )
     {
@@ -708,7 +708,7 @@ void YQPkgMultiVersion::cycleStatus()
 
 void YQPkgMultiVersion::setStatus( ZyppStatus newStatus )
 {
-    logInfo() << "Setting pick status to " << newStatus << endl;
+    logInfo() << "Setting pick status to " << newStatus << Qt::endl;
     _selectable->setPickStatus( _zyppPoolItem, newStatus );
 }
 

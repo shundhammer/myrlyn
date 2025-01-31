@@ -34,42 +34,42 @@
 
 MyrlynRepoManager::MyrlynRepoManager()
 {
-    logDebug() << "Creating MyrlynRepoManager" << endl;
+    logDebug() << "Creating MyrlynRepoManager" << Qt::endl;
 }
 
 
 MyrlynRepoManager::~MyrlynRepoManager()
 {
-    logDebug() << "Destroying MyrlynRepoManager..." << endl;
+    logDebug() << "Destroying MyrlynRepoManager..." << Qt::endl;
 
     shutdownZypp();
 
-    logDebug() << "Destroying MyrlynRepoManager done" << endl;
+    logDebug() << "Destroying MyrlynRepoManager done" << Qt::endl;
 }
 
 
 void MyrlynRepoManager::initTarget()
 {
-    logDebug() << "Creating the ZyppLogger" << endl;
+    logDebug() << "Creating the ZyppLogger" << Qt::endl;
     MyrlynApp::instance()->createZyppLogger();
 
-    logDebug() << "Initializing zypp..." << endl;
+    logDebug() << "Initializing zypp..." << Qt::endl;
 
     zyppPtr()->initializeTarget( "/", false );  // don't rebuild rpmdb
     zyppPtr()->target()->load(); // Load pkgs from the target (rpmdb)
 
-    logDebug() << "Initializing zypp done" << endl;
+    logDebug() << "Initializing zypp done" << Qt::endl;
 }
 
 
 void MyrlynRepoManager::shutdownZypp()
 {
-    logDebug() << "Shutting down zypp..." << endl;
+    logDebug() << "Shutting down zypp..." << Qt::endl;
 
     _repo_manager_ptr.reset();  // deletes the RepoManager
     _zypp_ptr.reset();          // deletes the ZYpp instance
 
-    logDebug() << "Shutting down zypp done" << endl;
+    logDebug() << "Shutting down zypp done" << Qt::endl;
 }
 
 
@@ -88,7 +88,7 @@ MyrlynRepoManager::repoManager()
 {
     if ( ! _repo_manager_ptr )
     {
-        logDebug() << "Creating RepoManager" << endl;
+        logDebug() << "Creating RepoManager" << Qt::endl;
         _repo_manager_ptr.reset( new zypp::RepoManager() );
     }
 
@@ -113,7 +113,7 @@ MyrlynRepoManager::zyppConnectInternal( int attempts, int waitSeconds )
     {
 	try
 	{
-	    logInfo() << "Initializing Zypp library..." << endl;
+	    logInfo() << "Initializing Zypp library..." << Qt::endl;
 	    _zypp_ptr = zypp::getZYpp();
 
  	    // initialize solver flag, be compatible with zypper
@@ -155,13 +155,13 @@ void MyrlynRepoManager::attachRepos()
     }
     catch ( const zypp::Exception & ex )
     {
-        logError() << "Caught zypp exception: " << ex.asString() << endl;
+        logError() << "Caught zypp exception: " << ex.asString() << Qt::endl;
 
         if ( geteuid() != 0 )
         {
             notifyUserToRunZypperDup();
 
-            logInfo() << "Exiting." << endl;
+            logInfo() << "Exiting." << Qt::endl;
             exit( 1 );
         }
 
@@ -184,14 +184,14 @@ void MyrlynRepoManager::findEnabledRepos()
 
             logInfo() << "Found repo \"" << repo.name() << "\""
                       << " URL: " << repo.url().asString()
-                      << endl;
+                      << Qt::endl;
 
             emit foundRepo( repo );
         }
         else
         {
             logInfo() << "Ignoring disabled repo \"" << repo.name() << "\""
-                      << endl;
+                      << Qt::endl;
         }
     }
 }
@@ -201,7 +201,7 @@ void MyrlynRepoManager::refreshRepos()
 {
     if ( geteuid() != 0 )
     {
-        logWarning() << "Skipping repos refresh for non-root user" << endl;
+        logWarning() << "Skipping repos refresh for non-root user" << Qt::endl;
         return;
     }
 
@@ -216,7 +216,7 @@ void MyrlynRepoManager::refreshRepos()
         try
         {
             timer.start();
-            logInfo() << "Refreshing repo " << repo.name() << "..." << endl;
+            logInfo() << "Refreshing repo " << repo.name() << "..." << Qt::endl;
             emit refreshRepoStart( repo );
 
             repoManager()->refreshMetadata( repo, zypp::RepoManager::RefreshIfNeeded );
@@ -227,16 +227,16 @@ void MyrlynRepoManager::refreshRepos()
 
             logInfo() << "Refreshing repo " << repo.name()
                       << " done after " << timer.elapsed() / 1000.0 << " sec"
-                      << endl;
+                      << Qt::endl;
 
             emit refreshRepoDone( repo );
         }
         catch ( const zypp::repo::RepoException & exception )
         {
             Q_UNUSED( exception );
-            logWarning() << "CAUGHT zypp exception for repo " << repo.name() << endl;
+            logWarning() << "CAUGHT zypp exception for repo " << repo.name() << Qt::endl;
 
-            logInfo() << "Disabling repo " << repo.name() << endl;
+            logInfo() << "Disabling repo " << repo.name() << Qt::endl;
             repo.setEnabled( false );
         }
     }
@@ -249,12 +249,12 @@ void MyrlynRepoManager::loadRepos()
     {
         if ( repo.enabled() )
         {
-            logDebug() << "Loading resolvables from " << repo.name() << endl;
+            logDebug() << "Loading resolvables from " << repo.name() << Qt::endl;
             repoManager()->loadFromCache( repo );
         }
         else
         {
-            logInfo() << "Skipping disabled repo " << repo.name() << endl;
+            logInfo() << "Skipping disabled repo " << repo.name() << Qt::endl;
         }
     }
 }
@@ -262,7 +262,7 @@ void MyrlynRepoManager::loadRepos()
 
 void MyrlynRepoManager::notifyUserToRunZypperDup() const
 {
-    logInfo() << "Run 'sudo zypper refresh' and restart the program." << endl;
+    logInfo() << "Run 'sudo zypper refresh' and restart the program." << Qt::endl;
 
     QString message = _( "Error loading the repos. Run\n\n"
                          "    sudo zypper refresh\n\n"
