@@ -32,7 +32,7 @@ InitReposPage::InitReposPage( MyrlynRepoManager * repoManager,
     , _repoManager( repoManager )
     , _ui( new Ui::InitReposPage )  // Use the Qt designer .ui form
 {
-    // logDebug() << "Creating InitReposPage" << endl;
+    // logDebug() << "Creating InitReposPage" << Qt::endl;
 
     CHECK_NEW( _ui );
     _ui->setupUi( this ); // Actually create the widgets from the .ui form
@@ -42,13 +42,13 @@ InitReposPage::InitReposPage( MyrlynRepoManager * repoManager,
     connectSignals();
     loadIcons();
 
-    // logDebug() << "Creating InitReposPage done" << endl;
+    // logDebug() << "Creating InitReposPage done" << Qt::endl;
 }
 
 
 InitReposPage::~InitReposPage()
 {
-    // logDebug() << "Destroying InitReposPage" << endl;
+    // logDebug() << "Destroying InitReposPage" << Qt::endl;
 
     delete _ui;
 }
@@ -113,7 +113,7 @@ void InitReposPage::foundRepo( const ZyppRepoInfo & repo )
 
 void InitReposPage::refreshRepoStart( const ZyppRepoInfo & repo )
 {
-    // logDebug() << "Repo refresh start for " << repo.name() << endl;
+    // logDebug() << "Repo refresh start for " << repo.name() << Qt::endl;
 
     QListWidgetItem * item = setItemIcon( repo, _downloadOngoingIcon );
 
@@ -129,7 +129,7 @@ void InitReposPage::refreshRepoStart( const ZyppRepoInfo & repo )
 
 void InitReposPage::refreshRepoDone ( const ZyppRepoInfo & repo )
 {
-    // logDebug() << "Repo refresh done for " << repo.name() << endl;
+    // logDebug() << "Repo refresh done for " << repo.name() << Qt::endl;
 
     _ui->progressBar->setValue( ++_refreshDoneCount );
     setItemIcon( repo, _downloadDoneIcon );
@@ -168,7 +168,7 @@ InitReposPage::findRepoItem( const ZyppRepoInfo & repo )
     }
 
     logError() << "No item in repos list widget for \""
-               << repoName << "\"" << endl;
+               << repoName << "\"" << Qt::endl;
     return 0;
 }
 

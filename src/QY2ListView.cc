@@ -75,7 +75,7 @@ QY2ListView::selectSomething()
 #if VERBOSE_SELECT_SOMETHING
 
             logVerbose() << metaObject()->className() << ": Selecting "
-                         << item->text( 1 ) << endl;
+                         << item->text( 1 ) << Qt::endl;
 #endif
             setCurrentItem( item ); // Sends a signal
             return;
@@ -182,7 +182,7 @@ QY2ListView::restoreColumnWidths()
             yuiDebug() << "Restoring size " << _savedColumnWidth[i]
                        << " for section " << i
                        << " now " << header()->sectionSize(i)
-                       << endl;
+                       << Qt::endl;
 #endif
         }
     }

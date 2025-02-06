@@ -32,7 +32,7 @@ Workflow::Workflow( const WorkflowStepList & steps )
 
     if ( _steps.isEmpty() )
     {
-        logError() << "Empty workflow!" << endl;
+        logError() << "Empty workflow!" << Qt::endl;
         return;
     }
 
@@ -69,7 +69,7 @@ void Workflow::checkDuplicateIds()
 
     if ( ! duplicates.isEmpty() )
     {
-        logError() << "Duplicate workflow step IDs: " << duplicates << endl;
+        logError() << "Duplicate workflow step IDs: " << duplicates << Qt::endl;
         THROW( Exception( "Duplicate worflow step IDs" ) );
     }
 }
@@ -84,7 +84,7 @@ Workflow::step( const QString & id ) const
             return step;
     }
 
-    logWarning() << "No workflow step \"" << id << "\"" << endl;
+    logWarning() << "No workflow step \"" << id << "\"" << Qt::endl;
     return 0;
 }
 
@@ -104,7 +104,7 @@ void Workflow::next()
         else
             logError() << "No workflow step after step " << _currentStep->id()
                        << " (#" << index << ")"
-                       << endl;
+                       << Qt::endl;
     }
 }
 
@@ -113,7 +113,7 @@ void Workflow::back()
 {
     if ( _history.isEmpty() )
     {
-        logWarning() << "Workflow steps history is empty - can't go back any further" << endl;
+        logWarning() << "Workflow steps history is empty - can't go back any further" << Qt::endl;
         return;
     }
 
@@ -135,7 +135,7 @@ void Workflow::activate( WorkflowStep * step, bool goingForward )
 #if VERBOSE_WORKFLOW
         logDebug() << "Going " << QString( goingForward ? "forward" : "backward" )
                    << " to step " << step->id()
-                   << endl;
+                   << Qt::endl;
 #endif
 
         if ( _currentStep )
@@ -155,7 +155,7 @@ void Workflow::activate( WorkflowStep * step, bool goingForward )
 void Workflow::start()
 {
 #if VERBOSE_WORKFLOW
-        logDebug() << "Starting the workflow" << endl;
+        logDebug() << "Starting the workflow" << Qt::endl;
 #endif
 
     restart();
@@ -182,7 +182,7 @@ bool Workflow::atLastStep() const
 
     if ( index < 0 )
     {
-        logError() << "Can't find current step in the steps list" << endl;
+        logError() << "Can't find current step in the steps list" << Qt::endl;
         return true;
     }
 
@@ -197,19 +197,19 @@ void Workflow::pushHistory( WorkflowStep * step )
         if ( ! step->includeInHistory() )
         {
 #if VERBOSE_WORKFLOW
-            logDebug() << "Step " << step->id() << " is excluded from history" << endl;
+            logDebug() << "Step " << step->id() << " is excluded from history" << Qt::endl;
 #endif
         }
         else
         {
 #if VERBOSE_WORKFLOW
-            logDebug() << "Saving step " << step->id() << " to history" << endl;
+            logDebug() << "Saving step " << step->id() << " to history" << Qt::endl;
 #endif
         _history << step;
         }
     }
     else
-        logError() << "Refusing to push null pointer to history" << endl;
+        logError() << "Refusing to push null pointer to history" << Qt::endl;
 }
 
 
@@ -218,7 +218,7 @@ Workflow::popHistory()
 {
     if ( _history.isEmpty() )
     {
-        logError() << "History is empty" << endl;
+        logError() << "History is empty" << Qt::endl;
         return 0;
     }
 
@@ -226,7 +226,7 @@ Workflow::popHistory()
     CHECK_PTR( step );
 
 #if VERBOSE_WORKFLOW
-    logDebug() << "Taking step " << step->id() << " from history" << endl;
+    logDebug() << "Taking step " << step->id() << " from history" << Qt::endl;
 #endif
 
     return step;

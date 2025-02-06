@@ -167,7 +167,7 @@ YQPkgHistoryDialog::populate()
     }
     catch (  const zypp::Exception & exception )
     {
-        logWarning() << "CAUGHT zypp exception: " << exception.asUserHistory() << endl;
+        logWarning() << "CAUGHT zypp exception: " << exception.asUserHistory() << Qt::endl;
         showReadHistoryWarning( fromUTF8( exception.asUserHistory() ) );
     }
 }

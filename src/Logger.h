@@ -45,7 +45,7 @@ enum LogSeverity
 //
 // Usage example:
 //
-//   logDebug() << "Result: " << result << endl;
+//   logDebug() << "Result: " << result << Qt::endl;
 
 #define logVerbose()	Logger::log( 0, __FILE__, __LINE__, __FUNCTION__, LogSeverityVerbose   )
 #define logDebug()	Logger::log( 0, __FILE__, __LINE__, __FUNCTION__, LogSeverityDebug     )
@@ -74,9 +74,9 @@ enum LogSeverity
         if ( obj )                                                       \
             logDebug() << "sender(): " << obj->metaObject()->className() \
                        << " " << obj->objectName()                       \
-                       << endl;                                          \
+                       << Qt::endl;                                          \
         else                                                             \
-            logDebug() << "No sender" << endl;                           \
+            logDebug() << "No sender" << Qt::endl;                           \
                                                                          \
     } while( 0 )
 
@@ -85,8 +85,8 @@ enum LogSeverity
 /**
  * Logging class. Use one of the macros above for stream output:
  *
- *     logDebug() << "Debug logging demo " << myString << ": " << 42 << endl;
- *     logError() << "Can't open file " << filename << ": " << errno << endl;
+ *     logDebug() << "Debug logging demo " << myString << ": " << 42 << Qt::endl;
+ *     logError() << "Can't open file " << filename << ": " << errno << Qt::endl;
  *
  * Remember to terminate each log line with 'endl'.
  * Unlike qDebug() etc., this class does NOT add spaces or quotes.
@@ -203,7 +203,7 @@ public:
      * Notice that due to the way C++ evaluates expressions, the runtime cost
      * will not change significantly, only the log file size:
      *
-     *	   logDebug() << "Result: " << myObj->result() << endl;
+     *	   logDebug() << "Result: " << myObj->result() << Qt::endl;
      *
      * Even if the log level is higher than logDebug(), this will still call
      * myObj->result() and its operator<<(). If you want to avoid that, use

@@ -154,7 +154,7 @@ YQPkgChangesDialog::filter( Filters flt )
 void
 YQPkgChangesDialog::slotFilterChanged( int index )
 {
-    logInfo() << "filter index changed to: " << index << endl;
+    logInfo() << "filter index changed to: " << index << Qt::endl;
     QVariant var = _filter->itemData( index );
 
     if ( var.isValid() && var.canConvert<Filters>() )
@@ -164,7 +164,7 @@ YQPkgChangesDialog::slotFilterChanged( int index )
     }
     else
     {
-        logError() << "Can't find filter for index " << index << endl;
+        logError() << "Can't find filter for index " << index << Qt::endl;
     }
 
 }
@@ -180,7 +180,7 @@ YQPkgChangesDialog::setFilter( Filters filters )
 void
 YQPkgChangesDialog::setFilter( const QRegularExpression & regexp, Filters flt )
 {
-    logInfo() << "filter changed to: " << flt << endl;
+    logInfo() << "filter changed to: " << flt << Qt::endl;
 
     int index = -1;
 
@@ -209,7 +209,7 @@ YQPkgChangesDialog::setFilter( const QRegularExpression & regexp, Filters flt )
     }
     else
     {
-        logError() << "Can't find index for filter " << flt << endl;
+        logError() << "Can't find index for filter " << flt << Qt::endl;
     }
 }
 
@@ -300,7 +300,7 @@ YQPkgChangesDialog::showChangesDialog( QWidget *        parent,
 
     if ( dialog.isEmpty() && options.testFlag( OptionAutoAcceptIfEmpty ) )
     {
-        logInfo() << "No items to show in changes dialog, accepting it automatically" << endl;
+        logInfo() << "No items to show in changes dialog, accepting it automatically" << Qt::endl;
         return true;
     }
 
@@ -328,7 +328,7 @@ YQPkgChangesDialog::showChangesDialog( QWidget *                  parent,
 
     if ( dialog.isEmpty() &&  options.testFlag(OptionAutoAcceptIfEmpty) )
     {
-        logInfo() << "No items to show in dialog, accepting it automatically" << endl;
+        logInfo() << "No items to show in dialog, accepting it automatically" << Qt::endl;
         return true;
     }
 
@@ -377,7 +377,7 @@ YQPkgUnsupportedPackagesDialog::showUnsupportedPackagesDialog( QWidget *       p
 
     if ( dialog.isEmpty() && options.testFlag( OptionAutoAcceptIfEmpty ) )
     {
-        logInfo() << "No items to show in unsupported packages dialog, accepting it automatically" << endl;
+        logInfo() << "No items to show in unsupported packages dialog, accepting it automatically" << Qt::endl;
         return true;
     }
 

@@ -62,7 +62,7 @@ YQPatternSelector::YQPatternSelector( QWidget *	parent, long modeFlags )
 
     if ( zyppPool().empty<zypp::Pattern  >() )
     {
-	logWarning() << "Neither patterns nor selections in ZyppPool" << endl;
+	logWarning() << "Neither patterns nor selections in ZyppPool" << Qt::endl;
     }
 
 
@@ -243,14 +243,14 @@ YQPatternSelector::makeConnections()
 
     }
 
-    logInfo() << "Connection set up" << endl;
+    logInfo() << "Connection set up" << Qt::endl;
 }
 
 
 void
 YQPatternSelector::detailedPackageSelection()
 {
-    logInfo() << "\"Details..\" button clicked" << endl;
+    logInfo() << "\"Details..\" button clicked" << Qt::endl;
 
     // FIXME: Open a YQPackageSelector
 }
@@ -259,7 +259,7 @@ YQPatternSelector::detailedPackageSelection()
 void
 YQPatternSelector::debugTrace()
 {
-    logWarning() << "debugTrace" << endl;
+    logWarning() << "debugTrace" << Qt::endl;
 }
 
 

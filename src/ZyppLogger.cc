@@ -28,7 +28,7 @@ ZyppLogger::ZyppLogger()
     , _lineFormatter( new ZyppLogLineFormatter() )
     , _zyppThreadLogger( Logger::lastLogDir(), "zypp.log" )
 {
-    logInfo() << "Installing the zypp logger" << endl;
+    logInfo() << "Installing the zypp logger" << Qt::endl;
 
     zypp::base::LogControl::instance().setLineFormater( _lineFormatter );
     zypp::base::LogControl::instance().setLineWriter  ( _lineWriter    );
@@ -37,7 +37,7 @@ ZyppLogger::ZyppLogger()
 
 ZyppLogger::~ZyppLogger()
 {
-    logInfo() << "Uninstalling the zypp logger" << endl;
+    logInfo() << "Uninstalling the zypp logger" << Qt::endl;
 
     // Avoid error "QMutex: destroying locked mutex" in the (main) log:
     // The zypp thread might still be writing log messages.
@@ -57,7 +57,7 @@ void ZyppLogger::logLine( const std::string & message )
 {
     QMutexLocker locker( &_mutex );
 
-    _zyppThreadLogger.logStream() << fromUTF8( message ) << endl;
+    _zyppThreadLogger.logStream() << fromUTF8( message ) << Qt::endl;
 }
 
 

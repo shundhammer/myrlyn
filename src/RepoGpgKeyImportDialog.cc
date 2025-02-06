@@ -62,7 +62,7 @@ RepoGpgKeyImportDialog::RepoGpgKeyImportDialog( const zypp::PublicKey & key,
     connect( _ui->cancelButton, SIGNAL( clicked() ),
              this,              SLOT  ( reject()  ) );
 
-    logDebug() << "Asking user to accept the GPG key for repo " << _ui->repoName->text() << endl;
+    logDebug() << "Asking user to accept the GPG key for repo " << _ui->repoName->text() << Qt::endl;
 }
 
 
@@ -93,10 +93,10 @@ void RepoGpgKeyImportDialog::reject()
 
 void RepoGpgKeyImportDialog::logResult( const QString & result )
 {
-    logInfo() << result << " GPG key for repo " << _ui->repoName->text() << endl;
-    logInfo() << "URL:         " << _ui->repoUrl->text()     << endl;
-    logInfo() << "Fingerprint: " << _ui->fingerprint->text() << endl;
-    logInfo() << "Key name:    " << _ui->keyName->text()     << endl;
+    logInfo() << result << " GPG key for repo " << _ui->repoName->text() << Qt::endl;
+    logInfo() << "URL:         " << _ui->repoUrl->text()     << Qt::endl;
+    logInfo() << "Fingerprint: " << _ui->fingerprint->text() << Qt::endl;
+    logInfo() << "Key name:    " << _ui->keyName->text()     << Qt::endl;
 }
 
 

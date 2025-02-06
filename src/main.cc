@@ -75,12 +75,12 @@ bool commandLineOption( const QString & longName,
         if ( ! shortName.isEmpty() )
             argList.removeAll( shortName );
 
-        logDebug() << "Found " << longName << endl;
+        logDebug() << "Found " << longName << Qt::endl;
 	return true;
     }
     else
     {
-        // logDebug() << "No " << longName << endl;
+        // logDebug() << "No " << longName << Qt::endl;
 	return false;
     }
 }
@@ -103,7 +103,7 @@ parseCommandLineOptions( QStringList & argList )
 
     if ( ! argList.isEmpty() )
     {
-        logError() << "FATAL: Bad command line args: " << argList.join( " " ) << endl;
+        logError() << "FATAL: Bad command line args: " << argList.join( " " ) << Qt::endl;
         usage();
     }
 
@@ -118,7 +118,7 @@ void logVersion()
 
     logInfo() << progName << "-" << VERSION
               << " built with Qt " << QT_VERSION_STR
-              << endl;
+              << Qt::endl;
 }
 
 
@@ -148,7 +148,7 @@ int main( int argc, char *argv[] )
         app.run();
     }
 
-    logDebug() << "MyrlynApp finished." << endl;
+    logDebug() << "MyrlynApp finished." << Qt::endl;
 
     return 0;
 }
