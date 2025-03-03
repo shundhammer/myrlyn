@@ -176,6 +176,7 @@ YQPkgUpdatesFilterView::markLeftovers()
     if ( ! pkgList )
         return;
 
+    QIcon icon;
     QIcon noIcon;
 
     for ( int i=0; i < pkgList->topLevelItemCount(); ++i )
@@ -192,10 +193,20 @@ YQPkgUpdatesFilterView::markLeftovers()
             // "installed" (S_KeepInstalled) is left over, i.e. could not be
             // updated without a package conflict.
 
-            bool leftOver = pkgItem->selectable()->status() == S_KeepInstalled;
+            switch ( pkgItem->selectable()->status() )
+            {
+                case S_Update:
+                case S_AutoUpdate:    icon = _updateOkIcon;
+                    break;
 
-            pkgItem->setIcon( pkgList->versionCol(),
-                              leftOver ? _leftoverPkgIcon : _updateOkIcon );
+                case S_KeepInstalled: icon = _leftoverPkgIcon;
+                    break;
+
+                default: icon = noIcon;
+                    break;
+            }
+
+            pkgItem->setIcon( pkgList->versionCol(), icon );
         }
     }
 }
