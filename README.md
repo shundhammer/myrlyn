@@ -2,13 +2,17 @@
 
 _(Formerly known as YQPkg)_
 
-Myrlyn is a graphical package manager to select software packages and patterns
-for installation, update and removal. It uses _libzypp_ as its backend and Qt
-as its GUI toolkit.
+Myrlyn is a graphical software package and repositories manager.
+
+You can use it to install, update or remove individual or multiple software
+packages, and to install or remove software patterns (groups of packages) or
+patches.
+
+It uses _libzypp_ as its backend and Qt 6 as its GUI toolkit.
 
 This started in the 11/2024 SUSE Hack Week to make the SUSE YaST Qt package
-selector usable as a standalone Qt program without any YaST dependencies,
-but it has grown beyond that since then.
+selector usable as a standalone Qt program without any YaST or Ruby
+dependencies, but it has grown beyond that since then.
 
 [<img src="https://raw.githubusercontent.com/shundhammer/yqpkg/refs/heads/master/src/artwork/Myrlyn-256x256.png">](https://raw.githubusercontent.com/shundhammer/yqpkg/refs/heads/master/src/artwork/Myrlyn-256x256.png)
 
@@ -20,9 +24,7 @@ GPL V2; see file LICENSE.
 
 ## Development Status
 
-Approaching Beta status.
-
-It is already well usable and fairly feature complete.
+Not 100% complete yet, but well usable and reliable.
 
 
 ## Screenshots
@@ -63,8 +65,9 @@ It is already well usable and fairly feature complete.
   - File list (installed packages only)
   - Change log (installed packages only)
 
-- Install, update and remove packages
+- Install, update and remove individual or multiple packages
 - Pick a specific package version for installation or update
+- Set a package to "taboo" (never install) or "protected" (keep the current version)
 - Install and remove patterns
 - Install and remove patches
 - Browse and select packages by repository
@@ -127,9 +130,10 @@ It is already well usable and fairly feature complete.
   You can do everything except actually apply any changes.
 
 - During the commit phase (where packages are actually installed, updated or
-  removed), in addition to the large progress bar, you can now also switch to a
-  details view to see which packages are waiting, downloaded, being processed,
-  or finished.
+  removed), in addition to the large progress bar, there is now also a details
+  view to see which packages are waiting, downloaded, being processed, or
+  finished. If you don't like that, disable the details with just one mouse
+  click to get only the progress bar.
 
 - You can decide during the commit phase whether or not you want to see a
   summary page as the next step. That summary page exits the program after a
@@ -183,7 +187,7 @@ It is already well usable and fairly feature complete.
 
 See [issue #1](https://github.com/shundhammer/myrlyn/issues/1).
 
-Scroll down all the way for the latest news.
+Scroll all the way down for the latest news.
 
 
 ## Stability
@@ -249,7 +253,7 @@ Hopefully SUSE will recognize the importance of this and keep sponsoring it.
 
 ## Build Requirements
 
-You need at least a C++ and Qt6 development environment plus CMake and
+You need at least a C++ and Qt 6 development environment plus CMake and
 libzypp-devel.
 
 ```
@@ -263,7 +267,7 @@ For Leap 15.x / SLE-15-SPx also:
 sudo zypper in gcc10-c++
 ```
 
-(or a higher version; Qt6 now requires GCC / G++ 10 or later.)
+(or a higher version; Qt 6 now requires GCC / G++ 10 or later.)
 
 
 ## Building
