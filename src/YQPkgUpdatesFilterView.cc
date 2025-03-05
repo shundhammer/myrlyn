@@ -115,7 +115,8 @@ YQPkgUpdatesFilterView::filter()
     {
         ZyppSel selectable = *it;
 
-        if ( isUpdateAvailableFor( selectable ) )
+        if ( isUpdateAvailableFor( selectable ) &&
+             selectable->status() != S_Protected    )
         {
             ZyppObj installed = selectable->installedObj();
             ZyppPkg zyppPkg   = tryCastToZyppPkg( installed );
@@ -138,8 +139,13 @@ YQPkgUpdatesFilterView::countUpdates()
           it != zyppPkgEnd();
           ++it )
     {
-        if ( isUpdateAvailableFor( *it ) )
+        ZyppSel selectable = *it;
+
+        if ( isUpdateAvailableFor( selectable ) &&
+             selectable->status() != S_Protected    )
+        {
             ++count;
+        }
     }
 
     return count;
