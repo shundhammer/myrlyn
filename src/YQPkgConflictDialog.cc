@@ -22,14 +22,13 @@
 #include <zypp/ZYppFactory.h>
 #include <zypp/Resolver.h>
 
+#include <QElapsedTimer>
 #include <QLabel>
 #include <QLayout>
 #include <QMenu>
-#include <QPushButton>
-#include <QElapsedTimer>
-#include <QPainter>
 #include <QMessageBox>
 #include <QPixmap>
+#include <QPushButton>
 #include <QBoxLayout>
 
 #include "BusyPopup.h"
@@ -215,13 +214,18 @@ YQPkgConflictDialog::verifySystemWithBusyPopup()
 int
 YQPkgConflictDialog::doPackageUpdate()
 {
+    QElapsedTimer timer;
+
     prepareSolving();
     logInfo() << "Starting a global package update ('zypper up' counterpart)..." << endl;
 
+    timer.start();
     bool success = true;
     zypp::getZYpp()->resolver()->doUpdate(); // No return value, assume success.
 
-    logDebug() << "Package update done." << endl;
+    logInfo() << "Package update done after "
+              << timer.elapsed() / 1000.0 << " sec"
+              << endl;
 
     return processSolverResult( success );
 }
@@ -230,12 +234,17 @@ YQPkgConflictDialog::doPackageUpdate()
 int
 YQPkgConflictDialog::doDistUpgrade()
 {
+    QElapsedTimer timer;
+
     prepareSolving();
     logInfo() << "Starting a dist upgrade ('zypper dup' counterpart)" << endl;
 
+    timer.start();
     bool success = zypp::getZYpp()->resolver()->doUpgrade();
 
-    logDebug() << "Dist upgrade done." << endl;
+    logInfo() << "Dist upgrade done after "
+              << timer.elapsed() / 1000.0 << " sec"
+              << endl;
 
     return processSolverResult( success );
 }
