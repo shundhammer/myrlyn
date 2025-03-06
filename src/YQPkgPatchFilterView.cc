@@ -16,7 +16,6 @@
 
 
 #include <QComboBox>
-#include <QElapsedTimer>
 #include <QLabel>
 #include <QSplitter>
 #include <QTabWidget>
