@@ -15,7 +15,8 @@
 
 #include <QString>
 #include <QRegularExpression>
-#include <QTextStream>
+
+#include "Logger.h"     // LogStream
 
 
 /**
@@ -119,8 +120,8 @@ protected:
 };  // class SearchFilter
 
 
-inline QTextStream & operator<< ( QTextStream        & stream,
-                                  const SearchFilter & filter )
+inline LogStream & operator<< ( LogStream        & stream,
+                                const SearchFilter & filter )
 {
     stream << "<SearchFilter \""
            << filter.pattern()

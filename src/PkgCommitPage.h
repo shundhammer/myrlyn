@@ -374,7 +374,7 @@ protected:
 };
 
 
-QTextStream & operator<<( QTextStream & str, ZyppRes zyppRes );
+LogStream & operator<<( LogStream & str, ZyppRes zyppRes );
 
 
 

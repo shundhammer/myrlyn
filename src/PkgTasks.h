@@ -21,10 +21,10 @@
 
 #include <QString>
 #include <QList>
-#include <QTextStream>
 #include <QMutex>
 
 #include <zypp-core/ByteCount.h>
+#include "Logger.h"     // LogStream
 #include "YQZypp.h"     // ZyppRes
 
 
@@ -383,8 +383,8 @@ protected:
 };
 
 
-QTextStream & operator<<( QTextStream & str, const PkgTask & task );
-QTextStream & operator<<( QTextStream & str, PkgTask *       task );
+LogStream & operator<<( LogStream & str, const PkgTask & task );
+LogStream & operator<<( LogStream & str, PkgTask *       task );
 
 
 #endif // PkgTasks_h
