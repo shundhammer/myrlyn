@@ -36,7 +36,7 @@ BuildRequires:  hicolor-icon-theme
 # FIXME: Is this still needed (gcc-fortran)?
 BuildRequires:  gcc-fortran
 BuildRequires:  pkgconfig
-BuildRequires:  pkgconfig(Qt6Core)
+BuildRequires:  pkgconfig(Qt6Core) >= 6.5
 BuildRequires:  pkgconfig(Qt6Gui)
 BuildRequires:  pkgconfig(Qt6Widgets)
 # Not needed:   pkgconfig(Qt6Svg)

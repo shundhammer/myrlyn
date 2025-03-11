@@ -92,7 +92,7 @@ find_package( Qt6
               Widgets
               REQUIRED )
 
-qt_standard_project_setup()
+qt_standard_project_setup( REQUIRES 6.5 )
 
 
 # Avoid RUNPATH (https://github.com/shundhammer/myrlyn/issues/80)
