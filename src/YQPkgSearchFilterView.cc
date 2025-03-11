@@ -34,7 +34,7 @@
 #include "SearchFilter.h"
 #include "YQi18n.h"
 #include "utf8.h"
-
+#include "YQPkgSelector.h"
 #include "YQPkgSearchFilterView.h"
 
 #ifndef VERBOSE_FILTER_VIEWS
@@ -51,6 +51,7 @@ YQPkgSearchFilterView::YQPkgSearchFilterView( QWidget * parent )
 {
     CHECK_NEW( _ui );
     _ui->setupUi( this ); // Actually create the widgets from the .ui form
+    _ui->searchText->installEventFilter( this );
 
     // See ui_search-filter-view.h in the build/ tree for the widget names.
     //
@@ -420,4 +421,36 @@ void YQPkgSearchFilterView::writeSettings()
     settings.setValue( "searchMode",          _ui->searchMode->currentIndex()       );
 
     settings.endGroup();
+}
+
+
+bool YQPkgSearchFilterView::eventFilter( QObject * watchedObj, QEvent * event )
+{
+    if ( event && event->type() == QEvent::KeyPress &&
+         watchedObj == _ui->searchText )
+    {
+        QKeyEvent * keyEvent = static_cast<QKeyEvent *>( event );
+
+        if ( keyEvent->modifiers() == Qt::ControlModifier )
+        {
+            switch( keyEvent->key() )
+            {
+                // Issue #84: Search input field consumes Ctrl + Left / Ctrl + Right.
+                // We want this key combination to move the current tab left or right,
+                // not as a duplicated action for 'Home' or 'End'.
+
+                case Qt::Key_Left:
+                case Qt::Key_Right:
+
+                    // Send this event to the YQPkgSelector where it will
+                    // trickle down to the YQPkgFilterTab and its individual
+                    // tabs and their action.
+                    qApp->sendEvent( YQPkgSelector::instance(), event );
+
+                    return true; // Event processing finished
+            }
+        }
+    }
+
+    return false; // Event processing not yet finished, continue down the chain
 }

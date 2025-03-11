@@ -155,6 +155,14 @@ protected:
     virtual void keyPressEvent( QKeyEvent * event ) override;
 
     /**
+     * Event filter to catch foreign events
+     *
+     * Reimplemented from QObject.
+     **/
+    virtual bool eventFilter( QObject * watchedObj, QEvent * event ) override;
+
+
+    /**
      * Read settings from the config file.
      **/
     void readSettings();
