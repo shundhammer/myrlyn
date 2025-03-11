@@ -436,15 +436,15 @@ bool YQPkgSearchFilterView::eventFilter( QObject * watchedObj, QEvent * event )
             switch( keyEvent->key() )
             {
                 // Issue #84: Search input field consumes Ctrl + Left / Ctrl + Right.
-                // We want this key combination to move the current tab left or right,
-                // not as a duplicated action for 'Home' or 'End'.
+                // We want these key combinations to move the current tab left
+                // or right, not as a duplicated action for 'Home' or 'End'.
 
                 case Qt::Key_Left:
                 case Qt::Key_Right:
 
                     // Send this event to the YQPkgSelector where it will
                     // trickle down to the YQPkgFilterTab and its individual
-                    // tabs and their action.
+                    // tabs and their actions.
                     qApp->sendEvent( YQPkgSelector::instance(), event );
 
                     return true; // Event processing finished
