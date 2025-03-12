@@ -214,7 +214,7 @@ void CommunityRepos::openSUSE_Tumbleweed_Repos()
     _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/" )
            << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials" )
            << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Tumbleweed/" )
-           << openH264Repo         ( "https://codecs.opensuse.org/openh264/openSUSE_Tumbleweed/" )
+           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Tumbleweed/" )
            << nvidiaRepo           ( "https://download.nvidia.com/opensuse/tumbleweed" );
 }
 
@@ -224,7 +224,7 @@ void CommunityRepos::openSUSE_Slowroll_Repos()
     _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Slowroll/" )
            << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Slowroll/Essentials/" )
            << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Tumbleweed/" )
-           << openH264Repo         ( "https://codecs.opensuse.org/openh264/openSUSE_Tumbleweed/" )
+           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Tumbleweed/" )
            << nvidiaRepo           ( "https://download.nvidia.com/opensuse/tumbleweed" );
 }
 
@@ -234,7 +234,7 @@ void CommunityRepos::openSUSE_Leap_15x_Repos()
     _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/" )
            << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/Essentials/" )
            << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
-           << openH264Repo         ( "https://codecs.opensuse.org/openh264/openSUSE_Leap/" )
+           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap/" )
            << nvidiaRepo           ( "https://download.nvidia.com/opensuse/leap/$releasever/" );
 }
 
@@ -244,5 +244,5 @@ void CommunityRepos::SLE_15_SPx_Repos()
     _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLE_15/" )
            << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLE_15/Essentials/" )
            << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
-           << openH264Repo         ( "https://codecs.opensuse.org/openh264/openSUSE_Leap/" );
+           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap/" );
 }
