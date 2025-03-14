@@ -17,10 +17,13 @@
 
 #include <unistd.h>             // sleep()
 #include <iostream>             // cerr
+#include <clocale>              // std::setlocale()
 #include <QElapsedTimer>
 #include <QMessageBox>
 
 #include <zypp/ZYppFactory.h>
+#include <zypp/Locale.h>
+#include <zypp/ZConfig.h>
 
 #include "Exception.h"
 #include "KeyRingCallbacks.h"
@@ -99,6 +102,26 @@ MyrlynRepoManager::repoManager()
 void MyrlynRepoManager::zyppConnect( int attempts, int waitSeconds )
 {
     (void) zyppConnectInternal( attempts, waitSeconds );
+    initZyppLocale();
+}
+
+
+void MyrlynRepoManager::initZyppLocale()
+{
+    // Get the locale from the environment variables. See 'locale'.
+    const char * locale = std::setlocale( LC_MESSAGES, 0 );
+
+    logInfo() << "C locale: " << locale << endl;
+
+    try
+    {
+        zypp::Locale zyppLocale = zypp::Locale( locale );
+        zypp::ZConfig::instance().setTextLocale( zyppLocale );
+    }
+    catch (...)
+    {
+        logWarning() << "Can't set zypp locale " << locale << endl;
+    }
 }
 
 

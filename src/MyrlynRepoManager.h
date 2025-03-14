@@ -124,6 +124,11 @@ protected:
     void shutdownZypp();
 
     /**
+     * Initialize the zypp locale from the locale environment variables.
+     **/
+    void initZyppLocale();
+
+    /**
      * Find the enabled repos from the zypp repo manager and put them into
      * _repos.
      **/
