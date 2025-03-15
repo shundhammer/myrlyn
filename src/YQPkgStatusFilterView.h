@@ -55,6 +55,12 @@ public:
     bool check( ZyppSel selectable,
                 ZyppObj pkg );
 
+    /**
+     * Return 'true' if this view is showing any automatic package changes, so
+     * showing an additional dialog for that is not needed.
+     **/
+    bool showingAutomaticChanges() const;
+
 
 public slots:
 

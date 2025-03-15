@@ -128,6 +128,13 @@ public:
     int tabCount() const;
 
     /**
+     * Return 'true' if widget 'pageContent' is the current page, 'false' if
+     * not.
+     **/
+    bool isCurrentPage( QWidget * pageContent ) const;
+
+
+    /**
      * Event filter to catch mouse right clicks on open tabs for the tab
      * context menu. Returns 'true' if the event is processed and consumed,
      * 'false' if processed should be continued by the watched object itself.

@@ -182,6 +182,22 @@ void YQPkgStatusFilterView::clear()
 }
 
 
+bool
+YQPkgStatusFilterView::showingAutomaticChanges() const
+{
+    // Showing all installed packages will drown out the automatic changes, so
+    // let's be conservative here: Better show an additional popup that ONLY
+    // shows the automatic changes in that case.
+
+    if ( _ui->showKeepInstalled->isChecked() )
+        return false;
+
+    return _ui->showAutoInstall->isChecked() &&
+        _ui->showAutoUpdate->isChecked()     &&
+        _ui->showAutoDel->isChecked();
+}
+
+
 void YQPkgStatusFilterView::showTransactions()
 {
     _ui->showInstall->setChecked( true );

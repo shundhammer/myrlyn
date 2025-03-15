@@ -163,6 +163,12 @@ signals:
 protected:
 
     /**
+     * Return 'true' if the "Automatic Changes" dialog should be shown upon
+     * accepting the changes.
+     **/
+    virtual bool showAutoChangesDialog() { return false; }
+
+    /**
      * Show all license agreements the user has not confirmed yet
      * (for all packages that will be installed, and in YOU mode also for
      * patches).
@@ -199,7 +205,6 @@ protected:
     // Data members
 
     bool                  _blockResolver;
-    bool                  _showChangesDialog;
     YQPkgConflictDialog * _pkgConflictDialog;
     YQPkgDiskUsageList *  _diskUsageList;
 };

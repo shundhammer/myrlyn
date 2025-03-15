@@ -385,6 +385,16 @@ YQPkgFilterTab::reloadCurrentPage()
 }
 
 
+bool
+YQPkgFilterTab::isCurrentPage( QWidget * pageContent ) const
+{
+    int currentIndex = tabBar()->currentIndex();
+    YQPkgFilterPage * currentPage = findPage( currentIndex );
+
+    return currentPage && currentPage->content == pageContent;
+}
+
+
 void
 YQPkgFilterTab::setPageLabel( QWidget * pageContent, const QString & newLabel )
 {

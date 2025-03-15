@@ -43,10 +43,9 @@ YQPkgSelectorBase::YQPkgSelectorBase( QWidget * parent )
     : QFrame( parent )
     , _blockResolver( true )
 {
-    _showChangesDialog          = false;
-    _pkgConflictDialog          = 0;
-    _diskUsageList              = 0;
-    _pkgConflictDialog          = 0;
+    _pkgConflictDialog = 0;
+    _diskUsageList     = 0;
+    _pkgConflictDialog = 0;
 
     // YQUI::setTextdomain( "qt-pkg" );
     // setFont( YQUI::yqApp()->currentFont() );
@@ -254,7 +253,7 @@ void YQPkgSelectorBase::accept()
 
     } while ( ! confirmedAllLicenses ); // Some packages will be set to S_TABOO - need another solver run
 
-    if ( _showChangesDialog )
+    if ( showAutoChangesDialog() )
     {
         // Show which packages are installed/deleted automatically
         QString msg =
@@ -383,9 +382,9 @@ void YQPkgSelectorBase::keyPressEvent( QKeyEvent * event )
 {
     if ( event )
     {
-        Qt::KeyboardModifiers special_combo = ( Qt::ControlModifier | Qt::ShiftModifier | Qt::AltModifier );
+        Qt::KeyboardModifiers specialCombo = ( Qt::ControlModifier | Qt::ShiftModifier | Qt::AltModifier );
 
-        if ( ( event->modifiers() & special_combo ) == special_combo )
+        if ( ( event->modifiers() & specialCombo ) == specialCombo )
         {
             if ( event->key() == Qt::Key_A )
             {

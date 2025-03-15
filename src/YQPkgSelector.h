@@ -361,6 +361,16 @@ protected:
     void globalUpdatePkg( bool force );
 
     /**
+     * Return 'true' if the "Automatic Changes" dialog should be shown upon
+     * accepting the changes.
+     *
+     * Reimplemented from YQPkgSelectorBase to avoid showing this dialog if the
+     * user already sees the "Installation Summary" view page in its default
+     * configuration which already shows the automatic changes.
+     **/
+    virtual bool showAutoChangesDialog() override;
+
+    /**
      * Return 'true' if any selectable has any retracted package version
      * installed.
      **/

@@ -129,8 +129,7 @@ YQPkgSelector::YQPkgSelector( QWidget * parent )
     _instance = this;
 
     // Inherited from YQPkgSelectorBase
-    _blockResolver     = true;
-    _showChangesDialog = true;
+    _blockResolver = true;
 
     logDebug() << "Creating YQPkgSelector..." << endl;
 
@@ -1447,6 +1446,23 @@ YQPkgSelector::installRecommendedPkgs()
                                            QString(),                   // rejectButtonLabel
                                            YQPkgChangesDialog::FilterAutomatic,
                                            YQPkgChangesDialog::OptionNone );    // showIfEmpty
+}
+
+
+bool
+YQPkgSelector::showAutoChangesDialog()
+{
+    if ( _statusFilterView && _filters &&
+         _filters->isCurrentPage( _statusFilterView ) &&
+         _statusFilterView->showingAutomaticChanges() )
+    {
+        logDebug() << "Already showing automatic changes in the main windwow, "
+                   << "skipping pop-up dialog" << endl;
+
+        return false;
+    }
+
+    return true;
 }
 
 
