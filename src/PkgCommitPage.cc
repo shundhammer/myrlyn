@@ -855,6 +855,9 @@ void PkgCommitPage::pkgActionProgress( ZyppRes       zyppRes,
 {
     Q_UNUSED( action );
 
+    // Make sure the file conflicts dialog is closed now
+    fileConflictsProgressDialog()->hide();
+
     // Avoid an unreasonable number of expensive progress updates:
     //
     // Every 5% (i.e. 20 times per package) is more than enough, and libzypp
@@ -900,6 +903,9 @@ void PkgCommitPage::pkgActionEnd( ZyppRes       zyppRes,
                                   const char *  caller )
 {
     CHECK_PTR( zyppRes );
+
+    // Make sure the file conflicts dialog is closed now
+    fileConflictsProgressDialog()->hide();
 
     PkgTask * task = pkgTasks()->doing().find( zyppRes );
 
