@@ -1,9 +1,9 @@
 /*
  *   File name: BusyPopup.cc
- *   Summary:	QDirStat generic widget classes
- *   License:	GPL V2 - See file LICENSE for details.
+ *   Summary:   QDirStat generic widget classes
+ *   License:   GPL V2 - See file LICENSE for details.
  *
- *   Author:	Stefan Hundhammer <Stefan.Hundhammer@gmx.de>
+ *   Author:    Stefan Hundhammer <Stefan.Hundhammer@gmx.de>
  *              Donated by the QDirStat project
  */
 
@@ -19,16 +19,16 @@
 
 
 BusyPopup::BusyPopup( const QString & text,
-		      QWidget *	      parent,
-		      bool	      autoPost ):
+                      QWidget *       parent,
+                      bool            autoPost ):
     QLabel( text, parent, Qt::SplashScreen ),
     _posted( false )
 {
-    setContentsMargins( 50, 50, 50, 50 );
+    setMargin( 15 );
     setWindowTitle( " " );
 
     if ( autoPost )
-	post();
+        post();
 }
 
 
@@ -41,7 +41,7 @@ BusyPopup::~BusyPopup()
 void BusyPopup::post()
 {
     if ( _posted )
-	return;
+        return;
 
     show();
     processEvents();
@@ -53,7 +53,7 @@ void BusyPopup::processEvents( int millisec )
 {
     QEventLoop eventLoop;
     eventLoop.processEvents( QEventLoop::ExcludeUserInputEvents,
-			     millisec );
+                             millisec );
 }
 
 
@@ -63,18 +63,18 @@ void BusyPopup::showEvent( QShowEvent * event )
 
     if ( parentWidget() )
     {
-	int x = ( parentWidget()->width()  - width()  ) / 2;
-	int y = ( parentWidget()->height() - height() ) / 2;
+        int x = ( parentWidget()->width()  - width()  ) / 2;
+        int y = ( parentWidget()->height() - height() ) / 2;
 
-	move( parentWidget()->x() + x, parentWidget()->y() + y );
+        move( parentWidget()->x() + x, parentWidget()->y() + y );
     }
     else
     {
         QRect screenGeo = qApp->primaryScreen()->availableGeometry();
 
-	int x = ( screenGeo.width()  - width()  ) / 2;
-	int y = ( screenGeo.height() - height() ) / 2;
+        int x = ( screenGeo.width()  - width()  ) / 2;
+        int y = ( screenGeo.height() - height() ) / 2;
 
-	move( screenGeo.x() + x, screenGeo.y() + y );
+        move( screenGeo.x() + x, screenGeo.y() + y );
     }
 }
