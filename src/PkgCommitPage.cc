@@ -82,7 +82,7 @@ PkgCommitPage::~PkgCommitPage()
     delete _ui;
     // PkgCommitSignalForwarder::instance()->deleteLater();
 
-    // don't delete _fileConflictsProgressDialog:
+    // No need to delete _fileConflictsProgressDialog:
     // It has the main window as its parent.
 
     _instance = 0;
@@ -547,6 +547,26 @@ PkgCommitPage::fileConflictsProgressDialog()
 }
 
 
+void PkgCommitPage::closeFileConflictsProgressDialog()
+{
+    if ( ! _fileConflictsProgressDialog )
+        return;
+
+    if ( _fileConflictsProgressDialog->isVisible() )
+    {
+        logDebug() << "Closing file conflicts dialog after "
+                   << _fileConflictsProgressDialog->elapsed() / 1000.0
+                   << " sec" << endl;
+
+        _fileConflictsProgressDialog->hide();
+        processEvents();
+    }
+
+    delete _fileConflictsProgressDialog;
+    _fileConflictsProgressDialog = 0;
+}
+
+
 //----------------------------------------------------------------------
 
 //
@@ -784,7 +804,7 @@ void PkgCommitPage::pkgActionStart( ZyppRes       zyppRes,
     // the time for checking file conflicts is definitely over;
     // close the dialog. It doesn't hurt if it's already closed.
 
-    fileConflictsProgressDialog()->hide();
+    closeFileConflictsProgressDialog();
 
     if ( action & PkgAdd ) // PkgInstall | PkgUpdate
     {
@@ -856,7 +876,7 @@ void PkgCommitPage::pkgActionProgress( ZyppRes       zyppRes,
     Q_UNUSED( action );
 
     // Make sure the file conflicts dialog is closed now
-    fileConflictsProgressDialog()->hide();
+    closeFileConflictsProgressDialog();
 
     // Avoid an unreasonable number of expensive progress updates:
     //
@@ -905,7 +925,7 @@ void PkgCommitPage::pkgActionEnd( ZyppRes       zyppRes,
     CHECK_PTR( zyppRes );
 
     // Make sure the file conflicts dialog is closed now
-    fileConflictsProgressDialog()->hide();
+    closeFileConflictsProgressDialog();
 
     PkgTask * task = pkgTasks()->doing().find( zyppRes );
 
@@ -1071,14 +1091,11 @@ void PkgCommitPage::fileConflictsCheckProgress( int percent )
 
 void PkgCommitPage::fileConflictsCheckResult( const QStringList & conflicts )
 {
-    logDebug() << endl;
-
-    fileConflictsProgressDialog()->hide();
-    processEvents();
-
     logInfo() << "File conflicts check finished after "
               << fileConflictsProgressDialog()->elapsed() / 1000.0 << " sec"
               << endl;
+
+    closeFileConflictsProgressDialog();
 
     if ( conflicts.isEmpty() )
          return;

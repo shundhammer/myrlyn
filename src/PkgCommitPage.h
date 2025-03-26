@@ -321,6 +321,12 @@ protected:
     ProgressDialog * fileConflictsProgressDialog();
 
     /**
+     * Close the file conflicts check dialog and delete it.
+     * Do nothing if it was never created.
+     **/
+    void closeFileConflictsProgressDialog();
+
+    /**
      * The common part of pkgInstallStart() and pkgRemoveStart() /
      * ...progress(), ...End(), ...Error().
      *
