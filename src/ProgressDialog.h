@@ -114,8 +114,8 @@ public:
     //
 
     Ui::ProgressDialog * _ui;
-    QElapsedTimer       _timer;
-    bool                _shown;
+    QElapsedTimer        _timer;
+    bool                 _shown;
 };
 
 #endif // ProgressDialog_h
