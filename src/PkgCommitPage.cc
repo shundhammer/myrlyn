@@ -967,6 +967,17 @@ void PkgCommitPage::pkgActionEnd( ZyppRes       zyppRes,
     // when the task was moved from the downloads list to the doing list.
 
 
+    // Was this the last task?
+
+    if ( pkgTasks()->todo().isEmpty()      &&
+         pkgTasks()->downloads().isEmpty() &&
+         pkgTasks()->doing().isEmpty() )
+    {
+        QString msg = _( "[Post-transaction scripts]" );
+        _ui->doingList->addItem( new QListWidgetItem( msg ) );
+    }
+
+
     // Update the UI
 
     updateTotalProgressBar(); // This may or may not be needed
