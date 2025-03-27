@@ -850,13 +850,11 @@ YQPkgSelector::addMenus()
     extrasMenu->addAction( _( "Install All Matching Recommended Packages" ),
                             this, SLOT( installRecommendedPkgs() ) );
 
-    extrasMenu->addSeparator();
-
     if ( _pkgConflictDialog )
     {
-        QAction * action = extrasMenu->addAction( _( "Generate Dependency Resolver &Test Case" ),
-                                                   _pkgConflictDialog, SLOT( askCreateSolverTestCase() ) );
-        action->setEnabled( MyrlynApp::runningAsRoot() );
+        extrasMenu->addSeparator();
+        extrasMenu->addAction( _( "Generate Dependency Resolver &Test Case" ),
+                               _pkgConflictDialog, SLOT( askCreateSolverTestCase() ) );
     }
 
 
