@@ -161,6 +161,7 @@ protected:
     QMenu *             _expertMenu;
 
     static YQPkgConflictDialog * _instance;
+    static int                   _resolverRunCount;
 };
 
 

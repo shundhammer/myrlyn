@@ -44,7 +44,8 @@
 #define MARGIN   4       // around the widget
 
 
-YQPkgConflictDialog * YQPkgConflictDialog::_instance = 0;
+YQPkgConflictDialog * YQPkgConflictDialog::_instance         = 0;
+int                   YQPkgConflictDialog::_resolverRunCount = 0;
 
 
 YQPkgConflictDialog::YQPkgConflictDialog( QWidget * parent )
@@ -173,6 +174,7 @@ YQPkgConflictDialog::solveAndShowConflicts()
     // logInfo() << "Resolving dependencies..." << endl;
 
     bool success = zypp::getZYpp()->resolver()->resolvePool();
+    ++_resolverRunCount;
 
     // logDebug() << "Resolving dependencies done." << endl;
 
@@ -193,6 +195,7 @@ YQPkgConflictDialog::verifySystem( bool showBusyPopup )
     logInfo() << "Verifying all system dependencies..." << endl;
 
     bool success = zypp::getZYpp()->resolver()->verifySystem();
+    ++_resolverRunCount;
 
     logDebug() << "System dependencies verified." << endl;
 
@@ -222,6 +225,7 @@ YQPkgConflictDialog::doPackageUpdate()
     timer.start();
     bool success = true;
     zypp::getZYpp()->resolver()->doUpdate(); // No return value, assume success.
+    ++_resolverRunCount;
 
     logInfo() << "Package update done after "
               << timer.elapsed() / 1000.0 << " sec"
@@ -241,6 +245,7 @@ YQPkgConflictDialog::doDistUpgrade()
 
     timer.start();
     bool success = zypp::getZYpp()->resolver()->doUpgrade();
+    ++_resolverRunCount;
 
     logInfo() << "Dist upgrade done after "
               << timer.elapsed() / 1000.0 << " sec"
@@ -311,18 +316,25 @@ YQPkgConflictDialog::processSolverResult( bool success )
 void
 YQPkgConflictDialog::askCreateSolverTestCase()
 {
-    QString testCaseDir = "/var/log/YaST2/solverTestcase";
+    QString testCaseDir = Logger::lastLogDir() + "/solver-test-case";
 
-    // Heading for popup dialog
-    QString heading = QString( "<h2>%1</h2>" ).arg( _( "Create Dependency Resolver Test Case" ) );
+    QMessageBox msgBox( window() );
+    msgBox.setWindowTitle( _( "Create Dependency Resolver Test Case" ) );
+
+    if ( _resolverRunCount < 1 )
+    {
+        msgBox.setText( _( "You need to run the dependency resolver first." ) );
+        msgBox.addButton( QMessageBox::Ok );
+        msgBox.exec();
+
+        return;
+    }
 
     QString msg =
         _( "<p>Use this to generate extensive logs to help tracking down bugs in the dependency resolver. "
            "The logs will be stored in directory <br><tt>%1</tt></p>" ).arg( testCaseDir );
 
-    QMessageBox msgBox( window() );
     msgBox.setText( msg );
-    msgBox.setWindowTitle( heading );
     msgBox.addButton( _( "C&ontinue" ), QMessageBox::AcceptRole );
     msgBox.addButton( QMessageBox::Cancel );
 
