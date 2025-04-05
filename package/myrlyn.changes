@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Sat Apr  5 16:14:01 UTC 2025 - Stefan Hundhammer <shundhammer@suse.com>
+
+- Improved dist upgrade / package update (icons etc.)
+- "Automatic changes" dialog only when needed
+- Don't require root privileges for solver test case anymore
+- Feedback about post-trans scripts
+- 0.9.3
+
+-------------------------------------------------------------------
 Mon Feb 24 23:03:21 UTC 2025 - Stefan Hundhammer <shundhammer@suse.com>
 
 - Migration to Qt 6
