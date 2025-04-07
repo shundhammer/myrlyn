@@ -7,7 +7,7 @@ https://build.opensuse.org/package/show/system:packagemanager/myrlyn
 
 ## Check Out the Package
 
-Checkout into a branch package:
+Branch and check out (`osc bco`) into a branch package:
 
 ```
 cd /work/obs
@@ -15,7 +15,7 @@ osc bco system:packagemanager myrlyn
 cd system:packagemanager/myrlyn
 ```
 
-Checking out the devel project:
+Alternative: Check out the devel project:
 
 ```
 cd /work/obs
