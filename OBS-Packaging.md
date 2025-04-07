@@ -107,3 +107,6 @@ https://build.opensuse.org/package/requests/system:packagemanager/myrlyn
 ```
 osc sr system:packagemanager/myrlyn openSUSE:Factory/myrlyn
 ```
+
+Check the pending requests:
+https://build.opensuse.org/package/requests/openSUSE:Factory/myrlyn
