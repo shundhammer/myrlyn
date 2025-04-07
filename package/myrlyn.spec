@@ -26,15 +26,12 @@ Summary:        Package manager GUI
 License:        GPL-2.0-only
 Group:          System/Packages
 URL:            https://github.com/shundhammer/myrlyn
-Source:         %{name}-%{version}.tar.bz2
+Source:         %{name}-%{version}.tar.zst
 BuildRequires:  %{libzypp_devel_version}
 BuildRequires:  ImageMagick
 BuildRequires:  boost-devel
 BuildRequires:  cmake >= 3.17
 BuildRequires:  hicolor-icon-theme
-# Workaround for boost issue, see boo#1225861
-# FIXME: Is this still needed (gcc-fortran)?
-BuildRequires:  gcc-fortran
 BuildRequires:  pkgconfig
 BuildRequires:  pkgconfig(Qt6Core) >= 6.5
 BuildRequires:  pkgconfig(Qt6Gui)
@@ -55,12 +52,13 @@ Requires:	xdg-utils
 Obsoletes:      myrlyn = 9.0.1
 
 %description
-Myrlyn is a graphical package manager to select software packages and patterns for installation, update and removal. It uses libzypp as its backend and Qt as its GUI toolkit.
+Myrlyn is a graphical package manager to select software packages
+and patterns for installation, update and removal.
 
+It uses libzypp as its backend and Qt as its GUI toolkit.
 
 %prep
 %autosetup -p1
-
 
 %build
 %if 0%{?suse_version} < 1600
