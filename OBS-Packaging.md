@@ -101,8 +101,8 @@ https://build.opensuse.org/package/requests/system:packagemanager/myrlyn
 
 ## Submit from the Devel Project to Factory
 
-- [Devel Project] (https://build.opensuse.org/package/show/system:packagemanager/myrlyn)
-- [Factory] (https://build.opensuse.org/project/show/openSUSE:Factory)
+- [Devel Project](https://build.opensuse.org/package/show/system:packagemanager/myrlyn)
+- [Factory](https://build.opensuse.org/project/show/openSUSE:Factory)
 
 ```
 osc sr system:packagemanager/myrlyn openSUSE:Factory/myrlyn
