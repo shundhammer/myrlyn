@@ -1,8 +1,13 @@
 # Packaging Myrlyn with OBS
 
-## Checking Out the Package
+## Devel Project
 
-Checking out into a branch package:
+https://build.opensuse.org/package/show/system:packagemanager/myrlyn
+
+
+## Check Out the Package
+
+Checkout into a branch package:
 
 ```
 cd /work/obs
@@ -10,7 +15,7 @@ osc bco system:packagemanager myrlyn
 cd system:packagemanager/myrlyn
 ```
 
-Checking out the real thing (Caution!):
+Checking out the devel project:
 
 ```
 cd /work/obs
@@ -55,7 +60,7 @@ rm *.zst
 ## Check in the new cpio Archive
 
 ```
-osc ar 
+osc ar
 ```
 
 ## Double-Check
@@ -72,8 +77,33 @@ osc ci
 
 ## Check the Result
 
-- In the home project: https://build.opensuse.org/
+- In the home project:
+  https://build.opensuse.org/
   - Left sidebar: "Your Home Project"
   - Center tab: "Subprojects"
   - `home:${user}:branches:system:packagemanager`
   - "myrlyn"
+
+
+- In the real target project:
+  https://build.opensuse.org/package/show/system:packagemanager/myrlyn
+
+
+## Submit from the Home Project to the Devel Project
+
+```
+osc sr home:shundhammer:myrlyn-stable/myrlyn system:packagemanager/myrlyn
+```
+
+Check the pending requests:
+https://build.opensuse.org/package/requests/system:packagemanager/myrlyn
+
+
+## Submit from the Devel Project to Factory
+
+- [Devel Project] (https://build.opensuse.org/package/show/system:packagemanager/myrlyn)
+- [Factory] (https://build.opensuse.org/project/show/openSUSE:Factory)
+
+```
+osc sr system:packagemanager/myrlyn openSUSE:Factory/myrlyn
+```
