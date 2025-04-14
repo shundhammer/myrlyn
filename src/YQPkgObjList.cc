@@ -1154,7 +1154,6 @@ YQPkgObjListItem::cycleStatus()
 void
 YQPkgObjListItem::showNotifyTexts( ZyppStatus status )
 {
-    // just return if no selectable
     if ( ! selectable() )
         return;
 
