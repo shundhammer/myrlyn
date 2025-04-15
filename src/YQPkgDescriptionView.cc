@@ -294,8 +294,9 @@ YQPkgDescriptionView::findDesktopFiles( const list<string> & fileList ) const
           ++it )
     {
         QString line = fromUTF8( *it );
+        static QRegularExpression reDesktop( DESKTOP_FILE_DIR );
 
-        if ( line.contains( QRegularExpression( DESKTOP_FILE_DIR ) ) )
+        if ( line.contains( reDesktop ) )
             desktopFiles << line;
     }
 
@@ -312,9 +313,11 @@ void YQPkgDescriptionView::initLang()
         _langWithCountry = lang_cstr;
 
          // remove .utf8 / @euro etc.
-        _langWithCountry.replace( QRegularExpression( "[@\\.].*$" ), "" );
+        static QRegularExpression reCountry( "[@\\.].*$" );
+        _langWithCountry.replace( reCountry, "" );
 
         _lang = _langWithCountry;
-        _lang.replace( QRegularExpression( "_.*$" ), "" ); // remove _DE etc.
+        static QRegularExpression reLanguage( "_.*$" );
+        _lang.replace( reLanguage, "" ); // remove _DE etc.
     }
 }
