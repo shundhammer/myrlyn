@@ -77,7 +77,12 @@ public slots:
     /**
      * Notification that refreshing a repo is done.
      **/
-    void refreshRepoDone ( const ZyppRepoInfo & repo );
+    void refreshRepoDone( const ZyppRepoInfo & repo );
+
+    /**
+     * Notification that refreshing a repo failed.
+     **/
+    void refreshRepoError( const ZyppRepoInfo & repo );
 
 
 protected:
@@ -119,6 +124,7 @@ protected:
     QPixmap             _emptyIcon;
     QPixmap             _downloadOngoingIcon;
     QPixmap             _downloadDoneIcon;
+    QPixmap             _downloadErrorIcon;
 };
 
 

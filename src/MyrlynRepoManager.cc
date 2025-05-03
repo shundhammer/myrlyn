@@ -30,6 +30,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MyrlynApp.h"
+#include "QY2CursorHelper.h"
 #include "YQi18n.h"
 #include "utf8.h"
 #include "MyrlynRepoManager.h"
@@ -233,6 +234,7 @@ void MyrlynRepoManager::refreshRepos()
 
     KeyRingCallbacks keyRingCallbacks;
     QElapsedTimer    timer;
+    _failedRepos.clear();
 
     for ( ZyppRepoInfo & repo: _repos )
     {
@@ -261,8 +263,13 @@ void MyrlynRepoManager::refreshRepos()
 
             logInfo() << "Disabling repo " << repo.name() << endl;
             repo.setEnabled( false );
+            _failedRepos.push_back( repo );
+
+            emit refreshRepoError( repo );
         }
     }
+
+    showFailedRepos();
 }
 
 
@@ -293,7 +300,41 @@ void MyrlynRepoManager::notifyUserToRunZypperDup() const
     std::cerr << toUTF8( message ) << std::endl;
 
     QMessageBox::warning( MainWindow::instance(), // parent
-                          _( "Error" ),
+                          _( "Error" ),           // window title
                           message );
 }
 
+
+void MyrlynRepoManager::showFailedRepos() const
+{
+    if ( _failedRepos.empty() )
+        return;
+
+    QString msg;
+
+    if ( _failedRepos.size() == 1 )
+    {
+        QString repoName = fromUTF8( _failedRepos.front().name() );
+
+        msg = _( "Refreshing repository \"%1\" failed.\n\n"
+                 "This repository is now disabled "
+                 "for this program run." ).arg( repoName );
+    }
+    else
+    {
+        QString repoNameList;
+
+        for ( const ZyppRepoInfo & repo: _failedRepos )
+            repoNameList += QString( "  - %1\n" ).arg( fromUTF8( repo.name() ) );
+
+        msg = _( "Refreshing failed for repositories\n\n"
+                 "%1\n"
+                 "Those repositories are now disabled "
+                 "for this program run." ).arg( repoNameList );
+    }
+
+    normalCursor();
+    QMessageBox::warning( MainWindow::instance(), // parent
+                          _( "Warning" ),         // window title
+                          msg );
+}

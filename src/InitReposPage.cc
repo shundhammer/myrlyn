@@ -68,6 +68,9 @@ void InitReposPage::connectSignals()
 
     connect( _repoManager, SIGNAL( refreshRepoDone ( ZyppRepoInfo ) ),
              this,         SLOT  ( refreshRepoDone ( ZyppRepoInfo ) ) );
+
+    connect( _repoManager, SIGNAL( refreshRepoError( ZyppRepoInfo ) ),
+             this,         SLOT  ( refreshRepoError( ZyppRepoInfo ) ) );
 }
 
 
@@ -85,6 +88,7 @@ void InitReposPage::loadIcons()
     _emptyIcon           = QPixmap( ":/empty-40x22" );
     _downloadOngoingIcon = QIcon( ":/download-ongoing" ).pixmap( iconSize );
     _downloadDoneIcon    = QIcon( ":/download-done"    ).pixmap( iconSize );
+    _downloadErrorIcon   = QIcon( ":/emoji-sad"        ).pixmap( iconSize );
 }
 
 
@@ -129,12 +133,23 @@ void InitReposPage::refreshRepoStart( const ZyppRepoInfo & repo )
 }
 
 
-void InitReposPage::refreshRepoDone ( const ZyppRepoInfo & repo )
+void InitReposPage::refreshRepoDone( const ZyppRepoInfo & repo )
 {
     // logDebug() << "Repo refresh done for " << repo.name() << endl;
 
     _ui->progressBar->setValue( ++_refreshDoneCount );
     setItemIcon( repo, _downloadDoneIcon );
+
+    MainWindow::processEvents();
+}
+
+
+void InitReposPage::refreshRepoError( const ZyppRepoInfo & repo )
+{
+    // logDebug() << "Repo refresh error for " << repo.name() << endl;
+
+    _ui->progressBar->setValue( ++_refreshDoneCount );
+    setItemIcon( repo, _downloadErrorIcon );
 
     MainWindow::processEvents();
 }

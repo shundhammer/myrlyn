@@ -89,6 +89,11 @@ public:
      **/
     RepoManager_Ptr repoManager();
 
+    /**
+     * Return 'true' if there were any repos that failed to refresh.
+     **/
+    bool haveFailedRepos() const { return ! _failedRepos.empty(); }
+
 
 signals:
 
@@ -105,7 +110,12 @@ signals:
     /**
      * Emitted when refreshing a repo is done.
      **/
-    void refreshRepoDone ( const ZyppRepoInfo & repo );
+    void refreshRepoDone( const ZyppRepoInfo & repo );
+
+    /**
+     * Emitted when refreshing a repo failed.
+     **/
+    void refreshRepoError( const ZyppRepoInfo & repo );
 
 
 protected:
@@ -151,6 +161,12 @@ protected:
      **/
     void notifyUserToRunZypperDup() const;
 
+    /**
+     * Show a popup dialog with the names of repos that failed to refresh.
+     * Do nothing if there weren't any.
+     **/
+    void showFailedRepos() const;
+
 
     //
     // Data members
@@ -159,6 +175,7 @@ protected:
     zypp::ZYpp::Ptr _zypp_ptr;
     RepoManager_Ptr _repo_manager_ptr;
     RepoInfoList    _repos;
+    RepoInfoList    _failedRepos;
 };
 
 #endif // MyrlynRepoManager_h
