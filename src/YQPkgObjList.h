@@ -18,6 +18,7 @@
 #ifndef YQPkgObjList_h
 #define YQPkgObjList_h
 
+#include <QColor>
 #include <QPixmap>
 #include <QRegularExpression>
 #include <QMenu>
@@ -76,6 +77,14 @@ public:
     int sizeCol()        const { return _sizeCol;        }
     int versionCol()     const { return _versionCol;     }
     int instVersionCol() const { return _instVersionCol; }
+
+
+    // Text colors
+
+    QColor normalTextColor() { return _normalTextColor; }
+    QColor blueTextColor()   { return _blueTextColor;   }
+    QColor redTextColor()    { return _redTextColor;    }
+
 
     /**
      * Return whether or not items in this list are generally editable,
@@ -306,6 +315,12 @@ signals:
 protected:
 
     /**
+     * Initialize the internally used colors depending on the widget theme
+     * (light or dark).
+     **/
+    void initColors();
+
+    /**
      * Event handler for keyboard input.
      * Only very special keys are processed here.
      *
@@ -369,16 +384,21 @@ protected:
 
     // Data members
 
-    int  _iconCol;
-    int  _statusCol;
-    int  _nameCol;
-    int  _summaryCol;
-    int  _sizeCol;
-    int  _versionCol;
-    int  _instVersionCol;
-    bool _editable;
-    bool _debug;
-    int  _excludedItemsCount;
+    int     _iconCol;
+    int     _statusCol;
+    int     _nameCol;
+    int     _summaryCol;
+    int     _sizeCol;
+    int     _versionCol;
+    int     _instVersionCol;
+
+    QColor  _normalTextColor;
+    QColor  _redTextColor;
+    QColor  _blueTextColor;
+
+    bool    _editable;
+    bool    _debug;
+    int     _excludedItemsCount;
 
     QMenu * _installedContextMenu;
     QMenu * _notInstalledContextMenu;
@@ -597,6 +617,13 @@ public:
     int sizeCol()          const { return _pkgObjList->sizeCol();          }
     int versionCol()       const { return _pkgObjList->versionCol();       }
     int instVersionCol()   const { return _pkgObjList->instVersionCol();   }
+
+
+    // Text colors
+
+    QColor normalTextColor() { return _pkgObjList->normalTextColor(); }
+    QColor blueTextColor()   { return _pkgObjList->blueTextColor();   }
+    QColor redTextColor()    { return _pkgObjList->redTextColor();    }
 
 
 protected:

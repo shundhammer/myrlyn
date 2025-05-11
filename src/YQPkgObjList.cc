@@ -77,6 +77,7 @@ YQPkgObjList::YQPkgObjList( QWidget * parent )
 
     _excludedItemsCount = 0;
 
+    initColors();
     createActions();
 
     connect( this,      SIGNAL( columnClicked             ( int, QTreeWidgetItem *, int, const QPoint & ) ),
@@ -97,6 +98,25 @@ YQPkgObjList::YQPkgObjList( QWidget * parent )
 
 YQPkgObjList::~YQPkgObjList()
 {
+}
+
+
+void YQPkgObjList::initColors()
+{
+    _normalTextColor = palette().color( QPalette::Active, QPalette::Text );
+    QColor backgroundColor = palette().color( QPalette::Active, QPalette::Base );
+
+    if ( backgroundColor.lightness() >= 128 )  // light Theme: 0 (black) .. 255 (white)
+    {
+        _blueTextColor = Qt::blue;
+        _redTextColor  = Qt::red;
+    }
+    else  // dark Theme
+    {
+        _blueTextColor = Qt::cyan;
+        _redTextColor  = Qt::red;
+    }
+
 }
 
 
@@ -346,10 +366,10 @@ YQPkgObjList::setAllItemStatus( ZyppStatus newStatus, bool force )
 void
 YQPkgObjList::selectNextItem()
 {
-    QTreeWidgetItemIterator it(this);
+    QTreeWidgetItemIterator it( this );
     QTreeWidgetItem * item;
 
-    while ( (item = *it) != NULL )
+    while ( ( item = *it ) != NULL )
     {
         ++it;
         scrollToItem( *it );    // Scroll if necessary
@@ -533,7 +553,7 @@ YQPkgObjList::installedContextMenu()
 void
 YQPkgObjList::updateActions( YQPkgObjListItem * item )
 {
-    if ( !item)
+    if ( !item )
         item = dynamic_cast<YQPkgObjListItem *> ( currentItem() );
 
     if ( item )
@@ -931,11 +951,11 @@ YQPkgObjListItem::init()
             }
 
             if ( _installedIsNewer )
-                setForeground( versionCol(), Qt::red );
+                setForeground( versionCol(), redTextColor()  );
             else if ( _candidateIsNewer )
-                setForeground( versionCol(), Qt::blue );
+                setForeground( versionCol(), blueTextColor() );
             else
-                setForeground( versionCol(), Qt::black );
+                setForeground( versionCol(), normalTextColor() );
         }
     }
     else // separate columns for installed and available versions
@@ -947,11 +967,11 @@ YQPkgObjListItem::init()
                 setText( instVersionCol(), installed->edition() );
 
                 if ( _installedIsNewer )
-                    setForeground( instVersionCol(), Qt::red );
+                    setForeground( instVersionCol(), redTextColor()  );
                 else if ( _candidateIsNewer )
-                    setForeground( instVersionCol(), Qt::blue );
+                    setForeground( instVersionCol(), blueTextColor() );
                 else
-                    setForeground( versionCol(), Qt::black );
+                    setForeground( versionCol(), normalTextColor() );
             }
         }
 
@@ -967,11 +987,11 @@ YQPkgObjListItem::init()
                 setText( versionCol(), candidate->edition() );
 
                 if ( _installedIsNewer )
-                    setForeground( versionCol(), Qt::red);
+                    setForeground( versionCol(), redTextColor()  );
                 else if ( _candidateIsNewer )
-                    setForeground( versionCol(), Qt::blue);
+                    setForeground( versionCol(), blueTextColor() );
                 else
-                    setForeground( versionCol(), Qt::black );
+                    setForeground( versionCol(), normalTextColor() );
             }
         }
     }
@@ -1451,7 +1471,7 @@ YQPkgObjList::ExcludeRule::match( QTreeWidgetItem * item )
 }
 
 
-void YQPkgObjList::slotCustomContextMenu(const QPoint& pos)
+void YQPkgObjList::slotCustomContextMenu( const QPoint& pos )
 {
     YQPkgObjListItem * item =
         dynamic_cast<YQPkgObjListItem *> ( currentItem() );
