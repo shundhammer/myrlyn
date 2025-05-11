@@ -26,6 +26,7 @@
 #include <QSplitter>
 #include <QTreeWidget>
 
+#include <boost/ref.hpp>
 #include <zypp-core/Date.h>
 #include <zypp-core/Pathname.h>
 #include <zypp-core/Url.h>
