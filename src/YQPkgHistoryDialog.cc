@@ -161,7 +161,7 @@ YQPkgHistoryDialog::populate()
     YQPkgHistoryItemCollector itemCollector( _datesTree, _actionsTree );
     zypp::parser::HistoryLogReader reader( FILENAME,
                                            zypp::parser::HistoryLogReader::Options(),
-                                           boost::ref( itemCollector ) );
+                                           itemCollector );
     try
     {
 	reader.readAll();
