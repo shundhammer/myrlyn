@@ -92,6 +92,8 @@ find_package( Qt6
               Widgets
               REQUIRED )
 
+find_package( Zypp REQUIRED )
+
 qt_standard_project_setup( REQUIRES 6.5 )
 
 
