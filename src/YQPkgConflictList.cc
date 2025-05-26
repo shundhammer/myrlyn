@@ -167,7 +167,7 @@ YQPkgConflictList::saveToFile( const QString filename, bool interactive ) const
 
     // Write header
 
-    QString header = "#### YaST2 conflicts list - generated ";
+    QString header = "#### Myrlyn dependency conflicts list - generated ";
     header += QDateTime::currentDateTime().toString( "yyyy-MM-dd hh:mm:ss" );
     header += " ####\n\n";
 
@@ -181,7 +181,7 @@ YQPkgConflictList::saveToFile( const QString filename, bool interactive ) const
 
     // Write footer
 
-    file.write("\n#### YaST2 conflicts list END ###\n" );
+    file.write("\n#### Myrlyn dependency conflicts list END ###\n" );
 
 
     // Clean up
