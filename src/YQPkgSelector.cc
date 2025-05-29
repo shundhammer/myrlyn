@@ -31,7 +31,6 @@
 #include <QAction>
 #include <QApplication>
 #include <QDialog>
-#include <QFileDialog>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMap>

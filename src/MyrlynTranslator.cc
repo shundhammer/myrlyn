@@ -18,8 +18,12 @@
 #include <string.h>             // strlen()
 #include <libintl.h>            // dgettext(), bindtextdomain()
 #include "utf8.h"
+#include "Logger.h"
 #include "MyrlynApp.h"          // MyrlynApp::isOptionSet()
 #include "MyrlynTranslator.h"
+
+#define ENABLE_QT_INTERNAL_MESSAGES     0
+#define VERBOSE_QT_INTERNAL_MESSAGES    1
 
 
 MyrlynTranslator::MyrlynTranslator( QObject * parent )
@@ -30,7 +34,7 @@ MyrlynTranslator::MyrlynTranslator( QObject * parent )
 
     // Initialize _fakeTemplate with "xixoxixoxixo..."
 
-    for ( int i=1; i < 20; i++ )
+    for ( int i=0; i < 10; i++ )
         _fakeTemplate += "xixo";
 }
 
@@ -50,19 +54,32 @@ MyrlynTranslator::translate( const char * context_str,
     if ( MyrlynApp::isOptionSet( OptFakeTranslations ) )
          return fakeTranslation( sourceText );
 
+
+#if ENABLE_QT_INTERNAL_MESSAGES
+
     QString context( fromUTF8( context_str ) );
 
-    if ( context.startsWith( "libQt" ) )
-        // FIXME: Find out the real Qt-internal context (textomain)
+    if ( context.startsWith( 'Q' )         // Qt class?
+         && ! context.startsWith( "QY2" )  // Our own classes
+         && context != "QObject"           // Used for all kinds of things
+         && context != "QIODevice" )
     {
+#if VERBOSE_QT_INTERNAL_MESSAGES
+        logVerbose() << "Qt-internal message: "
+                     << "context: " << context
+                     << " msg: "    << sourceText
+                     << endl;
+#endif
+
         // For libQt-internal texts (file dialogs etc.), use the parent class
-        // for Qt's built-in translations
+        // for Qt's built-in translations.
 
         return QTranslator::translate( context_str,
                                        sourceText,
                                        disambiguation,
                                        nPlural );
     }
+#endif
 
     return dgettext( "myrlyn", sourceText );
 }
