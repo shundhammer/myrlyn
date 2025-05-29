@@ -15,23 +15,29 @@
  */
 
 
+#include <string.h>             // strlen()
 #include <libintl.h>            // dgettext(), bindtextdomain()
 #include "utf8.h"
+#include "MyrlynApp.h"          // MyrlynApp::isOptionSet()
 #include "MyrlynTranslator.h"
 
 
 MyrlynTranslator::MyrlynTranslator( QObject * parent )
     : QTranslator( parent )
 {
-    // DEBUG: Use the old YaST "qt-pkg" translations for now
+    // bindtextdomain( "myrlyn", "/usr/share/locale" );
+    // Not needed: /usr/share/locale is the default location.
 
-    bindtextdomain( "qt-pkg", "/usr/share/YaST2/locale" );
-    bindtextdomain( "Myrlyn", "/usr/share/locale" );
+    // Initialize _fakeTemplate with "xixoxixoxixo..."
+
+    for ( int i=1; i < 20; i++ )
+        _fakeTemplate += "xixo";
 }
 
 
 MyrlynTranslator::~MyrlynTranslator()
 {
+    // NOP
 }
 
 
@@ -41,6 +47,9 @@ MyrlynTranslator::translate( const char * context_str,
                              const char * disambiguation,
                              int          nPlural         ) const
 {
+    if ( MyrlynApp::isOptionSet( OptFakeTranslations ) )
+         return fakeTranslation( sourceText );
+
     QString context( fromUTF8( context_str ) );
 
     if ( context.startsWith( "libQt" ) )
@@ -55,10 +64,13 @@ MyrlynTranslator::translate( const char * context_str,
                                        nPlural );
     }
 
-#if 0
-    return dgettext( "Myrlyn", sourceText );
-#else
-    return dgettext( "qt-pkg", sourceText );
-#endif
+    return dgettext( "myrlyn", sourceText );
+}
+
+
+QString
+MyrlynTranslator::fakeTranslation( const char * sourceText ) const
+{
+    return _fakeTemplate.left( strlen( sourceText ) );
 }
 

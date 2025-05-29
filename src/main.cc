@@ -51,6 +51,7 @@ void usage()
 	 << "  --fake-root\n"
 	 << "  --fake-commit\n"
 	 << "  --fake-summary\n"
+	 << "  --fake-translations  (\"xixoxixoxixo\" everwhere)\n"
          << "  --slow-repo-refresh\n"
 	 << "\n"
 	 << std::endl;
@@ -98,6 +99,7 @@ parseCommandLineOptions( QStringList & argList )
     if ( commandLineOption( "--fake-root",          "" ,  argList ) ) optFlags |= OptFakeRoot;
     if ( commandLineOption( "--fake-commit",        "" ,  argList ) ) optFlags |= OptFakeCommit;
     if ( commandLineOption( "--fake-summary",       "" ,  argList ) ) optFlags |= OptFakeSummary;
+    if ( commandLineOption( "--fake-translations",  "" ,  argList ) ) optFlags |= OptFakeTranslations;
     if ( commandLineOption( "--slow-repo-refresh",  "" ,  argList ) ) optFlags |= OptSlowRepoRefresh;
     if ( commandLineOption( "--help",               "-h", argList ) ) usage(); // this will exit
 

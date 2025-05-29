@@ -38,18 +38,19 @@ class ZyppLogger;
 
 enum MyrlynAppOption
 {
-    OptNone            = 0,
-    OptReadOnly        = 0x01,
-    OptDryRun          = 0x02,
-    OptDownloadOnly    = 0x04,
-    OptNoRepoRefresh   = 0x08,
+    OptNone             = 0,
+    OptReadOnly         = 0x01,
+    OptDryRun           = 0x02,
+    OptDownloadOnly     = 0x04,
+    OptNoRepoRefresh    = 0x08,
 
     // For debugging
 
-    OptFakeRoot        = 0x100,
-    OptFakeCommit      = 0x200,
-    OptFakeSummary     = 0x400,
-    OptSlowRepoRefresh = 0x800,
+    OptFakeRoot         = 0x0100,
+    OptFakeCommit       = 0x0200,
+    OptFakeSummary      = 0x0400,
+    OptFakeTranslations = 0x0800,  // "xixoxixoxixo" everywhere
+    OptSlowRepoRefresh  = 0x1000
 };
 
 // See https://doc.qt.io/qt-5/qflags.html

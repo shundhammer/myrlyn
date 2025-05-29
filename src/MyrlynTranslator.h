@@ -53,6 +53,20 @@ public:
                                const char * disambiguation = 0,
                                int          nPlural        = -1 ) const override;
 
+    /**
+     * Return a fake translation "xixoxixoxixo" with the same length as
+     * 'sourceText'. This can be useful to see where translation markers are
+     * missing in the code.
+     *
+     * Use the '--fake-translations' command line option to enable this.
+     *
+     **/
+    QString fakeTranslation( const char * sourceText ) const;
+
+protected:
+
+    QString _fakeTemplate;
+
 };      // class MyrlynTranslator
 
 
