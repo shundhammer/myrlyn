@@ -18,18 +18,16 @@
 #ifndef YQi18n_h
 #define YQi18n_h
 
-#include <libintl.h>
-#include <qstring.h>
+#include <QString>
+#include <QObject>
 
 
 inline QString _( const char * msgid )
 {
-	return ( !msgid || !*msgid ) ? "" : QString::fromUtf8( gettext(msgid ) );
-}
-
-inline QString _( const char * msgid1, const char * msgid2, unsigned long int n )
-{
-	return QString::fromUtf8( ngettext(msgid1, msgid2, n ) );
+    if ( msgid && *msgid )
+        return QObject::tr( msgid );
+    else
+        return "";
 }
 
 
