@@ -244,6 +244,7 @@ YQPkgHistoryItemCollector::YQPkgHistoryItemCollector( QTreeWidget * datesTree,
                                                       QTreeWidget * actionsTree )
     : _datesTree( datesTree )
     , _actionsTree( actionsTree )
+    , _actionsDateItem(0)
 {
     // NOP
 }
