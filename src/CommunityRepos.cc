@@ -33,6 +33,7 @@ CommunityRepos::CommunityRepos( DistroType distroType )
         case openSUSE_Slowroll:   openSUSE_Slowroll_Repos();   break;
         case openSUSE_Leap_15x:   openSUSE_Leap_15x_Repos();   break;
         case SLE_15_SPx:          SLE_15_SPx_Repos();          break;
+        case SLES_16:             SLES_16_Repos();            break;
 
         default:
             logWarning() << "No community repos for this distro." << endl;
@@ -98,10 +99,20 @@ CommunityRepos::findBestMatch()
     {
         distroType = openSUSE_Leap_15x;
     }
+    else if ( BaseProduct::name().contains( "Leap" ) &&
+              BaseProduct::version().startsWith( "16." ) )
+    {
+        distroType = openSUSE_Leap_16x;
+    }
     else if ( BaseProduct::summary().startsWith( "SUSE Linux Enterprise", Qt::CaseInsensitive ) &&
               BaseProduct::version().startsWith( "15." ) )
     {
         distroType = SLE_15_SPx;
+    }
+    else if ( BaseProduct::summary().startsWith( "SUSE Linux Enterprise", Qt::CaseInsensitive ) &&
+              BaseProduct::version().startsWith( "16." ) )
+    {
+        distroType = SLES_16;
     }
 
     if ( ! resultLogged )
@@ -128,7 +139,9 @@ QString CommunityRepos::toString( DistroType distroType )
         case openSUSE_Tumbleweed:  return "openSUSE_Tumbleweed";
         case openSUSE_Slowroll:    return "openSUSE_Slowroll";
         case openSUSE_Leap_15x:    return "openSUSE_Leap_15x";
+        case openSUSE_Leap_16x:    return "openSUSE_Leap_16x";
         case SLE_15_SPx:           return "SLE_15_SPx";
+        case SLES_16:              return "SLES_16";
     }
 
     return QString( "<Unknown DistroType #%1" ).arg( (int) distroType );
@@ -239,10 +252,40 @@ void CommunityRepos::openSUSE_Leap_15x_Repos()
 }
 
 
+void CommunityRepos::openSUSE_Leap_16x_Repos()
+{
+#if 0
+    _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/" )
+           << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/Essentials/" )
+           << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
+           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" )
+           << nvidiaRepo           ( "https://download.nvidia.com/opensuse/leap/$releasever/" );
+#else
+    _repos << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
+           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" )
+           << nvidiaRepo           ( "https://download.nvidia.com/opensuse/leap/$releasever/" );
+#endif
+}
+
+
 void CommunityRepos::SLE_15_SPx_Repos()
 {
     _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLE_15/" )
            << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLE_15/Essentials/" )
            << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
            << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap/" );
+}
+
+
+void CommunityRepos::SLES_16_Repos()
+{
+#if 0
+    _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLES_16/" )
+           << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLES_16/Essentials/" )
+           << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
+           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" );
+#else
+    _repos << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
+           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" );
+#endif
 }

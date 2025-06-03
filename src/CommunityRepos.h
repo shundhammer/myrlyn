@@ -49,7 +49,9 @@ public:
         openSUSE_Tumbleweed,
         openSUSE_Slowroll,
         openSUSE_Leap_15x,
-        SLE_15_SPx
+        openSUSE_Leap_16x,
+        SLE_15_SPx,
+        SLES_16
     };
 
     /**
@@ -98,7 +100,9 @@ protected:
     void openSUSE_Tumbleweed_Repos();
     void openSUSE_Slowroll_Repos();
     void openSUSE_Leap_15x_Repos();
+    void openSUSE_Leap_16x_Repos();
     void SLE_15_SPx_Repos();
+    void SLES_16_Repos();
 
 
     // Data members
