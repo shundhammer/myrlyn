@@ -110,3 +110,16 @@ osc sr system:packagemanager/myrlyn openSUSE:Factory/myrlyn
 
 Check the pending requests:
 https://build.opensuse.org/package/requests/openSUSE:Factory/myrlyn
+
+
+## Submit from Factory to Leap 16.0
+
+- [Factory](https://build.opensuse.org/project/show/openSUSE:Factory)
+- [Leap 16.0](https://build.opensuse.org/package/show/openSUSE:Leap:16.0/myrlyn)
+
+```
+osc sr openSUSE:Factory/myrlyn openSUSE:Leap:16.0/myrlyn
+```
+
+Check the pending requests:
+https://build.opensuse.org/package/requests/openSUSE:Leap:16.0/myrlyn
