@@ -102,7 +102,8 @@ https://build.opensuse.org/package/requests/system:packagemanager/myrlyn
 ## Submit from the Devel Project to Factory
 
 - [Devel Project](https://build.opensuse.org/package/show/system:packagemanager/myrlyn)
-- [Factory](https://build.opensuse.org/project/show/openSUSE:Factory)
+- [Factory](https://build.opensuse.org/package/show/openSUSE:Factory/myrlyn)
+
 
 ```
 osc sr system:packagemanager/myrlyn openSUSE:Factory/myrlyn
@@ -114,7 +115,7 @@ https://build.opensuse.org/package/requests/openSUSE:Factory/myrlyn
 
 ## Submit from Factory to Leap 16.0
 
-- [Factory](https://build.opensuse.org/project/show/openSUSE:Factory)
+- [Factory](https://build.opensuse.org/package/show/openSUSE:Factory/myrlyn)
 - [Leap 16.0](https://build.opensuse.org/package/show/openSUSE:Leap:16.0/myrlyn)
 
 ```
