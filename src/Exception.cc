@@ -9,7 +9,6 @@
 
 
 #include <errno.h>
-#include <QObject>      // QObject::tr()
 
 #include "Exception.h"
 
@@ -40,29 +39,6 @@ void Exception::setSrcLocation( const QString &srcFile,
 
         _srcFile = _srcFile.section( '/', -1 );
     }
-}
-
-
-QString SysCallFailedException::errMsg( const QString & sysCall,
-					const QString & resourceName ) const
-{
-    QString msg;
-
-    if ( errno != 0 )
-    {
-	msg = QObject::tr( "%1( \"%2\" ) failed: %3" )
-	    .arg( sysCall )
-	    .arg( resourceName )
-	    .arg( formatErrno() );
-    }
-    else
-    {
-	msg = QObject::tr( "%1( \"%2\" ) failed" )
-	    .arg( sysCall )
-	    .arg( resourceName );
-    }
-
-    return msg;
 }
 
 
