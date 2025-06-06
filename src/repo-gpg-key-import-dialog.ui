@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>695</width>
-    <height>335</height>
+    <width>795</width>
+    <height>391</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,7 +91,7 @@
      <item row="0" column="1">
       <widget class="QLabel" name="repoName">
        <property name="text">
-        <string>&lt;RepoName&gt;</string>
+        <string notr="true">&lt;RepoName&gt;</string>
        </property>
       </widget>
      </item>
@@ -111,7 +111,7 @@
      <item row="1" column="1">
       <widget class="QLabel" name="repoUrl">
        <property name="text">
-        <string>https://my.repo.org/repos/may/have/a/pretty/damn/long/url/plus/reserve</string>
+        <string notr="true">https://my.repo.org/repos/may/have/a/pretty/damn/long/url/plus/reserve</string>
        </property>
       </widget>
      </item>
@@ -131,7 +131,7 @@
      <item row="2" column="1">
       <widget class="QLabel" name="fingerprint">
        <property name="text">
-        <string>00AA 11BB 22CC 33DD 44EE 55FF 66AA 77BB 88CC 99DD</string>
+        <string notr="true">00AA 11BB 22CC 33DD 44EE 55FF 66AA 77BB 88CC 99DD</string>
        </property>
       </widget>
      </item>
@@ -151,7 +151,7 @@
      <item row="3" column="1">
       <widget class="QLabel" name="keyName">
        <property name="text">
-        <string>&lt;Key Name&gt;</string>
+        <string notr="true">&lt;Key Name&gt;</string>
        </property>
       </widget>
      </item>
@@ -171,7 +171,7 @@
      <item row="4" column="1">
       <widget class="QLabel" name="keyAlgo">
        <property name="text">
-        <string>&lt;Key Algorithm&gt;</string>
+        <string notr="true">&lt;Key Algorithm&gt;</string>
        </property>
       </widget>
      </item>
@@ -191,7 +191,7 @@
      <item row="5" column="1">
       <widget class="QLabel" name="keyId">
        <property name="text">
-        <string>&lt;Key ID&gt;</string>
+        <string notr="true">&lt;Key ID&gt;</string>
        </property>
       </widget>
      </item>
@@ -211,7 +211,7 @@
      <item row="6" column="1">
       <widget class="QLabel" name="keyCreated">
        <property name="text">
-        <string>2038-12-30</string>
+        <string notr="true">2038-12-30</string>
        </property>
       </widget>
      </item>
@@ -231,7 +231,7 @@
      <item row="7" column="1">
       <widget class="QLabel" name="keyExpires">
        <property name="text">
-        <string>2038-12-31</string>
+        <string notr="true">2038-12-31</string>
        </property>
       </widget>
      </item>

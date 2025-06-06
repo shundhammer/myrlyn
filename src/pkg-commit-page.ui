@@ -148,42 +148,66 @@
             </property>
             <item>
              <property name="text">
-              <string>bash</string>
+              <string notr="true">bash</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>libfoobar</string>
+              <string notr="true">libfoobar</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>libfoobar-devel</string>
+              <string notr="true">libfoobar-devel</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>MozillaFireFoxBlafaselWrglbrmpf</string>
+              <string notr="true">MozillaFireFoxBlafaselWrglbrmpf</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>MozillaFireFoxBlafaselWrglbrmpf-plugins-bad</string>
+              <string notr="true">MozillaFireFoxBlafaselWrglbrmpf-plugins-bad</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>MozillaFireFoxBlafaselWrglbrmpf-plugins-good</string>
+              <string notr="true">MozillaFireFoxBlafaselWrglbrmpf-plugins-good</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>MozillaFireFoxBlafaselWrglbrmpf-plugins-ugly</string>
+              <string notr="true">MozillaFireFoxBlafaselWrglbrmpf-plugins-ugly</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>zsh</string>
+              <string notr="true">zsh</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
            </widget>
@@ -302,17 +326,26 @@
             </property>
             <item>
              <property name="text">
-              <string>Foo</string>
+              <string notr="true">Foo</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Bar</string>
+              <string notr="true">Bar</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>FooBar</string>
+              <string notr="true">FooBar</string>
+             </property>
+             <property name="toolTip">
+              <string notr="true"/>
              </property>
             </item>
            </widget>
