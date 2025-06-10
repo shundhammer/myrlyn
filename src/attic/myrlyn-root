@@ -1,0 +1,8 @@
+#!/bin/sh
+
+pkexec env                                    \
+  DISPLAY=$DISPLAY                            \
+  WAYLAND_DISPLAY=$WAYLAND_DISPLAY            \
+  XAUTHORITY=$XAUTHORITY                      \
+  QT_QPA_PLATFORMTHEME=$QT_QPA_PLATFORMTHEME  \
+  /usr/bin/myrlyn
