@@ -43,6 +43,7 @@ void usage()
 	 << "  -n | --dry-run\n"
 	 << "  -d | --download-only\n"
          << "  -f | --no-repo-refresh\n"
+         << "  -v | --force-service-view\n"
 	 << "  -h | --help \n"
 	 << "\n"
 	 << "Debugging options:\n"
@@ -95,6 +96,7 @@ parseCommandLineOptions( QStringList & argList )
     if ( commandLineOption( "--dry-run",            "-n", argList ) ) optFlags |= OptDryRun;
     if ( commandLineOption( "--download-only",      "-d", argList ) ) optFlags |= OptDownloadOnly;
     if ( commandLineOption( "--no-repo-refresh",    "-f", argList ) ) optFlags |= OptNoRepoRefresh;
+    if ( commandLineOption( "--force-service-view", "-v", argList ) ) optFlags |= OptForceServiceView;
     if ( commandLineOption( "--fake-root",          "" ,  argList ) ) optFlags |= OptFakeRoot;
     if ( commandLineOption( "--fake-commit",        "" ,  argList ) ) optFlags |= OptFakeCommit;
     if ( commandLineOption( "--fake-summary",       "" ,  argList ) ) optFlags |= OptFakeSummary;

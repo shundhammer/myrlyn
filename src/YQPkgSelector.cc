@@ -335,15 +335,14 @@ void YQPkgSelector::createRepoFilterView()
 
 void YQPkgSelector::createServiceFilterView()
 {
-    if ( YQPkgServiceFilterView::any_service() ) // Only if a service is present
+    if ( MyrlynApp::isOptionSet( OptForceServiceView ) ||
+         YQPkgServiceFilterView::any_service() ) // Only if a service is present
     {
         _serviceFilterView = new YQPkgServiceFilterView( this );
         CHECK_NEW( _serviceFilterView );
 
-        _filters->addPage( _( "Ser&vices" ), _serviceFilterView, "services" );
-
-        // No shortcut - this isn't used nearly enough to waste another
-        // key combination on it. There are only 26 to choose from.
+        _filters->addPage( _( "Repository Index Ser&vices" ), _serviceFilterView,
+                           "services", Qt::CTRL | Qt::SHIFT | Qt::Key_V );
     }
 }
 

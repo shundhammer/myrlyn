@@ -42,6 +42,7 @@ enum MyrlynAppOption
     OptDryRun           = 0x02,
     OptDownloadOnly     = 0x04,
     OptNoRepoRefresh    = 0x08,
+    OptForceServiceView = 0x10,
 
     // For debugging
 
