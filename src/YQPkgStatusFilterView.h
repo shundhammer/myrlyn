@@ -17,6 +17,7 @@
 #ifndef YQPkgStatusFilterView_h
 #define YQPkgStatusFilterView_h
 
+#include <QEvent>
 #include <QWidget>
 #include "YQZypp.h"
 
@@ -60,6 +61,12 @@ public:
      **/
     bool showingAutomaticChanges() const;
 
+    /**
+     * Event filter for the check boxes:
+     * Upon mouse middle click, check that one and uncheck all others
+     **/
+    bool eventFilter( QObject * watchedObj, QEvent * event ) override;
+
 
 public slots:
 
@@ -78,14 +85,9 @@ public slots:
     void filter();
 
     /**
-     * Reset all check boxes: Set them all to the default values.
+     * Show the defaults for all check boxes.
      **/
-    void clear();
-
-    /**
-     * Set up the check boxes so all pending transactions are displayed.
-     **/
-    void showTransactions();
+    void resetToDefaults();
 
     /**
      * Read settings from the config file.

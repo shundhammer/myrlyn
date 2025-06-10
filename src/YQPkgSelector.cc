@@ -1271,8 +1271,7 @@ YQPkgSelector::globalUpdatePkg( bool force )
     {
         _filters->showPage( _statusFilterView );
         _statusFilterView->writeSettings();
-        _statusFilterView->clear();
-        _statusFilterView->showTransactions();
+        _statusFilterView->resetToDefaults();
     }
 }
 

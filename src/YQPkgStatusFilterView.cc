@@ -14,7 +14,9 @@
  */
 
 
+#include <QMouseEvent>
 #include <QSettings>
+#include <QSignalBlocker>
 
 #include "Exception.h"
 #include "Logger.h"
@@ -67,13 +69,18 @@ void YQPkgStatusFilterView::connectWidgets()
     {
         connect( checkBox,  SIGNAL( clicked() ),
                  this,      SLOT  ( filter()  ) );
+
+        checkBox->installEventFilter( this );
     }
 
 
-    // Connect the "Refresh List" QPushButton
+    // Connect the buttons
 
-    connect( _ui->refreshButton, SIGNAL( clicked() ),
-             this,               SLOT  ( filter()  ) );
+    connect( _ui->defaultsButton, SIGNAL( clicked()         ),
+             this,                SLOT  ( resetToDefaults() ) );
+
+    connect( _ui->refreshButton,  SIGNAL( clicked() ),
+             this,                SLOT  ( filter()  ) );
 }
 
 
@@ -174,10 +181,64 @@ YQPkgStatusFilterView::check( ZyppSel selectable,
 }
 
 
-
-void YQPkgStatusFilterView::clear()
+bool
+YQPkgStatusFilterView::eventFilter( QObject * watchedObj, QEvent * event )
 {
-    readSettings();
+    if ( watchedObj && event && event->type() == QEvent::MouseButtonRelease )
+    {
+        QCheckBox   * clickedCheckBox = qobject_cast<QCheckBox *>( watchedObj );
+        QMouseEvent * mouseEvent      = dynamic_cast<QMouseEvent *>( event );
+
+        if ( clickedCheckBox &&
+             mouseEvent && mouseEvent->button() == Qt::MiddleButton )
+        {
+            // Middle mouse click on one of the check boxes?
+            // -> Check this one and uncheck all others
+
+            const QList<QCheckBox *> & children = findChildren<QCheckBox *>();
+
+            {
+                // Avoid an event cascade: No signals until this goes out of scope
+                QSignalBlocker sigBlocker( this );
+
+                for ( QCheckBox * checkBox: children )
+                    checkBox->setChecked( checkBox == clickedCheckBox );
+            }
+
+            filter();      // Apply the new settings
+
+            return true;   // Event processing finished for this one
+        }
+    }
+
+    return false;  //  Event processing not finished for this one
+}
+
+
+void
+YQPkgStatusFilterView::resetToDefaults()
+{
+    const QList<QCheckBox *> & children = findChildren<QCheckBox *>();
+
+    {
+        // Avoid an event cascade: No signals until this goes out of scope
+        QSignalBlocker sigBlocker( this );
+
+        for ( QCheckBox * checkBox: children )
+        {
+            if ( checkBox == _ui->showKeepInstalled ||
+                 checkBox == _ui->showNoInst )
+            {
+                checkBox->setChecked( false );
+            }
+            else
+            {
+                checkBox->setChecked( true );
+            }
+        }
+    }
+
+    filter();   // Apply the new settings
 }
 
 
@@ -194,17 +255,6 @@ YQPkgStatusFilterView::showingAutomaticChanges() const
     return _ui->showAutoInstall->isChecked() &&
         _ui->showAutoUpdate->isChecked()     &&
         _ui->showAutoDel->isChecked();
-}
-
-
-void YQPkgStatusFilterView::showTransactions()
-{
-    _ui->showInstall->setChecked( true );
-    _ui->showUpdate->setChecked( true );
-    _ui->showDel->setChecked( true );
-    _ui->showAutoInstall->setChecked( true );
-    _ui->showAutoUpdate->setChecked( true );
-    _ui->showAutoDel->setChecked( true );
 }
 
 
