@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# Wrapper around the (graphical!) ssh-askpass with a meaningful prompt
+# to tell the user which password should be entered.
+#
+# The default is "Enter the openSSH passphrase" which is totally confusing
+# in the context of Myrlyn.
+
+ASKPASS_MSG=" Password for user $USER: "
+ASKPASS=/usr/libexec/ssh/ssh-askpass
+
+if [ ! -x $ASKPASS ]; then
+    # Leap 15.x
+    ASKPASS=/usr/lib/ssh/ssh-askpass
+fi
+
+if [ ! -x $ASKPASS ]; then
+    echo "No 'ssh-askpass' found."
+    echo "Install the openssh-clients package:"
+    echo "  sudo zypper in openssh-clients"
+    exit 1
+fi
+
+$ASKPASS $ASKPASS_MSG

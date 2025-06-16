@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Wrapper around 'sudo' for Myrlyn that can open a graphical password prompt
+# and that can keep the connection to the display (X11 or Wayland) alive
+# as well as some well-defined environment variables.
+
+MYRLYN_ARGS=$*
+
+# Environment variables to keep for the 'sudo' call
+ENV_KEEP="DISPLAY,WAYLAND_DISPLAY,XAUTHORITY,\
+QT_QPA_PLATFORMTHEME,QT_ENABLE_HIGHDPI_SCALING,\
+LANG,LC_MESSAGES,LC_COLLATE,LC_NUMERIC,LC_TIME,LC_ALL,LANGUAGE"
+
+ASKPASS=myrlyn-askpass
+
+if [ ! -x $ASKPASS ]; then
+    ASKPASS=/usr/bin/myrlyn-askpass
+fi
+
+SUDO_ASKPASS=$ASKPASS sudo -Ai --preserve-env=$ENV_KEEP /usr/bin/myrlyn $MYRLYN_ARGS
