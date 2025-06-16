@@ -20,7 +20,7 @@
 Name:           myrlyn
 # If you change the version here, don't forget ../VERSION.cmake !
 # To increase only the last number, use  rake version:bump
-Version:        0.9.5
+Version:        0.9.6
 Release:        0
 Summary:        Package manager GUI
 License:        GPL-2.0-only
@@ -47,7 +47,8 @@ BuildRequires:  gcc13-c++
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 %endif
-Requires:	xdg-utils
+# Only needed for using the 'myrlyn-xdg-su.desktop' file
+Recommends:	xdg-utils
 # Obsolete accidential release because of a wrong tag on GitHub (9.0.1 instead of 0.9.1)
 Obsoletes:      myrlyn = 9.0.1
 
@@ -87,6 +88,8 @@ CMAKE_OPTS="-DCMAKE_BUILD_TYPE=RELEASE"
 %doc README.md
 %license LICENSE
 %{_bindir}/myrlyn
+%{_bindir}/myrlyn-askpass
+%{_bindir}/myrlyn-sudo
 %{_datadir}/applications/%{name}-*.desktop
 %{_datadir}/icons/hicolor/*/apps/Myrlyn.png
 
