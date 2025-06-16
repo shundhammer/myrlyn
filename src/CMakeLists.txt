@@ -222,7 +222,6 @@ install( TARGETS ${TARGETBIN} RUNTIME DESTINATION bin )
 # Scripts -> /usr/bin
 install( PROGRAMS
 	 myrlyn-sudo
-	 myrlyn-askpass
 	 DESTINATION bin )
 
 # .desktop files -> /usr/share/applications

@@ -29,6 +29,7 @@ include( CheckIncludeFileCXX )  # check_include_file_cxx
 #   cmake -DBUILD_TEST=off ..
 
 option( BUILD_SRC         "Build in src/ subdirectory"                on  )
+option( BUILD_AUX         "Build in aux/ subdirectory"                on  )
 option( BUILD_TEST        "Build in test/ subdirectory"               off )
 option( WERROR            "Treat all compiler warnings as errors"     on  )
 
@@ -111,6 +112,10 @@ set( CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE )
 
 if ( BUILD_SRC )
   add_subdirectory( src )
+endif()
+
+if ( BUILD_AUX )
+  add_subdirectory( aux )
 endif()
 
 if ( BUILD_TEST )
