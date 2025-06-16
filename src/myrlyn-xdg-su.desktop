@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Myrlyn
+Exec=xdg-su -c /usr/bin/myrlyn
+Icon=Myrlyn.png
+GenericName=Myrlyn Graphical Software Package Manager
+Comment=Full root access (via xdg-su / kdesu / gnomesu )
+Terminal=false
+MimeType=
+Categories=System;Settings
+Keywords=software;package panagement;gui

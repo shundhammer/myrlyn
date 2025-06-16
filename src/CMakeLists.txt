@@ -219,9 +219,16 @@ target_link_libraries( myrlyn
 # Executable -> /usr/bin
 install( TARGETS ${TARGETBIN} RUNTIME DESTINATION bin )
 
+# Scripts -> /usr/bin
+install( PROGRAMS
+	 myrlyn-sudo
+	 myrlyn-askpass
+	 DESTINATION bin )
+
 # .desktop files -> /usr/share/applications
 install( FILES
-	 myrlyn-root.desktop
+	 myrlyn-sudo.desktop
+	 myrlyn-xdg-su.desktop
 	 myrlyn-user.desktop
 	 DESTINATION share/applications )
 

@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
 Name=Myrlyn
-Exec=xdg-su -c /usr/bin/myrlyn
+Exec=myrlyn-sudo
 Icon=Myrlyn.png
 GenericName=Myrlyn Graphical Software Package Manager
-Comment=Full root access
+Comment=Full root access (via sudo)
 Terminal=false
 MimeType=
 Categories=System;Settings
