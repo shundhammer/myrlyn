@@ -35,6 +35,12 @@ void YQPkgSelector::helpRepoConfig()
 }
 
 
+void YQPkgSelector::helpRootAuth()
+{
+    openInBrowser( "https://github.com/shundhammer/myrlyn/issues/99" );
+}
+
+
 void YQPkgSelector::about()
 {
     QDialog aboutDialog( this );

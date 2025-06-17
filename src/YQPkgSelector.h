@@ -176,6 +176,12 @@ public slots:
     void helpRepoConfig();
 
     /**
+     * Help about root authentication
+     * (opens in external web browser)
+     **/
+    void helpRootAuth();
+
+    /**
      * Display an about page.
      **/
     void about();

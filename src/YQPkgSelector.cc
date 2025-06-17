@@ -868,12 +868,22 @@ YQPkgSelector::addMenus()
     // Note: The help functions and their texts are moved out
     // to a separate source file YQPkgSelHelp.cc
 
-    // Menu entry for help overview
-    helpMenu->addAction( _( "&Overview"    ), this, SLOT( help()    ) );
+    // Opening a hyperlink in the user's Internet browser is only supported
+    // if not running via sudo or xdg-su
+    bool canOpenInBrowser = ( geteuid() != 0 );
+
+    if ( canOpenInBrowser )
+        helpMenu->addAction( _( "&Overview" ), this, SLOT( help()    ) );
+
     helpMenu->addAction( _( "About &Myrlyn" ), this, SLOT( about()   ) );
     helpMenu->addAction( _( "About &Qt"     ), qApp, SLOT( aboutQt() ) );
-    helpMenu->addSeparator();
-    helpMenu->addAction( _( "Rep&ository Configuration" ), this, SLOT( helpRepoConfig() ) );
+
+    if ( canOpenInBrowser )
+    {
+        helpMenu->addSeparator();
+        helpMenu->addAction( _( "Rep&ository Configuration" ), this, SLOT( helpRepoConfig() ) );
+        helpMenu->addAction( _( "Root &Authentication"      ), this, SLOT( helpRootAuth()   ) );
+    }
 
 
 
