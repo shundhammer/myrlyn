@@ -51,7 +51,7 @@ void usage()
 	 << "  --fake-root\n"
 	 << "  --fake-commit\n"
 	 << "  --fake-summary\n"
-	 << "  --fake-translations  (\"xixoxixoxixo\" everwhere)\n"
+	 << "  --fake-translations  (\"xixoxixoxixo\" everywhere)\n"
          << "  --slow-repo-refresh\n"
 	 << "\n"
 	 << std::endl;
