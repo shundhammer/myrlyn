@@ -32,10 +32,14 @@ class AskPassWin: public QDialog
 
 public:
 
-    AskPassWin();
+    AskPassWin( const QString & prompt = QString() );
     virtual ~AskPassWin();
 
     Ui::MyrlynAskPassWin * ui;
+
+protected:
+
+    QString _prompt;
 };
 
 
