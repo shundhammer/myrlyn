@@ -138,7 +138,7 @@ int main( int argc, char *argv[] )
     // Create the QApplication first because it might remove some Qt-specific
     // command line arguments already
 
-    QApplication qtApp( argc, argv);
+    QApplication qtApp( argc, argv );
 
     QStringList argList = QCoreApplication::arguments();
     argList.removeFirst(); // Remove the program name
