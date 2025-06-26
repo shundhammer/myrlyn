@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Myrlyn
+Name=Myrlyn (sudo)
 Exec=myrlyn-sudo
 Icon=Myrlyn.png
 GenericName=Myrlyn Graphical Software Package Manager

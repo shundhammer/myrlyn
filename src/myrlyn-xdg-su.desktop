@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Myrlyn
+Name=Myrlyn (xdg-su)
 Exec=xdg-su -c /usr/bin/myrlyn
 Icon=Myrlyn.png
 GenericName=Myrlyn Graphical Software Package Manager
