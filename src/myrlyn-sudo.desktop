@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=Myrlyn (sudo)
+Name=Myrlyn
 Exec=myrlyn-sudo
 Icon=Myrlyn.png
-GenericName=Myrlyn Graphical Software Package Manager
+GenericName=Myrlyn Graphical Software Package Manager (using sudo)
 Comment=Full root access (via sudo)
 Terminal=false
 MimeType=

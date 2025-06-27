@@ -227,9 +227,10 @@ install( PROGRAMS
 # .desktop files -> /usr/share/applications
 install( FILES
 	 myrlyn-sudo.desktop
-	 myrlyn-xdg-su.desktop
 	 myrlyn-user.desktop
 	 DESTINATION share/applications )
+
+# myrlyn-xdg-su.desktop moved to attic/
 
 
 #
