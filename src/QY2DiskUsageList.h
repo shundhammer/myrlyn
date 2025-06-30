@@ -117,9 +117,9 @@ public:
     /**
      * The current free size of this partition.
      *
-     * Derived classes can choose reimpmenent this if it is less expensive than
-     * calculating this value each time from usedSize() and totalSize() which
-     * is the default implementation.
+     * Derived classes can choose to reimpmenent this if it is less expensive
+     * than calculating this value each time from usedSize() and totalSize()
+     * which is the default implementation.
      **/
     virtual FSize freeSize() const;
 

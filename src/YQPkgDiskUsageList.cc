@@ -102,7 +102,7 @@ YQPkgDiskUsageList::updateDiskUsage()
 
     for ( const ZyppPartitionDu & partitionDu: diskUsage )
     {
-        YQPkgDiskUsageListItem * item = _items[ QString::fromUtf8(partitionDu.dir.c_str()) ];
+        YQPkgDiskUsageListItem * item = _items[ QString::fromUtf8( partitionDu.dir.c_str() ) ];
 
         if ( item )
             item->updateDuData( partitionDu );

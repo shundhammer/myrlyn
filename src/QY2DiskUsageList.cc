@@ -84,7 +84,7 @@ interpolate( int from,
 
 
 /**
- * Interpolate ( in the HSV color space ) a color between 'minColor' and
+ * Interpolate (in the HSV color space) a color between 'minColor' and
  * 'maxColor' for a current value 'val' so that 'minVal' corresponds to
  * 'minColor' and 'maxVal' to 'maxColor'.
  *

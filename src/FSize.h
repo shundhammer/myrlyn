@@ -107,7 +107,7 @@ class FSize :
      * Construct from size in certain unit.
      * E.g. <code>FSize( 1, FSize::Unit::K )<code> makes 1024 Byte.
      **/
-    FSize( const boost::multiprecision::cpp_int &size_r = 0, const Unit unit_r = Unit::B)
+    FSize( const boost::multiprecision::cpp_int &size_r = 0, const Unit unit_r = Unit::B )
       : _size( boost::multiprecision::cpp_int(size_r) * factor( unit_r ) )
     {}
 
@@ -148,7 +148,7 @@ class FSize :
     FSize & operator*=( const FSize &rhs ) { _size *= boost::multiprecision::cpp_int(rhs); return *this; }
     FSize & operator/=( const FSize &rhs ) { _size /= boost::multiprecision::cpp_int(rhs); return *this; }
 
-    bool operator<( const FSize &rhs ) const { return _size < boost::multiprecision::cpp_int(rhs); }
+    bool operator< ( const FSize &rhs ) const { return _size < boost::multiprecision::cpp_int(rhs); }
     bool operator==( const FSize &rhs ) const { return _size == boost::multiprecision::cpp_int(rhs); }
 
     // ++operator (the prefix variant)
@@ -159,12 +159,12 @@ class FSize :
     /**
      * Adjust size to multiple of <code>blocksize_r</code>
      **/
-    FSize & fillBlock( FSize blocksize_r = boost::multiprecision::cpp_int(KB) );
+    FSize & fillBlock( FSize blocksize_r = boost::multiprecision::cpp_int( KB ) );
 
     /**
      * Return a new size adjusted to multiple of <code>blocksize_r</code>
      **/
-    FSize fullBlock( FSize blocksize_r = boost::multiprecision::cpp_int(KB) ) const
+    FSize fullBlock( FSize blocksize_r = boost::multiprecision::cpp_int( KB ) ) const
     {
         FSize ret( _size );
         return ret.fillBlock(  blocksize_r );
@@ -196,7 +196,8 @@ class FSize :
     /**
      * Return string representation in bestUnit.
      **/
-    std::string form( unsigned fw = 0, unsigned prec = bestPrec, bool showunit = true ) const {
+    std::string form( unsigned fw = 0, unsigned prec = bestPrec, bool showunit = true ) const
+    {
       return form( bestUnit(), fw, prec, showunit );
     }
 
@@ -207,7 +208,7 @@ class FSize :
 };
 
 // stream operators
-std::ostream& operator<<(std::ostream &ostr, const FSize&);
-std::ostream& operator<<(std::ostream &ostr, const FSize::Unit);
+std::ostream & operator<<(std::ostream &ostr, const FSize&);
+std::ostream & operator<<(std::ostream &ostr, const FSize::Unit);
 
 #endif // _FSize_h_
