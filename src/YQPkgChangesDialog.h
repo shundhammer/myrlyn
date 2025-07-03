@@ -145,7 +145,7 @@ protected:
     /**
      * Constructor: Creates a changes dialog with text 'message' on
      * top, a list packages with an "auto" status that is not set via selections
-     * and one ( default ) or two buttons.
+     * and one (default) or two buttons.
      *
      * Not meant for public use. Applications should use the static
      * 'showChangesDialog' method instead.
@@ -160,16 +160,16 @@ protected:
 
     /**
      * Apply the filter criteria: Fill the pkg list with pkgs that have a
-     * "modify" status ( install, update, delete ) set by automatic ( i.e. via the
-     * dependency solver ), by application ( i.e. via software selections ) or
+     * "modify" status (install, update, delete) set by automatic (i.e. via the
+     * dependency solver), by application (i.e. via software selections) or
      * manually by the user.
      **/
     void filter( Filters flt = FilterAutomatic );
 
     /**
      * Apply the filter criteria: Fill the pkg list with pkgs that have a
-     * "modify" status ( install, update, delete ) set by automatic ( i.e. via the
-     * dependency solver ), by application ( i.e. via software selections ) or
+     * "modify" status (install, update, delete) set by automatic (i.e. via the
+     * dependency solver), by application (i.e. via software selections) or
      * manually by the user and whose name matches 'regexp'.
      **/
     void filter( const QRegularExpression & regexp, Filters flt = FilterAutomatic );

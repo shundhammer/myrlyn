@@ -25,9 +25,9 @@ typedef zypp::Capabilities ZyppCap;
 
 
 /**
- * Display technical details ( very much like 'rpm -qi' ) for a zypp::Package
- * object - the installed instance, the candidate instance or both ( in two
- * columns ) if both exist. All other available instances are ignored.
+ * Display technical details (very much like 'rpm -qi') for a zypp::Package
+ * object - the installed instance, the candidate instance or both (in two
+ * columns) if both exist. All other available instances are ignored.
  **/
 class YQPkgDependenciesView : public YQPkgGenericDetailsView
 {

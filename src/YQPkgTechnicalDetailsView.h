@@ -23,8 +23,8 @@
 
 /**
  * Display technical details (very much like 'rpm -qi') for a ZYPP
- * object - the installed instance, the candidate instance or both ( in two
- * columns ) if both exist. All other available instances are ignored.
+ * object - the installed instance, the candidate instance or both (in two
+ * columns) if both exist. All other available instances are ignored.
  **/
 class YQPkgTechnicalDetailsView : public YQPkgGenericDetailsView
 {
@@ -65,7 +65,7 @@ protected:
     /**
      * Returns a string containing a HTML table for technical details for two
      * package instances: The installed instance and an alternate instance.
-     * ( usually the candidate instance ).
+     * (usually the candidate instance).
      **/
     QString complexTable( ZyppSel selectable,
                           ZyppPkg installedPkg,

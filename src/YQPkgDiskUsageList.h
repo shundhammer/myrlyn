@@ -50,7 +50,7 @@ class YQPkgDiskUsageListItem;
  *
  * The net effect of all that is to avoid posting the warning over and over
  * again while the value changes back and forth around the boundary of the
- * ( inner ) warning range.
+ * (inner) warning range.
  **/
 class YQPkgWarningRangeNotifier
 {
@@ -87,7 +87,7 @@ public:
 
     /**
      * Check if a warning should be posted, i.e. if the value is currently in
-     * range ( see 'inRange() ) and there has been no notification yet that a
+     * range (see 'inRange()) and there has been no notification yet that a
      * warning has already been posted.
      **/
     bool needWarning() const;
@@ -134,7 +134,7 @@ public:
      *
      * 'thresholdPercent' can be used to include only partitions with at least
      * this many percent used disk space in the list. This is useful for
-     * warning dialogs ( only? ).
+     * warning dialogs (only?).
      **/
     YQPkgDiskUsageList( QWidget * parent,
                         int       thresholdPercent = 0 );
@@ -236,7 +236,7 @@ public:
     virtual FSize totalSize() const override;
 
     /**
-     * The name to display for this partition ( the mount point ).
+     * The name to display for this partition (the mount point).
      *
      * Reimplemented from QY2DiskUsageListItem.
      **/

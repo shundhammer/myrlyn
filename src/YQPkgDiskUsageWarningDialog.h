@@ -31,11 +31,11 @@ public:
     /**
      * Static convenience method: Post a disk usage warning with text
      * 'message', a list of partitions that are at least 'thresholdPercent'
-     * full and one ( default ) or two buttons.
+     * full and one (default) or two buttons.
      *
-     * Returns 'true' if the user accepted ( i.e. clicked the 'accept' button )
-     * and 'false' if the user rejected ( i.e. clicked the 'reject' button or
-     * the window manager close button ).
+     * Returns 'true' if the user accepted (i.e. clicked the 'accept' button)
+     * and 'false' if the user rejected (i.e. clicked the 'reject' button or
+     * the window manager close button).
      **/
     static bool diskUsageWarning( const QString & message,
                                   int             thresholdPercent,
@@ -46,7 +46,7 @@ protected:
     /**
      * Constructor: Creates a disk usage warning dialog with text 'message' on
      * top, a list of partitions that are at least 'thresholdPercent' full and
-     * one ( default ) or two buttons.
+     * one (default) or two buttons.
      *
      * Not meant for public use. Applications should use the static
      * 'diskUsageWarning' method instead.

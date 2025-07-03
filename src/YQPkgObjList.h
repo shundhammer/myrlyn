@@ -216,7 +216,7 @@ public slots:
     virtual void resetContent();
 
     /**
-     * Update the internal actions for the currently selected item ( if any ).
+     * Update the internal actions for the currently selected item (if any).
      * This only calls updateActions( YQPkgObjListItem * ) with the currently
      * selected item as argument, so there is normally no need to reimplement
      * this method, too, if the other one is reimplemented.
@@ -652,7 +652,7 @@ protected:
 
     /**
      * Set a column text via STL string.
-     * ( QListViewItem::setText() expects a QString! )
+     * (QListViewItem::setText() expects a QString!)
      **/
     void setText( int column, const string & text );
 

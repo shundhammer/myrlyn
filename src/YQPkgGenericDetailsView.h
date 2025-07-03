@@ -116,7 +116,7 @@ public slots:
 
     /**
      * Show details for the specified package.
-     * Delayed ( optimized ) display if this is embedded into a QTabWidget
+     * Delayed (optimized) display if this is embedded into a QTabWidget
      * parent: In this case, wait until this page becomes visible.
      **/
     void showDetailsIfVisible( ZyppSel selectable );

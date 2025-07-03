@@ -128,10 +128,10 @@ public:
     static QString htmlHeading( ZyppSel selectable );
 
     /**
-     * Escapes characters special to HTML in a ( plain text ) string, such as:
-     * '<'   ->   '&lt;'
-     * '>'   ->   '&gt;'
-     * '&'   ->   '&amp;'
+     * Escapes characters special to HTML in a (plain text) string, such as:
+     *   '<'   ->   '&lt;'
+     *   '>'   ->   '&gt;'
+     *   '&'   ->   '&amp;'
      *
      * Returns the escaped string.
      **/
