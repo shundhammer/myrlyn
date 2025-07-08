@@ -3,14 +3,39 @@
 # Wrapper around 'sudo' for Myrlyn that can open a graphical password prompt
 # and that can keep the connection to the display (X11 or Wayland) alive
 # as well as some well-defined environment variables.
+#
+# Author:  Stefan Hundhammer <Stefan.Hundhammer@gmx.de>
+# License: GPL V2
 
 MYRLYN_ARGS=$*
 
 # Environment variables to keep for the 'sudo' call
-ENV_KEEP="DISPLAY,WAYLAND_DISPLAY,XAUTHORITY,XDG_RUNTIME_DIR,\
-QT_QPA_PLATFORMTHEME,QT_ENABLE_HIGHDPI_SCALING,\
-LANG,LC_MESSAGES,LC_COLLATE,LC_NUMERIC,LC_TIME,LC_ALL,LANGUAGE"
+ENV_KEEP="DISPLAY WAYLAND_DISPLAY XAUTHORITY XDG_RUNTIME_DIR \
+QT_QPA_PLATFORMTHEME QT_ENABLE_HIGHDPI_SCALING \
+LANG LC_MESSAGES LC_COLLATE LC_NUMERIC LC_TIME LC_ALL LANGUAGE"
 
+
+# Build an environment for use with /usr/bin/env from the above variables:
+# DISPLAY=:0.0 LANG=de_DE.utf8 ...
+
+ENV=""
+
+for VAR in $ENV_KEEP; do
+    # Uncomment for debugging
+    # echo "$VAR=${!VAR}"
+    ENV="$ENV $VAR=${!VAR}"
+done
+
+# Uncomment for debugging
+# echo $ENV
+
+# Use our own askpass binary to for a graphical password prompt
 ASKPASS=/usr/bin/myrlyn-askpass
 
-SUDO_ASKPASS=$ASKPASS sudo -A --preserve-env=$ENV_KEEP /usr/bin/myrlyn $MYRLYN_ARGS
+# Using /usr/bin/env to set up an environment inside the 'sudo' call,
+# not relying on what 'env_keep' in /etc/sudoers might allow or not.
+#
+# The main command that is called here is /usr/bin/env which builds
+# the environment and then calls myrlyn with $MYRLYN_ARGS.
+
+SUDO_ASKPASS=$ASKPASS sudo -A /usr/bin/env $ENV /usr/bin/myrlyn $MYRLYN_ARGS
