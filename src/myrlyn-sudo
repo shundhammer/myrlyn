@@ -13,4 +13,4 @@ LANG,LC_MESSAGES,LC_COLLATE,LC_NUMERIC,LC_TIME,LC_ALL,LANGUAGE"
 
 ASKPASS=/usr/bin/myrlyn-askpass
 
-SUDO_ASKPASS=$ASKPASS sudo -Ai --preserve-env=$ENV_KEEP /usr/bin/myrlyn $MYRLYN_ARGS
+SUDO_ASKPASS=$ASKPASS sudo -A --preserve-env=$ENV_KEEP /usr/bin/myrlyn $MYRLYN_ARGS
