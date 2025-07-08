@@ -78,6 +78,17 @@ public:
      **/
     YQPkgList * pkgList() const { return _pkgList; }
 
+    /**
+     * Return the exclude rule for "-devel" packages.
+     **/
+    YQPkgObjList::ExcludeRule * excludeRuleDevelPkgs() const { return _excludeDevelPkgs; }
+
+    /**
+     * Return the exclude rule for "-debuginfo / -debugsource" packages.
+     **/
+    YQPkgObjList::ExcludeRule * excludeRuleDebugInfoPkgs() const { return _excludeDebugInfoPkgs; }
+
+
 
 public slots:
 

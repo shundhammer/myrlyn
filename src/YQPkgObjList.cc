@@ -1413,6 +1413,9 @@ YQPkgObjListItem::setExcluded( bool excl )
     _excluded = excl;
 }
 
+
+
+
 YQPkgObjList::ExcludeRule::ExcludeRule( YQPkgObjList *             parent,
                                         const QRegularExpression & regexp,
                                         int                        column )
@@ -1420,6 +1423,7 @@ YQPkgObjList::ExcludeRule::ExcludeRule( YQPkgObjList *             parent,
     , _regexp( regexp )
     , _column( column )
     , _enabled( true )
+    , _savedEnabled( true )
 {
     _parent->addExcludeRule( this );
 }
@@ -1435,6 +1439,21 @@ YQPkgObjList::ExcludeRule::enable( bool enable )
                << " exclude rule " << _regexp.pattern()
                << endl;
 #endif
+}
+
+
+void
+YQPkgObjList::ExcludeRule::overrideEnabled( bool enable )
+{
+    _savedEnabled = _enabled;
+    _enabled      = enable;
+}
+
+
+void
+YQPkgObjList::ExcludeRule::restoreEnabled()
+{
+    _enabled = _savedEnabled;
 }
 
 

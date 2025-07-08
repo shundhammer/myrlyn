@@ -33,6 +33,7 @@
 #include "SearchFilter.h"
 #include "YQi18n.h"
 #include "utf8.h"
+#include "YQPkgObjList.h"
 #include "YQPkgSelector.h"
 #include "YQPkgSearchFilterView.h"
 
@@ -205,6 +206,59 @@ YQPkgSearchFilterView::showFilter( QWidget * newFilter )
 
 void
 YQPkgSearchFilterView::filter()
+{
+    bool overrideExcludeRuleDevel     = false;
+    bool overrideExcludeRuleDebugInfo = false;
+    QString searchText = _ui->searchText->text().toLower();
+
+    if ( searchText.contains( "-devel" ) )
+    {
+        YQPkgObjList::ExcludeRule * excludeRule =
+            YQPkgSelector::instance()->excludeRuleDevelPkgs();
+
+        if ( excludeRule )
+        {
+            logInfo() << "Overriding -devel exclude rule" << endl;
+
+            excludeRule->overrideEnabled( false );
+            overrideExcludeRuleDevel = true;
+        }
+    }
+
+    if ( searchText.contains( "-debuginfo"   ) ||
+         searchText.contains( "-debugsource" ) ||
+         searchText.contains( "-debug*"      )   )
+    {
+        YQPkgObjList::ExcludeRule * excludeRule =
+            YQPkgSelector::instance()->excludeRuleDebugInfoPkgs();
+
+        if ( excludeRule )
+        {
+            logInfo() << "Overriding -debuginfo / -debugsource exclude rule" << endl;
+
+            excludeRule->overrideEnabled( false );
+            overrideExcludeRuleDebugInfo = true;
+        }
+    }
+
+    filterInternal();
+
+    if ( overrideExcludeRuleDevel )
+    {
+        logInfo() << "Restoring -devel exclude rule" << endl;
+        YQPkgSelector::instance()->excludeRuleDevelPkgs()->restoreEnabled();
+    }
+
+    if ( overrideExcludeRuleDebugInfo )
+    {
+        logDebug() << "Restoring -debuginfo / -debugsource exclude rule" << endl;
+        YQPkgSelector::instance()->excludeRuleDebugInfoPkgs()->restoreEnabled();
+    }
+}
+
+
+void
+YQPkgSearchFilterView::filterInternal()
 {
 #if VERBOSE_FILTER_VIEWS
     logVerbose() << "Filtering" << endl;

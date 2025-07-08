@@ -143,6 +143,11 @@ signals:
 protected:
 
     /**
+     * The filtering without overriding and restoring any exclude rules.
+     **/
+    void filterInternal();
+
+    /**
      * Build a SearchFilter object from the widgets.
      **/
     SearchFilter buildSearchFilterFromWidgets();

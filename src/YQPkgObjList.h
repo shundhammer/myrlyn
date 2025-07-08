@@ -722,6 +722,18 @@ public:
     bool isEnabled() const { return _enabled; }
 
     /**
+     * Override the enabled state temporarily.
+     * Use 'restoreEnabled() to restore the previous state.
+     **/
+    void overrideEnabled( bool enable );
+
+    /**
+     * Restore the enabled state to what it was before the last
+     * 'overrideEnabled()' call.
+     **/
+    void restoreEnabled();
+
+    /**
      * Change the regular expression after creation.
      **/
     void setRegexp( const QRegularExpression & regexp );
@@ -759,6 +771,7 @@ private:
     QRegularExpression  _regexp;
     int                 _column;
     bool                _enabled;
+    bool                _savedEnabled;
 };
 
 
