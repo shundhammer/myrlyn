@@ -31,8 +31,9 @@ CommunityRepos::CommunityRepos( DistroType distroType )
         case openSUSE_Tumbleweed: openSUSE_Tumbleweed_Repos(); break;
         case openSUSE_Slowroll:   openSUSE_Slowroll_Repos();   break;
         case openSUSE_Leap_15x:   openSUSE_Leap_15x_Repos();   break;
+        case openSUSE_Leap_16x:   openSUSE_Leap_16x_Repos();   break;
         case SLE_15_SPx:          SLE_15_SPx_Repos();          break;
-        case SLES_16:             SLES_16_Repos();            break;
+        case SLES_16:             SLES_16_Repos();             break;
 
         default:
             logWarning() << "No community repos for this distro." << endl;
