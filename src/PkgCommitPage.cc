@@ -1031,8 +1031,10 @@ void PkgCommitPage::pkgActionError( ZyppRes         zyppRes,
     PkgCommitSignalForwarder::instance()->setReply( reply );
 
 
-    if ( reply != RetryReply )
+    if ( reply == AbortReply )
     {
+        // Move this task to the "failed" list
+
         PkgTask * task = pkgTasks()->downloads().find( zyppRes );
 
         if ( task )
