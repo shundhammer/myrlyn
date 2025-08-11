@@ -29,6 +29,8 @@ YQPkgRpmGroupTagsFilterView::YQPkgRpmGroupTagsFilterView( QWidget * parent )
 {
     setHeaderLabels( QStringList( _( "RPM Groups" ) ) );
     setRootIsDecorated( true );
+
+    // FIXME: Use lazy init to fill this tree, it takes a while
     cloneTree( rpmGroupsTree()->root(), 0 );
 
     new YQPkgRpmGroupTag( this, _( "zzz Unspecified" ), 0 );
@@ -105,12 +107,6 @@ void
 YQPkgRpmGroupTagsFilterView::selectSomething()
 {
     logDebug() << endl;
-#if 0
-    QTreeWidgetItem * item = children().first();
-
-    if ( item )
-        setCurrentItem( item );
-#endif
 }
 
 
@@ -172,19 +168,14 @@ YQPkgRpmGroupTagsFilterView::slotSelectionChanged( QTreeWidgetItem * newSelectio
 
     if ( sel )
     {
-#if 0
-        if ( sel->rpmGroup()->value().orig() == "zzz Unspecified" )
-            _selectedRpmGroup = "Unspecified";
-        else
-#endif
-            if ( sel->rpmGroup() )
+        if ( sel->rpmGroup() )
             _selectedRpmGroup = rpmGroupsTree()->rpmGroup( sel->rpmGroup() );
         else
             _selectedRpmGroup = "";
     }
     else
     {
-        _selectedRpmGroup = "";
+        _selectedRpmGroup = "<NONE>";
     }
 
     filter();
@@ -192,16 +183,22 @@ YQPkgRpmGroupTagsFilterView::slotSelectionChanged( QTreeWidgetItem * newSelectio
 
 
 bool
-YQPkgRpmGroupTagsFilterView::check( ZyppSel     selectable,
-                                    ZyppPkg     pkg             )
+YQPkgRpmGroupTagsFilterView::check( ZyppSel selectable,
+                                    ZyppPkg pkg        )
 {
     if ( ! pkg || ! selection() )
         return false;
 
-    if ( selection()->rpmGroup() == 0 )         // Special case: All packages
+    if ( selection()->rpmGroup() == 0 )   // Special case: "zzz Unspecified"
     {
-        emit filterMatch( selectable, pkg );
-        return true;
+        bool match =
+            pkg->group().empty() ||
+            pkg->group() == "Unspecified";
+
+        if ( match )
+            emit filterMatch( selectable, pkg );
+
+        return match;
     }
 
     if ( selectedRpmGroup().empty() )
