@@ -67,6 +67,7 @@
 #include "YQPkgPatternList.h"
 #include "YQPkgProductDialog.h"
 #include "YQPkgRepoFilterView.h"
+#include "YQPkgRpmGroupTagsFilterView.h"
 #include "YQPkgSearchFilterView.h"
 #include "YQPkgServiceFilterView.h"
 #include "YQPkgStatusFilterView.h"
@@ -102,6 +103,7 @@ YQPkgSelector::YQPkgSelector( QWidget * parent )
     , _patchFilterView(0)
     , _updatesFilterView(0)
     , _repoFilterView(0)
+    , _rpmGroupTagsFilterView(0)
     , _serviceFilterView(0)
     , _pkgClassificationFilterView(0)
     , _patternList(0)
@@ -270,6 +272,7 @@ void YQPkgSelector::createFilterViews()
     // the order of tabs
 
     createSearchFilterView();         // Package search
+    createRpmGroupTagsFilterView();   // RPM Groups
     createPatchFilterView();          // Patches - if patches available or F2
     createUpdatesFilterView();        // Package update
     createRepoFilterView();
@@ -329,7 +332,16 @@ void YQPkgSelector::createRepoFilterView()
 
     _filters->addPage( _( "&Repositories" ), _repoFilterView,
                        "repos", Qt::CTRL | Qt::SHIFT | Qt::Key_R );
+}
 
+
+void YQPkgSelector::createRpmGroupTagsFilterView()
+{
+    _rpmGroupTagsFilterView = new YQPkgRpmGroupTagsFilterView( this );
+    CHECK_NEW( _rpmGroupTagsFilterView );
+    
+    _filters->addPage( _( "RPM &Groups" ), _rpmGroupTagsFilterView,
+                       "rpm-groups", Qt::CTRL | Qt::SHIFT | Qt::Key_G );
 }
 
 
@@ -952,6 +964,7 @@ YQPkgSelector::makeConnections()
     connectFilter( _searchFilterView,            _pkgList, false );
     connectFilter( _updatesFilterView,           _pkgList, false );
     connectFilter( _repoFilterView,              _pkgList, false );
+    connectFilter( _rpmGroupTagsFilterView,      _pkgList, false );
     connectFilter( _serviceFilterView,           _pkgList, false );
     connectFilter( _patternList,                 _pkgList );
     connectFilter( _pkgClassificationFilterView, _pkgList, false );

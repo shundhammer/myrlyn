@@ -71,6 +71,7 @@ set( SOURCES
   YQPkgProductList.cc
   YQPkgRepoFilterView.cc
   YQPkgRepoList.cc
+  YQPkgRpmGroupTagsFilterView.cc
   YQPkgSearchFilterView.cc
   YQPkgSecondaryFilterView.cc
   YQPkgServiceFilterView.cc
@@ -82,6 +83,9 @@ set( SOURCES
   YQPkgVersionsView.cc
 
   YQIconPool.cc
+  YRpmGroupsTree.cc
+  YStringTree.cc
+
   QY2ComboTabWidget.cc
   QY2CursorHelper.cc
   QY2DiskUsageList.cc
