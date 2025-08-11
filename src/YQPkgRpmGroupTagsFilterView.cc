@@ -27,7 +27,7 @@ YRpmGroupsTree * YQPkgRpmGroupTagsFilterView::_rpmGroupsTree = 0;
 YQPkgRpmGroupTagsFilterView::YQPkgRpmGroupTagsFilterView( QWidget * parent )
     : QTreeWidget( parent )
 {
-    setHeaderLabels( QStringList( _( "Package Groups" ) ) );
+    setHeaderLabels( QStringList( _( "RPM Groups" ) ) );
     setRootIsDecorated( true );
     cloneTree( rpmGroupsTree()->root(), 0 );
 

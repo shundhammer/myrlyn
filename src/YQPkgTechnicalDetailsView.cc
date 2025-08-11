@@ -136,7 +136,7 @@ YQPkgTechnicalDetailsView::simpleTable( ZyppSel selectable,
     QString rpmGroup = formatRpmGroup( pkg );
 
     // if ( ! rpmGroup.isEmpty() )
-    html += row( hcell( _( "Package Group:"     ) ) + cell( rpmGroup                       ) );
+    html += row( hcell( _( "RPM Group:"         ) ) + cell( rpmGroup                       ) );
 
     html += row( hcell( _( "License:"           ) ) + cell( pkg->license()                 ) );
     html += row( hcell( _( "Installed Size:"    ) ) + cell( pkg->installSize().asString()  ) );
@@ -180,7 +180,7 @@ YQPkgTechnicalDetailsView::complexTable( ZyppSel selectable,
     QString rpmGroup2 = formatRpmGroup( p2 );
 
     // if ( ! rpmGroup1.isEmpty() || ! rpmGroup2.isEmpty() )
-    html += row( hcell( _( "Package Group:"     ) ) + cell( rpmGroup1                     ) + cell( rpmGroup2                     ) );
+    html += row( hcell( _( "RPM Group:"         ) ) + cell( rpmGroup1                     ) + cell( rpmGroup2                     ) );
 
     html += row( hcell( _( "License:"           ) ) + cell( p1->license()                 ) + cell( p2->license()                 ) );
     html += row( hcell( _( "Installed Size:"    ) ) + cell( p1->installSize().asString()  ) + cell( p2->installSize().asString()  ) );
