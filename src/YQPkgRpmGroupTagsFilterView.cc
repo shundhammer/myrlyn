@@ -94,8 +94,7 @@ YQPkgRpmGroupTagsFilterView::cloneTree( YStringTreeItem *       parentRpmGroup,
 
         CHECK_PTR( clone );
 
-        // FIXME clone->setExpanded( clone->depth() < 1 );
-        clone->setExpanded( true );
+        clone->setExpanded( clone->depth() < 1 );
         cloneTree( child, clone );
         child = child->next();
     }
@@ -240,6 +239,7 @@ YQPkgRpmGroupTag::YQPkgRpmGroupTag( YQPkgRpmGroupTagsFilterView * parentFilterVi
     : QTreeWidgetItem( parentFilterView )
     , _filterView( parentFilterView )
     , _rpmGroup( rpmGroup )
+    , _depth( 0 )
 {
     setText( 0,  fromUTF8( _rpmGroup->value().translation() ) );
 }
@@ -251,6 +251,7 @@ YQPkgRpmGroupTag::YQPkgRpmGroupTag( YQPkgRpmGroupTagsFilterView * parentFilterVi
     : QTreeWidgetItem( parentGroupTag )
     , _filterView( parentFilterView )
     , _rpmGroup( rpmGroup )
+    , _depth( parentGroupTag->depth() + 1 )
 {
     setText( 0,  fromUTF8( _rpmGroup->value().translation() )  );
 }
@@ -262,6 +263,7 @@ YQPkgRpmGroupTag::YQPkgRpmGroupTag( YQPkgRpmGroupTagsFilterView * parentFilterVi
     : QTreeWidgetItem( parentFilterView )
     , _filterView( parentFilterView )
     , _rpmGroup( rpmGroup )
+    , _depth(0)
 {
     setText( 0,  rpmGroupName );
 }

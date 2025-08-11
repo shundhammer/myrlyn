@@ -157,18 +157,18 @@ public:
      * Constructor for toplevel RPM group tags
      **/
     YQPkgRpmGroupTag( YQPkgRpmGroupTagsFilterView * parentFilterView,
-                      YStringTreeItem *             rpmGroup        );
+                      YStringTreeItem *             rpmGroup         );
 
     /**
      * Constructor for RPM group tags that have a parent
      **/
     YQPkgRpmGroupTag( YQPkgRpmGroupTagsFilterView * parentFilterView,
                       YQPkgRpmGroupTag *            parentGroupTag,
-                      YStringTreeItem *             rpmGroup );
+                      YStringTreeItem *             rpmGroup        );
 
     /**
      * Constructor for toplevel RPM group tags via STL string
-     * ( for special cases like "zzz All" )
+     * (for special cases like "zzz All")
      **/
     YQPkgRpmGroupTag( YQPkgRpmGroupTagsFilterView * parentFilterView,
                       const QString &               rpmGroupName,
@@ -190,6 +190,8 @@ public:
      **/
     const YStringTreeItem * rpmGroup() const { return _rpmGroup; }
 
+    int depth() const { return _depth; }
+
 
 private:
 
@@ -197,6 +199,7 @@ private:
 
     YQPkgRpmGroupTagsFilterView * _filterView;
     YStringTreeItem *             _rpmGroup;
+    int                           _depth;
 };
 
 
