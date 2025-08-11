@@ -31,7 +31,6 @@ public:
     /**
      * Constructor.
      **/
-
     YRpmGroupsTree();
 
     /**
@@ -59,11 +58,6 @@ public:
      **/
     std::string translatedRpmGroup( const YStringTreeItem * node )
         { return translatedPath( node, '/', false ); }
-
-    /**
-     * Add a predefined set of RPM groups
-     **/
-    void addFallbackRpmGroups();
 };
 
 
