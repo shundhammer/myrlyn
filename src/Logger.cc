@@ -316,6 +316,10 @@ static void qt_logger( QtMsgType                  msgType,
 
         line.remove( "Reinstalling the application may fix this problem." );
 
+        // Suppress Qt message that spams the log, making it unusable
+        if ( line.startsWith( "OpenType support missing for" ) )
+            continue;
+
         if ( ! line.trimmed().isEmpty() )
         {
             Logger::log( 0, // use default logger
