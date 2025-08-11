@@ -96,6 +96,34 @@ YQPkgTechnicalDetailsView::authorsListCell( ZyppPkg pkg ) const
 }
 
 
+
+QString
+YQPkgTechnicalDetailsView::formatRpmGroup( ZyppPkg pkg ) const
+{
+    return fromUTF8( pkg->group() );
+
+
+#if 0
+    QStringList groups = fromUTF8( pkg->group() ).split( '/', QString::KeepEmptyParts );
+
+    // Translate group path components
+
+    QStringList translated;
+
+    for ( QStringList::const_iterator it = groups.begin();
+          it != groups.end();
+          ++it )
+    {
+        translated.append( QString::fromUtf8( dgettext( "rpm-groups", (*it).toUtf8() ) ) );
+    }
+
+    return translated.join( "/" );
+#endif
+}
+
+
+
+
 QString
 YQPkgTechnicalDetailsView::simpleTable( ZyppSel selectable,
                                         ZyppPkg pkg )
@@ -109,6 +137,7 @@ YQPkgTechnicalDetailsView::simpleTable( ZyppSel selectable,
         *pkg == selectable->installedObj() ?
         row( hcell( _( "Install Time:" ) ) + cell( pkg->installtime() ) ) : "";
 
+    html += row( hcell( _( "Package Group:"     ) ) + cell( formatRpmGroup( pkg )          ) );
     html += row( hcell( _( "License:"           ) ) + cell( pkg->license()                 ) );
     html += row( hcell( _( "Installed Size:"    ) ) + cell( pkg->installSize().asString()  ) );
     html += row( hcell( _( "Download Size:"     ) ) + cell( pkg->downloadSize().asString() ) );
@@ -146,6 +175,7 @@ YQPkgTechnicalDetailsView::complexTable( ZyppSel selectable,
     html += row( hcell( _( "Version:"           ) ) + cell( p1->edition().asString()      ) + cell( p2->edition().asString()      ) );
     html += row( hcell( _( "Build Time:"        ) ) + cell( p1->buildtime()               ) + cell( p2->buildtime()               ) );
     html += row( hcell( _( "Install Time:"      ) ) + cell( p1->installtime()             ) + cell( p2->installtime()             ) );
+    html += row( hcell( _( "Package Group:"     ) ) + cell( formatRpmGroup( p1 )          ) + cell( formatRpmGroup( p2 )          ) );
     html += row( hcell( _( "License:"           ) ) + cell( p1->license()                 ) + cell( p2->license()                 ) );
     html += row( hcell( _( "Installed Size:"    ) ) + cell( p1->installSize().asString()  ) + cell( p2->installSize().asString()  ) );
     html += row( hcell( _( "Download Size:"     ) ) + cell( p1->downloadSize().asString() ) );

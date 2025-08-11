@@ -75,6 +75,11 @@ protected:
      * Returns a string containing HTML code for a package's authors list.
      **/
     QString authorsListCell( ZyppPkg pkg ) const;
+
+    /**
+     * Format an RPM group. Retrieves the translated (!) version.
+     **/
+    QString formatRpmGroup( ZyppPkg pkg ) const;
 };
 
 
