@@ -93,6 +93,12 @@ public slots:
      **/
     static YRpmGroupsTree * rpmGroupsTree();
 
+    /**
+     * Return the number of packages in the "zzz Unspecified" group, i.e. those
+     * that don't have an RPM group (libzypp reports them as "Unspecified").
+     **/
+    static int unspecifiedCount() { return _unspecifiedCount; }
+
 
 signals:
 
@@ -125,8 +131,22 @@ protected slots:
 protected:
 
     /**
+     * Initialize the tree in the widget on demand.
+     *
+     * This calls fillRpmGroupsTree() when called for the very first time which
+     * is expensive: It has to iterate over all packages to collect all used
+     * RPM groups from them. This might not even bee needed at all if this view
+     * is never shown (put to the foreground tab) anyway.
+     **/
+    void lazyTreeInit();
+
+    /**
      * Fill the internal RPM groups tree with RPM groups of all packages
-     * currently in the pool
+     * currently in the pool. This is expensive.
+     *
+     * This and the associated _rpmGroupsTree member variable are static to
+     * avoid having to do this again if this view is closed (and hence
+     * destroyed) and later reopened again.
      **/
     static void fillRpmGroupsTree();
 
@@ -143,8 +163,10 @@ protected:
     //
 
     std::string _selectedRpmGroup;
+    bool        _lazyTreeInitDone;
 
     static YRpmGroupsTree * _rpmGroupsTree;
+    static int              _unspecifiedCount;
 };
 
 

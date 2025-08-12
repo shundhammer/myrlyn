@@ -21,19 +21,19 @@
 #include "utf8.h"
 
 
-YRpmGroupsTree * YQPkgRpmGroupTagsFilterView::_rpmGroupsTree = 0;
+YRpmGroupsTree * YQPkgRpmGroupTagsFilterView::_rpmGroupsTree    = 0;
+int              YQPkgRpmGroupTagsFilterView::_unspecifiedCount = 0;
 
 
 YQPkgRpmGroupTagsFilterView::YQPkgRpmGroupTagsFilterView( QWidget * parent )
     : QTreeWidget( parent )
+    , _lazyTreeInitDone( false )
 {
     setHeaderLabels( QStringList( _( "RPM Groups" ) ) );
     setRootIsDecorated( true );
 
-    // FIXME: Use lazy init to fill this tree, it takes a while
-    cloneTree( rpmGroupsTree()->root(), 0 );
-
-    new YQPkgRpmGroupTag( this, _( "zzz Unspecified" ), 0 );
+    // The QTreeWidget's items are initialized on demand in lazyTreeInit()
+    // called from showFilter().
 
     connect( this, SIGNAL( currentItemChanged   ( QTreeWidgetItem *, QTreeWidgetItem * ) ),
              this, SLOT  ( slotSelectionChanged ( QTreeWidgetItem * ) ) );
@@ -47,6 +47,17 @@ YQPkgRpmGroupTagsFilterView::~YQPkgRpmGroupTagsFilterView()
 }
 
 
+void
+YQPkgRpmGroupTagsFilterView::lazyTreeInit()
+{
+    if ( _lazyTreeInitDone )
+        return;
+
+    cloneTree( rpmGroupsTree()->root(), 0 );
+    _lazyTreeInitDone = true;
+}
+
+
 YRpmGroupsTree *
 YQPkgRpmGroupTagsFilterView::rpmGroupsTree()
 {
@@ -54,6 +65,7 @@ YQPkgRpmGroupTagsFilterView::rpmGroupsTree()
     {
         _rpmGroupsTree = new YRpmGroupsTree();
         CHECK_PTR( _rpmGroupsTree );
+
         fillRpmGroupsTree();
     }
 
@@ -73,7 +85,18 @@ YQPkgRpmGroupTagsFilterView::fillRpmGroupsTree()
         ZyppPkg zyppPkg = tryCastToZyppPkg( (*it)->theObj() );
 
         if ( zyppPkg )
-            rpmGroupsTree()->addRpmGroup( zyppPkg->group() );
+        {
+            std::string group = zyppPkg->group();
+
+            if ( group.empty() || group == "Unspecified" )
+            {
+                group = "zzz Unspecified";
+                _unspecifiedCount++;
+            }
+
+            rpmGroupsTree()->addRpmGroup( group );
+
+        }
     }
 
     logDebug() << "Filling RPM groups tree done" << endl;
@@ -115,6 +138,7 @@ YQPkgRpmGroupTagsFilterView::showFilter( QWidget * newFilter )
 {
     if ( newFilter == this )
     {
+        lazyTreeInit();
         filter();
         selectSomething();
     }
@@ -173,10 +197,9 @@ YQPkgRpmGroupTagsFilterView::slotSelectionChanged( QTreeWidgetItem * newSelectio
         else
             _selectedRpmGroup = "";
     }
-    else
-    {
-        _selectedRpmGroup = "<NONE>";
-    }
+
+    if ( _selectedRpmGroup == "zzz Unspecified" )
+        _selectedRpmGroup = "Unspecified";
 
     filter();
 }
@@ -188,18 +211,6 @@ YQPkgRpmGroupTagsFilterView::check( ZyppSel selectable,
 {
     if ( ! pkg || ! selection() )
         return false;
-
-    if ( selection()->rpmGroup() == 0 )   // Special case: "zzz Unspecified"
-    {
-        bool match =
-            pkg->group().empty() ||
-            pkg->group() == "Unspecified";
-
-        if ( match )
-            emit filterMatch( selectable, pkg );
-
-        return match;
-    }
 
     if ( selectedRpmGroup().empty() )
         return false;
@@ -238,7 +249,15 @@ YQPkgRpmGroupTag::YQPkgRpmGroupTag( YQPkgRpmGroupTagsFilterView * parentFilterVi
     , _rpmGroup( rpmGroup )
     , _depth( 0 )
 {
-    setText( 0,  fromUTF8( _rpmGroup->value().translation() ) );
+    if ( _rpmGroup->value().orig() == "zzz Unspecified" )
+    {
+        setText( 0, _( "zzz Unspecified (%1)" )
+                 .arg( YQPkgRpmGroupTagsFilterView::unspecifiedCount() ) );
+    }
+    else
+    {
+        setText( 0,  fromUTF8( _rpmGroup->value().translation() ) );
+    }
 }
 
 
