@@ -37,8 +37,6 @@ YQPkgRpmGroupsFilterView::YQPkgRpmGroupsFilterView( QWidget * parent )
 
     connect( this, SIGNAL( currentItemChanged   ( QTreeWidgetItem *, QTreeWidgetItem * ) ),
              this, SLOT  ( slotSelectionChanged ( QTreeWidgetItem *                    ) ) );
-
-    selectSomething();
 }
 
 
