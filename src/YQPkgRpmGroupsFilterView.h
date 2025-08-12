@@ -14,22 +14,20 @@
  */
 
 
-#ifndef YQPkgRpmGroupTagsFilterView_h
-#define YQPkgRpmGroupTagsFilterView_h
+#ifndef YQPkgRpmGroupsFilterView_h
+#define YQPkgRpmGroupsFilterView_h
 
 #include "YQZypp.h"
 #include <QTreeWidget>
 #include <YRpmGroupsTree.h>
 
-class YQPkgRpmGroupTag;
+class YQPkgRpmGroupItem;
 
 
 /**
- * RPM group tags filter view: Display the RPM group tags tree and emit
- * signals if any group tag is selected so a package list can be filled or
- * updated.
+ * RPM groups filter view: Tree widget for the RPM groups.
  **/
-class YQPkgRpmGroupTagsFilterView : public QTreeWidget
+class YQPkgRpmGroupsFilterView: public QTreeWidget
 {
     Q_OBJECT
 
@@ -38,17 +36,17 @@ public:
     /**
      * Constructor
      **/
-    YQPkgRpmGroupTagsFilterView( QWidget * parent );
+    YQPkgRpmGroupsFilterView( QWidget * parent );
 
     /**
      * Destructor
      **/
-    virtual ~YQPkgRpmGroupTagsFilterView();
+    virtual ~YQPkgRpmGroupsFilterView();
 
     /**
      * Returns the currently selected item or 0 if there is none.
      **/
-    YQPkgRpmGroupTag * selection() const;
+    YQPkgRpmGroupItem * selection() const;
 
     /**
      * Check if 'pkg' matches the selected RPM group.
@@ -112,7 +110,7 @@ signals:
      * Emitted during filtering for each pkg that matches the filter.
      **/
     void filterMatch( ZyppSel selectable,
-                      ZyppPkg pkg );
+                      ZyppPkg pkg         );
 
     /**
      * Emitted when filtering is finished.
@@ -151,12 +149,12 @@ protected:
     static void fillRpmGroupsTree();
 
     /**
-     * Recursively clone the RPM group tag tree for the QListView widget:
+     * Recursively clone the RPM groups tree for the tree widget:
      * Make a deep copy of the tree starting at 'parentRpmGroup' and
      * 'parentClone'.
      **/
-    void cloneTree( YStringTreeItem *   parentRpmGroup,
-                    YQPkgRpmGroupTag *  parentClone = 0 );
+    void cloneTree( YStringTreeItem *    parentRpmGroup,
+                    YQPkgRpmGroupItem *  parentClone = 0 );
 
     //
     // Data members
@@ -171,41 +169,44 @@ protected:
 
 
 
-class YQPkgRpmGroupTag: public QTreeWidgetItem
+/**
+ * Item class for the RPM groups tree widget
+ **/
+class YQPkgRpmGroupItem: public QTreeWidgetItem
 {
 public:
 
     /**
-     * Constructor for toplevel RPM group tags
+     * Constructor for a toplevel RPM group
      **/
-    YQPkgRpmGroupTag( YQPkgRpmGroupTagsFilterView * parentFilterView,
-                      YStringTreeItem *             rpmGroup         );
+    YQPkgRpmGroupItem( YQPkgRpmGroupsFilterView * parentFilterView,
+                       YStringTreeItem *          rpmGroup          );
 
     /**
-     * Constructor for RPM group tags that have a parent
+     * Constructor for a non-toplevel RPM group
      **/
-    YQPkgRpmGroupTag( YQPkgRpmGroupTagsFilterView * parentFilterView,
-                      YQPkgRpmGroupTag *            parentGroupTag,
-                      YStringTreeItem *             rpmGroup        );
+    YQPkgRpmGroupItem( YQPkgRpmGroupsFilterView * parentFilterView,
+                       YQPkgRpmGroupItem *        parenItem,
+                       YStringTreeItem *          rpmGroup          );
 
     /**
-     * Constructor for toplevel RPM group tags via STL string
+     * Constructor for a toplevel RPM group via STL string
      * (for special cases like "zzz All")
      **/
-    YQPkgRpmGroupTag( YQPkgRpmGroupTagsFilterView * parentFilterView,
-                      const QString &               rpmGroupName,
-                      YStringTreeItem *             rpmGroup        );
+    YQPkgRpmGroupItem( YQPkgRpmGroupsFilterView * parentFilterView,
+                       const QString &            rpmGroupName,
+                       YStringTreeItem *          rpmGroup          );
 
     /**
      * Destructor
      **/
-    virtual ~YQPkgRpmGroupTag();
+    virtual ~YQPkgRpmGroupItem();
 
 
     /**
      * Returns the parent filter view
      **/
-    YQPkgRpmGroupTagsFilterView * filterView() const { return _filterView; }
+    YQPkgRpmGroupsFilterView * filterView() const { return _filterView; }
 
     /**
      * Returns the original tree item
@@ -219,10 +220,10 @@ private:
 
     // Data members
 
-    YQPkgRpmGroupTagsFilterView * _filterView;
-    YStringTreeItem *             _rpmGroup;
-    int                           _depth;
+    YQPkgRpmGroupsFilterView * _filterView;
+    YStringTreeItem *          _rpmGroup;
+    int                        _depth;
 };
 
 
-#endif // ifndef YQPkgRpmGroupTagsFilterView_h
+#endif // ifndef YQPkgRpmGroupsFilterView_h

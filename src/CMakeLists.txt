@@ -71,7 +71,7 @@ set( SOURCES
   YQPkgProductList.cc
   YQPkgRepoFilterView.cc
   YQPkgRepoList.cc
-  YQPkgRpmGroupTagsFilterView.cc
+  YQPkgRpmGroupsFilterView.cc
   YQPkgSearchFilterView.cc
   YQPkgSecondaryFilterView.cc
   YQPkgServiceFilterView.cc
@@ -93,6 +93,18 @@ set( SOURCES
   QY2LayoutUtils.cc
   QY2ListView.cc
   )
+
+# Needed only for the RPM groups view:
+#
+#   YQPkgRpmGroupsFilterView.h
+#   YQPkgRpmGroupsFilterView.cc
+#   YRpmGroupsTree.h
+#   YRpmGroupsTree.cc
+#   YStringTree.h
+#   YStringTree.cc
+#   TreeItem.h
+#   YTransText.h
+
 
 # Qt resource files
 set( QRC_FILES

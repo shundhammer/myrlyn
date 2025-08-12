@@ -27,7 +27,7 @@ typedef SortedTreeItem<YTransText>  YStringTreeItem;
 
 /**
  * Abstract base class for filter views with hierarchical filter
- * criteria - e.g., RPM group tags, MIME types.
+ * criteria - e.g. RPM groups.
  **/
 class YStringTree
 {

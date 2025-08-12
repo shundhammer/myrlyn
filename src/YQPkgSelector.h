@@ -40,7 +40,7 @@ class YQPkgClassificationFilterView;
 class YQPkgPatchFilterView;
 class YQPkgPatternList;
 class YQPkgRepoFilterView;
-class YQPkgRpmGroupTagsFilterView;
+class YQPkgRpmGroupsFilterView;
 class YQPkgSearchFilterView;
 class YQPkgServiceFilterView;
 class YQPkgStatusFilterView;
@@ -309,7 +309,7 @@ protected:
     void createPatchFilterView( bool force = false );
     void createUpdatesFilterView();
     void createRepoFilterView();
-    void createRpmGroupTagsFilterView();
+    void createRpmGroupsFilterView();
     void createServiceFilterView();
     void createPatternsFilterView();
     void createPkgClassificationFilterView();
@@ -429,7 +429,7 @@ protected:
     YQPkgPatchFilterView *              _patchFilterView;
     YQPkgUpdatesFilterView *            _updatesFilterView;
     YQPkgRepoFilterView *               _repoFilterView;
-    YQPkgRpmGroupTagsFilterView *       _rpmGroupTagsFilterView;
+    YQPkgRpmGroupsFilterView *          _rpmGroupsFilterView;
     YQPkgServiceFilterView *            _serviceFilterView;
     YQPkgClassificationFilterView *     _pkgClassificationFilterView;
     YQPkgPatternList *                  _patternList;

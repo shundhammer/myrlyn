@@ -22,7 +22,7 @@
 
 
 /**
- * Efficient storage for RPM group tags
+ * Efficient storage for RPM groups
  **/
 class YRpmGroupsTree: public YStringTree
 {
@@ -42,19 +42,20 @@ public:
      * Insert an RPM group into this tree if not already present.
      * Splits the RPM group string ("abc/def/ghi") and creates tree items for
      * each level as required.
-     * Returns the tree entry for this RPM group.
+     *
+     * This returns the tree entry for this RPM group.
      **/
     YStringTreeItem * addRpmGroup( const std::string & rpmGroup )
         { return addBranch( rpmGroup, '/' ); }
 
     /**
-     * Returns the complete (untranslated) RPM group tag string for 'node'.
+     * Return the complete (untranslated) RPM group string for 'node'.
      **/
     std::string rpmGroup( const YStringTreeItem * node )
         { return origPath( node, '/', false ); }
 
     /**
-     * Returns the complete translated RPM group tag string for 'node'.
+     * Return the complete translated RPM group string for 'node'.
      **/
     std::string translatedRpmGroup( const YStringTreeItem * node )
         { return translatedPath( node, '/', false ); }
