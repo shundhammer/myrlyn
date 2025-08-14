@@ -89,6 +89,11 @@ public:
      **/
     YQPkgObjList::ExcludeRule * excludeRuleDebugInfoPkgs() const { return _excludeDebugInfoPkgs; }
 
+    /**
+     * Flag: Use the RPM groups filter view?
+     **/
+    bool useRpmGroups() const { return _useRpmGroups; }
+
 
 
 public slots:
@@ -205,6 +210,13 @@ public slots:
 
     /**
      * Read the settings from the config file
+     * (before the widgets are created)
+     */
+    void readSettingsEarly();
+
+    /**
+     * Read the settings from the config file
+     * (after the widgets are created)
      */
     void readSettings();
 
@@ -458,6 +470,8 @@ protected:
 
     YQPkgObjList::ExcludeRule *         _excludeDevelPkgs;
     YQPkgObjList::ExcludeRule *         _excludeDebugInfoPkgs;
+
+    bool                                _useRpmGroups;
 
     static YQPkgSelector *              _instance;
 };

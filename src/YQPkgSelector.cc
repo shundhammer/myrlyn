@@ -87,6 +87,12 @@
 #define DEPENDENCY_FEEDBACK_IF_OK              1
 #define GLOBAL_UPDATE_CONFIRMATION_THRESHOLD  20
 
+// Users can override this in their ~/.config/openSUSE/Myrlyn.conf
+// (/root/.config/openSUSE/Myrlyn.conf for root, of course)
+#ifndef USE_RPM_GROUPS
+#  define USE_RPM_GROUPS  1
+#endif
+
 using std::max;
 using std::string;
 using std::map;
@@ -125,6 +131,7 @@ YQPkgSelector::YQPkgSelector( QWidget * parent )
     , _allowVendorChangeAction(0)
     , _excludeDevelPkgs(0)
     , _excludeDebugInfoPkgs(0)
+    , _useRpmGroups( USE_RPM_GROUPS )
 {
     _instance = this;
 
@@ -133,6 +140,7 @@ YQPkgSelector::YQPkgSelector( QWidget * parent )
 
     logDebug() << "Creating YQPkgSelector..." << endl;
 
+    readSettingsEarly();
     basicLayout();
     addMenus();         // Only after all widgets are created!
     readSettings();     // Only after menus are created!
@@ -272,7 +280,10 @@ void YQPkgSelector::createFilterViews()
     // the order of tabs
 
     createSearchFilterView();         // Package search
-    createRpmGroupsFilterView();      // RPM Groups
+
+    if ( _useRpmGroups )
+        createRpmGroupsFilterView();  // RPM Groups
+
     createPatchFilterView();          // Patches - if patches available or F2
     createUpdatesFilterView();        // Package update
     createRepoFilterView();
@@ -1657,6 +1668,20 @@ YQPkgSelector::anyRetractedPkgInstalled()
 
 
 void
+YQPkgSelector::readSettingsEarly()
+{
+    // Before any widgets are created!
+
+    QSettings settings;
+    settings.beginGroup( "PackageSelector" );
+
+    _useRpmGroups = settings.value( "useRpmGroups", (bool) USE_RPM_GROUPS ).toBool();
+
+    settings.endGroup();
+}
+
+
+void
 YQPkgSelector::readSettings()
 {
     QSettings settings;
@@ -1682,6 +1707,7 @@ YQPkgSelector::writeSettings()
 
     settings.setValue( "showDevelPackages", _showDevelAction->isChecked() );
     settings.setValue( "showDebugPackages", _showDebugAction->isChecked() );
+    settings.setValue( "useRpmGroups",      _useRpmGroups                 );
 
     settings.endGroup();
 
