@@ -153,6 +153,14 @@ qt_add_executable( ${TARGETBIN}
 # Make the version from ../../VERSION.cmake available as a #define
 target_compile_definitions( ${TARGETBIN} PUBLIC VERSION="${VERSION}" )
 
+if ( USE_RPM_GROUPS )
+  message( STATUS "Using RPM groups" )
+  target_compile_definitions( ${TARGETBIN} PUBLIC USE_RPM_GROUPS=1 )
+else()
+  message( STATUS "Not Using RPM groups" )
+  target_compile_definitions( ${TARGETBIN} PUBLIC USE_RPM_GROUPS=0 )
+endif()
+
 
 #
 # For debugging

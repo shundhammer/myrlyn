@@ -31,6 +31,7 @@ include( CheckIncludeFileCXX )  # check_include_file_cxx
 option( BUILD_SRC         "Build in src/ subdirectory"                on  )
 option( BUILD_AUX         "Build in aux/ subdirectory"                on  )
 option( BUILD_TEST        "Build in test/ subdirectory"               off )
+option( USE_RPM_GROUPS    "Use RPM groups by default"                 on  )
 option( WERROR            "Treat all compiler warnings as errors"     on  )
 
 
@@ -68,7 +69,7 @@ if ( WERROR )
   # add_compile_options( "-Werror" )
 endif()
 
-# libzypp and Qt 6 require C++17
+# libzypp and Qt 6 require C++17 or later
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 
