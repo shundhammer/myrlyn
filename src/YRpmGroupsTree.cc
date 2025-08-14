@@ -18,7 +18,7 @@
 
 
 YRpmGroupsTree::YRpmGroupsTree()
-    : YStringTree()
+    : YStringTree( RPM_GROUPS_TEXTDOMAIN )
 {
 }
 

@@ -38,14 +38,6 @@ public:
         _translation( translation )
         {}
 
-    /**
-     * Constructor that automatically translates the original message.
-     **/
-    YTransText( const std::string & orig ):
-        _orig( orig )
-    {
-        _translation = dgettext( "myrlyn", _orig.c_str() );
-    }
 
     /**
      * Copy constructor.

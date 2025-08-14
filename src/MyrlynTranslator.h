@@ -24,7 +24,7 @@
  * messages.
  *
  * This uses Qt mechanisms like Qt::tr(), but it maps them to GNU gettext calls
- * like dcgettext(). Since it uses common Qt mechanisms, it also works for Qt
+ * like dgettext(). Since it uses common Qt mechanisms, it also works for Qt
  * .ui files generated with Qt Designer.
  **/
 class MyrlynTranslator: public QTranslator

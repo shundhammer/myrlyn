@@ -20,6 +20,8 @@
 
 #include "YStringTree.h"
 
+#define RPM_GROUPS_TEXTDOMAIN "rpm-groups"
+
 
 /**
  * Efficient storage for RPM groups

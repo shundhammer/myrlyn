@@ -34,15 +34,20 @@ class YStringTree
 public:
 
     /**
-     * Constructor.
+     * Constructor: Create a a tree with the specified textdomain.
      **/
 
-    YStringTree();
+    YStringTree( const std::string & textdomain );
 
     /**
      * Destructor.
      **/
     virtual ~YStringTree();
+
+    /**
+     * Return the textdomain used for translating new items.
+     **/
+    std::string textdomain() const { return _textdomain; }
 
     /**
      * Add a unique new branch with text content 'content' to the tree,
@@ -149,6 +154,7 @@ protected:
 
     // Data members
 
+    std::string       _textdomain;
     YStringTreeItem * _root;
 };
 

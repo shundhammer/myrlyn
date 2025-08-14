@@ -15,10 +15,9 @@
 
 
 #include "Logger.h"
-
 #include "YQi18n.h"
 #include "utf8.h"
-
+#include "YRpmGroupsTree.h"  // RPM_GROUPS_TEXTDOMAIN
 #include "YQPkgTechnicalDetailsView.h"
 
 
@@ -113,7 +112,7 @@ YQPkgTechnicalDetailsView::formatRpmGroup( ZyppPkg pkg ) const
 
     for ( QString group: groups )
     {
-        translated.append( QString::fromUtf8( dgettext( "myrlyn", group.toUtf8() ) ) );
+        translated.append( QString::fromUtf8( dgettext( RPM_GROUPS_TEXTDOMAIN, group.toUtf8() ) ) );
     }
 
     return translated.join( "/" );

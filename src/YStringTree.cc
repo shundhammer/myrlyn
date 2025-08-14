@@ -20,10 +20,11 @@
 using std::string;
 
 
-YStringTree::YStringTree()
-    : _root( 0 )
+YStringTree::YStringTree( const string & textdomain )
+    : _textdomain( textdomain )
+    , _root( 0 )
 {
-    _root = new YStringTreeItem( YTransText( "<root>" ) );
+    _root = new YStringTreeItem( YTransText( "<root>", "<root>" ) );
 }
 
 
@@ -107,9 +108,7 @@ YStringTree::addBranch( const string &    content,
 string
 YStringTree::translate( const string & orig )
 {
-    string trans( dgettext( "myrlyn", orig.c_str() ) );
-
-    return trans;
+    return dgettext( _textdomain.c_str(), orig.c_str() );
 }
 
 
