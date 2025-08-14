@@ -1707,7 +1707,14 @@ YQPkgSelector::writeSettings()
 
     settings.setValue( "showDevelPackages", _showDevelAction->isChecked() );
     settings.setValue( "showDebugPackages", _showDebugAction->isChecked() );
+
+#if 0
+    // Disabled writing this default value until there is an agreement if
+    // openSUSE is negatively affected by the RPM groups filter view; once the
+    // users' config files contain this value, it's almost impossible to change
+    // the default.
     settings.setValue( "useRpmGroups",      _useRpmGroups                 );
+#endif
 
     settings.endGroup();
 
