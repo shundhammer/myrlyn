@@ -187,7 +187,6 @@ void YQPkgSelector::showFallbackPages()
         if ( _patchFilterView   ) _filters->showPage( _patchFilterView   );
         if ( _updatesFilterView ) _filters->showPage( _updatesFilterView );
         if ( _repoFilterView    ) _filters->showPage( _repoFilterView    );
-        if ( _serviceFilterView ) _filters->showPage( _serviceFilterView );
         if ( _patternList       ) _filters->showPage( _patternList       );
         if ( _statusFilterView  ) _filters->showPage( _statusFilterView  );
     }
