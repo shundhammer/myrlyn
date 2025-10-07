@@ -2,6 +2,9 @@
 Type=Application
 Name=Myrlyn (read‑only)
 Exec=/usr/bin/myrlyn
+# Uncomment this and comment out the above line if you need HiDPI scaling:
+# Exec=sh -c "QT_SCALE_FACTOR=2 /usr/bin/myrlyn"
+
 Icon=Myrlyn.png
 GenericName=Myrlyn Graphical Software Package Manager (read‑only)
 Comment=Read-only mode for non-privileged users
