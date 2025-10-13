@@ -77,7 +77,8 @@ CMAKE_OPTS="-DCMAKE_BUILD_TYPE=RELEASE"
 %endif
 
 %cmake \
- $CMAKE_OPTS
+  $CMAKE_OPTS \
+  -DUSE_RPM_GROUPS=off
 %cmake_build
 
 %install
