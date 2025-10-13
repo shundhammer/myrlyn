@@ -254,17 +254,11 @@ void CommunityRepos::openSUSE_Leap_15x_Repos()
 
 void CommunityRepos::openSUSE_Leap_16x_Repos()
 {
-#if 0
     _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/" )
            << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/Essentials/" )
            << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
            << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" )
            << nvidiaRepo           ( "https://download.nvidia.com/opensuse/leap/$releasever/" );
-#else
-    _repos << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
-           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" )
-           << nvidiaRepo           ( "https://download.nvidia.com/opensuse/leap/$releasever/" );
-#endif
 }
 
 
@@ -279,13 +273,9 @@ void CommunityRepos::SLE_15_SPx_Repos()
 
 void CommunityRepos::SLES_16_Repos()
 {
-#if 0
-    _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLES_16/" )
-           << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLES_16/Essentials/" )
+    _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLE_16/" )
+           << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLE_16/Essentials/" )
            << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
-           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" );
-#else
-    _repos << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
-           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" );
-#endif
+           << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" )
+           << nvidiaRepo           ( "https://download.nvidia.com/suse/sle16/" );
 }
