@@ -213,6 +213,10 @@ Official distro packages:
 - [myrlyn for openSUSE Tumbleweed](https://software.opensuse.org/download/package?package=myrlyn&project=openSUSE%3AFactory)
 - [myrlyn for openSUSE Slowroll](https://software.opensuse.org//download.html?project=openSUSE%3ASlowroll&package=myrlyn)
 
+From my OBS home project:
+
+- [myrlyn for openSUSE Leap 15.6](https://download.opensuse.org/repositories/home:/shundhammer:/myrlyn-stable/openSUSE_Leap_15.6_Update_standard/x86_64/)
+
 
 The latest version from Git:
 
