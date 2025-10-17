@@ -5,8 +5,7 @@ _(Formerly known as YQPkg)_
 Myrlyn is a graphical software package and repositories manager.
 
 You can use it to install, update or remove individual or multiple software
-packages, and to install or remove software patterns (groups of packages) or
-patches.
+packages or software patterns (groups of packages), and to manage software repositories.
 
 It uses _libzypp_ as its backend and Qt 6 as its GUI toolkit.
 
@@ -24,7 +23,7 @@ GPL V2; see file LICENSE.
 
 ## Development Status
 
-Not 100% complete yet, but well usable and reliable.
+Production ready. Suitable for everyday use.
 
 
 ## Screenshots
@@ -67,7 +66,7 @@ Not 100% complete yet, but well usable and reliable.
 
 - Install, update and remove individual or multiple packages
 - Pick a specific package version for installation or update
-- Set a package to "taboo" (never install) or "protected" (keep the current version)
+- Lock or unlock  a package: Set it to "taboo" (never install) or "protected" (keep the current version)
 - Install and remove patterns
 - Install and remove patches
 - Browse and select packages by repository
@@ -129,11 +128,11 @@ Not 100% complete yet, but well usable and reliable.
 
   You can do everything except actually apply any changes.
 
-- During the commit phase (where packages are actually installed, updated or
-  removed), in addition to the large progress bar, there is now also a details
-  view to see which packages are waiting, downloaded, being processed, or
-  finished. If you don't like that, disable the details with just one mouse
-  click to get only the progress bar.
+- Progress report: During the commit phase (where packages are actually
+  installed, updated or removed), in addition to the large progress bar, there
+  is now also a details view to see which packages are waiting, downloaded,
+  being processed, or finished. If you don't like that, disable the details
+  with just one mouse click to get only the progress bar.
 
 - You can decide during the commit phase whether or not you want to see a
   summary page as the next step. That summary page exits the program after a
@@ -146,7 +145,7 @@ Not 100% complete yet, but well usable and reliable.
   cycle.
 
 
-### Fixes
+### Fixes / Improvements Compared to YaST
 
 - Improved performance during startup as well as during package selection.
 
@@ -192,12 +191,14 @@ Scroll all the way down for the latest news.
 
 ## Stability
 
-It's very stable and usable now.
+Myrlyn is now feature-complete, stable and well tested.
 
-Of course, since it's still in development, the occasional bug may appear, but
-it should now only be minor ones. See also the
+Of course, like in all non-trivial software, the occasional bug may appear.
+See also the
 [open issues](https://github.com/shundhammer/myrlyn/issues)
 in the GitHub issue tracker.
+
+Many community users and myself have been using it since early 2025.
 
 I have been using it exclusively since Christmas 2024 for all my package
 operations, including keeping my Slowroll laptop, my Leap 15.6 desktop PC and
