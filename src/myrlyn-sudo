@@ -14,6 +14,9 @@ ENV_KEEP="DISPLAY WAYLAND_DISPLAY XAUTHORITY XDG_RUNTIME_DIR \
 QT_QPA_PLATFORMTHEME QT_ENABLE_HIGHDPI_SCALING QT_SCALE_FACTOR \
 LANG LC_MESSAGES LC_COLLATE LC_NUMERIC LC_TIME LC_ALL LANGUAGE"
 
+# Run0 compatibility
+# Requires only the names for passthrough. Prefix with --setenv= 
+RUN0_ENV=$(echo $ENV_KEEP | sed 's/\</--setenv=/g')
 
 # Build an environment for use with /usr/bin/env from the above variables:
 # DISPLAY=:0.0 LANG=de_DE.utf8 ...
@@ -37,5 +40,8 @@ ASKPASS=/usr/bin/myrlyn-askpass
 #
 # The main command that is called here is /usr/bin/env which builds
 # the environment and then calls myrlyn with $MYRLYN_ARGS.
+#
+# Run0 fallback. Needs extra vars: XDG_SEAT and HOME.
 
-SUDO_ASKPASS=$ASKPASS sudo -A /usr/bin/env $ENV /usr/bin/myrlyn $MYRLYN_ARGS
+SUDO_ASKPASS=$ASKPASS sudo -A /usr/bin/env $ENV /usr/bin/myrlyn $MYRLYN_ARGS || \
+SUDO_ASKPASS=$ASKPASS run0 --setenv=XDG_SEAT --setenv=HOME $RUN0_ENV /usr/bin/myrlyn $MYRLYN_ARGS
