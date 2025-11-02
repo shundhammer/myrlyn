@@ -1,7 +1,10 @@
 [Desktop Entry]
 Type=Application
 Name=Myrlyn (run0)
-Exec=xdg-su -c /usr/bin/myrlyn
+Exec=myrlyn-run0
+# Uncomment this and comment out the above line if you need HiDPI scaling:
+# Exec=sh -c "QT_SCALE_FACTOR=2 myrlyn-run0"
+
 Icon=Myrlyn.png
 GenericName=Myrlyn Graphical Software Package Manager
 Comment=Full root access via systemd run0
