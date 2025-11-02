@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Myrlyn (run0)
+Exec=xdg-su -c /usr/bin/myrlyn
+Icon=Myrlyn.png
+GenericName=Myrlyn Graphical Software Package Manager
+Comment=Full root access via systemd run0
+Terminal=false
+MimeType=
+Categories=System;Settings
+Keywords=software;package panagement;gui

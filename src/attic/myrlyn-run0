@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# Wrapper around systemd 'run0' for Myrlyn that can open a graphical password
+# prompt and that can keep the connection to the display (X11 or Wayland) alive
+# as well as some well-defined environment variables.
+#
+# EXPERIMENTAL - use at your own risk!
+#
+# Inspired by pull request #122 by @zeusgoose
+#
+# Author:  Stefan Hundhammer <Stefan.Hundhammer@gmx.de>
+# License: GPL V2
+
+MYRLYN_ARGS=$*
+
+# Environment variables to keep for the 'run0' call,
+# taken from 'myrlyn-sudo'
+ENV_KEEP="DISPLAY WAYLAND_DISPLAY XAUTHORITY XDG_RUNTIME_DIR \
+QT_QPA_PLATFORMTHEME QT_ENABLE_HIGHDPI_SCALING QT_SCALE_FACTOR \
+LANG LC_MESSAGES LC_COLLATE LC_NUMERIC LC_TIME LC_ALL LANGUAGE"
+
+# Additional environment variables not used in 'myrlyn-sudo'
+ENV_KEEP="$ENV_KEEP XDG_SEAT"
+
+# Build the environment args for run0 from the above variables:
+# --setenv=DISPLAY --setenv=LANG ...
+
+ENV_ARGS=""
+
+for VAR in $ENV_KEEP; do
+    # Uncomment for debugging
+    # echo "$VAR=${!VAR}"
+    ENV_ARGS="$ENV_ARGS --setenv=$VAR"
+done
+
+# Prevent changing ownership to root of the user's
+# ~/.config/openSUSE/Myrlyn.conf
+ENV_ARGS="$ENV_ARGS --setenv=HOME=`realpath ~root`"
+
+# Uncomment for debugging
+# echo $ENV_ARGS | tr ' ' '\n'
+
+
+RUN0_ARGS="--unit=Myrlyn"
+
+run0 $RUN0_ARGS $ENV_ARGS /usr/bin/myrlyn $MYRLYN_ARGS
