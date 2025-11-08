@@ -103,6 +103,7 @@ void PkgCommitPage::commit()
     populateLists();
     initProgressData();
     _startedInstallingPkg = false;
+    _ui->totalProgressBar->show();
     _ui->totalProgressBar->setValue( 0 );
     PkgCommitSignalForwarder::instance()->reset();
 
@@ -974,6 +975,7 @@ void PkgCommitPage::pkgActionEnd( ZyppRes       zyppRes,
     {
         QString msg = _( "[Post-transaction scripts]" );
         _ui->doingList->addItem( new QListWidgetItem( msg ) );
+        _ui->totalProgressBar->hide();
     }
 
 
