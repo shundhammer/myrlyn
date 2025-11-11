@@ -256,8 +256,15 @@ void CommunityRepos::openSUSE_Leap_16x_Repos()
 {
     _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/" )
            << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/Essentials/" )
+
+#if 0
+        // not available for Leap 16.x (?)
            << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
+
+        // provided by the Leap 16.x RIS (repo index service)
+        // https://github.com/openSUSE/openSUSE-repos/blob/main/opensuse-leap16-repoindex.xml
            << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" )
+#endif
            << nvidiaRepo           ( "https://download.nvidia.com/opensuse/leap/$releasever/" );
 }
 
@@ -275,7 +282,14 @@ void CommunityRepos::SLES_16_Repos()
 {
     _repos << packmanRepo          ( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLE_16/" )
            << packmanEssentialsRepo( "https://ftp.gwdg.de/pub/linux/misc/packman/suse/SLE_16/Essentials/" )
+
+#if 0
+        // not available for 16.x (?)
            << libdvdcssRepo        ( "https://opensuse-guide.org/repo/openSUSE_Leap_$releasever/" )
+#endif
+        // not sure if this one is needed for SLES-16 or if it's also provided by the RIS
            << openH264Repo         ( "http://codecs.opensuse.org/openh264/openSUSE_Leap_16/" )
+
+        // this may be redundant if the workstation add-on is installed
            << nvidiaRepo           ( "https://download.nvidia.com/suse/sle16/" );
 }
