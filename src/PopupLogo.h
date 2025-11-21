@@ -23,6 +23,7 @@
 class LogoPopup;
 class QMouseEvent;
 class QKeyEvent;
+class QShowEvent;
 
 
 /**
@@ -119,6 +120,13 @@ protected:
      * Reimplemented from QWidget.
      **/
     void keyPressEvent( QKeyEvent * event ) override;
+
+    /**
+     * Process a show event.
+     *
+     * Reimplemented from QLabel / QWidget.
+     **/
+    virtual void showEvent( QShowEvent * event ) override;
 };
 
 

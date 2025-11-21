@@ -106,3 +106,19 @@ void LogoPopup::keyPressEvent( QKeyEvent * event )
         hide();
     }
 }
+
+
+void LogoPopup::showEvent( QShowEvent * event )
+{
+    Q_UNUSED( event );
+
+    QWidget * parent = parentWidget() ? parentWidget() : MainWindow::instance();
+
+    if ( parent )
+    {
+        int x = ( parentWidget()->width()  - width()  ) / 2;
+        int y = ( parentWidget()->height() - height() ) / 2;
+
+        move( parentWidget()->x() + x, parentWidget()->y() + y );
+    }
+}
