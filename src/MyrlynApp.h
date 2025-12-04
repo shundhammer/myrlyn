@@ -241,6 +241,11 @@ public slots:
 
 protected:
 
+    /**
+     * Log the Qt-related envionment variables
+     **/
+    void logQtEnv() const;
+
     // Create the various objects (and set up Qt connections if necessary)
     // if they don't exist yet.
 

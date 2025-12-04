@@ -17,9 +17,11 @@
 #include <unistd.h>     // getuid()
 
 #include <QApplication>
+#include <QCloseEvent>
 #include <QLabel>
 #include <QMessageBox>
-#include <QCloseEvent>
+#include <QProcess>
+#include <QProcessEnvironment>
 
 #include "Exception.h"
 #include "Logger.h"
@@ -66,6 +68,7 @@ MyrlynApp::MyrlynApp( MyrlynAppOptions optFlags )
     }
 
     logDebug() << "_optFlags: 0x" << std::hex << _optFlags << std::dec << endl;
+    logQtEnv();
 
     MyrlynTranslator * translator = new MyrlynTranslator( this );
     qApp->installTranslator( translator );
@@ -106,6 +109,20 @@ MyrlynApp::~MyrlynApp()
     _instance = 0;
 
     logDebug() << "Destroying MyrlynApp done" << endl;
+}
+
+
+void MyrlynApp::logQtEnv() const
+{
+    QStringList env( QProcess::systemEnvironment() );
+
+    for ( const QString & envVar: env )
+    {
+        if ( envVar.startsWith( "QT" ) )
+        {
+            logDebug() << envVar << endl;
+        }
+    }
 }
 
 
