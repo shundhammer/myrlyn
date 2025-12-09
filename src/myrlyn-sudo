@@ -27,7 +27,6 @@ LANG LANGUAGE LC_MESSAGES LC_COLLATE LC_NUMERIC LC_TIME LC_ALL"
 #  QT_SCALE_FACTOR=1
 
 
-
 # Build an environment for use with /usr/bin/env from the above variables:
 # DISPLAY=:0.0 LANG=de_DE.utf8 ...
 
@@ -37,7 +36,7 @@ for VAR in $ENV_KEEP; do
     VALUE=${!VAR}
     if [ -n "$VALUE" ]; then
         # Uncomment for debugging
-        echo "$VAR=$VALUE"
+        # echo "$VAR=$VALUE"
         ENV="$ENV $VAR=$VALUE"
     fi
 done
