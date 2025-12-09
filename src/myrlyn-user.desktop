@@ -2,9 +2,9 @@
 Type=Application
 Name=Myrlyn (read‑only)
 Exec=/usr/bin/myrlyn
-# Uncomment one of the lines below instead to change HiDPI scaling:
-# Exec=sh -c "QT_SCALE_FACTOR=2 /usr/bin/myrlyn"
-# Exed=sh -c "QT_ENABLE_HIGHDPI_SCALING=0 /usr/bin/myrlyn"
+# Uncomment one of the lines below instead to change theming and/or high-DPI scaling:
+# Exec=sh -c "QT_QPA_PLATFORMTHEME=qt6ct QT_SCALE_FACTOR=1 QT_ENABLE_HIGHDPI_SCALING=0 /usr/bin/myrlyn"
+# Exec=sh -c "QT_QPA_PLATFORMTHEME=qt6ct /usr/bin/myrlyn"
 
 Icon=Myrlyn.png
 GenericName=Myrlyn Graphical Software Package Manager (read‑only)

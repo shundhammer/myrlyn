@@ -2,9 +2,11 @@
 Type=Application
 Name=Myrlyn
 Exec=myrlyn-sudo
-# Uncomment one of the lines below instead to change HiDPI scaling:
-# Exec=sh -c "QT_SCALE_FACTOR=2 myrlyn-sudo"
-# Exec=sh -c "QT_ENABLE_HIGHDPI_SCALING=0 myrlyn-sudo"
+# You can set variables in ~/.config/openSUSE/myrlyn-sudo.conf like this:
+#
+#  QT_QPA_PLATFORMTHEME=qt6ct
+#  QT_ENABLE_HIGHDPI_SCALING=0
+#  QT_SCALE_FACTOR=1
 
 Icon=Myrlyn.png
 GenericName=Myrlyn Graphical Software Package Manager (using sudo)
