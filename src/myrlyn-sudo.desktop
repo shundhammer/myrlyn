@@ -4,7 +4,7 @@ Name=Myrlyn
 Exec=myrlyn-sudo
 # Uncomment one of the lines below instead to change HiDPI scaling:
 # Exec=sh -c "QT_SCALE_FACTOR=2 myrlyn-sudo"
-# Exed=sh -c "QT_ENABLE_HIGHDPI_SCALING=0 myrlyn-sudo"
+# Exec=sh -c "QT_ENABLE_HIGHDPI_SCALING=0 myrlyn-sudo"
 
 Icon=Myrlyn.png
 GenericName=Myrlyn Graphical Software Package Manager (using sudo)
