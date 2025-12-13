@@ -74,6 +74,8 @@ YQPkgUpdatesFilterView::connectWidgets()
 void YQPkgUpdatesFilterView::doPackageUpdate()
 {
     YQPkgConflictDialog::instance()->doPackageUpdate();
+    YQPkgSelector::instance()->showResolverStatus();
+
     markLeftovers();
 }
 
@@ -81,12 +83,14 @@ void YQPkgUpdatesFilterView::doPackageUpdate()
 void YQPkgUpdatesFilterView::doDistUpgrade()
 {
     YQPkgConflictDialog::instance()->doDistUpgrade();
+    YQPkgSelector::instance()->showResolverStatus();
     markLeftovers();
 }
 
 
 void YQPkgUpdatesFilterView::refreshList()
 {
+    YQPkgSelector::instance()->showResolverStatus();
     filter();
 }
 

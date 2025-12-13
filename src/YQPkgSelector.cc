@@ -119,6 +119,7 @@ YQPkgSelector::YQPkgSelector( QWidget * parent )
     , _notificationsArea(0)
     , _switchToRepoLabel(0)
     , _cancelSwitchingToRepoLabel(0)
+    , _resolverStatusLabel(0)
     , _menuBar(0)
     , _pkgMenu(0)
     , _patchMenu(0)
@@ -267,6 +268,7 @@ void YQPkgSelector::basicLayout()
     _filters->showPage( 0 );
 
     layoutRightPane( _filters->rightPane() );
+    showResolverStatus();
 }
 
 
@@ -620,37 +622,42 @@ YQPkgSelector::layoutDetailsViews( QWidget * parent )
 void
 YQPkgSelector::layoutButtons( QWidget *parent )
 {
-    QWidget * button_box = new QWidget( parent );
-    CHECK_NEW( button_box );
-    parent->layout()->addWidget( button_box );
+    QWidget * buttonBox = new QWidget( parent );
+    CHECK_NEW( buttonBox );
+    parent->layout()->addWidget( buttonBox );
 
-    QHBoxLayout * layout = new QHBoxLayout( button_box );
+    QHBoxLayout * layout = new QHBoxLayout( buttonBox );
     CHECK_NEW( layout );
 
-    button_box->setLayout( layout );
+    buttonBox->setLayout( layout );
     layout->setContentsMargins( 2, 2, 2, 2 ); // left / right / top / bottom
+
+    _resolverStatusLabel = new QLabel( _( "Resolver: ??" ) );
+    CHECK_NEW( _resolverStatusLabel );
+    layout->addWidget( _resolverStatusLabel );
+
     layout->addStretch();
 
-    QPushButton * cancel_button = new QPushButton( _( "&Cancel" ), button_box );
-    CHECK_NEW( cancel_button );
-    layout->addWidget(cancel_button);
+    QPushButton * cancelButton = new QPushButton( _( "&Cancel" ), buttonBox );
+    CHECK_NEW( cancelButton );
+    layout->addWidget( cancelButton );
 
-    cancel_button->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed ) ); // hor/vert
+    cancelButton->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed ) ); // hor/vert
 
-    connect( cancel_button, SIGNAL( clicked() ),
-             this,          SLOT  ( reject()   ) );
+    connect( cancelButton, SIGNAL( clicked() ),
+             this,         SLOT  ( reject()   ) );
 
 
-    QPushButton * accept_button = new QPushButton( _( "&Accept" ), button_box );
-    CHECK_NEW( accept_button );
-    layout->addWidget(accept_button);
-    accept_button->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed ) ); // hor/vert
-    accept_button->setEnabled( ! MyrlynApp::readOnlyMode() );
+    QPushButton * acceptButton = new QPushButton( _( "&Accept" ), buttonBox );
+    CHECK_NEW( acceptButton );
+    layout->addWidget( acceptButton );
+    acceptButton->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed ) ); // hor/vert
+    acceptButton->setEnabled( ! MyrlynApp::readOnlyMode() );
 
-    connect( accept_button, SIGNAL( clicked() ),
-             this,          SLOT  ( accept()   ) );
+    connect( acceptButton, SIGNAL( clicked() ),
+             this,         SLOT  ( accept()   ) );
 
-    button_box->setFixedHeight( button_box->sizeHint().height() );
+    buttonBox->setFixedHeight( buttonBox->sizeHint().height() );
 }
 
 
@@ -1199,6 +1206,7 @@ YQPkgSelector::reset()
     logDebug() << "Reset" << endl;
 
     resetResolver();
+    showResolverStatus();
     LicenseCache::confirmed()->clear();
 
     if ( _patchFilterView )
@@ -1306,6 +1314,22 @@ YQPkgSelector::globalUpdatePkg( bool force )
         _statusFilterView->writeSettings();
         _statusFilterView->resetToDefaults();
     }
+}
+
+
+void
+YQPkgSelector::showResolverStatus()
+{
+    CHECK_PTR( _resolverStatusLabel );
+    zypp::Resolver_Ptr resolver = zypp::getZYpp()->resolver();
+
+    QString resolverStatus;
+
+    if      ( resolver->upgradeMode() ) resolverStatus = _( "Dist-Upgrade Mode"   );
+    else if ( resolver->updateMode()  ) resolverStatus = _( "Package Update Mode" );
+    // intentionally empty in standard mode
+
+    _resolverStatusLabel->setText( QString( "<b><i>%1</i></b>" ).arg( resolverStatus ) );
 }
 
 

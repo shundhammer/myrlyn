@@ -209,6 +209,12 @@ public slots:
     void updateSwitchRepoLabels();
 
     /**
+     * Update the "Resolver: XY" label at the bottom to show the current
+     * resolver status.
+     */
+    void showResolverStatus();
+
+    /**
      * Read the settings from the config file
      * (before the widgets are created)
      */
@@ -453,6 +459,7 @@ protected:
     QWidget *                           _notificationsArea;
     QLabel *                            _switchToRepoLabel;
     QLabel *                            _cancelSwitchingToRepoLabel;
+    QLabel *                            _resolverStatusLabel;
 
     // Menus
     QMenuBar *                          _menuBar;
