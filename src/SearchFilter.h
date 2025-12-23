@@ -16,7 +16,7 @@
 #include <QString>
 #include <QRegularExpression>
 
-#include "Logger.h"     // LogStream
+#include "LogStream.h"  // operator<<()
 
 
 /**
@@ -120,18 +120,8 @@ protected:
 };  // class SearchFilter
 
 
-inline LogStream & operator<< ( LogStream        & stream,
-                                const SearchFilter & filter )
-{
-    stream << "<SearchFilter \""
-           << filter.pattern()
-           << "\" mode \""
-           << SearchFilter::toString( filter.filterMode() ) << "\" "
-           <<( filter.isCaseSensitive()? " case sensitive" : "" )
-           << ">";
-
-    return stream;
-}
+inline LogStream & operator<< ( LogStream          & stream,
+                                const SearchFilter & filter );
 
 
 #endif  // SearchFilter_h

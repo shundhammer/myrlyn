@@ -38,6 +38,9 @@
 #include "ZyppLogger.h"
 #include "MyrlynApp.h"
 
+using LogStr::hex;
+using LogStr::dec;
+
 
 MyrlynApp *      MyrlynApp::_instance = 0;
 MyrlynAppOptions MyrlynApp::_optFlags( OptNone );
@@ -67,7 +70,7 @@ MyrlynApp::MyrlynApp( MyrlynAppOptions optFlags )
         _optFlags |= OptReadOnly;
     }
 
-    logDebug() << "_optFlags: 0x" << std::hex << _optFlags << std::dec << endl;
+    logDebug() << "_optFlags: 0x" << hex << _optFlags << dec << endl;
     logQtEnv();
 
     MyrlynTranslator * translator = new MyrlynTranslator( this );

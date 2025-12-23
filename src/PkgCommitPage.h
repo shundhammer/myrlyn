@@ -24,6 +24,7 @@
 #include <zypp/ZYppCommitPolicy.h>
 
 #include "YQZypp.h"     // ZyppRes
+#include "LogStream.h"  // operator<<()
 
 
 // Generated with 'uic' from a Qt designer .ui form: pkg-commit.ui

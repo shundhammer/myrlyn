@@ -12,22 +12,19 @@
 #define Logger_h
 
 #include <string>
-#include <iostream>
-#include <fstream>
 
 #include <QString>
 #include <QStringList>
 
+#include "LogStream.h"
 
-typedef std::ofstream LogStream;
 
+// Define NO_USING_LOGSTREAM_ENDL before including this header (or on the
+// compiler command line) if you are anal about this in your own code, but do
+// not remove it here.
 
-// Define NO_USING_STD_ENDL before including this header (or on the compiler
-// command line) if you are anal about this in your own code, but do not remove
-// it here.
-
-#ifndef NO_USING_STD_ENDL
-  using std::endl;
+#ifndef NO_USING_LOGSTR_ENDL
+    using LogStr::endl;
 #endif
 
 
@@ -87,9 +84,9 @@ enum LogSeverity
         if ( obj )                                                      \
             logDebug() << "sender(): " << obj->metaObject()->className() \
                        << " " << obj->objectName()                      \
-                       << std::endl;                                    \
+                       << LogStr::endl;                                 \
         else                                                            \
-            logDebug() << "No sender" << std::endl;                     \
+            logDebug() << "No sender" << LogStr:endl;                   \
                                                                         \
     } while( 0 )
 
@@ -205,7 +202,7 @@ public:
     static Logger * defaultLogger() { return _defaultLogger; }
 
     /**
-     * Return the LogStream associated with this logger. Not for general use.
+     * Return the LogStream associated with this logger.
      */
     LogStream & logStream() { return _logStream; }
 
@@ -323,12 +320,6 @@ private:
     LogStream       _nullStream;
     LogSeverity     _logLevel;
 };
-
-
-LogStream & operator<<( LogStream & str, const QString & text );
-LogStream & operator<<( LogStream & str, const char *    text );
-LogStream & operator<<( LogStream & str, const QStringList & stringList );
-
 
 
 /**

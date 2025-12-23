@@ -21,6 +21,7 @@ set( SOURCES
   BusyPopup.cc
   LicenseCache.cc
   Logger.cc
+  LogStream.cc
   Exception.cc
   FSize.cc
   InitReposPage.cc

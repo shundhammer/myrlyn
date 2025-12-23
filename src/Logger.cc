@@ -1,5 +1,5 @@
 /*
- *   File name: Logger.cc
+ *   File name: Logger.cpp
  *   Summary:   Logger class for Myrlyn
  *   License:   GPL V2 - See file LICENSE for details.
  *
@@ -14,6 +14,7 @@
 #include <QString>
 #include <QStringList>
 
+#include <iostream>     // cerr
 #include <string.h>     // strlen()
 #include <stdlib.h>     // abort(), mkdtemp()
 #include <unistd.h>     // getpid()
@@ -26,8 +27,9 @@
 
 #define VERBOSE_ROTATE  0
 
-using std::endl;
 using std::cerr;
+using LogStr::endl;
+
 
 static LogSeverity toLogSeverity( QtMsgType msgType );
 
@@ -71,7 +73,7 @@ Logger::Logger( const QString & rawLogDir,
 
 Logger::~Logger()
 {
-    if ( _logStream.is_open() )
+    if ( _logStream.isOpen() )
     {
         // logInfo() << "-- Log End --\n" << endl;
         _logStream.close();
@@ -100,33 +102,30 @@ void Logger::createNullStream()
     // logger time stamp etc. that gets suppressed, not the real logging
     // output.
 
-    _nullStream.open( "/dev/null" );
-
-    if ( _nullStream.fail() )
-        cerr << "ERROR: Can't open /dev/null to suppress log output" << endl;
+    if ( ! _nullStream.open( "/dev/null" ) )
+        cerr << "ERROR: Can't open /dev/null to suppress log output" << std::endl;
 }
 
 
 void Logger::openLogFile( const QString & filename )
 {
-    if ( ! _logStream.is_open() || _logFilename != filename )
+    if ( ! _logStream.isOpen() || _logStream.logFileName() != filename )
     {
         _logFilename = filename;
-        _logStream.open( filename.toUtf8(), std::ofstream::out | std::ofstream::app );
 
-        if ( _logStream.good() )
+        if ( _logStream.open( filename ) )
         {
             if ( ! _defaultLogger )
                 setDefaultLogger();
 
-            cerr << "Logging to " << qPrintable( filename ) << endl;
+            cerr << "Logging to " << qPrintable( filename ) << std::endl;
             _logStream << "\n\n";
             log( __FILE__, __LINE__, __FUNCTION__, LogSeverityInfo )
                 << "-- Log Start --" << endl;
         }
         else
         {
-            cerr << "ERROR: Can't open log file " << qPrintable( filename ) << endl;
+            cerr << "ERROR: Can't open log file " << qPrintable( filename ) << std::endl;
         }
     }
 }
@@ -154,7 +153,7 @@ LogStream & Logger::log( Logger *        logger,
         return logger->log( srcFile, srcLine, srcFunction, severity );
     else
     {
-        if ( ! stderrStream.is_open() )
+        if ( ! stderrStream.isOpen() )
             stderrStream.open( "/dev/stderr" );
 
         return stderrStream;
@@ -316,10 +315,6 @@ static void qt_logger( QtMsgType                  msgType,
 
         line.remove( "Reinstalling the application may fix this problem." );
 
-        // Suppress Qt message that spams the log, making it unusable
-        if ( line.startsWith( "OpenType support missing for" ) )
-            continue;
-
         if ( ! line.trimmed().isEmpty() )
         {
             Logger::log( 0, // use default logger
@@ -377,12 +372,12 @@ static void qt_logger( QtMsgType                  msgType,
                 // marketing people.
 
                 std::string text = "FATAL: Could not connect to the display.";
-                cerr << "\n" << text << endl;
+                cerr << "\n" << text << std::endl;
                 logError() << text << endl;
             }
             else
             {
-                cerr << "FATAL: " << qPrintable( msg ) << endl;
+                cerr << "FATAL: " << qPrintable( msg ) << std::endl;
             }
 
             logInfo() << "-- Exiting --\n" << endl;
@@ -390,7 +385,7 @@ static void qt_logger( QtMsgType                  msgType,
         }
         else
         {
-            cerr << "FATAL: " << qPrintable( msg ) << endl;
+            cerr << "FATAL: " << qPrintable( msg ) << std::endl;
             logInfo() << "-- Aborting with core dump --\n" << endl;
             abort(); // Exit with core dump (it might contain a useful backtrace)
         }
@@ -401,7 +396,7 @@ static void qt_logger( QtMsgType                  msgType,
            msg.contains( "QObject::disconnect" )    ) )
     {
         // Duplicate this on stderr
-        cerr << "Qt Warning: " << qPrintable( msg ) << endl;
+        cerr << "Qt Warning: " << qPrintable( msg ) << std::endl;
     }
 }
 
@@ -568,31 +563,7 @@ QString Logger::expandVariables( const QString & unexpanded )
 
 
 
-LogStream & operator<<( LogStream & str, const char * text )
-{
-    // Need to resort to ugly low-level ostream::write()
-    // to prevent an endless recursion
-    str.write( text, strlen( text ) );
-
-    return str;
-}
-
-
-LogStream & operator<<( LogStream & str, const QString & text )
-{
-    str << text.toUtf8().constData();
-    return str;
-}
-
-
-LogStream & operator<<( LogStream & str, const QStringList & stringList )
-{
-    str << stringList.join( ", " );
-    return str;
-}
-
-
 QString formatErrno()
 {
-    return QString::number( errno );
+    return QString( "errno %1" ).arg( errno );
 }

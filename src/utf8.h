@@ -37,10 +37,4 @@ inline std::string toUTF8( const QString & str )
 }
 
 
-inline std::ostream & operator<<( std::ostream & stream, const QString & str )
-{
-    return stream << str.toUtf8().data();
-}
-
-
 #endif // utf8_h

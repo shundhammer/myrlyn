@@ -25,6 +25,7 @@
 #include <zypp-core/ByteCount.h>
 #include "Logger.h"     // LogStream
 #include "YQZypp.h"     // ZyppRes
+#include "LogStream.h"  // operator<<()
 
 
 using zypp::ByteCount;
