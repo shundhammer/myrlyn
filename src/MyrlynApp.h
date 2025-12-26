@@ -49,8 +49,7 @@ enum MyrlynAppOption
     OptFakeRoot         = 0x0100,
     OptFakeCommit       = 0x0200,
     OptFakeSummary      = 0x0400,
-    OptFakeTranslations = 0x0800,  // "xixoxixoxixo" everywhere
-    OptSlowRepoRefresh  = 0x1000
+    OptSlowRepoRefresh  = 0x0800
 };
 
 // See https://doc.qt.io/qt-5/qflags.html

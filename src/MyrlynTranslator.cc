@@ -25,10 +25,14 @@
 #define VERBOSE_QT_INTERNAL_MESSAGES    1
 
 
-MyrlynTranslator::MyrlynTranslator( QObject * parent )
+bool MyrlynTranslator::_useFakeTranslations = false;
+
+
+MyrlynTranslator::MyrlynTranslator( const QString & textdomain, QObject * parent )
     : QTranslator( parent )
+    , _textdomain( textdomain.toUtf8() )
 {
-    // bindtextdomain( "myrlyn", "/usr/share/locale" );
+    // bindtextdomain( textdomain.data(), "/usr/share/locale" );
     // Not needed: /usr/share/locale is the default location.
 
     // Initialize _fakeTemplate with "xixoxixoxixo..."
@@ -50,8 +54,8 @@ MyrlynTranslator::translate( const char * context_str,
                              const char * disambiguation,
                              int          nPlural         ) const
 {
-    if ( MyrlynApp::isOptionSet( OptFakeTranslations ) )
-         return fakeTranslation( sourceText );
+    if ( _useFakeTranslations )
+        return fakeTranslation( sourceText ); // -> "xixoxixo..."
 
 
 #if ENABLE_QT_INTERNAL_MESSAGES
@@ -80,7 +84,7 @@ MyrlynTranslator::translate( const char * context_str,
     }
 #endif
 
-    return dgettext( "myrlyn", sourceText );
+    return dgettext( _textdomain.data(), sourceText );
 }
 
 
@@ -90,3 +94,9 @@ MyrlynTranslator::fakeTranslation( const char * sourceText ) const
     return _fakeTemplate.left( strlen( sourceText ) );
 }
 
+
+void
+MyrlynTranslator::useFakeTranslations( bool val )
+{
+    _useFakeTranslations = val;
+}

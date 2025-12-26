@@ -73,7 +73,7 @@ MyrlynApp::MyrlynApp( MyrlynAppOptions optFlags )
     logDebug() << "_optFlags: 0x" << hex << _optFlags << dec << endl;
     logQtEnv();
 
-    MyrlynTranslator * translator = new MyrlynTranslator( this );
+    MyrlynTranslator * translator = new MyrlynTranslator( "myrlyn", this );
     qApp->installTranslator( translator );
 
     createMainWin(); // Create this early to get early visual feedback

@@ -18,6 +18,7 @@
 #define MyrlynTranslator_h
 
 #include <QTranslator>
+#include <QByteArray>
 
 /**
  * Class to manage translations for widget texts and other user-visible
@@ -33,7 +34,7 @@ class MyrlynTranslator: public QTranslator
 
 public:
 
-    MyrlynTranslator( QObject * parent );
+    MyrlynTranslator( const QString & textdomain, QObject * parent );
     virtual ~MyrlynTranslator();
 
     /**
@@ -53,6 +54,16 @@ public:
                                int          nPlural        = -1 ) const override;
 
     /**
+     * Use fake translations: Translate every message with "xixoxixo..." of the
+     * same length as the original message. This can be used to check if all
+     * user messages are actually marked for translation.
+     **/
+    static void useFakeTranslations( bool val = true );
+
+
+protected:
+
+    /**
      * Return a fake translation "xixoxixoxixo" with the same length as
      * 'sourceText'. This can be useful to see where translation markers are
      * missing in the code.
@@ -62,9 +73,14 @@ public:
      **/
     QString fakeTranslation( const char * sourceText ) const;
 
-protected:
+    //
+    // Data members
+    //
 
-    QString _fakeTemplate;
+    QByteArray  _textdomain;   // QByteArray to avoid repeated toUtf8() conversions
+    QString     _fakeTemplate;
+
+    static bool _useFakeTranslations;
 
 };      // class MyrlynTranslator
 

@@ -21,6 +21,7 @@
 
 #include "Logger.h"
 #include "MyrlynApp.h"
+#include "MyrlynTranslator.h"
 
 
 using std::cerr;
@@ -100,7 +101,7 @@ parseCommandLineOptions( QStringList & argList )
     if ( commandLineOption( "--fake-root",          "" ,  argList ) ) optFlags |= OptFakeRoot;
     if ( commandLineOption( "--fake-commit",        "" ,  argList ) ) optFlags |= OptFakeCommit;
     if ( commandLineOption( "--fake-summary",       "" ,  argList ) ) optFlags |= OptFakeSummary;
-    if ( commandLineOption( "--fake-translations",  "" ,  argList ) ) optFlags |= OptFakeTranslations;
+    if ( commandLineOption( "--fake-translations",  "" ,  argList ) ) MyrlynTranslator::useFakeTranslations();
     if ( commandLineOption( "--slow-repo-refresh",  "" ,  argList ) ) optFlags |= OptSlowRepoRefresh;
     if ( commandLineOption( "--help",               "-h", argList ) ) usage(); // this will exit
 
