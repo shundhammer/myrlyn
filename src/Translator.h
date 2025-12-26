@@ -34,7 +34,7 @@ class Translator: public QTranslator
 
 public:
 
-    Translator( const QString & textdomain, QObject * parent );
+    Translator( const QString & textdomain, QObject * parent = 0 );
     virtual ~Translator();
 
     /**
