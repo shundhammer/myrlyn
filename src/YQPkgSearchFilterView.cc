@@ -48,6 +48,7 @@ using std::string;
 YQPkgSearchFilterView::YQPkgSearchFilterView( QWidget * parent )
     : QWidget( parent )
     , _ui( new Ui::SearchFilterView )
+    , _defaultAutoMode( SearchFilter::StartsWith )
 {
     CHECK_NEW( _ui );
     _ui->setupUi( this ); // Actually create the widgets from the .ui form
@@ -72,6 +73,9 @@ YQPkgSearchFilterView::YQPkgSearchFilterView( QWidget * parent )
     connect( _ui->searchText,   SIGNAL( textEdited              ( QString ) ),
              this,              SLOT  ( updateDetectedFilterMode( QString ) ) );
 
+    connect( _ui->changeAutoDefaultButton, SIGNAL( clicked()                 ),
+             this,                         SLOT  ( cycleDefaultFilterModes() ) );
+
     readSettings();
     updateDetectedFilterMode();
 }
@@ -88,7 +92,8 @@ SearchFilter
 YQPkgSearchFilterView::buildSearchFilterFromWidgets()
 {
     SearchFilter searchFilter( _ui->searchText->text(),
-                               (SearchFilter::FilterMode) _ui->searchMode->currentIndex() );
+                               (SearchFilter::FilterMode) _ui->searchMode->currentIndex(),
+                               _defaultAutoMode );
     searchFilter.setCaseSensitive( _ui->caseSensitive->isChecked() );
 
     return searchFilter;
@@ -109,7 +114,7 @@ YQPkgSearchFilterView::updateDetectedFilterMode( int index )
     }
     else
     {
-        _ui->detectedAutoMode->hide();
+        hideDetectedAutoMode();
     }
 }
 
@@ -125,7 +130,7 @@ YQPkgSearchFilterView::updateDetectedFilterMode( const QString & searchPattern )
 
     if ( filterMode != SearchFilter::Auto )
     {
-        _ui->detectedAutoMode->hide();
+        hideDetectedAutoMode();
         return;
     }
 
@@ -134,17 +139,19 @@ YQPkgSearchFilterView::updateDetectedFilterMode( const QString & searchPattern )
 
     if ( detectedMode == SearchFilter::Auto || searchPattern.isEmpty() )
     {
-        detectedMode = SearchFilter::StartsWith;  // Use the fallback
+        detectedMode = _defaultAutoMode;
 
         // Translators: This is the default search filter mode.
         // %1 is a text from the combo box that is already translated.
         text = _( "Default: %1" );
+        _ui->changeAutoDefaultButton->show();
     }
     else
     {
         // Translators: This is the detected search filter mode.
         // %1 is a text from the combo box that is already translated.
         text = _( "Detected: %1" );
+        _ui->changeAutoDefaultButton->hide();
     }
 
     // Use the text from the combo box because it's already translated
@@ -158,9 +165,39 @@ YQPkgSearchFilterView::updateDetectedFilterMode( const QString & searchPattern )
 
 
 void
+YQPkgSearchFilterView::hideDetectedAutoMode()
+{
+    _ui->detectedAutoMode->hide();
+    _ui->changeAutoDefaultButton->hide();
+}
+
+
+void
 YQPkgSearchFilterView::searchModeChanged( int index )
 {
     updateDetectedFilterMode( index );
+}
+
+
+void
+YQPkgSearchFilterView::cycleDefaultFilterModes()
+{
+    switch ( _defaultAutoMode )
+    {
+        case SearchFilter::StartsWith:
+            _defaultAutoMode = SearchFilter::Contains;
+            break;
+
+        case SearchFilter::Contains:
+            _defaultAutoMode = SearchFilter::StartsWith;
+            break;
+
+        default:
+            _defaultAutoMode = SearchFilter::StartsWith;
+            break;
+    }
+
+    updateDetectedFilterMode();
 }
 
 
@@ -444,15 +481,16 @@ void YQPkgSearchFilterView::readSettings()
     QSettings settings;
     settings.beginGroup( "PkgSearchFilterView" );
 
-    _ui->searchInName->setChecked        ( settings.value( "searchInName",        true  ).toBool() );
-    _ui->searchInSummary->setChecked     ( settings.value( "searchInSummary",     false ).toBool() );
-    _ui->searchInDescription->setChecked ( settings.value( "searchInDescription", false ).toBool() );
-    _ui->searchInProvides->setChecked    ( settings.value( "searchInProvides",    false ).toBool() );
-    _ui->searchInRequires->setChecked    ( settings.value( "searchInRequires",    false ).toBool() );
-    _ui->searchInFileList->setChecked    ( settings.value( "searchInFileList",    false ).toBool() );
+    _ui->searchInName->setChecked        ( settings.value( "searchInName",        true   ).toBool() );
+    _ui->searchInSummary->setChecked     ( settings.value( "searchInSummary",     false  ).toBool() );
+    _ui->searchInDescription->setChecked ( settings.value( "searchInDescription", false  ).toBool() );
+    _ui->searchInProvides->setChecked    ( settings.value( "searchInProvides",    false  ).toBool() );
+    _ui->searchInRequires->setChecked    ( settings.value( "searchInRequires",    false  ).toBool() );
+    _ui->searchInFileList->setChecked    ( settings.value( "searchInFileList",    false  ).toBool() );
 
-    _ui->caseSensitive->setChecked       ( settings.value( "caseSensitive",       false ).toBool() );
-    _ui->searchMode->setCurrentIndex     ( settings.value( "searchMode",          0     ).toInt() );
+    _ui->caseSensitive->setChecked       ( settings.value( "caseSensitive",       false  ).toBool() );
+    _ui->searchMode->setCurrentIndex     ( settings.value( "searchMode",          0      ).toInt() );
+    _defaultAutoMode = (SearchFilter::FilterMode) ( settings.value( "defaultAutoMode", 2 ).toInt() );
 
     settings.endGroup();
 }
@@ -472,6 +510,7 @@ void YQPkgSearchFilterView::writeSettings()
 
     settings.setValue( "caseSensitive",       _ui->caseSensitive->isChecked()       );
     settings.setValue( "searchMode",          _ui->searchMode->currentIndex()       );
+    settings.setValue( "defaultAutoMode",     (int) _defaultAutoMode                );
 
     settings.endGroup();
 }

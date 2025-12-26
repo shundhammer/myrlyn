@@ -114,6 +114,11 @@ protected slots:
      **/
     void updateDetectedFilterMode( const QString & searchPattern );
 
+    /**
+     * Cycle through the valid default filter modes for "Auto" mode.
+     **/
+    void cycleDefaultFilterModes();
+
 
 signals:
 
@@ -153,6 +158,11 @@ protected:
     SearchFilter buildSearchFilterFromWidgets();
 
     /**
+     * Hide the detected auto mode and its tool button.
+     **/
+    void hideDetectedAutoMode();
+
+    /**
      * Key press event: Execute search upon 'Return'
      * Reimplemented from QVBox / QWidget.
      **/
@@ -181,7 +191,8 @@ protected:
     // Data members
     //
 
-    Ui::SearchFilterView * _ui;
+    Ui::SearchFilterView *   _ui;
+    SearchFilter::FilterMode _defaultAutoMode;
 };
 
 
