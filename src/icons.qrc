@@ -27,6 +27,7 @@
     <file alias="package-supported">icons/package-supported.svg</file>
     <file alias="package-upgrade">icons/package-upgrade.svg</file>
     <file alias="package-upgrade-auto">icons/package-upgrade-auto.svg</file>
+    <file alias="wrench">icons/wrench.svg</file>
     <file alias="tab-close">icons/tab-close.svg</file>
   </qresource>
 </RCC>
