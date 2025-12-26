@@ -1,4 +1,4 @@
-#/!bin/sh
+#!/bin/sh
 #
 # makepot - generate a .pot file for gettext translations from the sources
 #
