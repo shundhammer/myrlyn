@@ -15,7 +15,7 @@ set( SOURCES
   BaseProduct.cc
   CommunityRepos.cc
   MyrlynApp.cc
-  MyrlynTranslator.cc
+  Translator.cc
   MyrlynWorkflowSteps.cc
   MyrlynRepoManager.cc
   BusyPopup.cc

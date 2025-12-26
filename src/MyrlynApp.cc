@@ -27,7 +27,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MyrlynRepoManager.h"
-#include "MyrlynTranslator.h"
+#include "Translator.h"
 #include "MyrlynWorkflowSteps.h"
 #include "PkgCommitPage.h"
 #include "PkgTasks.h"
@@ -73,7 +73,7 @@ MyrlynApp::MyrlynApp( MyrlynAppOptions optFlags )
     logDebug() << "_optFlags: 0x" << hex << _optFlags << dec << endl;
     logQtEnv();
 
-    MyrlynTranslator * translator = new MyrlynTranslator( "myrlyn", this );
+    Translator * translator = new Translator( "myrlyn", this );
     qApp->installTranslator( translator );
 
     createMainWin(); // Create this early to get early visual feedback

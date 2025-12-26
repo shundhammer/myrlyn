@@ -19,16 +19,16 @@
 #include "utf8.h"
 #include "Logger.h"
 #include "MyrlynApp.h"          // MyrlynApp::isOptionSet()
-#include "MyrlynTranslator.h"
+#include "Translator.h"
 
 #define ENABLE_QT_INTERNAL_MESSAGES     0
 #define VERBOSE_QT_INTERNAL_MESSAGES    1
 
 
-bool MyrlynTranslator::_useFakeTranslations = false;
+bool Translator::_useFakeTranslations = false;
 
 
-MyrlynTranslator::MyrlynTranslator( const QString & textdomain, QObject * parent )
+Translator::Translator( const QString & textdomain, QObject * parent )
     : QTranslator( parent )
     , _textdomain( textdomain.toUtf8() )
 {
@@ -42,17 +42,17 @@ MyrlynTranslator::MyrlynTranslator( const QString & textdomain, QObject * parent
 }
 
 
-MyrlynTranslator::~MyrlynTranslator()
+Translator::~Translator()
 {
     // NOP
 }
 
 
 QString
-MyrlynTranslator::translate( const char * context_str,
-                             const char * sourceText,
-                             const char * disambiguation,
-                             int          nPlural         ) const
+Translator::translate( const char * context_str,
+                       const char * sourceText,
+                       const char * disambiguation,
+                       int          nPlural         ) const
 {
     if ( _useFakeTranslations )
         return fakeTranslation( sourceText ); // -> "xixoxixo..."
@@ -89,14 +89,14 @@ MyrlynTranslator::translate( const char * context_str,
 
 
 QString
-MyrlynTranslator::fakeTranslation( const char * sourceText ) const
+Translator::fakeTranslation( const char * sourceText ) const
 {
     return _fakeTemplate.left( strlen( sourceText ) );
 }
 
 
 void
-MyrlynTranslator::useFakeTranslations( bool val )
+Translator::useFakeTranslations( bool val )
 {
     _useFakeTranslations = val;
 }

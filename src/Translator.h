@@ -14,8 +14,8 @@
  */
 
 
-#ifndef MyrlynTranslator_h
-#define MyrlynTranslator_h
+#ifndef Translator_h
+#define Translator_h
 
 #include <QTranslator>
 #include <QByteArray>
@@ -28,14 +28,14 @@
  * like dgettext(). Since it uses common Qt mechanisms, it also works for Qt
  * .ui files generated with Qt Designer.
  **/
-class MyrlynTranslator: public QTranslator
+class Translator: public QTranslator
 {
     Q_OBJECT
 
 public:
 
-    MyrlynTranslator( const QString & textdomain, QObject * parent );
-    virtual ~MyrlynTranslator();
+    Translator( const QString & textdomain, QObject * parent );
+    virtual ~Translator();
 
     /**
      * Reimplemented from QTranslator:
@@ -82,7 +82,7 @@ protected:
 
     static bool _useFakeTranslations;
 
-};      // class MyrlynTranslator
+};      // class Translator
 
 
-#endif  // MyrlynTranslator_h
+#endif  // Translator_h
