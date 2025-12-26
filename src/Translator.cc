@@ -16,9 +16,7 @@
 
 #include <string.h>             // strlen()
 #include <libintl.h>            // dgettext(), bindtextdomain()
-#include "utf8.h"
 #include "Logger.h"
-#include "MyrlynApp.h"          // MyrlynApp::isOptionSet()
 #include "Translator.h"
 
 #define ENABLE_QT_INTERNAL_MESSAGES     0
@@ -54,13 +52,17 @@ Translator::translate( const char * context_str,
                        const char * disambiguation,
                        int          nPlural         ) const
 {
+    Q_UNUSED( context_str );
+    Q_UNUSED( disambiguation );
+    Q_UNUSED( nPlural );
+
     if ( _useFakeTranslations )
         return fakeTranslation( sourceText ); // -> "xixoxixo..."
 
 
 #if ENABLE_QT_INTERNAL_MESSAGES
 
-    QString context( fromUTF8( context_str ) );
+    QString context( QString::fromUtf8( context_str ) );
 
     if ( context.startsWith( 'Q' )         // Qt class?
          && ! context.startsWith( "QY2" )  // Our own classes
