@@ -224,6 +224,9 @@
        </item>
        <item>
         <widget class="QToolButton" name="changeAutoDefaultButton">
+         <property name="toolTip">
+          <string>Switch default mode for &quot;auto&quot;</string>
+         </property>
          <property name="text">
           <string>...</string>
          </property>
