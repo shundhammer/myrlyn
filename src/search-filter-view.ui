@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>379</width>
-    <height>738</height>
+    <height>740</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -106,6 +106,22 @@
        </widget>
       </item>
       <item>
+       <spacer name="searchFieldsSpacer1">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>13</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QCheckBox" name="searchInProvides">
         <property name="text">
          <string>RPM P&amp;rovides</string>
@@ -118,6 +134,29 @@
          <string>RPM Re&amp;quires</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="searchInRecommends">
+        <property name="text">
+         <string>RPM Recommends</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="searchFieldsSpacer2">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>13</height>
+         </size>
+        </property>
+       </spacer>
       </item>
       <item>
        <widget class="QCheckBox" name="searchInFileList">

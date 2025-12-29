@@ -45,9 +45,10 @@
 using std::string;
 
 
-YQPkgSearchFilterView::YQPkgSearchFilterView( QWidget * parent )
+YQPkgSearchFilterView::YQPkgSearchFilterView( QWidget * parent, SearchFields searchFields )
     : QWidget( parent )
     , _ui( new Ui::SearchFilterView )
+    , _searchFields( searchFields )
     , _defaultAutoMode( SearchFilter::StartsWith )
 {
     CHECK_NEW( _ui );
@@ -62,6 +63,15 @@ YQPkgSearchFilterView::YQPkgSearchFilterView( QWidget * parent )
     // Take care in Qt designer to give each widget a meaningful name in the
     // widget tree at the top right: They are also the member variable names
     // for the _ui object.
+
+    if ( _searchFields != AllSearchFields )
+    {
+        // Save some screen space if used as a secondary filter (BasicSearchFields)
+        _ui->searchInRequires->hide();
+        _ui->searchInRecommends->hide();
+        _ui->searchInProvides->hide();
+        _ui->searchInFileList->hide();
+    }
 
 
     connect( _ui->searchButton, SIGNAL( clicked() ),
@@ -357,9 +367,14 @@ YQPkgSearchFilterView::filterInternal()
             if ( _ui->searchInName->isChecked()        ) query.addAttribute( zypp::sat::SolvAttr::name );
             if ( _ui->searchInDescription->isChecked() ) query.addAttribute( zypp::sat::SolvAttr::description );
             if ( _ui->searchInSummary->isChecked()     ) query.addAttribute( zypp::sat::SolvAttr::summary );
-            if ( _ui->searchInRequires->isChecked()    ) query.addAttribute( zypp::sat::SolvAttr( "solvable:requires" ) );
-            if ( _ui->searchInProvides->isChecked()    ) query.addAttribute( zypp::sat::SolvAttr( "solvable:provides" ) );
-            if ( _ui->searchInFileList->isChecked()    ) query.addAttribute( zypp::sat::SolvAttr::filelist );
+
+            if ( _searchFields == AllSearchFields )
+            {
+                if ( _ui->searchInRequires->isChecked()   ) query.addAttribute( zypp::sat::SolvAttr( "solvable:requires" ) );
+                if ( _ui->searchInRecommends->isChecked() ) query.addAttribute( zypp::sat::SolvAttr( "solvable:recommends" ) );
+                if ( _ui->searchInProvides->isChecked()   ) query.addAttribute( zypp::sat::SolvAttr( "solvable:provides" ) );
+                if ( _ui->searchInFileList->isChecked()   ) query.addAttribute( zypp::sat::SolvAttr::filelist );
+            }
 
             _ui->searchText->setEnabled( false );   // Disable for the duration of the search
             _ui->searchButton->setEnabled( false );
@@ -445,12 +460,12 @@ YQPkgSearchFilterView::check( ZyppSel   selectable,
 
     SearchFilter searchFilter( buildSearchFilterFromWidgets() );
 
+    // This is used for secondary filters only - just check the basic fields
+
     bool match =
         ( _ui->searchInName->isChecked()        && searchFilter.matches( zyppObj->name()         ) ) ||
         ( _ui->searchInSummary->isChecked()     && searchFilter.matches( zyppObj->summary()      ) ) ||
-        ( _ui->searchInDescription->isChecked() && searchFilter.matches( zyppObj->description()  ) ) ||
-        ( _ui->searchInProvides->isChecked()    && checkCap( zyppObj->provides(), searchFilter   ) ) ||
-        ( _ui->searchInRequires->isChecked()    && checkCap( zyppObj->requires(), searchFilter   ) );
+        ( _ui->searchInDescription->isChecked() && searchFilter.matches( zyppObj->description()  ) );
 
     return match;
 }

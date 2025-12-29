@@ -112,9 +112,10 @@ YQPkgSecondaryFilterView::layoutSecondaryFilters( QWidget * parent, QWidget * pr
 
     //
     // Package search view
+    // (only with the basic search fields to save some screen space)
     //
 
-    _searchFilterView = new YQPkgSearchFilterView( this );
+    _searchFilterView = new YQPkgSearchFilterView( this, YQPkgSearchFilterView::BasicSearchFields );
     CHECK_NEW( _searchFilterView );
     _secondaryFilters->addPage( _( "Search" ), _searchFilterView );
 

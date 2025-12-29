@@ -47,11 +47,18 @@ class YQPkgSearchFilterView : public QWidget
     Q_OBJECT
 
 public:
+    enum SearchFields
+    {
+        AllSearchFields,
+        BasicSearchFields  // Only name, summary, description
+    };
+
 
     /**
      * Constructor
      **/
-    YQPkgSearchFilterView( QWidget * parent );
+    YQPkgSearchFilterView( QWidget *    parent,
+                           SearchFields searchFields = AllSearchFields );
 
     /**
      * Destructor
@@ -192,6 +199,7 @@ protected:
     //
 
     Ui::SearchFilterView *   _ui;
+    SearchFields             _searchFields;
     SearchFilter::FilterMode _defaultAutoMode;
 };
 
