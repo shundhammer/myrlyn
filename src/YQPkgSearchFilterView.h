@@ -160,6 +160,12 @@ protected:
     void filterInternal();
 
     /**
+     * Check if at least one of the "search in" check boxes is checked.
+     * Check one if needed.
+     **/
+    void ensureOneSearchCheckBoxIsActive();
+
+    /**
      * Build a SearchFilter object from the widgets.
      **/
     SearchFilter buildSearchFilterFromWidgets();

@@ -288,6 +288,7 @@ YQPkgSearchFilterView::filter()
         }
     }
 
+    ensureOneSearchCheckBoxIsActive();
     filterInternal();
 
     if ( overrideExcludeRuleDevel )
@@ -302,6 +303,28 @@ YQPkgSearchFilterView::filter()
         YQPkgSelector::instance()->excludeRuleDebugInfoPkgs()->restoreEnabled();
     }
 }
+
+
+void
+YQPkgSearchFilterView::ensureOneSearchCheckBoxIsActive()
+{
+    // Iterate over all QCheckBox children in the QGroupBox holding them
+
+    for ( QCheckBox * checkBox: _ui->searchInGroupBox->findChildren<QCheckBox *>() )
+    {
+        if ( checkBox->isVisible() &&
+             checkBox->isEnabled() &&
+             checkBox->isChecked() )
+        {
+            // It's sufficient that at least one of the checkboxes is checked
+            return;
+        }
+    }
+
+    // No checkbox is checked - check one
+    _ui->searchInName->setChecked( true );
+}
+
 
 
 void
