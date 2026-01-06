@@ -41,6 +41,7 @@ set( SOURCES
   SummaryPage.cc
   WindowSettings.cc
   Workflow.cc
+  ZyppHistory.cc
   ZyppLogger.cc
 
   YQPkgSelector.cc

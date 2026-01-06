@@ -22,6 +22,7 @@
 #include "Logger.h"
 #include "MyrlynApp.h"
 #include "Translator.h"
+#include "ZyppHistory.h"
 #include "utf8.h"
 
 
@@ -138,17 +139,17 @@ parseCommandLineOptions( QStringList & argList )
     if ( commandLineSwitch( "--download-only",      "-d", argList ) ) optFlags |= OptDownloadOnly;
     if ( commandLineSwitch( "--no-repo-refresh",    "-f", argList ) ) optFlags |= OptNoRepoRefresh;
     if ( commandLineSwitch( "--force-service-view", "-v", argList ) ) optFlags |= OptForceServiceView;
-    if ( commandLineSwitch( "--fake-root",          "" ,  argList ) ) optFlags |= OptFakeRoot;
-    if ( commandLineSwitch( "--fake-commit",        "" ,  argList ) ) optFlags |= OptFakeCommit;
-    if ( commandLineSwitch( "--fake-summary",       "" ,  argList ) ) optFlags |= OptFakeSummary;
-    if ( commandLineSwitch( "--fake-translations",  "" ,  argList ) ) Translator::useFakeTranslations();
-    if ( commandLineSwitch( "--slow-repo-refresh",  "" ,  argList ) ) optFlags |= OptSlowRepoRefresh;
+    if ( commandLineSwitch( "--fake-root",          "",   argList ) ) optFlags |= OptFakeRoot;
+    if ( commandLineSwitch( "--fake-commit",        "",   argList ) ) optFlags |= OptFakeCommit;
+    if ( commandLineSwitch( "--fake-summary",       "",   argList ) ) optFlags |= OptFakeSummary;
+    if ( commandLineSwitch( "--fake-translations",  "",   argList ) ) Translator::useFakeTranslations();
+    if ( commandLineSwitch( "--slow-repo-refresh",  "",   argList ) ) optFlags |= OptSlowRepoRefresh;
     if ( commandLineSwitch( "--help",               "-h", argList ) ) usage(); // this will exit
 
-    QString zyppHistFile = commandLineOptionWithArg( "--zypp-history", "-i", argList );
+    QString zyppHistFile = commandLineOptionWithArg( "--zypp-history", "", argList );
 
     if ( ! zyppHistFile.isEmpty() )
-        logDebug() << "Using zypp history file " << zyppHistFile << endl;
+        ZyppHistory::setFileName( zyppHistFile );
 
     if ( ! argList.isEmpty() )
     {
@@ -177,8 +178,8 @@ int main( int argc, char *argv[] )
     logVersion();
 
     // Set org/app name for QSettings
-    QCoreApplication::setOrganizationName( "openSUSE" ); // ~/.cache/openSUSE
-    QCoreApplication::setApplicationName ( "Myrlyn" );   // ~/.cache/openSUSE/Myrlyn.conf
+    QCoreApplication::setOrganizationName( "openSUSE" ); // ~/.config/openSUSE
+    QCoreApplication::setApplicationName ( "Myrlyn" );   // ~/.config/openSUSE/Myrlyn.conf
 
 
     // Create the QApplication first because it might remove some Qt-specific
