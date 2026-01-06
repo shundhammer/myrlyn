@@ -1,11 +1,11 @@
-/*  ------------------------------------------------------
-              __   _____  ____  _
-              \ \ / / _ \|  _ \| | ____ _
-               \ V / | | | |_) | |/ / _` |
-                | || |_| |  __/|   < (_| |
-                |_| \__\_\_|   |_|\_\__, |
-                                    |___/
-    ------------------------------------------------------
+/*  ---------------------------------------------------------
+               __  __            _
+              |  \/  |_   _ _ __| |_   _ _ __
+              | |\/| | | | | '__| | | | | '_ \
+              | |  | | |_| | |  | | |_| | | | |
+              |_|  |_|\__, |_|  |_|\__, |_| |_|
+                      |___/        |___/
+    ---------------------------------------------------------
 
     Project:  Myrlyn Package Manager GUI
     Copyright (c) Stefan Hundhammer <Stefan.Hundhammer@gmx.de>
@@ -22,6 +22,7 @@
 #include "Logger.h"
 #include "MyrlynApp.h"
 #include "Translator.h"
+#include "utf8.h"
 
 
 using std::cerr;
@@ -53,6 +54,7 @@ void usage()
 	 << "  --fake-commit\n"
 	 << "  --fake-summary\n"
 	 << "  --fake-translations  (\"xixoxixoxixo\" everywhere)\n"
+         << "  --zypp-history </path/to/zypp/history>\n"
          << "  --slow-repo-refresh\n"
 	 << "\n"
 	 << std::endl;
@@ -65,7 +67,7 @@ void usage()
  * Extract a command line switch (a command line argument without any
  * additional parameter) from the command line and remove it from 'argList'.
  **/
-bool commandLineOption( const QString & longName,
+bool commandLineSwitch( const QString & longName,
 			const QString & shortName,
 			QStringList   & argList )
 {
@@ -88,22 +90,65 @@ bool commandLineOption( const QString & longName,
 }
 
 
+/**
+ * Extract a command line argument with an additional parameter from the
+ * command line and remove both from 'argList'.
+ *
+ * Return the additional parameter if the argument was set, or an empty string
+ * if not.
+ **/
+QString commandLineOptionWithArg( const QString & longName,
+                                  const QString & shortName,
+                                  QStringList   & argList )
+{
+    qsizetype pos = argList.indexOf( longName );
+
+    if ( pos < 0 && ! shortName.isEmpty() )
+        pos = argList.indexOf( shortName );
+
+    QString result;
+
+    if ( pos >= 0 )
+    {
+        logDebug() << "Found " << longName << endl;
+
+        if ( pos + 1 >= argList.size() )
+        {
+            cerr << "\nERROR: Command line option " << toUTF8( longName )
+                 << " requires an argument!" << std::endl;
+
+            usage();   // this will exit
+        }
+
+        argList.removeAt( pos );  // remove longName or shortName
+        result = argList.takeAt( pos );
+    }
+
+    return result;
+}
+
+
 MyrlynAppOptions
 parseCommandLineOptions( QStringList & argList )
 {
     MyrlynAppOptions optFlags;
 
-    if ( commandLineOption( "--read-only",          "-r", argList ) ) optFlags |= OptReadOnly;
-    if ( commandLineOption( "--dry-run",            "-n", argList ) ) optFlags |= OptDryRun;
-    if ( commandLineOption( "--download-only",      "-d", argList ) ) optFlags |= OptDownloadOnly;
-    if ( commandLineOption( "--no-repo-refresh",    "-f", argList ) ) optFlags |= OptNoRepoRefresh;
-    if ( commandLineOption( "--force-service-view", "-v", argList ) ) optFlags |= OptForceServiceView;
-    if ( commandLineOption( "--fake-root",          "" ,  argList ) ) optFlags |= OptFakeRoot;
-    if ( commandLineOption( "--fake-commit",        "" ,  argList ) ) optFlags |= OptFakeCommit;
-    if ( commandLineOption( "--fake-summary",       "" ,  argList ) ) optFlags |= OptFakeSummary;
-    if ( commandLineOption( "--fake-translations",  "" ,  argList ) ) Translator::useFakeTranslations();
-    if ( commandLineOption( "--slow-repo-refresh",  "" ,  argList ) ) optFlags |= OptSlowRepoRefresh;
-    if ( commandLineOption( "--help",               "-h", argList ) ) usage(); // this will exit
+    if ( commandLineSwitch( "--read-only",          "-r", argList ) ) optFlags |= OptReadOnly;
+    if ( commandLineSwitch( "--dry-run",            "-n", argList ) ) optFlags |= OptDryRun;
+    if ( commandLineSwitch( "--download-only",      "-d", argList ) ) optFlags |= OptDownloadOnly;
+    if ( commandLineSwitch( "--no-repo-refresh",    "-f", argList ) ) optFlags |= OptNoRepoRefresh;
+    if ( commandLineSwitch( "--force-service-view", "-v", argList ) ) optFlags |= OptForceServiceView;
+    if ( commandLineSwitch( "--fake-root",          "" ,  argList ) ) optFlags |= OptFakeRoot;
+    if ( commandLineSwitch( "--fake-commit",        "" ,  argList ) ) optFlags |= OptFakeCommit;
+    if ( commandLineSwitch( "--fake-summary",       "" ,  argList ) ) optFlags |= OptFakeSummary;
+    if ( commandLineSwitch( "--fake-translations",  "" ,  argList ) ) Translator::useFakeTranslations();
+    if ( commandLineSwitch( "--slow-repo-refresh",  "" ,  argList ) ) optFlags |= OptSlowRepoRefresh;
+    if ( commandLineSwitch( "--help",               "-h", argList ) ) usage(); // this will exit
+
+    QString zyppHistFile = commandLineOptionWithArg( "--zypp-history", "-i", argList );
+
+    if ( ! zyppHistFile.isEmpty() )
+        logDebug() << "Using zypp history file " << zyppHistFile << endl;
 
     if ( ! argList.isEmpty() )
     {
