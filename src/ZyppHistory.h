@@ -71,8 +71,7 @@ public:
 
 
     /**
-     * Base class for events that can have child events, like CommandEvent or
-     * PatchEvent.
+     * Base class for events that can have child events, like CommandEvent.
      *
      * Those are the events triggered in that command or session, i.e. with a
      * single 'zypper' command, or in a single Myrlyn or YaST session; or the
@@ -126,7 +125,7 @@ public:
      **/
     struct CommandEvent: public ParentEvent
     {
-        QString command;     // "yast2 sw_single qt", "zypper in qdirstat ..."
+        QString command;     // "yast2 sw_single", "zypper in qdirstat ..."
         QString rawCommand;  // "/usr/bin/ruby3.3 /usr/lib/YaST2/bin/y2start sw_single qt"
     };
 
@@ -164,7 +163,7 @@ public:
     /**
      * Patch events.
      **/
-    struct PatchEvent: public ParentEvent
+    struct PatchEvent: public Event
     {
         QString patchName;
         QString version;
