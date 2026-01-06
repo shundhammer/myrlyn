@@ -15,12 +15,11 @@
 
 
 #include "ZyppHistory.h"
+#include "ZyppHistoryParser.h"
 #include "Logger.h"
 #include "Exception.h"
 
-
 #define DEFAULT_ZYPP_HISTORY "/var/log/zypp/history"
-
 
 
 ZyppHistory * ZyppHistory::_instance = 0;
@@ -57,13 +56,26 @@ bool ZyppHistory::read()
     if ( ! _dirty )
         return true;  // success
 
-    bool success = false;
-
-    // TO DO: Read and parse
-
-    _dirty = false;
-
-    return success;
+    try
+    {
+        clear();
+        ZyppHistoryParser parser( _fileName );
+        _dirty  = false; // Even if this fails, don't try again
+        _events = parser.parse();
+    }
+    catch ( const FileException & exception )
+    {
+        CAUGHT( exception );
+        logError() << "Can't read zypp history file " << _fileName << endl;
+        RETHROW( exception );
+    }
+    catch ( const ZyppHistoryParseException & exception )
+    {
+        CAUGHT( exception );
+        RETHROW( exception );
+    }
+    
+    return true;  // success
 }
 
 

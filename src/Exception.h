@@ -160,7 +160,7 @@ public:
      * Constructor.
      *
      * 'invalidIndex' is the offending index value. It should be between
-     *'validMin' and 'validMax':
+     * 'validMin' and 'validMax':
      *
      *	   validMin <= index <= validMax
      **/
