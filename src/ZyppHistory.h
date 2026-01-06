@@ -42,15 +42,16 @@ class ZyppHistory
 public:
 
     enum EventType
-    {                     // Field #1 in the zypp-history file:
-        CommandEvent,     //   command
-        PkgInstallEvent,  //   install
-        PkgRemoveEvent,   //   remove
-        RepoAddEvent,     //   radd
-        RepoRemoveEvent,  //   rremove
-        RepoUrlEvent,     //   rurl
-        RepoAliasEvent,   //   ralias
-        PatchEvent        //   patch
+    {                       // Field #1 in the zypp-history file:
+        UnknownEvent = -1,  //
+        CommandEvent,       //   command
+        PkgInstallEvent,    //   install
+        PkgRemoveEvent,     //   remove
+        RepoAddEvent,       //   radd
+        RepoRemoveEvent,    //   rremove
+        RepoUrlEvent,       //   rurl
+        RepoAliasEvent,     //   ralias
+        PatchEvent          //   patch
     };
 
     /**

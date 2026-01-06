@@ -25,7 +25,7 @@
 class ZyppHistoryParser
 {
 public:
-    
+
     /**
      * Constructor
      **/
@@ -48,13 +48,47 @@ public:
 
 protected:
 
+    void parseLine( const QString & line );
+    ZyppHistory::EventType parseEventType( const QString & str );
+
+    /**
+     * Increase the parse error counter and throw an exception if it reaches a
+     * maximum number of errors.
+     **/
+    void incErrCount();
+
+    /**
+     * Check if 'fields' has at least 'requiredCount' fields.
+     * Return 'true' if ok. If not, increase the error count and return
+     * 'false'. Throw an exception if there are too many parse errors.
+     **/
+    bool checkFieldsCount( const QStringList & fields, int requiredCount );
+
+    void parseCommandEvent   ( const QStringList & fields );
+    void parsePkgInstallEvent( const QStringList & fields );
+    void parsePkgRemoveEvent ( const QStringList & fields );
+    void parseRepoAddEvent   ( const QStringList & fields );
+    void parseRepoRemoveEvent( const QStringList & fields );
+    void parseRepoUrlEvent   ( const QStringList & fields );
+    void parseRepoAliasEvent ( const QStringList & fields );
+    void parsePatchEvent     ( const QStringList & fields );
+
+
+    //
+    // Data members
+    //
+
     QString _fileName;
     int     _lineNo;
+    int     _errCount;
+
+    ZyppHistory::EventList _events;
 };
 
 
 class ZyppHistoryParseException: public Exception
 {
+public:
     ZyppHistoryParseException( const QString & message ):
         Exception( "Parse error" )
         {}
