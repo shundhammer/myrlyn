@@ -14,6 +14,8 @@
  */
 
 
+#include <QtAlgorithms>  // qDeleteAll()
+
 #include "ZyppHistory.h"
 #include "ZyppHistoryParser.h"
 #include "Logger.h"
@@ -74,7 +76,7 @@ bool ZyppHistory::read()
         CAUGHT( exception );
         RETHROW( exception );
     }
-    
+
     return true;  // success
 }
 
@@ -101,31 +103,4 @@ void ZyppHistory::setFileName( const QString & fileName )
         _fileName = DEFAULT_ZYPP_HISTORY;
 
     logInfo() << "Using zypp history file " << _fileName << endl;
-}
-
-
-
-namespace ZyppHistoryEvents
-{
-    QString Event::date() const
-    {
-        // timestamp:  "2025-12-28 14:15:26" -> "2025-12-28"
-        return timestamp.section( ' ', 0, 0 );
-    }
-
-
-
-    QString Event::time() const
-    {
-        // timestamp:  "2025-12-28 14:15:26" -> "14:15:26"
-        return timestamp.section( ' ', 1, 1 );
-    }
-
-
-
-    void ParentEvent::addChildEvent( Event * childEvent )
-    {
-        if ( childEvent )
-            _childEvents << childEvent;
-    }
 }

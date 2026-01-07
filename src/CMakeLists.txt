@@ -42,6 +42,7 @@ set( SOURCES
   WindowSettings.cc
   Workflow.cc
   ZyppHistory.cc
+  ZyppHistoryEvents.cc
   ZyppHistoryParser.cc
   ZyppLogger.cc
 
