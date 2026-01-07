@@ -73,6 +73,9 @@ protected:
     void parseRepoAliasEvent ( const QStringList & fields );
     void parsePatchEvent     ( const QStringList & fields );
 
+    void    finalizeLastCommand();
+    QString prettyCommand( const QString & rawCommand );
+
 
     //
     // Data members
@@ -82,7 +85,8 @@ protected:
     int     _lineNo;
     int     _errCount;
 
-    ZyppHistory::EventList _events;
+    ZyppHistory::EventList      _events;
+    ZyppHistory::CommandEvent * _lastCommand;
 };
 
 

@@ -41,17 +41,18 @@ class ZyppHistory
 {
 public:
 
-    enum EventType
-    {                       // Field #1 in the zypp-history file:
-        UnknownEvent = -1,  //
-        CommandEvent,       //   command
-        PkgInstallEvent,    //   install
-        PkgRemoveEvent,     //   remove
-        RepoAddEvent,       //   radd
-        RepoRemoveEvent,    //   rremove
-        RepoUrlEvent,       //   rurl
-        RepoAliasEvent,     //   ralias
-        PatchEvent          //   patch
+    // C++11: To be used as EventType::Unknown, EventType::Comand etc.
+    enum class EventType
+    {                  // Field #1 in the zypp-history file:
+        Unknown = -1,  //
+        Command,       //   command
+        PkgInstall,    //   install
+        PkgRemove,     //   remove
+        RepoAdd,       //   radd
+        RepoRemove,    //   rremove
+        RepoUrl,       //   rurl
+        RepoAlias,     //   ralias
+        Patch          //   patch
     };
 
     /**

@@ -109,7 +109,7 @@ void ZyppHistory::setFileName( const QString & fileName )
 QString ZyppHistory::Event::date() const
 {
     // timestamp:  "2025-12-28 14:15:26" -> "2025-12-28"
-    return timestamp.section( ' ', 0 );
+    return timestamp.section( ' ', 0, 0 );
 }
 
 
@@ -117,7 +117,7 @@ QString ZyppHistory::Event::date() const
 QString ZyppHistory::Event::time() const
 {
     // timestamp:  "2025-12-28 14:15:26" -> "14:15:26"
-    return timestamp.section( ' ', 1 );
+    return timestamp.section( ' ', 1, 1 );
 }
 
 
