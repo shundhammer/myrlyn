@@ -44,12 +44,12 @@ public:
      *   - FileException
      *   - ZyppHistoryParseException
      **/
-    ZyppHistory::EventList parse();
+    ZyppHistoryEvents::EventList parse();
 
 protected:
 
     void parseLine( const QString & line );
-    ZyppHistory::EventType parseEventType( const QString & str );
+    ZyppHistoryEvents::EventType parseEventType( const QString & str );
 
     /**
      * Increase the parse error counter and throw an exception if it reaches a
@@ -75,7 +75,7 @@ protected:
 
     void    finalizeLastCommand();
     QString prettyCommand( const QString & rawCommand );
-    void    addEvent( ZyppHistory::Event * event );
+    void    addEvent( ZyppHistoryEvents::Event * event );
 
 
     //
@@ -86,8 +86,8 @@ protected:
     int     _lineNo;
     int     _errCount;
 
-    ZyppHistory::EventList      _events;
-    ZyppHistory::CommandEvent * _lastCommand;
+    ZyppHistoryEvents::EventList      _events;
+    ZyppHistoryEvents::CommandEvent * _lastCommand;
 };
 
 

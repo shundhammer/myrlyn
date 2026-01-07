@@ -21,26 +21,8 @@
 #include <QtAlgorithms>  // qDeleteAll()
 
 
-/**
- * Singleton class for the content of the zypp history file where libzypp
- * events are recorded, like installing / updating / removing a package, adding
- * / removing / modifying a repo, or applying a patch.
- *
- * The default file to use is /var/log/zypp/history, but this has restricted
- * access for non-root users. For debugging and testing the parser, or for
- * analyzing zypp history files from another machine, use the '--zypp-history
- * /path/to/zypp/history' command line option or the static setFileName()
- * method here.
- *
- * This singleton class caches its data. Use the dropCache() method when the
- * underlying data might have changed, such as after a package transaction
- * (installing / updating / removing packages) was done, and the user returns
- * to the Myrlyn main screen.
- **/
-class ZyppHistory
+namespace ZyppHistoryEvents
 {
-public:
-
     // C++11: To be used as EventType::Unknown, EventType::Comand etc.
     enum class EventType
     {                  // Field #1 in the zypp-history file:
@@ -126,7 +108,7 @@ public:
      **/
     struct CommandEvent: public ParentEvent
     {
-        QString command;     // "yast2 sw_single", "zypper in qdirstat ..."
+        QString command;     // "YaST sw_single", "zypper in qdirstat ..."
         QString rawCommand;  // "/usr/bin/ruby3.3 /usr/lib/YaST2/bin/y2start sw_single qt"
     };
 
@@ -173,7 +155,26 @@ public:
         QString patchState;  // "applied", "needed"
     };
 
+}  // namespace ZyppHistoryEvents
 
+/**
+ * Singleton class for the content of the zypp history file where libzypp
+ * events are recorded, like installing / updating / removing a package, adding
+ * / removing / modifying a repo, or applying a patch.
+ *
+ * The default file to use is /var/log/zypp/history, but this has restricted
+ * access for non-root users. For debugging and testing the parser, or for
+ * analyzing zypp history files from another machine, use the '--zypp-history
+ * /path/to/zypp/history' command line option or the static setFileName()
+ * method here.
+ *
+ * This singleton class caches its data. Use the dropCache() method when the
+ * underlying data might have changed, such as after a package transaction
+ * (installing / updating / removing packages) was done, and the user returns
+ * to the Myrlyn main screen.
+ **/
+class ZyppHistory
+{
 protected:
 
     /**
@@ -207,7 +208,7 @@ public:
     /**
      * Return the zypp history events. Make sure to call read() first.
      **/
-    const EventList & events() const { return _events; }
+    const ZyppHistoryEvents::EventList & events() const { return _events; }
 
     /**
      * Clear the content.
@@ -236,8 +237,8 @@ protected:
     static ZyppHistory * _instance;
     static QString       _fileName;
 
-    EventList _events;
-    bool      _dirty;
+    ZyppHistoryEvents::EventList _events;
+    bool                         _dirty;
 
 };  // class ZyppHistory
 

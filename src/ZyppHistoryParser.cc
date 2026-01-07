@@ -23,6 +23,7 @@
 
 #define MAX_ERR_COUNT 500
 
+using namespace ZyppHistoryEvents;
 
 
 ZyppHistoryParser::ZyppHistoryParser( const QString & fileName ):
@@ -41,7 +42,7 @@ ZyppHistoryParser::~ZyppHistoryParser()
 }
 
 
-ZyppHistory::EventList
+EventList
 ZyppHistoryParser::parse()
 {
     QFile file( _fileName );
@@ -85,43 +86,43 @@ void ZyppHistoryParser::parseLine( const QString & line )
     if ( ! checkFieldsCount( fields, 2 ) )
         return;
 
-    ZyppHistory::EventType eventType = parseEventType( fields.at( 1 ) );
+    EventType eventType = parseEventType( fields.at( 1 ) );
 
     switch ( eventType )
     {
-        case ZyppHistory::EventType::Command:     parseCommandEvent   ( fields ); break;
-        case ZyppHistory::EventType::PkgInstall:  parsePkgInstallEvent( fields ); break;
-        case ZyppHistory::EventType::PkgRemove:   parsePkgRemoveEvent ( fields ); break;
-        case ZyppHistory::EventType::RepoAdd:     parseRepoAddEvent   ( fields ); break;
-        case ZyppHistory::EventType::RepoRemove:  parseRepoRemoveEvent( fields ); break;
-        case ZyppHistory::EventType::RepoUrl:     parseRepoUrlEvent   ( fields ); break;
-        case ZyppHistory::EventType::RepoAlias:   parseRepoAliasEvent ( fields ); break;
-        case ZyppHistory::EventType::Patch:       parsePatchEvent     ( fields ); break;
+        case EventType::Command:     parseCommandEvent   ( fields ); break;
+        case EventType::PkgInstall:  parsePkgInstallEvent( fields ); break;
+        case EventType::PkgRemove:   parsePkgRemoveEvent ( fields ); break;
+        case EventType::RepoAdd:     parseRepoAddEvent   ( fields ); break;
+        case EventType::RepoRemove:  parseRepoRemoveEvent( fields ); break;
+        case EventType::RepoUrl:     parseRepoUrlEvent   ( fields ); break;
+        case EventType::RepoAlias:   parseRepoAliasEvent ( fields ); break;
+        case EventType::Patch:       parsePatchEvent     ( fields ); break;
 
-        case ZyppHistory::EventType::Unknown:
+        case EventType::Unknown:
             break;
     }
 }
 
 
-ZyppHistory::EventType
+EventType
 ZyppHistoryParser::parseEventType( const QString & strOrig )
 {
     QString str = strOrig.trimmed().toLower();
 
-    if ( str == "command" ) return ZyppHistory::EventType::Command;
-    if ( str == "install" ) return ZyppHistory::EventType::PkgInstall;
-    if ( str == "remove"  ) return ZyppHistory::EventType::PkgRemove;
-    if ( str == "radd"    ) return ZyppHistory::EventType::RepoAdd;
-    if ( str == "rremove" ) return ZyppHistory::EventType::RepoRemove;
-    if ( str == "rurl"    ) return ZyppHistory::EventType::RepoUrl;
-    if ( str == "ralias"  ) return ZyppHistory::EventType::RepoAlias;
-    if ( str == "patch"   ) return ZyppHistory::EventType::Patch;
+    if ( str == "command" ) return EventType::Command;
+    if ( str == "install" ) return EventType::PkgInstall;
+    if ( str == "remove"  ) return EventType::PkgRemove;
+    if ( str == "radd"    ) return EventType::RepoAdd;
+    if ( str == "rremove" ) return EventType::RepoRemove;
+    if ( str == "rurl"    ) return EventType::RepoUrl;
+    if ( str == "ralias"  ) return EventType::RepoAlias;
+    if ( str == "patch"   ) return EventType::Patch;
 
     logError() << "Unknown zypp history event type \"" << str << "\""
                << " in line " << _lineNo << endl;
 
-    return ZyppHistory::EventType::Unknown;
+    return EventType::Unknown;
 }
 
 
@@ -160,11 +161,11 @@ void ZyppHistoryParser::parseCommandEvent( const QStringList & fields )
         return;
 
     finalizeLastCommand();
-    ZyppHistory::CommandEvent * commandEvent = new ZyppHistory::CommandEvent;
+    CommandEvent * commandEvent = new CommandEvent;
     CHECK_NEW( commandEvent );
 
     commandEvent->timestamp = fields.at( 0 );
-    commandEvent->eventType = ZyppHistory::EventType::Command;
+    commandEvent->eventType = EventType::Command;
 
     QString command = fields.at( 1 ).simplified();
     command.remove( '\'' ); // Remove all single quotes: 'zypper' 'in' 'xhost'
@@ -259,7 +260,7 @@ QString ZyppHistoryParser::prettyCommand( const QString & rawCommandLine )
 }
 
 
-void ZyppHistoryParser::addEvent( ZyppHistory::Event * event )
+void ZyppHistoryParser::addEvent( Event * event )
 {
     if ( _lastCommand )
         _lastCommand->addChildEvent( event );
@@ -279,11 +280,11 @@ void ZyppHistoryParser::parsePkgInstallEvent( const QStringList & fields )
     if ( ! checkFieldsCount( fields, 7 ) )
         return;
 
-    ZyppHistory::PkgEvent * event = new ZyppHistory::PkgEvent;
+    PkgEvent * event = new PkgEvent;
     CHECK_NEW( event );
 
     event->timestamp = fields.at( 0 );
-    event->eventType = ZyppHistory::EventType::PkgInstall;
+    event->eventType = EventType::PkgInstall;
     event->pkgName   = fields.at( 2 );
     event->version   = fields.at( 3 );
     event->arch      = fields.at( 4 );
@@ -301,11 +302,11 @@ void ZyppHistoryParser::parsePkgRemoveEvent( const QStringList & fields )
     if ( ! checkFieldsCount( fields, 4 ) )
         return;
 
-    ZyppHistory::PkgEvent * event = new ZyppHistory::PkgEvent;
+    PkgEvent * event = new PkgEvent;
     CHECK_NEW( event );
 
     event->timestamp = fields.at( 0 );
-    event->eventType = ZyppHistory::EventType::PkgRemove;
+    event->eventType = EventType::PkgRemove;
     event->pkgName   = fields.at( 2 );
     event->version   = fields.at( 3 );
     event->arch      = fields.at( 4 );
@@ -322,11 +323,11 @@ void ZyppHistoryParser::parseRepoAddEvent( const QStringList & fields )
     if ( ! checkFieldsCount( fields, 4 ) )
         return;
 
-    ZyppHistory::RepoEvent * event = new ZyppHistory::RepoEvent;
+    RepoEvent * event = new RepoEvent;
     CHECK_NEW( event );
 
     event->timestamp = fields.at( 0 );
-    event->eventType = ZyppHistory::EventType::RepoAdd;
+    event->eventType = EventType::RepoAdd;
     event->repoAlias = fields.at( 2 );
     event->url       = fields.at( 3 );
 
@@ -342,11 +343,11 @@ void ZyppHistoryParser::parseRepoRemoveEvent( const QStringList & fields )
     if ( ! checkFieldsCount( fields, 3 ) )
         return;
 
-    ZyppHistory::RepoEvent * event = new ZyppHistory::RepoEvent;
+    RepoEvent * event = new RepoEvent;
     CHECK_NEW( event );
 
     event->timestamp = fields.at( 0 );
-    event->eventType = ZyppHistory::EventType::RepoRemove;
+    event->eventType = EventType::RepoRemove;
     event->repoAlias = fields.at( 2 );
 
     addEvent( event );
@@ -361,11 +362,11 @@ void ZyppHistoryParser::parseRepoUrlEvent( const QStringList & fields )
     if ( ! checkFieldsCount( fields, 4 ) )
         return;
 
-    ZyppHistory::RepoEvent * event = new ZyppHistory::RepoEvent;
+    RepoEvent * event = new RepoEvent;
     CHECK_NEW( event );
 
     event->timestamp = fields.at( 0 );
-    event->eventType = ZyppHistory::EventType::RepoUrl;
+    event->eventType = EventType::RepoUrl;
     event->oldUrl    = fields.at( 2 );
     event->url       = fields.at( 3 );
 
@@ -381,11 +382,11 @@ void ZyppHistoryParser::parseRepoAliasEvent( const QStringList & fields )
     if ( ! checkFieldsCount( fields, 4 ) )
         return;
 
-    ZyppHistory::RepoEvent * event = new ZyppHistory::RepoEvent;
+    RepoEvent * event = new RepoEvent;
     CHECK_NEW( event );
 
     event->timestamp    = fields.at( 0 );
-    event->eventType    = ZyppHistory::EventType::RepoUrl;
+    event->eventType    = EventType::RepoUrl;
     event->oldRepoAlias = fields.at( 2 );
     event->repoAlias     = fields.at( 3 );
 
@@ -401,11 +402,11 @@ void ZyppHistoryParser::parsePatchEvent( const QStringList & fields )
     if ( ! checkFieldsCount( fields, 10 ) )
         return;
 
-    ZyppHistory::PatchEvent * event = new ZyppHistory::PatchEvent;
+    PatchEvent * event = new PatchEvent;
     CHECK_NEW( event );
 
     event->timestamp  = fields.at( 0 );
-    event->eventType  = ZyppHistory::EventType::Patch;
+    event->eventType  = EventType::Patch;
     event->patchName  = fields.at( 2 );
     event->version    = fields.at( 3 );
     event->arch       = fields.at( 4 );
