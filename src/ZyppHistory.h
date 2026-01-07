@@ -90,7 +90,7 @@ public:
          * Add a child event. This class takes over ownership of the child and
          * will delete it in its destructor.
          **/
-        void addChild( Event * childEvent );
+        void addChildEvent( Event * childEvent );
 
         /**
          * Release any unused memory in the childEvents list.

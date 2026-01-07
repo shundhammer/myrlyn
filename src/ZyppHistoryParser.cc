@@ -24,6 +24,7 @@
 #define MAX_ERR_COUNT 500
 
 
+
 ZyppHistoryParser::ZyppHistoryParser( const QString & fileName ):
     _fileName( fileName ),
     _lineNo(0),
@@ -185,15 +186,21 @@ void ZyppHistoryParser::finalizeLastCommand()
 {
     if ( _lastCommand )
     {
-        _lastCommand->squeezeChildEvents();
-
         // Only append _lastCommand to _events if it has any child events to
         // prevent lots of empty commands apearing in the history; e.g. when a
         // user (like myself) often checks with Myrlyn if there are any
         // updates, or if trying a zypper dry-run that has no effect.
 
         if ( _lastCommand->hasChildEvents() )
+        {
+            _lastCommand->squeezeChildEvents();
             _events << _lastCommand;
+        }
+        else
+        {
+            logDebug() << "Deleting empty command " << _lastCommand->command << endl;
+            delete _lastCommand;
+        }
 
         _lastCommand = 0;
     }
@@ -208,8 +215,7 @@ QString ZyppHistoryParser::prettyCommand( const QString & rawCommandLine )
     // zypper in xhost
     // zypper dup
     //
-    // /usr/bin/ruby.ruby3.3 --encoding=utf-8 /usr/lib/YaST2/bin/y2start sw_single qt \
-    //   -name YaST2 -icon yast
+    // /usr/bin/ruby.ruby3.3 --encoding=utf-8 /usr/lib/YaST2/bin/y2start sw_single qt -name YaST2
 
     QString commandLine = rawCommandLine.simplified();
     QString result      = commandLine;
@@ -247,47 +253,164 @@ QString ZyppHistoryParser::prettyCommand( const QString & rawCommandLine )
     else if ( command.toLower().contains( "packagekit" ) )
         result = command;
 
+    logDebug() << "result: " << result << endl;
+
     return result;
+}
+
+
+void ZyppHistoryParser::addEvent( ZyppHistory::Event * event )
+{
+    if ( _lastCommand )
+        _lastCommand->addChildEvent( event );
+    else
+    {
+        logWarning() << "No last command event for event in line " << _lineNo << endl;
+        _events << event;
+    }
 }
 
 
 void ZyppHistoryParser::parsePkgInstallEvent( const QStringList & fields )
 {
+    //      #0                #1       #2     #3      #4       #5              #6                    #7
+    // 2024-09-13 18:20:50|install|qdirstat|1.9-1.3|x86_64|root@meteor|download.opensuse.org-oss|4138...527a0|
 
+    if ( ! checkFieldsCount( fields, 7 ) )
+        return;
+
+    ZyppHistory::PkgEvent * event = new ZyppHistory::PkgEvent;
+    CHECK_NEW( event );
+
+    event->timestamp = fields.at( 0 );
+    event->eventType = ZyppHistory::EventType::PkgInstall;
+    event->pkgName   = fields.at( 2 );
+    event->version   = fields.at( 3 );
+    event->arch      = fields.at( 4 );
+    event->repoAlias = fields.at( 6 );
+
+    addEvent( event );
 }
 
 
 void ZyppHistoryParser::parsePkgRemoveEvent( const QStringList & fields )
 {
+    //      #0               #1       #2      #3       #4      #5
+    // 2024-09-13 18:13:28|remove |drkonqi6|6.1.4-1.1|x86_64|root@meteor|
 
+    if ( ! checkFieldsCount( fields, 4 ) )
+        return;
+
+    ZyppHistory::PkgEvent * event = new ZyppHistory::PkgEvent;
+    CHECK_NEW( event );
+
+    event->timestamp = fields.at( 0 );
+    event->eventType = ZyppHistory::EventType::PkgRemove;
+    event->pkgName   = fields.at( 2 );
+    event->version   = fields.at( 3 );
+    event->arch      = fields.at( 4 );
+
+    addEvent( event );
 }
 
 
 void ZyppHistoryParser::parseRepoAddEvent( const QStringList & fields )
 {
+    //      #0              #1         #2                               #3
+    // 2025-01-16 22:04:52|radd   |download.nvidia.com-tumbleweed|https://download.nvidia.com/opensuse/tumbleweed/|
 
+    if ( ! checkFieldsCount( fields, 4 ) )
+        return;
+
+    ZyppHistory::RepoEvent * event = new ZyppHistory::RepoEvent;
+    CHECK_NEW( event );
+
+    event->timestamp = fields.at( 0 );
+    event->eventType = ZyppHistory::EventType::RepoAdd;
+    event->repoAlias = fields.at( 2 );
+    event->url       = fields.at( 3 );
+
+    addEvent( event );
 }
 
 
 void ZyppHistoryParser::parseRepoRemoveEvent( const QStringList & fields )
 {
+    //      #0               #1         #2
+    // 2025-01-16 22:07:11|rremove|download.nvidia.com-tumbleweed|
 
+    if ( ! checkFieldsCount( fields, 3 ) )
+        return;
+
+    ZyppHistory::RepoEvent * event = new ZyppHistory::RepoEvent;
+    CHECK_NEW( event );
+
+    event->timestamp = fields.at( 0 );
+    event->eventType = ZyppHistory::EventType::RepoRemove;
+    event->repoAlias = fields.at( 2 );
+
+    addEvent( event );
 }
 
 
 void ZyppHistoryParser::parseRepoUrlEvent( const QStringList & fields )
 {
+    //      #0              #1          #2                                                       #3
+    // 2025-02-07 13:06:26|rurl   |http://codecs.opensuse.org/openh264/openSUSE_Tumbleweed|https://codecs.opensuse.org/openh264/openSUSE_Tumbleweed|
 
+    if ( ! checkFieldsCount( fields, 4 ) )
+        return;
+
+    ZyppHistory::RepoEvent * event = new ZyppHistory::RepoEvent;
+    CHECK_NEW( event );
+
+    event->timestamp = fields.at( 0 );
+    event->eventType = ZyppHistory::EventType::RepoUrl;
+    event->oldUrl    = fields.at( 2 );
+    event->url       = fields.at( 3 );
+
+    addEvent( event );
 }
 
 
 void ZyppHistoryParser::parseRepoAliasEvent( const QStringList & fields )
 {
+    //      #0               #1        #2                         #3
+    // 2024-09-25 10:01:06|ralias |download.opensuse.org-oss_1|slowroll-update|
 
+    if ( ! checkFieldsCount( fields, 4 ) )
+        return;
+
+    ZyppHistory::RepoEvent * event = new ZyppHistory::RepoEvent;
+    CHECK_NEW( event );
+
+    event->timestamp    = fields.at( 0 );
+    event->eventType    = ZyppHistory::EventType::RepoUrl;
+    event->oldRepoAlias = fields.at( 2 );
+    event->repoAlias     = fields.at( 3 );
+
+    addEvent( event );
 }
 
 
 void ZyppHistoryParser::parsePatchEvent( const QStringList & fields )
 {
+    //      #0              #1        #2            #3   #4         #5                #6        #7       #8     #9
+    // 2026-01-07 16:24:32|patch  |openSUSE-2024-157|1|noarch|repo-backports-update|important|security|needed|applied|
 
+    if ( ! checkFieldsCount( fields, 10 ) )
+        return;
+
+    ZyppHistory::PatchEvent * event = new ZyppHistory::PatchEvent;
+    CHECK_NEW( event );
+
+    event->timestamp  = fields.at( 0 );
+    event->eventType  = ZyppHistory::EventType::Patch;
+    event->patchName  = fields.at( 2 );
+    event->version    = fields.at( 3 );
+    event->arch       = fields.at( 4 );
+    event->repoAlias  = fields.at( 5 );
+    event->patchState = fields.at( 9 );
+
+    addEvent( event );
 }

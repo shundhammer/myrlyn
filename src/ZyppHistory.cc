@@ -122,7 +122,7 @@ QString ZyppHistory::Event::time() const
 
 
 
-void ZyppHistory::ParentEvent::addChild( Event * childEvent )
+void ZyppHistory::ParentEvent::addChildEvent( Event * childEvent )
 {
     if ( childEvent )
         _childEvents << childEvent;

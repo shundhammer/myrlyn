@@ -75,6 +75,7 @@ protected:
 
     void    finalizeLastCommand();
     QString prettyCommand( const QString & rawCommand );
+    void    addEvent( ZyppHistory::Event * event );
 
 
     //
