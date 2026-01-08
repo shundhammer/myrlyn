@@ -266,8 +266,19 @@ void ZyppHistoryParser::addEvent( Event * event )
         _lastCommand->addChildEvent( event );
     else
     {
-        logWarning() << "No last command event for event in line " << _lineNo << endl;
-        _events << event;
+        // Special case: The beginning of the history file was cut off, so the
+        // history doesn't start with a command.  So let's create an artificial
+        // one as a bracket for the first events until a real command appears,
+        // and add this new child event to this artificial first one.
+
+        CommandEvent * commandEvent = new CommandEvent;
+        CHECK_NEW( commandEvent );
+
+        commandEvent->timestamp = event->timestamp;
+        commandEvent->eventType = EventType::Command;
+
+        _lastCommand = commandEvent;
+        _lastCommand->addChildEvent( event );
     }
 }
 
