@@ -50,6 +50,7 @@
 #include "QY2CursorHelper.h"
 #include "MyrlynApp.h"
 #include "RepoConfigDialog.h"
+#include "ZyppHistoryBrowser.h"
 #include "YQPkgChangeLogView.h"
 #include "YQPkgChangesDialog.h"
 #include "YQPkgClassificationFilterView.h"
@@ -59,7 +60,6 @@
 #include "YQPkgDiskUsageList.h"
 #include "YQPkgFileListView.h"
 #include "YQPkgFilterTab.h"
-#include "YQPkgHistoryDialog.h"
 #include "YQPkgLangList.h"
 #include "YQPkgList.h"
 #include "YQPkgPatchFilterView.h"
@@ -1455,7 +1455,8 @@ YQPkgSelector::showProducts()
 void
 YQPkgSelector::showHistory()
 {
-    YQPkgHistoryDialog::showHistoryDialog(this);
+    ZyppHistoryBrowser dialog;
+    dialog.exec();
 }
 
 

@@ -42,6 +42,7 @@ set( SOURCES
   WindowSettings.cc
   Workflow.cc
   ZyppHistory.cc
+  ZyppHistoryBrowser.cc
   ZyppHistoryEvents.cc
   ZyppHistoryParser.cc
   ZyppLogger.cc
@@ -64,7 +65,6 @@ set( SOURCES
   YQPkgFilterTab.cc
   YQPkgFilters.cc
   YQPkgGenericDetailsView.cc
-  YQPkgHistoryDialog.cc
   YQPkgLangList.cc
   YQPkgList.cc
   YQPkgObjList.cc

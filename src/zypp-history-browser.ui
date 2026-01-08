@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dialog</class>
- <widget class="QDialog" name="dialog">
+ <class>ZyppHistoryBrowser</class>
+ <widget class="QDialog" name="ZyppHistoryBrowser">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>1106</width>
-    <height>729</height>
+    <height>718</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -143,7 +143,7 @@
   <connection>
    <sender>closeButton</sender>
    <signal>clicked()</signal>
-   <receiver>dialog</receiver>
+   <receiver>ZyppHistoryBrowser</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
