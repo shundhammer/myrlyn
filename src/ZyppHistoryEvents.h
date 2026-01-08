@@ -61,13 +61,12 @@ namespace ZyppHistoryEvents
     /**
      * Base class for events that can have child events, like CommandEvent.
      *
-     * Those are the events triggered in that command or session, i.e. with a
-     * single 'zypper' command, or in a single Myrlyn or YaST session; or the
-     * PkgEvents (PkgInstallEvent, PkgRemoveEvent)
+     * Child Events are the events triggered in that command or session,
+     * i.e. with a single 'zypper' command, or in a single Myrlyn or YaST
+     * session; or the PkgEvents (PkgInstallEvent, PkgRemoveEvent)
      **/
     struct ParentEvent: public Event
     {
-
         const EventList & childEvents() { return _childEvents; }
 
         qsizetype childEventsCount() const { return   _childEvents.size();    }
@@ -115,6 +114,8 @@ namespace ZyppHistoryEvents
     {
         QString command;     // "YaST sw_single", "zypper in qdirstat ..."
         QString rawCommand;  // "/usr/bin/ruby3.3 /usr/lib/YaST2/bin/y2start sw_single qt"
+
+        CommandEvent() { eventType = EventType::Command; }
     };
 
 
@@ -125,7 +126,7 @@ namespace ZyppHistoryEvents
      **/
     struct PkgEvent: public Event
     {
-        QString pkgName;
+        QString name;
         QString version;
         QString arch;
         QString repoAlias;
@@ -153,7 +154,7 @@ namespace ZyppHistoryEvents
      **/
     struct PatchEvent: public Event
     {
-        QString patchName;
+        QString name;
         QString version;
         QString arch;
         QString repoAlias;

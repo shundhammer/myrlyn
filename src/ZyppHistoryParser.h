@@ -51,6 +51,15 @@ protected:
     void parseLine( const QString & line );
     ZyppHistoryEvents::EventType parseEventType( const QString & str );
 
+    ZyppHistoryEvents::Event * parseCommandEvent   ( const QStringList & fields );
+    ZyppHistoryEvents::Event * parsePkgInstallEvent( const QStringList & fields );
+    ZyppHistoryEvents::Event * parsePkgRemoveEvent ( const QStringList & fields );
+    ZyppHistoryEvents::Event * parseRepoAddEvent   ( const QStringList & fields );
+    ZyppHistoryEvents::Event * parseRepoRemoveEvent( const QStringList & fields );
+    ZyppHistoryEvents::Event * parseRepoUrlEvent   ( const QStringList & fields );
+    ZyppHistoryEvents::Event * parseRepoAliasEvent ( const QStringList & fields );
+    ZyppHistoryEvents::Event * parsePatchEvent     ( const QStringList & fields );
+    
     /**
      * Increase the parse error counter and throw an exception if it reaches a
      * maximum number of errors.
@@ -63,15 +72,6 @@ protected:
      * 'false'. Throw an exception if there are too many parse errors.
      **/
     bool checkFieldsCount( const QStringList & fields, int requiredCount );
-
-    void parseCommandEvent   ( const QStringList & fields );
-    void parsePkgInstallEvent( const QStringList & fields );
-    void parsePkgRemoveEvent ( const QStringList & fields );
-    void parseRepoAddEvent   ( const QStringList & fields );
-    void parseRepoRemoveEvent( const QStringList & fields );
-    void parseRepoUrlEvent   ( const QStringList & fields );
-    void parseRepoAliasEvent ( const QStringList & fields );
-    void parsePatchEvent     ( const QStringList & fields );
 
     void    finalizeLastCommand();
     QString prettyCommand( const QString & rawCommand );
