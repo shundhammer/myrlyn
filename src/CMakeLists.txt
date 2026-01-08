@@ -138,6 +138,7 @@ set( UI_FILES
      search-filter-view.ui
      summary-page.ui
      updates-filter-view.ui
+     zypp-history-browser.ui
    )
 
 
