@@ -19,6 +19,7 @@
 #include "WindowSettings.h"
 #include "utf8.h"
 #include "YQi18n.h"
+#include "YQIconPool.h"
 #include "ZyppHistory.h"
 #include "ZyppHistoryBrowser.h"
 
@@ -44,6 +45,9 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
 
     WindowSettings::read( this, "ZyppHistoryBrowser" );
     populate();
+
+    connect( _ui->timeLineTree, SIGNAL( itemClicked    ( QTreeWidgetItem * item, int col ) ),
+             this,              SLOT  ( timeLineClicked( QTreeWidgetItem * item, int col ) ) );
 }
 
 
@@ -200,4 +204,156 @@ bool ZyppHistoryBrowser::anyItemstartsWith( const QString     & searchText,
     }
 
     return false;
+}
+
+
+void ZyppHistoryBrowser::timeLineClicked( QTreeWidgetItem * item, int col )
+{
+    Q_UNUSED( col );
+
+    QString date = item->text( 0 );
+
+    if ( date.size() <= QString( "2025" ).size() ) // Don't show a whole year's history at once
+        return;
+
+    populateEventsTree( date );
+}
+
+
+void ZyppHistoryBrowser::populateEventsTree( const QString & date )
+{
+    _ui->eventsTree->clear();
+
+    for ( Event * event: ZyppHistory::instance()->events() )
+    {
+        if ( event->timestamp.startsWith( date ) )
+            addEventItem( event );
+    }
+}
+
+
+enum EventsTreeColumns
+{
+    TimestampCol = 0,
+    EventTypeCol,
+    NameCol,
+    VersionCol,
+    ArchCol,
+    RepoCol
+};
+
+
+void ZyppHistoryBrowser::addEventItem( Event * event, QTreeWidgetItem * parentItem )
+{
+    CHECK_PTR( event );
+
+    QTreeWidgetItem * item = new QTreeWidgetItem;
+    CHECK_NEW( item );
+
+    item->setText( TimestampCol, event->timestamp );
+
+    switch ( event->eventType )
+    {
+        case EventType::Command:     fillCommandItem( item, event ); break;
+
+        case EventType::PkgInstall:
+        case EventType::PkgRemove:   fillPkgItem    ( item, event ); break;
+
+        case EventType::RepoAdd:
+        case EventType::RepoRemove:
+        case EventType::RepoUrl:
+        case EventType::RepoAlias:   fillRepoItem   ( item, event ); break;
+
+        case EventType::Patch:       fillPatchItem  ( item, event ); break;
+
+        default:
+            break;
+    }
+
+    if ( parentItem )
+        parentItem->addChild( item );
+    else
+        _ui->eventsTree->addTopLevelItem( item );
+}
+
+
+void ZyppHistoryBrowser::fillCommandItem( QTreeWidgetItem * commandEventItem, Event * event )
+{
+    CommandEvent * commandEvent = dynamic_cast<CommandEvent *>( event );
+    CHECK_DYNAMIC_CAST( commandEvent, "ZyppHistoryEvents::CommandEvent" );
+
+    commandEventItem->setText( NameCol, commandEvent->command   );
+
+    for ( Event * childEvent: commandEvent->childEvents() )
+    {
+        addEventItem( childEvent,
+                      commandEventItem ); // parentItem
+    }
+}
+
+
+void ZyppHistoryBrowser::fillPkgItem( QTreeWidgetItem * item, Event * event )
+{
+    PkgEvent * pkgEvent = dynamic_cast<PkgEvent *>( event );
+    CHECK_DYNAMIC_CAST( pkgEvent, "ZyppHistoryEvents::PkgEvent" );
+
+    QString eventType = event->eventType == EventType::PkgInstall ? _( "Pkg+" ) : _( "Pkg-" );
+    QPixmap icon      = event->eventType == EventType::PkgInstall ?
+        YQIconPool::pkgInstall() : YQIconPool::pkgDel();
+
+    item->setText( EventTypeCol, eventType           );
+    item->setText( NameCol,      pkgEvent->name      );
+    item->setIcon( NameCol,      icon                );
+    item->setText( VersionCol,   pkgEvent->version   );
+    item->setText( ArchCol,      pkgEvent->arch      );
+    item->setText( RepoCol,      pkgEvent->repoAlias );
+}
+
+
+void ZyppHistoryBrowser::fillRepoItem( QTreeWidgetItem * item, Event * event )
+{
+    RepoEvent * repoEvent = dynamic_cast<RepoEvent *>( event );
+    CHECK_DYNAMIC_CAST( repoEvent, "ZyppHistoryEvents::RepoEvent" );
+
+    switch ( event->eventType )
+    {
+        case EventType::RepoAdd:
+            item->setText( EventTypeCol,  _( "Repo+" )   );
+            item->setText( NameCol, repoEvent->url       );
+            item->setText( RepoCol, repoEvent->repoAlias );
+            break;
+
+        case EventType::RepoRemove:
+            item->setText( EventTypeCol,  _( "Repo-" )   );
+            item->setText( NameCol, repoEvent->repoAlias );
+            break;
+
+        case EventType::RepoUrl:
+            item->setText( EventTypeCol, _( "Repo-URL" ) );
+            item->setText( NameCol, repoEvent->url       );
+            item->setText( RepoCol, repoEvent->repoAlias );
+            break;
+
+        case EventType::RepoAlias:
+            item->setText( EventTypeCol, _( "Repo-Alias" )  );
+            item->setText( NameCol, repoEvent->repoAlias    );
+            item->setText( RepoCol, repoEvent->oldRepoAlias );
+            break;
+
+        default:
+            break;
+    }
+}
+
+
+void ZyppHistoryBrowser::fillPatchItem( QTreeWidgetItem * item, Event * event )
+{
+    PatchEvent * patchEvent = dynamic_cast<PatchEvent *>( event );
+    CHECK_DYNAMIC_CAST( patchEvent, "ZyppHistoryEvents::PatchEvent" );
+
+    item->setText( EventTypeCol, _( "Patch" )          );
+    item->setText( NameCol,      patchEvent->name      );
+    item->setText( VersionCol,   patchEvent->version   );
+    item->setText( ArchCol,      patchEvent->arch      );
+    item->setText( RepoCol,      patchEvent->repoAlias );
 }

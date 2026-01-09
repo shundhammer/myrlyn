@@ -38,7 +38,7 @@ public:
 
     /**
      * Parse the zypp history file and return the list of history events in
-     * that file.
+     * that file. Ownership of the events is transferred to the caller.
      *
      * This may throw Exceptions:
      *   - FileException
@@ -51,6 +51,9 @@ protected:
     void parseLine( const QString & line );
     ZyppHistoryEvents::EventType parseEventType( const QString & str );
 
+    // Parse a history event of the given type and create an Event struct from it.
+    // Ownership is transferred to the caller.
+
     ZyppHistoryEvents::Event * parseCommandEvent   ( const QStringList & fields );
     ZyppHistoryEvents::Event * parsePkgInstallEvent( const QStringList & fields );
     ZyppHistoryEvents::Event * parsePkgRemoveEvent ( const QStringList & fields );
@@ -59,7 +62,7 @@ protected:
     ZyppHistoryEvents::Event * parseRepoUrlEvent   ( const QStringList & fields );
     ZyppHistoryEvents::Event * parseRepoAliasEvent ( const QStringList & fields );
     ZyppHistoryEvents::Event * parsePatchEvent     ( const QStringList & fields );
-    
+
     /**
      * Increase the parse error counter and throw an exception if it reaches a
      * maximum number of errors.

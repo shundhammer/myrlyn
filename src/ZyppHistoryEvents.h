@@ -52,6 +52,8 @@ namespace ZyppHistoryEvents
 
         QString date() const;   // "2025-12-28"
         QString time() const;   // "14:15:26"
+
+        virtual ~Event() {}     // To make it polymorphic for dynamic_cast
     };
 
 
