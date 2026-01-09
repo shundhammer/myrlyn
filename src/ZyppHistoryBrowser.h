@@ -53,10 +53,21 @@ protected slots:
 
 protected:
 
-    /**
-     * Fill the widgets with data
-     **/
     void populate();
+    void populateTimeLineTree();
+
+    /**
+     * Return the number of days in the given month (1..12) of the specified
+     * year.
+     **/
+    int  daysInMonth( int year, int month ) const;
+
+    /**
+     * Return 'true' if any item in 'stringList' starts with 'searchText',
+     * 'false' otherwise.
+     **/
+    bool anyItemstartsWith( const QString     & searchText,
+                            const QStringList & stringList ) const;
 
     // Data members
 

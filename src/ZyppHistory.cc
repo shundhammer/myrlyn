@@ -23,6 +23,8 @@
 
 #define DEFAULT_ZYPP_HISTORY "/var/log/zypp/history"
 
+using namespace ZyppHistoryEvents;
+
 
 ZyppHistory * ZyppHistory::_instance = 0;
 QString       ZyppHistory::_fileName( DEFAULT_ZYPP_HISTORY );
@@ -78,6 +80,32 @@ bool ZyppHistory::read()
     }
 
     return true;  // success
+}
+
+
+QStringList
+ZyppHistory::uniqueDates()
+{
+    QStringList dates;
+    QString lastDate;
+
+    for ( Event * event: _events )
+    {
+        QString date = event->date();
+
+        if ( date != lastDate )
+        {
+            dates << date;
+            lastDate = date;
+        }
+    }
+
+#if 0
+    for ( const QString & date: dates )
+        logDebug() << date << endl;
+#endif
+
+    return dates;
 }
 
 

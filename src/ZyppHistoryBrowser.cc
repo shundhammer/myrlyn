@@ -57,6 +57,147 @@ ZyppHistoryBrowser::~ZyppHistoryBrowser()
 
 void ZyppHistoryBrowser::populate()
 {
-    // This can be called repeatedly; it uses cached data if possible.
+    // This can be called repeatedly without any performance pentalty:
+    // It uses cached data if possible.
     ZyppHistory::instance()->read();
+
+    populateTimeLineTree();
+}
+
+
+void ZyppHistoryBrowser::populateTimeLineTree()
+{
+    QStringList dates = ZyppHistory::instance()->uniqueDates();
+
+    QString firstDate = dates.first();
+    QString lastDate  = dates.last();
+
+    //                                  #0  #1 #2
+    //                                 2025-12-28
+    int firstYear  = firstDate.section( '-', 0, 0 ).toInt();
+    int firstMonth = firstDate.section( '-', 1, 1 ).toInt();
+    int firstDay   = firstDate.section( '-', 2, 2 ).toInt();
+
+    int lastYear   = lastDate.section( '-', 0, 0 ).toInt();
+    int lastMonth  = lastDate.section( '-', 1, 1 ).toInt();
+    int lastDay    = lastDate.section( '-', 2, 2 ).toInt();
+
+    // Generate hierarchical items (years, months, days) in the timeline
+    // (navigation) tree on the left side for each date between firstDate and
+    // lastDate.
+    //
+    //   v 2024                (expanded)
+    //     v 2024-09
+    //         2024-09-17      (first day in the zypp history)
+    //         2024-09-18
+    //         ...
+    //         ...
+    //     v 2024-10
+    //         2024-10-01
+    //         2024-10-02
+    //         2024-10-03
+    //         ...
+    //         ...
+    //         2024-10-31
+    //     > 2024-11
+    //     > 2014-12
+    //   v 2025                (expanded)
+    //     > 2025-01
+    //     > 2025-02
+    //       ...
+    //
+    // Dates will be clickable if they appear in uniqueDates, disabled
+    // (non-clickable) if not.
+    //
+    // The idea behind this is to give a visual impression about
+    // days / months / years with and without zypp events
+    // (Myrlyn, zypper, YaST calls).
+
+    for ( int year = firstYear; year <= lastYear; year++ )
+    {
+        QString yearStr = QString( "%1" ).arg( year );
+        QTreeWidgetItem * yearItem = new QTreeWidgetItem( _ui->timeLineTree );
+        CHECK_NEW( yearItem );
+        yearItem->setText( 0, yearStr );
+        yearItem->setExpanded( year == lastYear );
+
+        if ( ! anyItemstartsWith( yearStr, dates ) )
+            yearItem->setFlags( Qt::NoItemFlags );  // Disable this item
+
+        int startMonth = ( year == firstYear ) ? firstMonth : 1;
+        int endMonth   = ( year == lastYear  ) ? lastMonth  : 12;
+
+        for ( int month = startMonth; month <= endMonth; month++ )
+        {
+            QString monthStr = QString( "%1-%2" )
+                .arg( year )
+                .arg( month, 2, 10, QChar( '0' ) );   // n, fieldWidth, base, fillChar
+            QTreeWidgetItem * monthItem = new QTreeWidgetItem( yearItem );
+            CHECK_NEW( monthItem );
+            monthItem->setText( 0, monthStr );
+            monthItem->setExpanded( year == lastYear && month == lastMonth );
+
+            if ( ! anyItemstartsWith( monthStr, dates ) )
+                monthItem->setFlags( Qt::NoItemFlags );  // Disable this item
+
+            int startDay = ( year == firstYear && month == firstMonth ) ? firstDay : 1;
+            int endDay   = ( year == lastYear  && month == lastMonth  ) ? lastDay  : daysInMonth( year, month );
+
+            for ( int day = startDay; day <= endDay; day++ )
+            {
+                QString date = QString( "%1-%2-%3" )
+                    .arg( year )
+                    .arg( month, 2, 10, QChar( '0' ) )  // n, fieldWidth, base, fillChar
+                    .arg( day,   2, 10, QChar( '0' ) ); // n, fieldWidth, base, fillChar
+                QTreeWidgetItem * dateItem = new QTreeWidgetItem( monthItem );
+                CHECK_NEW( dateItem );
+                dateItem->setText( 0, date );
+
+                if ( ! dates.contains( date ) )
+                    dateItem ->setFlags( Qt::NoItemFlags );  // Disable this item
+            }
+        }
+    }
+}
+
+
+int ZyppHistoryBrowser::daysInMonth( int year, int month ) const
+{
+    switch ( month )
+    {
+        case 1:  return 31; // January
+
+        case 2:             // February - leap year rules!
+            if ( year % 400 == 0 ) return 29; // Leap year    (2000, 2400)
+            if ( year % 100 == 0 ) return 28; // No leap year (2000, 2100 )
+            if ( year %   4 == 0 ) return 29; // Leap year    (2024, 2028, 2032)
+            else                   return 28; // No leap year
+
+        case 3:  return 31;  // March
+        case 4:  return 30;  // April
+        case 5:  return 31;  // May
+        case 6:  return 30;  // June
+        case 7:  return 31;  // July
+        case 8:  return 31;  // August
+        case 9:  return 30;  // September
+        case 10: return 31;  // October
+        case 11: return 30;  // November
+        case 12: return 31;  // December
+
+        default: // Shouldn't happen
+            return 0;
+    }
+}
+
+
+bool ZyppHistoryBrowser::anyItemstartsWith( const QString     & searchText,
+                                            const QStringList & stringList ) const
+{
+    for ( const QString & item: stringList )
+    {
+        if ( item.startsWith( searchText ) )
+             return true;
+    }
+
+    return false;
 }
