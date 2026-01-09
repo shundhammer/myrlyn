@@ -860,7 +860,10 @@ YQPkgSelector::addMenus()
 
     extrasMenu->addAction( _( "Show &Products"         ), this, SLOT( showProducts()    ) );
     extrasMenu->addAction( _( "Show Package &Changes"  ), this, SLOT( showAutoPkgList() ) );
-    extrasMenu->addAction( _( "Show &History"          ), this, SLOT( showHistory()     ) );
+
+    extrasMenu->addAction( _( "Show &History"          ),
+                           Qt::CTRL | Qt::SHIFT | Qt::Key_H,
+                           this, SLOT( showHistory()     ) );
 
     extrasMenu->addSeparator();
 
