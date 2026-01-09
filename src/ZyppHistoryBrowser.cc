@@ -272,7 +272,17 @@ void ZyppHistoryBrowser::addEventItem( Event * event, QTreeWidgetItem * parentIt
     else
         _ui->eventsTree->addTopLevelItem( item );
 
-    item->setExpanded( true );
+    if ( event->eventType == EventType::Command )
+    {
+        static QFont boldFont( item->font( 0 ) );
+        boldFont.setBold( true );
+        item->setFont( 0, boldFont );
+
+        item->setExpanded( true );
+
+        // This only seems to work when the item is added to the QTreeWidget
+        item->setFirstColumnSpanned( true );
+    }
 }
 
 
@@ -284,12 +294,6 @@ void ZyppHistoryBrowser::fillCommandItem( QTreeWidgetItem * item, Event * event 
     item->setText( 0, QString( "%1  %2" )
                    .arg( event->timestamp )
                    .arg( commandEvent->command ) );
-
-    QFont font( item->font( 0 ) );
-    font.setBold( true );
-    item->setFont( 0, font );
-
-    item->setFirstColumnSpanned( true );
 
     for ( Event * childEvent: commandEvent->childEvents() )
     {
