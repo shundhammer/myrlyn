@@ -78,16 +78,6 @@
       </property>
       <column>
        <property name="text">
-        <string>Date</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Event</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
         <string>Name</string>
        </property>
       </column>

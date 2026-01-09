@@ -22,7 +22,8 @@
 #include "Logger.h"
 #include "Exception.h"
 
-#define MAX_ERR_COUNT 500
+#define MAX_ERR_COUNT       500
+#define MAX_ZYPPER_ARG_LEN  100
 
 using namespace ZyppHistoryEvents;
 
@@ -427,10 +428,10 @@ QString ZyppHistoryParser::prettyCommand( const QString & rawCommandLine )
     {
         result = "zypper";
 
-        if ( args.size() < 25 )
+        if ( args.size() < MAX_ZYPPER_ARG_LEN )
             result += QString( " " ) + args;
         else
-            result += QString( " " ) + args.left( 25 ) + "...";
+            result += QString( " " ) + args.left( MAX_ZYPPER_ARG_LEN ) + "...";
     }
     else if ( command.toLower().contains( "packagekit" ) )
         result = command;

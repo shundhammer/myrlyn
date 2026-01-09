@@ -27,6 +27,15 @@
 using namespace ZyppHistoryEvents;
 
 
+enum EventsTreeColumns
+{
+    NameCol,
+    VersionCol,
+    ArchCol,
+    RepoCol
+};
+
+
 ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     : QDialog( parent ? parent : MainWindow::instance() )
     , _ui( new Ui::ZyppHistoryBrowser )  // Use the Qt designer .ui form (XML)
@@ -44,6 +53,12 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     // for the _ui object.
 
     WindowSettings::read( this, "ZyppHistoryBrowser" );
+
+    _ui->eventsTree->setColumnWidth( NameCol,    400 );
+    _ui->eventsTree->setColumnWidth( VersionCol, 200 );
+    _ui->eventsTree->setColumnWidth( ArchCol,    100 );
+    _ui->eventsTree->setColumnWidth( RepoCol,    250 );
+
     populate();
 
     connect( _ui->timeLineTree, SIGNAL( currentItemChanged( QTreeWidgetItem * ,
@@ -231,23 +246,17 @@ void ZyppHistoryBrowser::populateEventsTree( const QString & date )
 }
 
 
-enum EventsTreeColumns
-{
-    TimestampCol = 0,
-    EventTypeCol,
-    NameCol,
-    VersionCol,
-    ArchCol,
-    RepoCol
-};
-
-
 void ZyppHistoryBrowser::addEventItem( Event * event, QTreeWidgetItem * parentItem )
 {
     CHECK_PTR( event );
 
     QTreeWidgetItem * item = new QTreeWidgetItem;
     CHECK_NEW( item );
+
+    if ( parentItem )
+        parentItem->addChild( item );
+    else
+        _ui->eventsTree->addTopLevelItem( item );
 
     switch ( event->eventType )
     {
@@ -266,23 +275,6 @@ void ZyppHistoryBrowser::addEventItem( Event * event, QTreeWidgetItem * parentIt
         default:
             break;
     }
-
-    if ( parentItem )
-        parentItem->addChild( item );
-    else
-        _ui->eventsTree->addTopLevelItem( item );
-
-    if ( event->eventType == EventType::Command )
-    {
-        static QFont boldFont( item->font( 0 ) );
-        boldFont.setBold( true );
-        item->setFont( 0, boldFont );
-
-        item->setExpanded( true );
-
-        // This only seems to work when the item is added to the QTreeWidget
-        item->setFirstColumnSpanned( true );
-    }
 }
 
 
@@ -294,6 +286,13 @@ void ZyppHistoryBrowser::fillCommandItem( QTreeWidgetItem * item, Event * event 
     item->setText( 0, QString( "%1  %2" )
                    .arg( event->timestamp )
                    .arg( commandEvent->command ) );
+
+    static QFont boldFont( item->font( 0 ) );
+    boldFont.setBold( true );
+    item->setFont( 0, boldFont );
+
+    item->setExpanded( true );
+    item->setFirstColumnSpanned( true );
 
     for ( Event * childEvent: commandEvent->childEvents() )
     {
@@ -323,35 +322,40 @@ void ZyppHistoryBrowser::fillRepoItem( QTreeWidgetItem * item, Event * event )
 {
     RepoEvent * repoEvent = dynamic_cast<RepoEvent *>( event );
     CHECK_DYNAMIC_CAST( repoEvent, "ZyppHistoryEvents::RepoEvent" );
+    QString text;
 
     switch ( event->eventType )
     {
         case EventType::RepoAdd:
-            item->setText( EventTypeCol,  _( "Repo+" )   );
-            item->setText( NameCol, repoEvent->url       );
-            item->setText( RepoCol, repoEvent->repoAlias );
+            text = _( "Repo+  %1  %2" )
+                .arg( repoEvent->repoAlias )
+                .arg( repoEvent->url );
             break;
 
         case EventType::RepoRemove:
-            item->setText( EventTypeCol,  _( "Repo-" )   );
-            item->setText( NameCol, repoEvent->repoAlias );
+            text = _( "Repo-  %1" )
+                .arg( repoEvent->repoAlias );
             break;
 
         case EventType::RepoUrl:
-            item->setText( EventTypeCol, _( "Repo-URL" ) );
-            item->setText( NameCol, repoEvent->url       );
-            item->setText( RepoCol, repoEvent->repoAlias );
+            text =  _( "Repo-URL  %1 -> %2" )
+                .arg( repoEvent->oldUrl )
+                .arg( repoEvent->url    );
             break;
 
         case EventType::RepoAlias:
-            item->setText( EventTypeCol, _( "Repo-Alias" )  );
-            item->setText( NameCol, repoEvent->repoAlias    );
-            item->setText( RepoCol, repoEvent->oldRepoAlias );
+            text = _( "Repo-Alias  %1 -> %2" )
+                .arg( repoEvent->oldRepoAlias )
+                .arg( repoEvent->repoAlias    );
             break;
 
         default:
             break;
     }
+
+    item->setText( 0, text );
+    item->setFirstColumnSpanned( true );
+
 }
 
 
@@ -360,9 +364,8 @@ void ZyppHistoryBrowser::fillPatchItem( QTreeWidgetItem * item, Event * event )
     PatchEvent * patchEvent = dynamic_cast<PatchEvent *>( event );
     CHECK_DYNAMIC_CAST( patchEvent, "ZyppHistoryEvents::PatchEvent" );
 
-    item->setText( EventTypeCol, _( "Patch" )          );
-    item->setText( NameCol,      patchEvent->name      );
-    item->setText( VersionCol,   patchEvent->version   );
-    item->setText( ArchCol,      patchEvent->arch      );
-    item->setText( RepoCol,      patchEvent->repoAlias );
+    item->setText( NameCol,     _( "Patch %1" ).arg( patchEvent->name ) );
+    item->setText( VersionCol,  patchEvent->version   );
+    item->setText( ArchCol,     patchEvent->arch      );
+    item->setText( RepoCol,     patchEvent->repoAlias );
 }
