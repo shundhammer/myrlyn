@@ -16,6 +16,7 @@
 
 #include <QFile>
 #include <QTextStream>
+#include <QElapsedTimer>
 
 #include "ZyppHistoryParser.h"
 #include "Logger.h"
@@ -30,6 +31,7 @@ ZyppHistoryParser::ZyppHistoryParser( const QString & fileName ):
     _fileName( fileName ),
     _lineNo(0),
     _errCount(0),
+    _eventCount(0),
     _lastCommand(0)
 {
     // NOP
@@ -54,13 +56,19 @@ ZyppHistoryParser::parse()
         THROW( FileException( _fileName, msg ) );
     }
 
+
     _events.clear();
     _lastCommand = 0;
     _errCount    = 0;
     _lineNo      = 0;
+    _eventCount  = 0;
+
+    QElapsedTimer timer;
+    timer.start();
+
+    logInfo() << "Parsing zypp history file " << _fileName << endl;
 
     QTextStream stream( &file );
-    logInfo() << "Parsing zypp history file " << _fileName << endl;
 
     while ( ! stream.atEnd() )
     {
@@ -72,6 +80,14 @@ ZyppHistoryParser::parse()
     }
 
     finalizeLastCommand();
+
+    logInfo() << "Parsing finished after "
+              << timer.elapsed() / 1000.0 << " sec" << endl;
+
+    logDebug() << "Lines read: " << _lineNo
+               << " total history events: " << _eventCount
+               << " command events: " << _events.size()
+               << endl;
 
     return _events;
 }
@@ -108,6 +124,7 @@ void ZyppHistoryParser::parseLine( const QString & line )
     {
         event->timestamp = fields.at( 0 );
         event->eventType = eventType;
+        _eventCount++;
     }
 }
 
@@ -150,12 +167,11 @@ ZyppHistoryParser::parseCommandEvent( const QStringList & fields )
     CommandEvent * event = new CommandEvent;
     CHECK_NEW( event );
 
-    QString command = fields.at( 1 ).simplified();
+    QString command = fields.at( 3 ).simplified();
     command.remove( '\'' ); // Remove all single quotes: 'zypper' 'in' 'xhost'
     event->rawCommand = command;
     event->command    = prettyCommand( command );
-
-    _lastCommand = event;
+    _lastCommand      = event;
 
     // Intentionally not doing
     //
@@ -361,7 +377,12 @@ void ZyppHistoryParser::finalizeLastCommand()
         }
         else
         {
-            logDebug() << "Deleting empty command " << _lastCommand->command << endl;
+#if 0
+            logDebug() << "Deleting empty command "
+                       << _lastCommand->timestamp << " "
+                       << _lastCommand->command << endl;
+#endif
+
             delete _lastCommand;
         }
 
@@ -386,8 +407,6 @@ QString ZyppHistoryParser::prettyCommand( const QString & rawCommandLine )
     QString args        = commandLine.section( ' ', 1 );    // the rest
 
     command = command.section( '/', -1 ).toLower();  // basename only, no path
-
-    logDebug() << "Found command \"" << command << "\"" << endl;
 
     if ( command.contains( "myrlyn" ) )
     {
@@ -416,7 +435,7 @@ QString ZyppHistoryParser::prettyCommand( const QString & rawCommandLine )
     else if ( command.toLower().contains( "packagekit" ) )
         result = command;
 
-    logDebug() << "result: " << result << endl;
+    // logDebug() << result << " from \"" << rawCommandLine << "\"" << endl;
 
     return result;
 }

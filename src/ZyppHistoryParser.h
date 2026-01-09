@@ -85,6 +85,7 @@ protected:
     QString _fileName;
     int     _lineNo;
     int     _errCount;
+    int     _eventCount;
 
     ZyppHistoryEvents::EventList      _events;
     ZyppHistoryEvents::CommandEvent * _lastCommand;

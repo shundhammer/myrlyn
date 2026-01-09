@@ -53,6 +53,11 @@ protected slots:
 
 protected:
 
+    /**
+     * Fill the widgets with data
+     **/
+    void populate();
+
     // Data members
 
     Ui::ZyppHistoryBrowser * _ui;  // see ui_zypp-history-browser.h

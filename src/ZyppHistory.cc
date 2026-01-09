@@ -91,6 +91,7 @@ void ZyppHistory::clear()
 
 void ZyppHistory::dropCache()
 {
+    logInfo() << "Dropping zypp history cache" << endl;
     instance()->clear();
 }
 

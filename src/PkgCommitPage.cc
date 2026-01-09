@@ -32,6 +32,7 @@
 #include "YQZypp.h"
 #include "YQi18n.h"
 #include "utf8.h"
+#include "ZyppHistory.h"
 #include "PkgCommitCallbacks.h"
 #include "PkgCommitPage.h"
 
@@ -100,6 +101,7 @@ void PkgCommitPage::connectWidgets()
 
 void PkgCommitPage::commit()
 {
+    ZyppHistory::dropCache();
     populateLists();
     initProgressData();
     _startedInstallingPkg = false;

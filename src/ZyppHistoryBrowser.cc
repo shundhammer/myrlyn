@@ -19,7 +19,11 @@
 #include "WindowSettings.h"
 #include "utf8.h"
 #include "YQi18n.h"
+#include "ZyppHistory.h"
 #include "ZyppHistoryBrowser.h"
+
+
+using namespace ZyppHistoryEvents;
 
 
 ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
@@ -39,7 +43,7 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     // for the _ui object.
 
     WindowSettings::read( this, "ZyppHistoryBrowser" );
-    
+    populate();
 }
 
 
@@ -48,4 +52,11 @@ ZyppHistoryBrowser::~ZyppHistoryBrowser()
     WindowSettings::write( this, "ZyppHistoryBrowser" );
 
     delete _ui;
+}
+
+
+void ZyppHistoryBrowser::populate()
+{
+    // This can be called repeatedly; it uses cached data if possible.
+    ZyppHistory::instance()->read();
 }
