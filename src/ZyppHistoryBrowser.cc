@@ -46,8 +46,9 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     WindowSettings::read( this, "ZyppHistoryBrowser" );
     populate();
 
-    connect( _ui->timeLineTree, SIGNAL( itemClicked    ( QTreeWidgetItem * item, int col ) ),
-             this,              SLOT  ( timeLineClicked( QTreeWidgetItem * item, int col ) ) );
+    connect( _ui->timeLineTree, SIGNAL( currentItemChanged( QTreeWidgetItem * ,
+                                                            QTreeWidgetItem * ) ),
+             this,              SLOT  ( timeLineClicked   ( QTreeWidgetItem * ) ) );
 }
 
 
@@ -207,10 +208,8 @@ bool ZyppHistoryBrowser::anyItemstartsWith( const QString     & searchText,
 }
 
 
-void ZyppHistoryBrowser::timeLineClicked( QTreeWidgetItem * item, int col )
+void ZyppHistoryBrowser::timeLineClicked( QTreeWidgetItem * item )
 {
-    Q_UNUSED( col );
-
     QString date = item->text( 0 );
 
     if ( date.size() <= QString( "2025" ).size() ) // Don't show a whole year's history at once
@@ -250,8 +249,6 @@ void ZyppHistoryBrowser::addEventItem( Event * event, QTreeWidgetItem * parentIt
     QTreeWidgetItem * item = new QTreeWidgetItem;
     CHECK_NEW( item );
 
-    item->setText( TimestampCol, event->timestamp );
-
     switch ( event->eventType )
     {
         case EventType::Command:     fillCommandItem( item, event ); break;
@@ -274,20 +271,30 @@ void ZyppHistoryBrowser::addEventItem( Event * event, QTreeWidgetItem * parentIt
         parentItem->addChild( item );
     else
         _ui->eventsTree->addTopLevelItem( item );
+
+    item->setExpanded( true );
 }
 
 
-void ZyppHistoryBrowser::fillCommandItem( QTreeWidgetItem * commandEventItem, Event * event )
+void ZyppHistoryBrowser::fillCommandItem( QTreeWidgetItem * item, Event * event )
 {
     CommandEvent * commandEvent = dynamic_cast<CommandEvent *>( event );
     CHECK_DYNAMIC_CAST( commandEvent, "ZyppHistoryEvents::CommandEvent" );
 
-    commandEventItem->setText( NameCol, commandEvent->command   );
+    item->setText( 0, QString( "%1  %2" )
+                   .arg( event->timestamp )
+                   .arg( commandEvent->command ) );
+
+    QFont font( item->font( 0 ) );
+    font.setBold( true );
+    item->setFont( 0, font );
+
+    item->setFirstColumnSpanned( true );
 
     for ( Event * childEvent: commandEvent->childEvents() )
     {
         addEventItem( childEvent,
-                      commandEventItem ); // parentItem
+                      item ); // parentItem
     }
 }
 
@@ -297,11 +304,9 @@ void ZyppHistoryBrowser::fillPkgItem( QTreeWidgetItem * item, Event * event )
     PkgEvent * pkgEvent = dynamic_cast<PkgEvent *>( event );
     CHECK_DYNAMIC_CAST( pkgEvent, "ZyppHistoryEvents::PkgEvent" );
 
-    QString eventType = event->eventType == EventType::PkgInstall ? _( "Pkg+" ) : _( "Pkg-" );
-    QPixmap icon      = event->eventType == EventType::PkgInstall ?
+    QPixmap icon = event->eventType == EventType::PkgInstall ?
         YQIconPool::pkgInstall() : YQIconPool::pkgDel();
 
-    item->setText( EventTypeCol, eventType           );
     item->setText( NameCol,      pkgEvent->name      );
     item->setIcon( NameCol,      icon                );
     item->setText( VersionCol,   pkgEvent->version   );

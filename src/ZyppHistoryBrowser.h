@@ -57,7 +57,7 @@ protected slots:
      * Notification that the user clicked on an item in the timeline
      * (navigation) tree.
      **/
-    void timeLineClicked( QTreeWidgetItem * item, int col );
+    void timeLineClicked( QTreeWidgetItem * item );
 
 protected:
 
