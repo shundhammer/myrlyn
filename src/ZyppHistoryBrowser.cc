@@ -13,6 +13,9 @@
 
  */
 
+
+#include <QSettings>
+
 #include "Exception.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -53,6 +56,7 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     // for the _ui object.
 
     WindowSettings::read( this, "ZyppHistoryBrowser" );
+    readSettings();
 
     _ui->eventsTree->setColumnWidth( NameCol,    400 );
     _ui->eventsTree->setColumnWidth( VersionCol, 200 );
@@ -60,20 +64,29 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     _ui->eventsTree->setColumnWidth( RepoCol,    250 );
 
     populate();
-
-    connect( _ui->timeLineTree, SIGNAL( currentItemChanged( QTreeWidgetItem * ,
-                                                            QTreeWidgetItem * ) ),
-             this,              SLOT  ( timeLineClicked   ( QTreeWidgetItem * ) ) );
+    connectWidgets();
 }
 
 
 ZyppHistoryBrowser::~ZyppHistoryBrowser()
 {
+    writeSettings();
     WindowSettings::write( this, "ZyppHistoryBrowser" );
 
     delete _ui;
 }
 
+
+void ZyppHistoryBrowser::connectWidgets()
+{
+
+    connect( _ui->timeLineTree, SIGNAL( currentItemChanged( QTreeWidgetItem * ,
+                                                            QTreeWidgetItem * ) ),
+             this,              SLOT  ( timeLineClicked   ( QTreeWidgetItem * ) ) );
+
+    connect( _ui->showPlusMinusCount, SIGNAL( stateChanged( int ) ),
+             this,                    SLOT  ( rePopulateEventsTree() ) );
+}
 
 void ZyppHistoryBrowser::populate()
 {
@@ -246,6 +259,15 @@ void ZyppHistoryBrowser::populateEventsTree( const QString & date )
 }
 
 
+void ZyppHistoryBrowser::rePopulateEventsTree()
+{
+    QTreeWidgetItem * item = _ui->timeLineTree->currentItem();
+
+    if ( item )
+        timeLineClicked( item );
+}
+
+
 void ZyppHistoryBrowser::addEventItem( Event * event, QTreeWidgetItem * parentItem )
 {
     CHECK_PTR( event );
@@ -283,9 +305,42 @@ void ZyppHistoryBrowser::fillCommandItem( QTreeWidgetItem * item, Event * event 
     CommandEvent * commandEvent = dynamic_cast<CommandEvent *>( event );
     CHECK_DYNAMIC_CAST( commandEvent, "ZyppHistoryEvents::CommandEvent" );
 
-    item->setText( 0, QString( "%1  %2" )
-                   .arg( event->timestamp )
-                   .arg( commandEvent->command ) );
+    int pkgInstallCount = 0;
+    int pkgRemoveCount  = 0;
+
+    for ( Event * childEvent: commandEvent->childEvents() )
+    {
+        switch ( childEvent->eventType )
+        {
+            case EventType::PkgInstall: pkgInstallCount++; break;
+            case EventType::PkgRemove:  pkgRemoveCount++;  break;
+            default: break;
+        }
+
+        addEventItem( childEvent,
+                      item ); // parentItem
+    }
+
+    QString text = QString( "%1  %2" )
+        .arg( event->timestamp )
+        .arg( commandEvent->command );
+
+    if ( _ui->showPlusMinusCount->isChecked() &&
+         pkgInstallCount + pkgRemoveCount > 0 )
+    {
+        if ( pkgRemoveCount == 0 )
+            text += QString( "   (+%1)" ).arg( pkgInstallCount );
+        else if ( pkgInstallCount == 0 )
+            text += QString( "   (-%1)" ).arg( pkgRemoveCount );
+        else
+        {
+            text += QString( "   (+%1/-%2)" )
+                .arg( pkgInstallCount )
+                .arg( pkgRemoveCount  );
+        }
+    }
+
+    item->setText( 0, text );
 
     static QFont boldFont( item->font( 0 ) );
     boldFont.setBold( true );
@@ -294,11 +349,6 @@ void ZyppHistoryBrowser::fillCommandItem( QTreeWidgetItem * item, Event * event 
     item->setExpanded( true );
     item->setFirstColumnSpanned( true );
 
-    for ( Event * childEvent: commandEvent->childEvents() )
-    {
-        addEventItem( childEvent,
-                      item ); // parentItem
-    }
 }
 
 
@@ -368,4 +418,28 @@ void ZyppHistoryBrowser::fillPatchItem( QTreeWidgetItem * item, Event * event )
     item->setText( VersionCol,  patchEvent->version   );
     item->setText( ArchCol,     patchEvent->arch      );
     item->setText( RepoCol,     patchEvent->repoAlias );
+}
+
+
+void ZyppHistoryBrowser::readSettings()
+{
+    QSettings settings;
+    settings.beginGroup( "ZyppHistoryBrowser" );
+
+    bool showPlusMinusCount = settings.value( "showPlusMinusCount", true ).toBool();
+
+    settings.endGroup();
+
+    _ui->showPlusMinusCount->setChecked( showPlusMinusCount );
+}
+
+
+void ZyppHistoryBrowser::writeSettings()
+{
+    QSettings settings;
+    settings.beginGroup( "ZyppHistoryBrowser" );
+
+    settings.setValue( "showPlusMinusCount", _ui->showPlusMinusCount->isChecked() );
+
+    settings.endGroup();
 }

@@ -100,18 +100,41 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="buttonHBox">
+    <layout class="QHBoxLayout" name="buttonHBox" stretch="1,0,1,0">
      <property name="sizeConstraint">
       <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
      </property>
      <item>
-      <spacer name="horizontalSpacer">
+      <spacer name="buttonBoxSpacer1">
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>508</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="showPlusMinusCount">
+       <property name="text">
+        <string>Sho&amp;w (+/-) Count</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="buttonBoxSpacer2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
          <height>20</height>
         </size>
        </property>

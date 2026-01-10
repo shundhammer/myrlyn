@@ -59,8 +59,16 @@ protected slots:
      **/
     void timeLineClicked( QTreeWidgetItem * item );
 
+    /**
+     * Populate the events tree with the same content as before,
+     * but possibly different settings.
+     **/
+    void rePopulateEventsTree();
+
+
 protected:
 
+    void connectWidgets();
     void populate();
     void populateTimeLineTree();
 
@@ -98,6 +106,9 @@ protected:
     void fillPkgItem    ( QTreeWidgetItem * item, ZyppHistoryEvents::Event * event );
     void fillRepoItem   ( QTreeWidgetItem * item, ZyppHistoryEvents::Event * event );
     void fillPatchItem  ( QTreeWidgetItem * item, ZyppHistoryEvents::Event * event );
+
+    void readSettings();
+    void writeSettings();
 
 
     // Data members
