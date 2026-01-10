@@ -47,6 +47,7 @@ void usage()
 	 << "  -d | --download-only\n"
          << "  -f | --no-repo-refresh\n"
          << "  -v | --force-service-view\n"
+         << "  -z | --zypp-history </path/to/zypp/history>\n"
 	 << "  -h | --help \n"
 	 << "\n"
 	 << "Debugging options:\n"
@@ -55,7 +56,6 @@ void usage()
 	 << "  --fake-commit\n"
 	 << "  --fake-summary\n"
 	 << "  --fake-translations  (\"xixoxixoxixo\" everywhere)\n"
-         << "  --zypp-history </path/to/zypp/history>\n"
          << "  --slow-repo-refresh\n"
 	 << "\n"
 	 << std::endl;
@@ -146,7 +146,7 @@ parseCommandLineOptions( QStringList & argList )
     if ( commandLineSwitch( "--slow-repo-refresh",  "",   argList ) ) optFlags |= OptSlowRepoRefresh;
     if ( commandLineSwitch( "--help",               "-h", argList ) ) usage(); // this will exit
 
-    QString zyppHistFile = commandLineOptionWithArg( "--zypp-history", "", argList );
+    QString zyppHistFile = commandLineOptionWithArg( "--zypp-history", "-z", argList );
 
     if ( ! zyppHistFile.isEmpty() )
         ZyppHistory::setFileName( zyppHistFile );
