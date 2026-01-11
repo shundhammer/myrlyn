@@ -173,6 +173,15 @@ Production ready. Suitable for everyday use.
 
 - Streamlined keyboard shortcuts for most filter views and the tabs.
 
+- Much improved ZYPP history browser:
+  - Much better navigation (hierarchical years, months, days)
+  - View all zypp operations from one day, or from one complete month
+  - Zypp operations are now grouped by command invocation (zypper / YaST /
+    Myrlyn) / transaction, not just by day
+  - Collapse or expand each command and its operations individually
+  - See package install / update / remove operations as well as
+    repo operations and patches (for Leap)
+
 - Lots of other small fixes everywhere.
 
 
