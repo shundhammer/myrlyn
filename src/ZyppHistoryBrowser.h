@@ -72,6 +72,7 @@ protected:
     void populate();
     void populateTimeLineTree();
     void selectLastTimeLineItem();
+    void setColWidths();
 
     /**
      * Populate the events tree with events that match the given date.

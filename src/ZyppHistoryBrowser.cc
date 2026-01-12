@@ -15,6 +15,8 @@
 
 
 #include <QSettings>
+#include <QFontMetrics>
+#include <QHeaderView>
 
 #include "Exception.h"
 #include "Logger.h"
@@ -65,6 +67,7 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     _ui->eventsTree->setColumnWidth( RepoCol,    250 );
 
     populate();
+    setColWidths();
     connectWidgets();
     selectLastTimeLineItem();
 }
@@ -437,6 +440,23 @@ void ZyppHistoryBrowser::fillPatchItem( QTreeWidgetItem * item, Event * event )
     item->setText( VersionCol,  patchEvent->version   );
     item->setText( ArchCol,     patchEvent->arch      );
     item->setText( RepoCol,     patchEvent->repoAlias );
+}
+
+
+void ZyppHistoryBrowser::setColWidths()
+{
+    QString longPkgName = " [x] MozillaThunderbird-openpgp-whatever 1234 ";
+    QString longVersion = " 47.11.01-08.15+git20251228-0a3b4d7f ";
+    QString longArch    = " x86_64 1234 ";
+    QString longRepo    = " openSUSE-Leap-4711-OSS ";
+
+    QFontMetrics  fontMetrics( _ui->eventsTree->font() );
+    QHeaderView * header     ( _ui->eventsTree->header() );
+
+    header->resizeSection( NameCol,    fontMetrics.horizontalAdvance( longPkgName ) );
+    header->resizeSection( VersionCol, fontMetrics.horizontalAdvance( longVersion ) );
+    header->resizeSection( ArchCol,    fontMetrics.horizontalAdvance( longArch    ) );
+    header->resizeSection( RepoCol,    fontMetrics.horizontalAdvance( longRepo    ) );
 }
 
 
