@@ -42,6 +42,7 @@ enum EventsTreeColumns
 ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     : QDialog( parent ? parent : MainWindow::instance() )
     , _ui( new Ui::ZyppHistoryBrowser )  // Use the Qt designer .ui form (XML)
+    , _lastTimeLineItem(0)
 {
     CHECK_NEW( _ui );
     _ui->setupUi( this ); // Actually create the widgets from the .ui form
@@ -65,6 +66,7 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
 
     populate();
     connectWidgets();
+    selectLastTimeLineItem();
 }
 
 
@@ -88,6 +90,20 @@ void ZyppHistoryBrowser::connectWidgets()
              this,                    SLOT  ( rePopulateEventsTree() ) );
 }
 
+
+void ZyppHistoryBrowser::selectLastTimeLineItem()
+{
+    if ( _lastTimeLineItem )
+    {
+        _ui->timeLineTree->scrollToItem( _lastTimeLineItem,
+                                         QAbstractItemView::PositionAtBottom );
+        _ui->timeLineTree->setCurrentItem( _lastTimeLineItem,
+                                           0, // column
+                                           QItemSelectionModel::SelectCurrent );
+    }
+}
+
+
 void ZyppHistoryBrowser::populate()
 {
     // This can be called repeatedly without any performance pentalty:
@@ -100,6 +116,7 @@ void ZyppHistoryBrowser::populate()
 
 void ZyppHistoryBrowser::populateTimeLineTree()
 {
+    _lastTimeLineItem = 0;
     QStringList dates = ZyppHistory::instance()->uniqueDates();
 
     QString firstDate = dates.first();
@@ -188,6 +205,8 @@ void ZyppHistoryBrowser::populateTimeLineTree()
 
                 if ( ! dates.contains( date ) )
                     dateItem ->setFlags( Qt::NoItemFlags );  // Disable this item
+                else
+                    _lastTimeLineItem = dateItem;
             }
         }
     }

@@ -71,6 +71,7 @@ protected:
     void connectWidgets();
     void populate();
     void populateTimeLineTree();
+    void selectLastTimeLineItem();
 
     /**
      * Populate the events tree with events that match the given date.
@@ -114,6 +115,7 @@ protected:
     // Data members
 
     Ui::ZyppHistoryBrowser * _ui;  // see ui_zypp-history-browser.h
+    QTreeWidgetItem        * _lastTimeLineItem;
 };
 
 
