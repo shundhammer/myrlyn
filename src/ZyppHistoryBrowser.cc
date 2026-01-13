@@ -14,9 +14,10 @@
  */
 
 
-#include <QSettings>
+#include <QDate>
 #include <QFontMetrics>
 #include <QHeaderView>
+#include <QSettings>
 
 #include "Exception.h"
 #include "Logger.h"
@@ -128,8 +129,18 @@ void ZyppHistoryBrowser::populateTimeLineTree()
     if ( dates.isEmpty() )
         return;
 
+
     QString firstDate = dates.first();
     QString lastDate  = dates.last();
+
+    QDate lastQDate   = QDate::fromString( lastDate, Qt::ISODate );
+    QDate today       = QDate::currentDate();
+
+    if ( lastQDate.daysTo( today ) <= 10 )
+    {
+        lastDate = today.toString( "yyyy-MM-dd" );
+        logDebug() << "Extending time line to today: " << lastDate << endl;
+    }
 
     //                                  #0  #1 #2
     //                                 2025-12-28
