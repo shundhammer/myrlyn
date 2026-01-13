@@ -349,7 +349,7 @@ void ZyppHistoryBrowser::fillCommandItem( QTreeWidgetItem * item, Event * event 
 
     if ( _ui->showPlusMinusCount->isChecked() &&
          ( pkgInstallCount > _trivialPkgInstallCount ||
-           pkgRemoveCount  > _trivialPkgInstallCount    ) )
+           pkgRemoveCount  > _trivialPkgRemoveCount    ) )
     {
         if ( pkgRemoveCount == 0 )
             text += QString( "   (+%1)" ).arg( pkgInstallCount );
