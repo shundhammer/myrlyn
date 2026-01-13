@@ -14,7 +14,7 @@
  */
 
 
-#include <algorithm>
+#include <algorithm>  // std::max()
 
 #include <zypp-core/parser/sysconfig.h>
 #include <zypp/PoolItem.h>
@@ -50,7 +50,9 @@
 #include "QY2CursorHelper.h"
 #include "MyrlynApp.h"
 #include "RepoConfigDialog.h"
+#include "ZyppHistory.h"
 #include "ZyppHistoryBrowser.h"
+#include "ZyppHistoryParser.h"
 #include "YQPkgChangeLogView.h"
 #include "YQPkgChangesDialog.h"
 #include "YQPkgClassificationFilterView.h"
@@ -1458,8 +1460,35 @@ YQPkgSelector::showProducts()
 void
 YQPkgSelector::showHistory()
 {
-    ZyppHistoryBrowser dialog;
-    dialog.exec();
+    try
+    {
+        ZyppHistoryBrowser dialog;
+        dialog.exec();
+    }
+    catch ( const FileException & exception )
+    {
+        CAUGHT( exception );
+
+        QMessageBox msgBox( window() );
+        msgBox.setText( _( "Can't open zypp history file\n"
+                           "%1\n\n"
+                           "No permissions?" ).arg( ZyppHistory::fileName() ) );
+        msgBox.setIcon( QMessageBox::Warning );
+        msgBox.addButton( QMessageBox::Ok );
+        msgBox.exec();
+    }
+    catch ( const ZyppHistoryParseException & exception )
+    {
+        CAUGHT( exception );
+
+        QMessageBox msgBox( window() );
+        msgBox.setText( _( "Parse error in zypp history file\n"
+                           "%1\n\n"
+                           "Check the log!" ).arg( ZyppHistory::fileName() ) );
+        msgBox.setIcon( QMessageBox::Warning );
+        msgBox.addButton( QMessageBox::Ok );
+        msgBox.exec();
+    }
 }
 
 

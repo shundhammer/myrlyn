@@ -113,6 +113,9 @@ void ZyppHistoryBrowser::populate()
     // It uses cached data if possible.
     ZyppHistory::instance()->read();
 
+    _ui->timeLineTree->clear();
+    _ui->eventsTree->clear();
+
     populateTimeLineTree();
 }
 
@@ -121,6 +124,9 @@ void ZyppHistoryBrowser::populateTimeLineTree()
 {
     _lastTimeLineItem = 0;
     QStringList dates = ZyppHistory::instance()->uniqueDates();
+
+    if ( dates.isEmpty() )
+        return;
 
     QString firstDate = dates.first();
     QString lastDate  = dates.last();

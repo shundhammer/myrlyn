@@ -70,7 +70,6 @@ bool ZyppHistory::read()
     catch ( const FileException & exception )
     {
         CAUGHT( exception );
-        logError() << "Can't read zypp history file " << _fileName << endl;
         RETHROW( exception );
     }
     catch ( const ZyppHistoryParseException & exception )

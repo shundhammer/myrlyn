@@ -22,7 +22,7 @@
 #include "Logger.h"
 #include "Exception.h"
 
-#define MAX_ERR_COUNT       500
+#define MAX_ERR_COUNT       100
 #define MAX_ZYPPER_ARG_LEN  100
 
 using namespace ZyppHistoryEvents;
