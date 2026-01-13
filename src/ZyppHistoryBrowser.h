@@ -117,6 +117,8 @@ protected:
 
     Ui::ZyppHistoryBrowser * _ui;  // see ui_zypp-history-browser.h
     QTreeWidgetItem        * _lastTimeLineItem;
+    int                      _trivialPkgInstallCount;
+    int                      _trivialPkgRemoveCount;
 };
 
 

@@ -348,7 +348,8 @@ void ZyppHistoryBrowser::fillCommandItem( QTreeWidgetItem * item, Event * event 
         .arg( commandEvent->command );
 
     if ( _ui->showPlusMinusCount->isChecked() &&
-         pkgInstallCount + pkgRemoveCount > 0 )
+         ( pkgInstallCount > _trivialPkgInstallCount ||
+           pkgRemoveCount  > _trivialPkgInstallCount    ) )
     {
         if ( pkgRemoveCount == 0 )
             text += QString( "   (+%1)" ).arg( pkgInstallCount );
@@ -465,7 +466,9 @@ void ZyppHistoryBrowser::readSettings()
     QSettings settings;
     settings.beginGroup( "ZyppHistoryBrowser" );
 
-    bool showPlusMinusCount = settings.value( "showPlusMinusCount", true ).toBool();
+    bool showPlusMinusCount = settings.value( "showPlusMinusCount",    true ).toBool();
+    _trivialPkgInstallCount = settings.value( "trivialPkgInstallCount", 10  ).toInt();
+    _trivialPkgRemoveCount  = settings.value( "trivialPkgRemoveCount",   4  ).toInt();
 
     settings.endGroup();
 
@@ -478,7 +481,9 @@ void ZyppHistoryBrowser::writeSettings()
     QSettings settings;
     settings.beginGroup( "ZyppHistoryBrowser" );
 
-    settings.setValue( "showPlusMinusCount", _ui->showPlusMinusCount->isChecked() );
+    settings.setValue( "showPlusMinusCount",     _ui->showPlusMinusCount->isChecked() );
+    settings.setValue( "trivialPkgInstallCount", _trivialPkgInstallCount );
+    settings.setValue( "trivialPkgRemoveCount",  _trivialPkgRemoveCount  );
 
     settings.endGroup();
 }
