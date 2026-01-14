@@ -96,13 +96,24 @@ namespace ZyppHistoryEvents
         void squeezeChildEvents() { _childEvents.squeeze(); }
 
         /**
+         * Don't delete the child events in the destructor.
+         **/
+        void dontDeleteChildEvents() { _doDelete = false; }
+
+        /**
+         * Constructor.
+         **/
+        ParentEvent(): _doDelete( true ) {}
+
+        /**
          * Destructor. This deletes all child events.
          **/
-        virtual ~ParentEvent() { qDeleteAll( _childEvents ); }
+        virtual ~ParentEvent() { if ( _doDelete ) qDeleteAll( _childEvents ); }
 
     protected:
 
         EventList _childEvents;
+        bool      _doDelete;
     };
 
 
@@ -118,6 +129,18 @@ namespace ZyppHistoryEvents
         QString rawCommand;  // "/usr/bin/ruby3.3 /usr/lib/YaST2/bin/y2start sw_single qt"
 
         CommandEvent() { eventType = EventType::Command; }
+
+        /**
+         * Create a shallow clone of this without any children.
+         * Ownership is transferred to the caller.
+         **/
+        CommandEvent * shallowClone();
+
+    private:
+
+        // Disable copy constructor and assignment operator
+        CommandEvent( const CommandEvent & other );
+        CommandEvent operator==( const CommandEvent & other );
     };
 
 

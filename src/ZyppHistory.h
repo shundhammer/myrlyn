@@ -73,12 +73,6 @@ public:
     const ZyppHistoryEvents::EventList & events() const { return _events; }
 
     /**
-     * Return a list of unique dates of the timestamps of the toplevel (usually
-     * command) zypp history events.
-     **/
-    QStringList uniqueDates();
-
-    /**
      * Clear the content.
      **/
     void clear();

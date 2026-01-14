@@ -13,7 +13,9 @@
 
  */
 
+
 #include "ZyppHistoryEvents.h"
+#include "Exception.h"
 
 using namespace ZyppHistoryEvents;
 
@@ -41,3 +43,15 @@ void ParentEvent::addChildEvent( Event * childEvent )
 }
 
 
+CommandEvent *
+CommandEvent::shallowClone()
+{
+    CommandEvent * clone = new CommandEvent;
+    CHECK_NEW( clone );
+
+    clone->timestamp  = this->timestamp;
+    clone->command    = this->command;
+    clone->rawCommand = this->rawCommand;
+
+    return clone;
+}

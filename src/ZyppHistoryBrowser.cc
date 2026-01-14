@@ -46,6 +46,8 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     : QDialog( parent ? parent : MainWindow::instance() )
     , _ui( new Ui::ZyppHistoryBrowser )  // Use the Qt designer .ui form (XML)
     , _lastTimeLineItem(0)
+    , _filteredEventsDirty( true )
+    , _doFilter( false )
 {
     CHECK_NEW( _ui );
     _ui->setupUi( this ); // Actually create the widgets from the .ui form
@@ -124,7 +126,7 @@ void ZyppHistoryBrowser::populate()
 void ZyppHistoryBrowser::populateTimeLineTree()
 {
     _lastTimeLineItem = 0;
-    QStringList dates = ZyppHistory::instance()->uniqueDates();
+    QStringList dates = uniqueDates();
 
     if ( dates.isEmpty() )
         return;
@@ -233,6 +235,32 @@ void ZyppHistoryBrowser::populateTimeLineTree()
 }
 
 
+QStringList
+ZyppHistoryBrowser::uniqueDates()
+{
+    QStringList dates;
+    QString lastDate;
+
+    for ( Event * event: events() )
+    {
+        QString date = event->date();
+
+        if ( date != lastDate )
+        {
+            dates << date;
+            lastDate = date;
+        }
+    }
+
+#if 0
+    for ( const QString & date: dates )
+        logDebug() << date << endl;
+#endif
+
+    return dates;
+}
+
+
 int ZyppHistoryBrowser::daysInMonth( int year, int month ) const
 {
     switch ( month )
@@ -290,7 +318,7 @@ void ZyppHistoryBrowser::populateEventsTree( const QString & date )
 {
     _ui->eventsTree->clear();
 
-    for ( Event * event: ZyppHistory::instance()->events() )
+    for ( Event * event: events() )
     {
         if ( event->timestamp.startsWith( date ) )
             addEventItem( event );
@@ -475,6 +503,89 @@ void ZyppHistoryBrowser::setColWidths()
     header->resizeSection( VersionCol, fontMetrics.horizontalAdvance( longVersion ) );
     header->resizeSection( ArchCol,    fontMetrics.horizontalAdvance( longArch    ) );
     header->resizeSection( RepoCol,    fontMetrics.horizontalAdvance( longRepo    ) );
+}
+
+
+EventList
+ZyppHistoryBrowser::events()
+{
+    if ( _doFilter )
+    {
+        if ( _filteredEventsDirty )
+            filterEvents();
+
+        return _filteredEvents;
+    }
+    else  // ! _dofilter
+    {
+        return ZyppHistory::instance()->events();
+    }
+}
+
+
+void ZyppHistoryBrowser::filterEvents()
+{
+    _filteredEvents.clear();
+
+    for ( Event * event: ZyppHistory::instance()->events() )
+    {
+        CommandEvent * commandEvent = dynamic_cast<CommandEvent *>( event );
+
+        if ( commandEvent )
+        {
+            CommandEvent * clone = commandEvent->shallowClone();
+            clone->dontDeleteChildEvents();
+
+            for ( Event * childEvent: commandEvent->childEvents() )
+            {
+                if ( filterEvent( childEvent ) )
+                    clone->addChildEvent( childEvent );
+            }
+
+            if ( clone->hasChildEvents() )
+            {
+                _filteredEvents << clone;
+            }
+            else
+                delete clone;
+        }
+    }
+
+    _filteredEventsDirty = false;
+}
+
+
+bool ZyppHistoryBrowser::filterEvent( Event * event )
+{
+#if 1
+    // DEBUG
+    // DEBUG
+    PkgEvent * pkgEvent = dynamic_cast<PkgEvent *>( event );
+
+    if ( pkgEvent )
+    {
+#if 1
+        if ( pkgEvent->name.startsWith( "kernel-default" ) )
+            return true; // keep this event
+#endif
+
+#if 0
+        if ( pkgEvent->repoAlias.contains( "packman" ) )
+            return true; // keep this event
+#endif
+    }
+
+    // DEBUG
+    // DEBUG
+#endif
+
+#if 0
+    RepoEvent * repoEvent = dynamic_cast<RepoEvent *>( event );
+
+    return repoEvent ? true : false;
+#endif
+
+    return false;  // filter this event out
 }
 
 

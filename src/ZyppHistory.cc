@@ -82,32 +82,6 @@ bool ZyppHistory::read()
 }
 
 
-QStringList
-ZyppHistory::uniqueDates()
-{
-    QStringList dates;
-    QString lastDate;
-
-    for ( Event * event: _events )
-    {
-        QString date = event->date();
-
-        if ( date != lastDate )
-        {
-            dates << date;
-            lastDate = date;
-        }
-    }
-
-#if 0
-    for ( const QString & date: dates )
-        logDebug() << date << endl;
-#endif
-
-    return dates;
-}
-
-
 void ZyppHistory::clear()
 {
     qDeleteAll( _events );

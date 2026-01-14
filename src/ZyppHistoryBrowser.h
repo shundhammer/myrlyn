@@ -80,6 +80,12 @@ protected:
     void populateEventsTree( const QString & date );
 
     /**
+     * Return a list of unique dates of the timestamps of the toplevel (usually
+     * command) zypp history events.
+     **/
+    QStringList uniqueDates();
+
+    /**
      * Return the number of days in the given month (1..12) of the specified
      * year.
      **/
@@ -109,6 +115,21 @@ protected:
     void fillRepoItem   ( QTreeWidgetItem * item, ZyppHistoryEvents::Event * event );
     void fillPatchItem  ( QTreeWidgetItem * item, ZyppHistoryEvents::Event * event );
 
+    /**
+     * Return the zypp history events, possibly with any filters applied.
+     **/
+    ZyppHistoryEvents::EventList events();
+
+    /**
+     * Filter all events
+     **/
+    void filterEvents();
+
+    /**
+     * Filter one event. Return 'true' to keep this event, 'false' if not.
+     **/
+    bool filterEvent( ZyppHistoryEvents::Event * event );
+
     void readSettings();
     void writeSettings();
 
@@ -119,6 +140,11 @@ protected:
     QTreeWidgetItem        * _lastTimeLineItem;
     int                      _trivialPkgInstallCount;
     int                      _trivialPkgRemoveCount;
+
+    ZyppHistoryEvents::EventList _filteredEvents;
+    bool                         _filteredEventsDirty;
+    bool                         _doFilter;
+
 };
 
 
