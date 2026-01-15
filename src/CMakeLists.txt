@@ -41,9 +41,11 @@ set( SOURCES
   SummaryPage.cc
   WindowSettings.cc
   Workflow.cc
+
   ZyppHistory.cc
   ZyppHistoryBrowser.cc
   ZyppHistoryEvents.cc
+  ZyppHistoryFilterDialog.cc
   ZyppHistoryParser.cc
   ZyppLogger.cc
 
@@ -139,6 +141,7 @@ set( UI_FILES
      summary-page.ui
      updates-filter-view.ui
      zypp-history-browser.ui
+     zypp-history-filter-dialog.ui
    )
 
 

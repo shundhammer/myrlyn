@@ -43,6 +43,13 @@ void ParentEvent::addChildEvent( Event * childEvent )
 }
 
 
+ParentEvent::~ParentEvent()
+{
+    if ( _doDelete )
+        qDeleteAll( _childEvents );
+}
+
+
 CommandEvent *
 CommandEvent::shallowClone()
 {

@@ -27,6 +27,7 @@
 #include "YQi18n.h"
 #include "YQIconPool.h"
 #include "ZyppHistory.h"
+#include "ZyppHistoryFilterDialog.h"
 #include "ZyppHistoryBrowser.h"
 
 
@@ -47,7 +48,8 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     , _ui( new Ui::ZyppHistoryBrowser )  // Use the Qt designer .ui form (XML)
     , _lastTimeLineItem(0)
     , _filteredEventsDirty( true )
-    , _doFilter( false )
+    , _filterEnabled( false )
+    , _filterDialog(0)
 {
     CHECK_NEW( _ui );
     _ui->setupUi( this ); // Actually create the widgets from the .ui form
@@ -64,15 +66,12 @@ ZyppHistoryBrowser::ZyppHistoryBrowser( QWidget * parent )
     WindowSettings::read( this, "ZyppHistoryBrowser" );
     readSettings();
 
-    _ui->eventsTree->setColumnWidth( NameCol,    400 );
-    _ui->eventsTree->setColumnWidth( VersionCol, 200 );
-    _ui->eventsTree->setColumnWidth( ArchCol,    100 );
-    _ui->eventsTree->setColumnWidth( RepoCol,    250 );
+    _ui->clearFilterButton->setEnabled( _filterEnabled );
+    updateCurrentFilterLabel();
 
-    populate();
-    setColWidths();
     connectWidgets();
-    selectLastTimeLineItem();
+    setColWidths();
+    populate();
 }
 
 
@@ -80,6 +79,9 @@ ZyppHistoryBrowser::~ZyppHistoryBrowser()
 {
     writeSettings();
     WindowSettings::write( this, "ZyppHistoryBrowser" );
+
+    if ( _filterDialog )
+        delete _filterDialog;
 
     delete _ui;
 }
@@ -94,6 +96,12 @@ void ZyppHistoryBrowser::connectWidgets()
 
     connect( _ui->showPlusMinusCount, SIGNAL( stateChanged( int ) ),
              this,                    SLOT  ( rePopulateEventsTree() ) );
+
+    connect( _ui->filterButton,       SIGNAL( clicked()          ),
+             this,                    SLOT  ( openFilterDialog() ) );
+
+    connect( _ui->clearFilterButton,  SIGNAL( clicked() ),
+             this,                    SLOT  ( clearFilter() ) );
 }
 
 
@@ -112,14 +120,20 @@ void ZyppHistoryBrowser::selectLastTimeLineItem()
 
 void ZyppHistoryBrowser::populate()
 {
+    {
+        QSignalBlocker blocker( _ui->timeLineTree );
+
+        _lastTimeLineItem = 0;
+        _ui->timeLineTree->clear();
+        _ui->eventsTree->clear();
+    }
+
     // This can be called repeatedly without any performance pentalty:
     // It uses cached data if possible.
     ZyppHistory::instance()->read();
 
-    _ui->timeLineTree->clear();
-    _ui->eventsTree->clear();
-
     populateTimeLineTree();
+    selectLastTimeLineItem();
 }
 
 
@@ -130,7 +144,6 @@ void ZyppHistoryBrowser::populateTimeLineTree()
 
     if ( dates.isEmpty() )
         return;
-
 
     QString firstDate = dates.first();
     QString lastDate  = dates.last();
@@ -492,7 +505,7 @@ void ZyppHistoryBrowser::fillPatchItem( QTreeWidgetItem * item, Event * event )
 void ZyppHistoryBrowser::setColWidths()
 {
     QString longPkgName = " [x] MozillaThunderbird-openpgp-whatever 1234 ";
-    QString longVersion = " 47.11.01-08.15+git20251228-0a3b4d7f ";
+    QString longVersion = " 47.11.01-08.15+git20251228-0a3b4d7f 1234";
     QString longArch    = " x86_64 1234 ";
     QString longRepo    = " openSUSE-Leap-4711-OSS ";
 
@@ -509,14 +522,14 @@ void ZyppHistoryBrowser::setColWidths()
 EventList
 ZyppHistoryBrowser::events()
 {
-    if ( _doFilter )
+    if ( _filterEnabled )
     {
         if ( _filteredEventsDirty )
             filterEvents();
 
         return _filteredEvents;
     }
-    else  // ! _dofilter
+    else  // ! _filterEnabled
     {
         return ZyppHistory::instance()->events();
     }
@@ -543,9 +556,7 @@ void ZyppHistoryBrowser::filterEvents()
             }
 
             if ( clone->hasChildEvents() )
-            {
                 _filteredEvents << clone;
-            }
             else
                 delete clone;
         }
@@ -586,6 +597,53 @@ bool ZyppHistoryBrowser::filterEvent( Event * event )
 #endif
 
     return false;  // filter this event out
+}
+
+
+void ZyppHistoryBrowser::openFilterDialog()
+{
+    if ( ! _filterDialog )
+    {
+        _filterDialog = new ZyppHistoryFilterDialog( this );
+        CHECK_NEW( _filterDialog );
+    }
+
+    _filterDialog->exec();
+
+    if ( _filterDialog->result() == QDialog::Accepted )
+    {
+        _ui->clearFilterButton->setEnabled( true );
+        _filterEnabled       = true;
+        _filteredEventsDirty = true;
+        // TO DO: Generate filter class from the dialog
+
+        updateCurrentFilterLabel();
+        populate();
+    }
+}
+
+
+void ZyppHistoryBrowser::clearFilter()
+{
+    _filterEnabled = false;
+    _ui->clearFilterButton->setEnabled( false );
+
+    populate();
+    updateCurrentFilterLabel();
+}
+
+
+void ZyppHistoryBrowser::updateCurrentFilterLabel()
+{
+    QString filterText( _( "No Filter" ) );
+
+    if ( _filterEnabled )
+    {
+        // TO DO
+        filterText = _( "Filter active!" );
+    }
+
+    _ui->currentFilterLabel->setText( filterText );
 }
 
 

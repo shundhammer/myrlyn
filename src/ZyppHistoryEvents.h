@@ -106,9 +106,10 @@ namespace ZyppHistoryEvents
         ParentEvent(): _doDelete( true ) {}
 
         /**
-         * Destructor. This deletes all child events.
+         * Destructor. This deletes all child events
+         * unless _doDelete is false.
          **/
-        virtual ~ParentEvent() { if ( _doDelete ) qDeleteAll( _childEvents ); }
+        virtual ~ParentEvent();
 
     protected:
 

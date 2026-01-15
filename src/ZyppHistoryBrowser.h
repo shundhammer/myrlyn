@@ -30,6 +30,8 @@ class QTreeWidgetItem;
 
 #include "ui_zypp-history-browser.h"
 
+class ZyppHistoryFilterDialog;
+
 
 /**
  * Dialog to browser the zypp history.
@@ -65,6 +67,10 @@ protected slots:
      **/
     void rePopulateEventsTree();
 
+    void openFilterDialog();
+
+    void clearFilter();
+
 
 protected:
 
@@ -73,6 +79,7 @@ protected:
     void populateTimeLineTree();
     void selectLastTimeLineItem();
     void setColWidths();
+    void updateCurrentFilterLabel();
 
     /**
      * Populate the events tree with events that match the given date.
@@ -143,7 +150,8 @@ protected:
 
     ZyppHistoryEvents::EventList _filteredEvents;
     bool                         _filteredEventsDirty;
-    bool                         _doFilter;
+    bool                         _filterEnabled;
+    ZyppHistoryFilterDialog *    _filterDialog;
 
 };
 
