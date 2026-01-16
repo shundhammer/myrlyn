@@ -66,8 +66,8 @@ public:
     const QString & pattern() const { return _pattern; }
 
     /**
-     * Return the regular expression. This is only meaningful in filter modes RegExp
-     * and Wildcard.
+     * Return the regular expression. This is only meaningful in filter modes
+     * RegExp and Wildcard.
      **/
     const QRegularExpression & regexp() const { return _regexp; }
 

@@ -45,6 +45,7 @@ set( SOURCES
   ZyppHistory.cc
   ZyppHistoryBrowser.cc
   ZyppHistoryEvents.cc
+  ZyppHistoryFilter.cc
   ZyppHistoryFilterDialog.cc
   ZyppHistoryParser.cc
   ZyppLogger.cc
