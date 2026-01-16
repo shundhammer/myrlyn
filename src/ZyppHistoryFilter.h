@@ -56,10 +56,20 @@
 class ZyppHistoryFilter
 {
 protected:
+
+    /**
+     * Protected constructor since this is an abstract base class.
+     * Create an instance of a derived class instead.
+     **/
     ZyppHistoryFilter() {};
-    virtual ~ZyppHistoryFilter() {};
 
 public:
+
+    /**
+     * Public destructor. You can safely delete an instance of a derived class
+     * by a pointer to this abstract base class.
+     **/
+    virtual ~ZyppHistoryFilter() {};
 
     /**
      * Overloaded function call operator: Check if the specified event should

@@ -20,8 +20,6 @@
 #include <QDialog>
 #include "ZyppHistoryEvents.h"
 
-class QTreeWidgetItem;
-
 
 // Generated with 'uic' from a Qt designer .ui form: zypp-history-browser.ui
 //
@@ -30,7 +28,10 @@ class QTreeWidgetItem;
 
 #include "ui_zypp-history-browser.h"
 
+
+class QTreeWidgetItem;
 class ZyppHistoryFilterDialog;
+class ZyppHistoryFilter;
 
 
 /**
@@ -65,7 +66,7 @@ protected slots:
      * Populate the events tree with the same content as before,
      * but possibly different settings.
      **/
-    void rePopulateEventsTree();
+    void populateEventsTree();
 
     void openFilterDialog();
 
@@ -137,21 +138,26 @@ protected:
      **/
     bool filterEvent( ZyppHistoryEvents::Event * event );
 
+    /**
+     * Set a new ZyppHistoryFilter and delete the old one if non-null.
+     **/
+    void setFilter( ZyppHistoryFilter * filter );
+
     void readSettings();
     void writeSettings();
 
 
     // Data members
 
-    Ui::ZyppHistoryBrowser * _ui;  // see ui_zypp-history-browser.h
-    QTreeWidgetItem        * _lastTimeLineItem;
-    int                      _trivialPkgInstallCount;
-    int                      _trivialPkgRemoveCount;
+    Ui::ZyppHistoryBrowser *     _ui;  // see ui_zypp-history-browser.h
+    QTreeWidgetItem        *     _lastTimeLineItem;
+    int                          _trivialPkgInstallCount;
+    int                          _trivialPkgRemoveCount;
 
     ZyppHistoryEvents::EventList _filteredEvents;
     bool                         _filteredEventsDirty;
-    bool                         _filterEnabled;
     ZyppHistoryFilterDialog *    _filterDialog;
+    ZyppHistoryFilter       *    _filter;
 
 };
 

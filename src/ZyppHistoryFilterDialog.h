@@ -29,6 +29,9 @@
 #include "ui_zypp-history-filter-dialog.h"
 
 
+class ZyppHistoryFilter;
+
+
 class ZyppHistoryFilterDialog: public QDialog
 {
     Q_OBJECT
@@ -44,6 +47,18 @@ public:
      **/
     virtual ~ZyppHistoryFilterDialog();
 
+    /**
+     * Create a filter from the fields in this dialog.
+     *
+     * This should only be called when the dialog was finished with
+     * QDialog::Accepted, otherwise the result is undefined. In error cases
+     * this may also return 0.
+     *
+     * Ownership of the created object is transferred to the caller.
+     * Delete it when appropriate.
+     **/
+    ZyppHistoryFilter * filter();
+
 
 protected slots:
 
@@ -52,6 +67,11 @@ protected slots:
      * under the other radio buttons can be enabled or disabled accordingly.
      **/
     void radioButtonToggled( bool checked );
+
+    /**
+     * Enable or disable the [OK] button depending on the other widgets.
+     **/
+    void enableOkButton();
 
     
 protected:

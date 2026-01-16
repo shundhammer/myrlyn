@@ -21,6 +21,8 @@
 #include "MainWindow.h"
 #include "SearchFilter.h"
 #include "WindowSettings.h"
+#include "YQi18n.h"
+#include "ZyppHistoryFilter.h"
 #include "ZyppHistoryFilterDialog.h"
 
 
@@ -45,13 +47,14 @@ ZyppHistoryFilterDialog::ZyppHistoryFilterDialog( QWidget * parent )
 
     connectWidgets();
     initRadioButtons();
+    enableOkButton();
 }
 
 
 ZyppHistoryFilterDialog::~ZyppHistoryFilterDialog()
 {
     logDebug() << "Destroying ZyppHistoryFilterDialog" << endl;
-    
+
     writeSettings();
     WindowSettings::write( this, "ZyppHistoryFilterDialog" );
 
@@ -66,8 +69,15 @@ void ZyppHistoryFilterDialog::connectWidgets()
         connect( radioButton, SIGNAL( toggled           ( bool ) ),
                  this,        SLOT  ( radioButtonToggled( bool ) ) );
     }
+
+    connect( _ui->pkgName,    SIGNAL( textEdited     ( QString ) ),
+             this,            SLOT  ( enableOkButton ()          ) );
+
+    connect( _ui->repoAlias,  SIGNAL( textEdited     ( QString ) ),
+             this,            SLOT  ( enableOkButton ()          ) );
 }
-    
+
+
 void ZyppHistoryFilterDialog::initRadioButtons()
 {
     for ( QRadioButton * radioButton: findChildren<QRadioButton *>() )
@@ -81,11 +91,81 @@ void ZyppHistoryFilterDialog::radioButtonToggled( bool checked )
 {
     if ( ! checked )
         return;
-    
+
     QWidget * radioButton = qobject_cast<QRadioButton *>( sender() );
 
-    _ui->pkgByNameGroupBox->setEnabled( radioButton == _ui->pkgByNameRadioButton );
-    _ui->pkgByRepoGroupBox->setEnabled( radioButton == _ui->pkgByRepoRadioButton );
+    if ( checked )
+    {
+        _ui->pkgByNameGroupBox->setEnabled( radioButton == _ui->pkgByNameRadioButton );
+        _ui->pkgByRepoGroupBox->setEnabled( radioButton == _ui->pkgByRepoRadioButton );
+
+        if ( _ui->pkgByNameRadioButton->isChecked() )
+            _ui->pkgName->setFocus();
+        else if ( _ui->pkgByRepoRadioButton->isChecked() )
+            _ui->repoAlias->setFocus();
+    }
+
+    enableOkButton();
+}
+
+
+void ZyppHistoryFilterDialog::enableOkButton()
+{
+    bool ok = true;
+
+    if ( _ui->pkgByNameRadioButton->isChecked() )
+        ok = ! _ui->pkgName->text().isEmpty();
+    else if ( _ui->pkgByRepoRadioButton->isChecked() )
+        ok = ! _ui->repoAlias->text().isEmpty();
+
+    _ui->okButton->setEnabled( ok );
+}
+
+
+
+ZyppHistoryFilter *
+ZyppHistoryFilterDialog::filter()
+{
+    if ( _ui->pkgByNameRadioButton->isChecked() )
+    {
+        QString searchText = _ui->pkgName->text();
+        int     searchMode = _ui->pkgByNameSearchMode->currentIndex();
+
+        if ( ! searchText.isEmpty() )
+        {
+            return new ZyppHistoryPkgNameFilter( searchText,
+                                                 (SearchFilter::FilterMode) searchMode );
+        }
+    }
+    else if ( _ui->pkgByRepoRadioButton->isChecked() )
+    {
+        QString searchText = _ui->repoAlias->text();
+        int     searchMode = _ui->pkgByRepoSearchMode->currentIndex();
+
+        if ( ! searchText.isEmpty() )
+        {
+            return new ZyppHistoryPkgRepoAliasFilter( searchText,
+                                                      (SearchFilter::FilterMode) searchMode );
+
+        }
+    }
+    else if ( _ui->pkgInstallRadioButton->isChecked() )
+    {
+        return new ZyppHistoryEventTypeFilter( ZyppHistoryEvents::EventType::PkgInstall,
+                                               _( "Only package installation / update" ) );
+    }
+    else if ( _ui->pkgRemoveRadioButton->isChecked() )
+    {
+        return new ZyppHistoryEventTypeFilter( ZyppHistoryEvents::EventType::PkgRemove,
+                                               _( "Only package removal" ) );
+
+    }
+    else if ( _ui->repoEventsRadioButton->isChecked() )
+    {
+        return new ZyppHistoryRepoEventsFilter();
+    }
+
+    return 0;
 }
 
 
@@ -105,7 +185,7 @@ void ZyppHistoryFilterDialog::writeSettings()
 {
     QSettings settings;
     settings.beginGroup( "ZyppHistoryFilterDialog" );
-    
+
     settings.setValue( "pkgByNameSearchMode", _ui->pkgByNameSearchMode->currentIndex() );
     settings.setValue( "pkgByRepoSearchMode", _ui->pkgByNameSearchMode->currentIndex() );
 
