@@ -508,7 +508,7 @@ void ZyppHistoryBrowser::fillPatchItem( QTreeWidgetItem * item, Event * event )
 
 void ZyppHistoryBrowser::setColWidths()
 {
-    QString longPkgName = " [x] MozillaThunderbird-openpgp-whatever 1234 ";
+    QString longPkgName = " [x] nvidia-open-driver-G06-signed-kmp-default 12345678";
     QString longVersion = " 47.11.01-08.15+git20251228-0a3b4d7f 1234";
     QString longArch    = " x86_64 1234 ";
     QString longRepo    = " openSUSE-Leap-4711-OSS ";
