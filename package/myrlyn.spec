@@ -1,7 +1,7 @@
 #
 # spec file for package myrlyn
 #
-# Copyright (c) 2025 SUSE LLC
+# Copyright (c) 2025-26 SUSE LLC
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -20,7 +20,7 @@
 Name:           myrlyn
 # If you change the version here, don't forget ../VERSION.cmake !
 # To increase only the last number, use  rake version:bump
-Version:        0.9.9
+Version:        1.0.0
 Release:        0
 Summary:        Package manager GUI
 License:        GPL-2.0-only
