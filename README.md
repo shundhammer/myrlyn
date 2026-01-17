@@ -181,6 +181,11 @@ Production ready. Suitable for everyday use.
   - Collapse or expand each command and its operations individually
   - See package install / update / remove operations as well as
     repo operations and patches (for Leap)
+  - Powerful filters to see only (incomplete list):
+    - Changes of packages by name, including wildcards and regular expressions
+      over time: All changes of "kernel-default", all changes of packages
+      matching "*nvidia*"
+    - Changes of packages from one repository over time
 
 - Lots of other small fixes everywhere.
 
