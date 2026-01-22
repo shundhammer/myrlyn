@@ -42,8 +42,8 @@ Production ready. Suitable for everyday use.
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-40-repo-config.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-40-repo-config.png)
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-41-add-community-repo.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-41-add-community-repo.png)
 
-[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-50-zypp-history.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-50-zypp-history.png.png)
-[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-51-zypp-history-filtered.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-51-zypp-history-filtered.png.png)
+[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-50-zypp-history.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-50-zypp-history.png)
+[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-51-zypp-history-filtered.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-51-zypp-history-filtered.png)
 
 
 
