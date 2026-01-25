@@ -69,12 +69,12 @@ bool ZyppHistory::read()
     }
     catch ( const FileException & exception )
     {
-        CAUGHT( exception );
+        CAUGHT ( exception );
         RETHROW( exception );
     }
     catch ( const ZyppHistoryParseException & exception )
     {
-        CAUGHT( exception );
+        CAUGHT ( exception );
         RETHROW( exception );
     }
 
