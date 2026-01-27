@@ -270,11 +270,11 @@ where this project comes in.
 
 ## Is this an Official SUSE Project?
 
-No. Maybe it will become one, though. It started as a one-man project during
-the SUSE Hack Week in 11/2024, and it's been a mixture of private Open Source
-project and a SUSE-sponsored one at the same time.
+No.
 
-Hopefully SUSE will recognize the importance of this and keep sponsoring it.
+This started as a one-man project during the SUSE Hack Week in 11/2024, so it
+was sponsored by SUSE during that first week, but since then it has been a
+private Open Source project.
 
 
 ## Build Requirements
