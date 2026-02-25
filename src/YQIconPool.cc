@@ -16,13 +16,15 @@
 
 #include <QPixmap>
 #include <QIcon>
+#include <QSettings>
 
 #include "Logger.h"
 #include "YQIconPool.h"
 
 
 
-YQIconPool * YQIconPool::_instance = 0;
+YQIconPool * YQIconPool::_instance      = 0;
+bool         YQIconPool::_useThemeIcons = true;
 
 
 YQIconPool * YQIconPool::instance()
@@ -73,15 +75,38 @@ QPixmap YQIconPool::checkmark()                 { return instance()->cachedIcon(
 
 YQIconPool::YQIconPool()
 {
+    readSettings();
+
+    // Since the settings of this class are not accessible via GUI, make sure
+    // to write them to the config file so the user can chang them there with a
+    // plain text editor.
+    writeSettings();
 }
 
 
 YQIconPool::~YQIconPool()
 {
-    // NOP
+    // This is most likely never called, but we can't be sure.
+    writeSettings();
 }
 
 
+void YQIconPool::readSettings()
+{
+    QSettings settings;
+    settings.beginGroup( "Icons" );
+    _useThemeIcons = settings.value( "useThemeIcons", true ).toBool();
+    settings.endGroup();
+}
+
+
+void YQIconPool::writeSettings()
+{
+    QSettings settings;
+    settings.beginGroup( "Icons" );
+    settings.setValue( "useThemeIcons", _useThemeIcons );
+    settings.endGroup();
+}
 
 QPixmap
 YQIconPool::cachedIcon( const QString & iconName, bool enabled )
@@ -114,7 +139,7 @@ YQIconPool::loadIcon( const QString & iconName, bool enabled )
 {
     QPixmap iconPixmap;
 
-    if ( QIcon::hasThemeIcon( iconName ) )
+    if ( _useThemeIcons && QIcon::hasThemeIcon( iconName ) )
     {
         // logVerbose() << "Loading theme icon " << iconName << endl;
 

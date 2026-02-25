@@ -96,12 +96,16 @@ private:
      **/
     virtual ~YQIconPool();
 
+    void readSettings();
+    void writeSettings();
+
 
     //
     // Data members
     //
 
     static YQIconPool *             _instance;
+    static bool                     _useThemeIcons;
     QHash< const QString, QPixmap > _iconCache;
 };
 
