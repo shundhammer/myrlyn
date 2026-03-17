@@ -155,7 +155,7 @@ void ZyppHistoryBrowser::populateTimeLineTree()
     QDate lastQDate   = QDate::fromString( lastDate, Qt::ISODate );
     QDate today       = QDate::currentDate();
 
-    if ( lastQDate.daysTo( today ) <= 10 )
+    if ( lastQDate != today && lastQDate.daysTo( today ) <= 10 )
     {
         lastDate = today.toString( "yyyy-MM-dd" );
         logDebug() << "Extending time line to today: " << lastDate << endl;
