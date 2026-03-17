@@ -126,6 +126,9 @@ void ZyppHistoryParser::parseLine( const QString & line )
         event->timestamp = fields.at( 0 );
         event->eventType = eventType;
         _eventCount++;
+
+        if ( eventType != EventType::Command )
+            addChildEvent( event );
     }
 }
 
@@ -202,8 +205,6 @@ ZyppHistoryParser::parsePkgInstallEvent( const QStringList & fields )
     event->arch      = fields.at( 4 );
     event->repoAlias = fields.at( 6 );
 
-    addEvent( event );
-
     return event;
 }
 
@@ -224,8 +225,6 @@ ZyppHistoryParser::parsePkgRemoveEvent( const QStringList & fields )
     event->version = fields.at( 3 );
     event->arch    = fields.at( 4 );
 
-    addEvent( event );
-
     return event;
 }
 
@@ -245,8 +244,6 @@ ZyppHistoryParser::parseRepoAddEvent( const QStringList & fields )
     event->repoAlias = fields.at( 2 );
     event->url       = fields.at( 3 );
 
-    addEvent( event );
-
     return event;
 }
 
@@ -264,8 +261,6 @@ ZyppHistoryParser::parseRepoRemoveEvent( const QStringList & fields )
     CHECK_NEW( event );
 
     event->repoAlias = fields.at( 2 );
-
-    addEvent( event );
 
     return event;
 }
@@ -286,8 +281,6 @@ ZyppHistoryParser::parseRepoUrlEvent( const QStringList & fields )
     event->oldUrl = fields.at( 2 );
     event->url    = fields.at( 3 );
 
-    addEvent( event );
-
     return event;
 }
 
@@ -306,8 +299,6 @@ ZyppHistoryParser::parseRepoAliasEvent( const QStringList & fields )
 
     event->oldRepoAlias = fields.at( 2 );
     event->repoAlias    = fields.at( 3 );
-
-    addEvent( event );
 
     return event;
 }
@@ -330,8 +321,6 @@ ZyppHistoryParser::parsePatchEvent( const QStringList & fields )
     event->arch       = fields.at( 4 );
     event->repoAlias  = fields.at( 5 );
     event->patchState = fields.at( 9 );
-
-    addEvent( event );
 
     return event;
 }
@@ -378,7 +367,7 @@ void ZyppHistoryParser::finalizeLastCommand()
         }
         else
         {
-#if 0
+#if 1
             logDebug() << "Deleting empty command "
                        << _lastCommand->timestamp << " "
                        << _lastCommand->command << endl;
@@ -442,7 +431,7 @@ QString ZyppHistoryParser::prettyCommand( const QString & rawCommandLine )
 }
 
 
-void ZyppHistoryParser::addEvent( Event * event )
+void ZyppHistoryParser::addChildEvent( Event * event )
 {
     CHECK_PTR( event );
 
@@ -456,8 +445,11 @@ void ZyppHistoryParser::addEvent( Event * event )
         CommandEvent * commandEvent = new CommandEvent;
         CHECK_NEW( commandEvent );
 
+        commandEvent->command   = "<\?\?\?>";  // ?? is interpreted as a trigraph
         commandEvent->timestamp = event->timestamp;
         _lastCommand = commandEvent;
+
+        logInfo() << "Zypp history file does not start with a command" << endl;
     }
 
     _lastCommand->addChildEvent( event );
