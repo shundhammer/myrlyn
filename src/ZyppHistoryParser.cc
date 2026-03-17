@@ -367,7 +367,7 @@ void ZyppHistoryParser::finalizeLastCommand()
         }
         else
         {
-#if 1
+#if 0
             logDebug() << "Deleting empty command "
                        << _lastCommand->timestamp << " "
                        << _lastCommand->command << endl;
