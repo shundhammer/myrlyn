@@ -343,11 +343,16 @@ src/myrlyn
 After `sudo make install`:
 
 ```
-myrlyn
+myrlyn (readonly)
+sudo myrlyn (root)
 ```
 
 (it's now in `/usr/bin/myrlyn`)
 
+#### For Wayland users :
+```
+myrlyn-sudo (root)
+```
 
 ## Reference
 
