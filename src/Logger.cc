@@ -309,7 +309,7 @@ static void qt_logger( QtMsgType                  msgType,
 
     for ( QString line: lines )
     {
-        // Suppress bullshit messages that keep flodding the log
+        // Suppress bullshit messages that keep flooding the log
 
         if ( msg.contains( "OpenType support missing" ) )
             continue;
