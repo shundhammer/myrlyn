@@ -15,6 +15,7 @@
 
 
 #include <stdlib.h>                     // rand(), srand()
+#include <time.h>                       // time()
 #include <QMessageBox>
 
 #include <zypp/repo/RepoVariables.h>    // RepoVariablesStringReplacer
@@ -255,8 +256,19 @@ void RepoEditDialog::accept()
 
 void RepoEditDialog::saveRepoInfo()
 {
-    std::string oldRepoName = _repoInfo.name();
-    _repoInfo.setName( toUTF8( _ui->repoName->text() ) );
+    QString repoName = _ui->repoName->text();
+
+    if ( repoName.isEmpty() )  // User proactively sabotaged himself (issue #128)
+    {
+        repoName = QString( "Unnamed Repo %1" )
+            .arg( time( 0 ),
+                  sizeof( time_t ),  // fieldWidth
+                  16 );              // base
+        _ui->repoName->setText( repoName );
+    }
+
+    _repoInfo.setName( toUTF8( repoName ) );
+
 
     // This may throw an exception. Let it escalate to the caller.
 
