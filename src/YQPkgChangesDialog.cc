@@ -222,6 +222,15 @@ YQPkgChangesDialog::filter( const QRegularExpression & regexp, Filters flt )
     bool byAuto = flt.testFlag( FilterAutomatic );
     bool byUser = flt.testFlag( FilterUser      );
     bool byApp  = flt.testFlag( FilterUser      );
+    bool updateMode = false;
+
+    if ( byAuto )
+    {
+        zypp::Resolver_Ptr resolver = zypp::getZYpp()->resolver();
+
+        updateMode = ( resolver->upgradeMode() ||    // dist-upgrade mode
+                       resolver->updateMode()    );  // package update mode
+    }
 
     std::set<std::string> ignoredNames;
 
@@ -250,7 +259,25 @@ YQPkgChangesDialog::filter( const QRegularExpression & regexp, Filters flt )
                         ZyppPkg pkg = tryCastToZyppPkg( selectable->theObj() );
 
                         if ( extraFilter( selectable, pkg ) )
-                            _pkgList->addPkgItem( selectable, pkg );
+                        {
+                            bool skip = false;
+
+                            if ( updateMode ) // dist-upgrade / package update?
+                            {
+                                switch ( selectable->status() )
+                                {
+                                    case S_Update:
+                                    case S_AutoUpdate:    skip = true;
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            if ( ! skip )
+                                _pkgList->addPkgItem( selectable, pkg );
+                        }
                     }
                 }
             }
