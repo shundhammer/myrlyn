@@ -6,7 +6,7 @@ Exec=/usr/bin/myrlyn
 # Exec=sh -c "QT_QPA_PLATFORMTHEME=qt6ct QT_SCALE_FACTOR=1 QT_ENABLE_HIGHDPI_SCALING=0 /usr/bin/myrlyn"
 # Exec=sh -c "QT_QPA_PLATFORMTHEME=qt6ct /usr/bin/myrlyn"
 
-Icon=Myrlyn.png
+Icon=Myrlyn
 GenericName=Myrlyn Graphical Software Package Manager (read‑only)
 Comment=Read-only mode for non-privileged users
 Terminal=false
