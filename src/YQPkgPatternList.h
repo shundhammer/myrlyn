@@ -106,6 +106,12 @@ public slots:
     void fillList();
 
     /**
+     * Refill the pattern list from the current libzypp pool and restore the
+     * previously selected pattern by name if it still exists.
+     **/
+    void refillListPreservingSelection();
+
+    /**
      * Dispatcher slot for mouse click: cycle status depending on column.
      * For pattern category items, emulate tree open / close behaviour.
      *

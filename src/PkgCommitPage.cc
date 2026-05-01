@@ -29,6 +29,7 @@
 #include "PkgTaskListWidget.h"
 #include "ProgressDialog.h"
 #include "MyrlynApp.h"
+#include "YQPkgSelector.h"
 #include "YQZypp.h"
 #include "YQi18n.h"
 #include "utf8.h"
@@ -215,6 +216,12 @@ void PkgCommitPage::realCommit()
         zypp::getZYpp()->commit( commitPolicy() );
 
         logInfo() << "Package transactions done" << endl;
+
+        if ( ! MyrlynApp::isOptionSet( OptDryRun ) &&
+             ! MyrlynApp::isOptionSet( OptDownloadOnly ) )
+        {
+            MyrlynApp::instance()->pkgSel()->markPoolReloadedAfterCommit();
+        }
     }
     catch ( const zypp::target::TargetAbortedException & ex )
     {

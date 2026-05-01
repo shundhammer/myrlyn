@@ -135,6 +135,7 @@ YQPkgSelector::YQPkgSelector( QWidget * parent )
     , _excludeDevelPkgs(0)
     , _excludeDebugInfoPkgs(0)
     , _useRpmGroups( USE_RPM_GROUPS )
+    , _poolReloadedAfterCommit( false )
 {
     _instance = this;
 
@@ -1206,6 +1207,14 @@ YQPkgSelector::connectPatternList()
 
 
 void
+YQPkgSelector::markPoolReloadedAfterCommit()
+{
+    logInfo() << "Marking package selector views stale after commit" << endl;
+    _poolReloadedAfterCommit = true;
+}
+
+
+void
 YQPkgSelector::reset()
 {
     logDebug() << "Reset" << endl;
@@ -1219,6 +1228,13 @@ YQPkgSelector::reset()
 
     if ( _pkgList )
         _pkgList->clear();
+
+    if ( _poolReloadedAfterCommit && _patternList )
+    {
+        logInfo() << "Rebuilding pattern list after commit" << endl;
+        _patternList->refillListPreservingSelection();
+        _poolReloadedAfterCommit = false;
+    }
 
     if ( _filters )
         _filters->reloadCurrentPage();

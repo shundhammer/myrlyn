@@ -99,6 +99,12 @@ public:
 public slots:
 
     /**
+     * Mark persistent selector views as stale after a successful package
+     * commit because libzypp may reload the pool and replace selectables.
+     **/
+    void markPoolReloadedAfterCommit();
+
+    /**
      * Reset the data in connected views and reset the resolver.
      **/
     void reset();
@@ -479,6 +485,7 @@ protected:
     YQPkgObjList::ExcludeRule *         _excludeDebugInfoPkgs;
 
     bool                                _useRpmGroups;
+    bool                                _poolReloadedAfterCommit;
 
     static YQPkgSelector *              _instance;
 };

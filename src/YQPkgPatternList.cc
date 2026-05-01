@@ -169,6 +169,40 @@ YQPkgPatternList::fillList()
 }
 
 
+void
+YQPkgPatternList::refillListPreservingSelection()
+{
+    string selectedPatternName;
+
+    if ( selection() && selection()->selectable() )
+        selectedPatternName = selection()->selectable()->name();
+
+    fillList();
+
+    if ( ! selectedPatternName.empty() )
+    {
+        QTreeWidgetItemIterator it( this );
+
+        while ( *it )
+        {
+            YQPkgPatternListItem * patternItem = dynamic_cast<YQPkgPatternListItem *>( *it );
+
+            if ( patternItem &&
+                 patternItem->selectable() &&
+                 patternItem->selectable()->name() == selectedPatternName )
+            {
+                setCurrentItem( patternItem );
+                return;
+            }
+
+            ++it;
+        }
+    }
+
+    selectSomething();
+}
+
+
 YQPkgPatternCategoryItem *
 YQPkgPatternList::category( const QString & categoryName )
 {
