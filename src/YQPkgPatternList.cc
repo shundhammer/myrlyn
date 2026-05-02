@@ -193,6 +193,15 @@ YQPkgPatternList::category( const QString & categoryName )
 
 
 void
+YQPkgPatternList::resetPatterns()
+{
+    logDebug() << "Resetting patterns list" << endl;
+
+    fillList();
+}
+
+
+void
 YQPkgPatternList::showFilter( QWidget * newFilter )
 {
     if ( newFilter == this )

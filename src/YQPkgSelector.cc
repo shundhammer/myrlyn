@@ -1217,6 +1217,9 @@ YQPkgSelector::reset()
     if ( _patchFilterView )
         _patchFilterView->reset();
 
+    if ( _patternList )
+        _patternList->resetPatterns();
+
     if ( _pkgList )
         _pkgList->clear();
 

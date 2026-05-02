@@ -110,6 +110,11 @@ signals:
 public:
 
     /**
+     * Return 'true' if the list is empty, 'false' if not.
+     **/
+    bool isEmpty() const { return topLevelItemCount() < 1; }
+
+    /**
      * Returns a tool tip text for a specific column of a list item.
      * 'column' is -1 if the mouse pointer is in the tree indentation area.
      *

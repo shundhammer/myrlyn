@@ -75,6 +75,17 @@ public:
      **/
     bool showInvisiblePatterns() const { return _showInvisiblePatterns; }
 
+    /**
+     * Reset the list content.
+     *
+     * This is useful after committing a transaction and then going back to this
+     * filter view.
+     *
+     * Unfortunately, there is an inherited slot QAbstractItemView::reset()
+     * which gets in the way with consistent naming here.
+     **/
+    void resetPatterns();
+
 
 public slots:
 
