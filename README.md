@@ -233,14 +233,14 @@ Official distro packages:
 
 From my OBS home project:
 
-- [myrlyn for openSUSE Leap 15.6](https://download.opensuse.org/repositories/home:/shundhammer:/myrlyn-stable/openSUSE_Leap_15.6_Update_standard/x86_64/)
+- [myrlyn for openSUSE Leap 15.6](https://download.opensuse.org/repositories/home:/huha:/myrlyn-stable/openSUSE_Leap_15.6_Update_standard/x86_64/)
 
 
 The latest version from Git:
 
-- [myrlyn-git for openSUSE Tumbleweed](https://download.opensuse.org/repositories/home:/shundhammer:/myrlyn-git/openSUSE_Tumbleweed/x86_64/)
-- [myrlyn-git for openSUSE Slowroll](https://download.opensuse.org/repositories/home:/shundhammer:/myrlyn-git/openSUSE_Slowroll/x86_64/)
-- [myrlyn-git for Leap 15.6](https://download.opensuse.org/repositories/home:/shundhammer:/myrlyn-git/openSUSE_Leap_15.6_Update_standard/x86_64/)
+- [myrlyn-git for openSUSE Tumbleweed](https://download.opensuse.org/repositories/home:/huha:/myrlyn-git/openSUSE_Tumbleweed/x86_64/)
+- [myrlyn-git for openSUSE Slowroll](https://download.opensuse.org/repositories/home:/huha:/myrlyn-git/openSUSE_Slowroll/x86_64/)
+- [myrlyn-git for Leap 15.6](https://download.opensuse.org/repositories/home:/huha:/myrlyn-git/openSUSE_Leap_15.6_Update_standard/x86_64/)
 
 
 ## Motivation: Why?
