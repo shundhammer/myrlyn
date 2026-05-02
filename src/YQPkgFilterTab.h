@@ -168,7 +168,7 @@ public slots:
     void setPageLabel( QWidget * pageContent, const QString & newLabel );
 
     /**
-     * Reload the current page: Send a currentChange() signal with the current
+     * Reload the current page: Send a currentChanged() signal with the current
      * page as argument so it will filter again.
      **/
     void reloadCurrentPage();

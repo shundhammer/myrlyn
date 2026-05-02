@@ -58,8 +58,6 @@ public slots:
     /**
      * Reset the resolver, in particular modes like "upgrade mode" (after a
      * dist upgrade) or "update mode" after a package update).
-     *
-     * This is included in 'reset()'.
      **/
     void resetResolver();
 
@@ -152,7 +150,7 @@ signals:
      *
      * Do NOT connect this to the filter views' filter() slot:
      * The YQPkgSelector already does that with
-     * YQPkgFilteTab::reloadCurrentPage(). This resetNotify() signal is
+     * YQPkgFilterTab::reloadCurrentPage(). This resetNotify() signal is
      * intended for other widgets / QObjects that don't fit into this schema
      * like the YQPkgSelMapper.
      **/
