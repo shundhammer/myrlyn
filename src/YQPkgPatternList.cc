@@ -35,7 +35,7 @@
 #  define VERBOSE_FILTER_VIEWS  0
 #endif
 
-#define VERBOSE_PATTERN_LIST   0
+#define VERBOSE_PATTERN_LIST    0
 
 using std::string;
 using std::set;
@@ -197,8 +197,13 @@ YQPkgPatternList::showFilter( QWidget * newFilter )
 {
     if ( newFilter == this )
     {
-        filter();
-        selectSomething();
+        if ( ! selection() )
+        {
+            scrollToTop();
+            selectSomething();
+        }
+        else
+            filter();
     }
 }
 
