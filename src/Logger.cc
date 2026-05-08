@@ -329,6 +329,13 @@ static void qt_logger( QtMsgType                  msgType,
         }
     }
 
+    if ( msg.contains( "X11 connection broke" ) )
+    {
+        logError() << msg << endl;
+        logInfo() << "-- Exiting --\n" << endl;
+        exit( 2 ); // Don't dump core, just exit
+    }
+
     if ( msgType == QtFatalMsg )
     {
         if ( msg.contains( "Could not connect to display" ) ||
@@ -387,12 +394,6 @@ static void qt_logger( QtMsgType                  msgType,
 
             logInfo() << "-- Exiting --\n" << endl;
             exit( 1 ); // Don't dump core, just exit
-        }
-        else if ( msg.contains( "X11 connection broke" ) )
-        {
-            logError() << msg << endl;
-            logInfo() << "-- Exiting --\n" << endl;
-            exit( 2 ); // Don't dump core, just exit
         }
         else
         {
