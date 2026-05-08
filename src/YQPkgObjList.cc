@@ -17,6 +17,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QDebug>
+#include <QFont>
 #include <QHeaderView>
 #include <QKeyEvent>
 #include <QMenu>
@@ -904,6 +905,25 @@ YQPkgObjListItem::init()
     if ( installed && ! candidate )
         _installedIsNewer = true;
 
+    const bool candidateVersionChanged =
+        candidate && installed && _candidateIsNewer &&
+        ( candidate->edition().epoch()   != installed->edition().epoch() ||
+          candidate->edition().version() != installed->edition().version() );
+
+    if ( versionCol() >= 0 )
+    {
+        QFont versionFont = font( versionCol() );
+        versionFont.setBold( candidateVersionChanged );
+        setFont( versionCol(), versionFont );
+    }
+
+    if ( instVersionCol() >= 0 && instVersionCol() != versionCol() )
+    {
+        QFont instVersionFont = font( instVersionCol() );
+        instVersionFont.setBold( candidateVersionChanged );
+        setFont( instVersionCol(), instVersionFont );
+    }
+
     if ( nameCol()    >= 0 )  setText( nameCol(),     zyppObj()->name()    );
     if ( summaryCol() >= 0 )  setText( summaryCol(),  zyppObj()->summary() );
 
@@ -1509,5 +1529,4 @@ void YQPkgObjList::slotCustomContextMenu( const QPoint& pos )
             contextMenu->popup( viewport()->mapToGlobal( pos ) );
     }
 }
-
 
