@@ -14,6 +14,8 @@
  */
 
 
+#include <unistd.h>     // access()
+
 #include <QAction>
 #include <QActionGroup>
 #include <QMenu>
@@ -35,6 +37,7 @@ SummaryPage::SummaryPage( QWidget * parent )
     , _countdownSec( 30 )
     , _countdownMenu( 0 )
     , _pkgTasks( 0 )
+    , _doCheckRebootNeeded( true )
 {
     CHECK_NEW( _ui );
     _ui->setupUi( this ); // Actually create the widgets from the .ui form
@@ -217,7 +220,8 @@ void SummaryPage::readSettings()
     QSettings settings;
     settings.beginGroup( "SummaryPage" );
 
-    _countdownSec = settings.value( "countdownSec", 30 ).toInt();
+    _countdownSec        = settings.value( "countdownSec",      30   ).toInt();
+    _doCheckRebootNeeded = settings.value( "checkRebootNeeded", true ).toBool();
 
     settings.endGroup();
 }
@@ -228,7 +232,8 @@ void SummaryPage::writeSettings()
     QSettings settings;
     settings.beginGroup( "SummaryPage" );
 
-    settings.setValue( "countdownSec", _countdownSec );
+    settings.setValue( "countdownSec",      _countdownSec        );
+    settings.setValue( "checkRebootNeeded", _doCheckRebootNeeded );
 
     settings.endGroup();
 }
@@ -264,6 +269,9 @@ void SummaryPage::updateSummary()
 
         text = longSummary( byUserMax, byDepMax );
     }
+
+    if ( _doCheckRebootNeeded && isRebootNeeded() )
+        text += rebootNotice();
 
     _ui->contentTextEdit->setText( text );
 }
@@ -357,4 +365,18 @@ QStringList SummaryPage::listSummary( PkgTaskList     taskList,
     lines << NEWLINE;
 
     return lines;
+}
+
+
+bool SummaryPage::isRebootNeeded() const
+{
+    return access( "/run/reboot-needed", F_OK ) == 0;
+}
+
+
+QString SummaryPage::rebootNotice() const
+{
+    QString message = _( "Reboot recommended." );
+
+    return QString( "\n\n%1" ).arg( message );;
 }

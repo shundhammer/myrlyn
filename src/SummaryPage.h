@@ -184,6 +184,17 @@ protected:
                              const QString & header,
                              int             listMaxItems = -1 );
 
+    /**
+     * Return 'true' if a reboot is needed according to the /run/reboot-needed
+     * semaphore file, 'false' if not.
+     **/
+    bool isRebootNeeded() const;
+
+    /**
+     * Return a notice text if reboot is needed.
+     **/
+    QString rebootNotice() const;
+
     //
     // Data members
     //
@@ -194,6 +205,7 @@ protected:
     QTimer              _intervalTimer;
     QMenu *             _countdownMenu;
     PkgTasks *          _pkgTasks;
+    bool                _doCheckRebootNeeded;
 };
 
 
