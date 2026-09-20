@@ -30,7 +30,9 @@ ensure_installed msgcat     gettext-tools
 
 UI_TS="ui-files.ts"
 UI_POT="ui-files.pot"
+UI_TMP="ui-tmp.pot"
 CC_POT="cc-files.pot"
+RESULT_TMP="myrlyn-tmp.pot"
 RESULT_POT="myrlyn.pot"
 SRC_DIR=.
 
@@ -40,7 +42,11 @@ SRC_DIR=.
 # but convert immediately to gettext .pot format.
 
 lupdate6  -silent $SRC_DIR/*.ui -ts $UI_TS
-lconvert6 $UI_TS -o $UI_POT
+lconvert6 $UI_TS -o $UI_TMP
+
+# Remove msgctxt lines and merge duplicate msgids
+sed -i -e '/^msgctxt/d' $UI_TMP
+msguniq -o $UI_POT $UI_TMP
 
 
 # Extract messages from the .h and .cc files
@@ -66,14 +72,18 @@ xgettext --language=c++ -k --keyword=_ --qt \
 
 # Merge into the result .pot file
 
-msgcat -o $RESULT_POT $UI_POT $CC_POT
-grep -c 'msgid'  $UI_POT $CC_POT $RESULT_POT
+msgcat -o $RESULT_TMP $CC_POT $UI_POT
+msguniq -o $RESULT_POT $RESULT_TMP
+
+echo
+echo -n "Messages in $RESULT_POT: "
+grep -c 'msgid' $RESULT_POT
 
 
 # Clean up
 
 # Comment out to keep the temp files for debugging
-rm -f $UI_TS $UI_POT $CC_POT
+rm -f $UI_TS $UI_POT $CC_POT $UI_TMP $RESULT_TMP
 
 
 # Stats
