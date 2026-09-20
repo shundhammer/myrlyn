@@ -24,6 +24,7 @@ ensure_installed lupdate6   qt6-tools-linguist
 ensure_installed lconvert6  qt6-tools-linguist
 ensure_installed xgettext   gettext-tools
 ensure_installed msgcat     gettext-tools
+ensure_installed msguniq    gettext-tools
 
 
 # Constants for files and direcories
@@ -75,10 +76,6 @@ xgettext --language=c++ -k --keyword=_ --qt \
 msgcat -o $RESULT_TMP $CC_POT $UI_POT
 msguniq -o $RESULT_POT $RESULT_TMP
 
-echo
-echo -n "Messages in $RESULT_POT: "
-grep -c 'msgid' $RESULT_POT
-
 
 # Clean up
 
@@ -90,4 +87,7 @@ rm -f $UI_TS $UI_POT $CC_POT $UI_TMP $RESULT_TMP
 
 echo
 ls -l *.pot
+echo
+echo -n "Number of messages in $RESULT_POT: "
+grep -c 'msgid' $RESULT_POT
 echo
