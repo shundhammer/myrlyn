@@ -46,7 +46,7 @@ done
 # Uncomment for debugging
 # echo $ENV
 
-# Use our own askpass binary to for a graphical password prompt
+# Use our own askpass binary for a graphical password prompt
 ASKPASS=/usr/bin/myrlyn-askpass
 
 # Using /usr/bin/env to set up an environment inside the 'sudo' call,
