@@ -100,6 +100,7 @@ YQPkgSecondaryFilterView::layoutSecondaryFilters( QWidget * parent, QWidget * pr
     CHECK_NEW( _secondaryFilters );
     layout->addWidget( _secondaryFilters );
 
+
     //
     // All Packages
     //
@@ -133,7 +134,7 @@ YQPkgSecondaryFilterView::layoutSecondaryFilters( QWidget * parent, QWidget * pr
     _statusFilterView = new YQPkgStatusFilterView( parent );
     CHECK_NEW( _statusFilterView );
 
-    _secondaryFilters->addPage( _( "Installation Summary" ), _statusFilterView );
+    _secondaryFilters->addPage( _( "Status" ), _statusFilterView );
 
     connect( _statusFilterView, SIGNAL( filterStart() ),
              primaryWidget,     SLOT  ( filter()      ) );

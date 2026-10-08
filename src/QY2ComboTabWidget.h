@@ -57,7 +57,7 @@ public:
 
     /**
      * Declare a previously added page to be the one where the whole widget
-     * stacck will be minimized (hidden) whenever that combo box entry is
+     * stack will be minimized (hidden) whenever that combo box entry is
      * selected.
      *
      * This will usually be an empty page; like the "All Packages" page in
