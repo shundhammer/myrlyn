@@ -36,9 +36,15 @@ YQPkgSecondaryFilterView::YQPkgSecondaryFilterView( QWidget * parent )
 }
 
 
-void YQPkgSecondaryFilterView::init( QWidget * primaryWidget )
+YQPkgSecondaryFilterView::~YQPkgSecondaryFilterView()
 {
-    QHBoxLayout *layout = new QHBoxLayout( this );
+    // NOP
+}
+
+
+void YQPkgSecondaryFilterView::layoutSplitter( QWidget * primaryWidget )
+{
+    QVBoxLayout * layout = new QVBoxLayout( this );
     CHECK_NEW( layout );
     layout->setContentsMargins( 0, 0, 0, 0);
 
@@ -47,39 +53,14 @@ void YQPkgSecondaryFilterView::init( QWidget * primaryWidget )
 
     layout->addWidget( splitter );
     splitter->addWidget( primaryWidget );
-
     primaryWidget->setSizePolicy( QSizePolicy( QSizePolicy::Ignored, QSizePolicy::Expanding ) );// hor/vert
 
-
-    // Directly propagate signals filterStart() and filterFinished()
-    // from the primary filter to the outside
-
-    connect( primaryWidget, SIGNAL( filterStart() ),
-             this,          SIGNAL( filterStart() ) );
-
-    connect( primaryWidget, SIGNAL( filterFinished() ),
-             this,          SIGNAL( filterFinished() ) );
-
-    // Redirect filterMatch() and filterNearMatch() signals to the secondary filter
-
-    connect( primaryWidget, SIGNAL( filterMatch             ( ZyppSel, ZyppPkg ) ),
-             this,          SLOT  ( primaryFilterMatch      ( ZyppSel, ZyppPkg ) ) );
-
-    connect( primaryWidget, SIGNAL( filterNearMatch         ( ZyppSel, ZyppPkg ) ),
-             this,          SLOT  ( primaryFilterNearMatch  ( ZyppSel, ZyppPkg ) ) );
-
-    layoutSecondaryFilters( splitter, primaryWidget );
-}
-
-
-YQPkgSecondaryFilterView::~YQPkgSecondaryFilterView()
-{
-    // NOP
+    layoutSecondaryFilters( splitter );
 }
 
 
 QWidget *
-YQPkgSecondaryFilterView::layoutSecondaryFilters( QWidget * parent, QWidget * primaryWidget )
+YQPkgSecondaryFilterView::layoutSecondaryFilters( QWidget * parent )
 {
     QWidget * vbox = new QWidget( parent );
     CHECK_NEW( vbox );
@@ -135,7 +116,7 @@ YQPkgSecondaryFilterView::layoutSecondaryFilters( QWidget * parent, QWidget * pr
     _secondaryFilters->addPage( _( "Search" ), _searchFilterView );
 
     connect( _searchFilterView, SIGNAL( filterStart() ),
-             primaryWidget,     SLOT  ( filter()      ) );
+             this,              SLOT  ( filter()      ) );
 
     connect( _secondaryFilters, SIGNAL( currentChanged( QWidget * ) ),
              this,              SLOT  ( filter()                    ) );
@@ -152,9 +133,30 @@ YQPkgSecondaryFilterView::layoutSecondaryFilters( QWidget * parent, QWidget * pr
     // Collapse the secondary filters whenever "All Packages" is selected
 
     connect( _statusFilterView, SIGNAL( filterStart() ),
-             primaryWidget,     SLOT  ( filter()      ) );
+             this,              SLOT  ( filter()      ) );
 
     return _secondaryFilters;
+}
+
+
+void YQPkgSecondaryFilterView::connectFilter( QWidget * filterWidget )
+{
+    // Directly propagate signals filterStart() and filterFinished()
+    // from the primary filter to the outside
+
+    connect( filterWidget, SIGNAL( filterStart() ),
+             this,         SIGNAL( filterStart() ) );
+
+    connect( filterWidget, SIGNAL( filterFinished() ),
+             this,         SIGNAL( filterFinished() ) );
+
+    // Redirect filterMatch() and filterNearMatch() signals to the secondary filter
+
+    connect( filterWidget, SIGNAL( filterMatch             ( ZyppSel, ZyppPkg ) ),
+             this,         SLOT  ( primaryFilterMatch      ( ZyppSel, ZyppPkg ) ) );
+
+    connect( filterWidget, SIGNAL( filterNearMatch         ( ZyppSel, ZyppPkg ) ),
+             this,         SLOT  ( primaryFilterNearMatch  ( ZyppSel, ZyppPkg ) ) );
 }
 
 

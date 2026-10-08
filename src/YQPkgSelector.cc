@@ -1006,6 +1006,12 @@ YQPkgSelector::makeConnections()
     {
         connect( _repoFilterView,       SIGNAL( filterNearMatch  ( ZyppSel, ZyppPkg ) ),
                  _pkgList,              SLOT  ( addPkgItemDimmed ( ZyppSel, ZyppPkg ) ) );
+
+        connect( _repoFilterView,       SIGNAL( protectAll()           ),
+                 _pkgList,              SLOT  ( setListProtected()     ) );
+
+        connect( _repoFilterView,       SIGNAL( unProtectAll()         ),
+                 _pkgList,              SLOT  ( setListKeepInstalled() ) );
     }
 
     if ( _serviceFilterView && _pkgList )

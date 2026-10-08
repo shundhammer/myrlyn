@@ -14,20 +14,57 @@
  */
 
 
+#include <QVBoxLayout>
+#include <QPushButton>
 
 #include "Exception.h"
 #include "Logger.h"
 #include "YQPkgRepoList.h"
 #include "YQPkgRepoFilterView.h"
+#include "YQi18n.h"
 
 
 YQPkgRepoFilterView::YQPkgRepoFilterView( QWidget * parent )
     : YQPkgSecondaryFilterView( parent )
 {
-    _repoList = new YQPkgRepoList( this );
+    logDebug() << endl;
+
+    QWidget * primaryFilter = new QWidget( this );
+    CHECK_NEW( primaryFilter );
+
+    QVBoxLayout * layout = new QVBoxLayout( primaryFilter );
+    CHECK_NEW( layout );
+    layout->setContentsMargins( 0, 0, 0, 0 ); // left / top / right / bottom
+
+    // Repo List
+
+    _repoList = new YQPkgRepoList( primaryFilter );
     CHECK_NEW( _repoList );
 
-    init( _repoList) ;
+    layout->addWidget( _repoList );
+
+
+    // Buttons
+
+    _protectAllButton = new QPushButton( _( "Protect All" ), primaryFilter );
+    CHECK_NEW( _protectAllButton );
+    layout->addWidget( _protectAllButton );
+
+    connect( _protectAllButton, SIGNAL( clicked()    ),
+             this,              SIGNAL( protectAll() ) );
+
+    _unProtectAllButton = new QPushButton( _( "Un-Protect All" ), primaryFilter );
+    CHECK_NEW( _unProtectAllButton );
+    layout->addWidget( _unProtectAllButton );
+
+    connect( _unProtectAllButton, SIGNAL( clicked()      ),
+             this,                SIGNAL( unProtectAll() ) );
+
+
+    // Put this all into a splitter
+
+    layoutSplitter( primaryFilter );
+    connectFilter( _repoList );
 }
 
 

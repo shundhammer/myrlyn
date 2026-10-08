@@ -20,7 +20,9 @@
 #include "YQPkgSecondaryFilterView.h"
 
 class QWidget;
+class QPushButton;
 class YQPkgRepoList;
+
 
 class YQPkgRepoFilterView : public YQPkgSecondaryFilterView
 {
@@ -44,6 +46,25 @@ public:
     zypp::Repository selectedRepo() const;
 
 
+signals:
+
+    /**
+     * Set all packages in the current package list to status "Protected"
+     * where this is possible (i.e. all that are currently installed).
+     *
+     * This is the same as context menu "All in this list" -> "protected".
+     **/
+    void protectAll();
+
+    /**
+     * Set all packages in the current package list to status "Keep"
+     * where this is possible (i.e. all that are currently installed).
+     *
+     * This is the same as context menu "All in this list" -> "Keep".
+     **/
+    void unProtectAll();
+
+
 protected:
 
     /**
@@ -55,6 +76,8 @@ protected:
     // Data members
 
     YQPkgRepoList * _repoList;
+    QPushButton   * _protectAllButton;
+    QPushButton   * _unProtectAllButton;
 };
 
 

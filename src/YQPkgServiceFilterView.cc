@@ -28,8 +28,10 @@ YQPkgServiceFilterView::YQPkgServiceFilterView( QWidget * parent )
     _serviceList = new YQPkgServiceList( this );
     CHECK_NEW( _serviceList );
 
-    init(_serviceList);
+    layoutSplitter( _serviceList );
+    connectFilter( _serviceList );
 }
+
 
 YQPkgServiceFilterView::~YQPkgServiceFilterView()
 {

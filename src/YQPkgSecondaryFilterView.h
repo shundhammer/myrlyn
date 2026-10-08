@@ -54,7 +54,13 @@ public:
      * The primaryWidget is the primary widget to which the secondary views
      * will be added. It should be a subclass of YQPkgSecondaryFilterView.
      */
-    void init( QWidget * primaryWidget );
+    void layoutSplitter( QWidget * primaryWidget );
+
+    /**
+     * Connect the filter...() signals from 'filterWidget' to this class.
+     **/
+    void connectFilter( QWidget * filterWidget );
+
 
 signals:
 
@@ -132,8 +138,7 @@ protected:
     /**
      * Widget layout for the secondary filters
      **/
-    QWidget * layoutSecondaryFilters( QWidget * parent,
-                                      QWidget * primaryWidget );
+    QWidget * layoutSecondaryFilters( QWidget * parent );
 
     /**
      * Check if pkg matches the the currently selected secondary filter
