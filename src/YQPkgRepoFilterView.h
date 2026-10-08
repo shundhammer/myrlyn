@@ -19,8 +19,9 @@
 
 #include "YQPkgSecondaryFilterView.h"
 
-class QWidget;
+class QLayout;
 class QPushButton;
+class QWidget;
 class YQPkgRepoList;
 
 
@@ -72,9 +73,14 @@ protected:
      **/
     virtual void primaryFilter();
 
+    void layoutPrimaryFilter();
+    void layoutButtons();
+
 
     // Data members
 
+    QWidget       * _primaryFilter;
+    QVBoxLayout   * _outerLayout;
     YQPkgRepoList * _repoList;
     QPushButton   * _protectAllButton;
     QPushButton   * _unProtectAllButton;
