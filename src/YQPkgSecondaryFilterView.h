@@ -9,6 +9,7 @@
 
     Project:  Myrlyn Package Manager GUI
     Copyright (c) 2024-25 SUSE LLC
+              (c) 2026 Stefan.Hundhammer@gmx.de
     License:  GPL V2 - See file LICENSE for details.
 
  */
@@ -18,9 +19,10 @@
 #define YQPkgSecondaryFilterView_h
 
 #include "YQZypp.h"
+#include "QY2ComboTabWidget.h"
+
 #include <QWidget>
 
-class QY2ComboTabWidget;
 class YQPkgSearchFilterView;
 class YQPkgStatusFilterView;
 
@@ -81,6 +83,7 @@ signals:
      **/
     void filterFinished();
 
+
 public slots:
 
     /**
@@ -117,6 +120,16 @@ protected slots:
 protected:
 
     /**
+     * Return the current page.
+     **/
+    QWidget * currentPage() const { return _secondaryFilters->currentPage(); }
+
+    /**
+     * Check if 'selectable' is installed.
+     **/
+    bool isInstalled( ZyppSel selectable ) const;
+
+    /**
      * Widget layout for the secondary filters
      **/
     QWidget * layoutSecondaryFilters( QWidget * parent,
@@ -140,6 +153,8 @@ protected:
 
     QY2ComboTabWidget *     _secondaryFilters;
     QWidget *               _allPackages;
+    QWidget *               _installedPackages;
+    QWidget *               _notInstalledPackages;
     YQPkgSearchFilterView * _searchFilterView;
     YQPkgStatusFilterView * _statusFilterView;
 };

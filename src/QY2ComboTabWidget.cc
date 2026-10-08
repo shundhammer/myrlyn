@@ -9,6 +9,7 @@
 
     Project:  Myrlyn Package Manager GUI
     Copyright (c) 2024-25 SUSE LLC
+              (c) 2026 Stefan.Hundhammer@gmx.de
     License:  GPL V2 - See file LICENSE for details.
 
  */
@@ -30,7 +31,6 @@ using std::string;
 QY2ComboTabWidget::QY2ComboTabWidget( const QString & label,
                                       QWidget *       parent )
     : QWidget( parent )
-    , _minimizePage( 0 )
 {
     QVBoxLayout *vbox = new QVBoxLayout( this );
     vbox->setContentsMargins( 0, 0, 0, 0 );
@@ -67,22 +67,23 @@ QY2ComboTabWidget::~QY2ComboTabWidget()
 
 
 void
-QY2ComboTabWidget::addPage( const QString & page_label, QWidget * new_page )
+QY2ComboTabWidget::addPage( const QString & pageLabel, QWidget * newPage )
 {
-    _pages.insert( _comboBox->count(), new_page );
-    _comboBox->addItem( page_label );
-    _widgetStack->addWidget( new_page );
+    _pages.insert( _comboBox->count(), newPage );
+    _comboBox->addItem( pageLabel );
+    _widgetStack->addWidget( newPage );
 
     if ( ! _widgetStack->currentWidget() )
-        _widgetStack->setCurrentWidget( new_page );
+        _widgetStack->setCurrentWidget( newPage );
 }
 
 
 void
-QY2ComboTabWidget::setMinimizePage( QWidget * page )
+QY2ComboTabWidget::addEmptyPage( const QString & pageLabel, QWidget * newPage )
 {
-    _minimizePage = page;
-    _widgetStack->setVisible( page != _widgetStack->currentWidget() );
+    _emptyPages.insert( newPage );
+    addPage( pageLabel, newPage );
+    _widgetStack->setVisible( ! _emptyPages.contains( currentPage() ) );
 }
 
 
@@ -93,9 +94,8 @@ QY2ComboTabWidget::showPageIndex( int index )
     {
         QWidget * page = _pages[ index ];
         _widgetStack->setCurrentWidget( page );
-        _widgetStack->setVisible( page != _minimizePage );
+        _widgetStack->setVisible( ! _emptyPages.contains( page ) );
 
-        // yuiDebug() << "Changing current page" << endl;
         emit currentChanged( page );
     }
     else
@@ -110,6 +110,7 @@ void
 QY2ComboTabWidget::showPage( QWidget * page )
 {
     _widgetStack->setCurrentWidget( page );
+    _widgetStack->setVisible( ! _emptyPages.contains( page ) );
 
     if ( page == _pages[ _comboBox->currentIndex() ] )
     {
@@ -133,7 +134,7 @@ QY2ComboTabWidget::showPage( QWidget * page )
         }
     }
 
-    // If we come this far, that page isn't present in the dict.
+    // If we come this far, that page isn't present in the hash.
 
     qWarning( "QY2ComboTabWidget: Page not found" );
 }

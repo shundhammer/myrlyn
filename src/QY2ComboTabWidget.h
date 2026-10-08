@@ -9,6 +9,7 @@
 
     Project:  Myrlyn Package Manager GUI
     Copyright (c) 2024-25 SUSE LLC
+              (c) 2026 Stefan.Hundhammer@gmx.de
     License:  GPL V2 - See file LICENSE for details.
 
  */
@@ -19,11 +20,12 @@
 
 #include <QString>
 #include <QHash>
+#include <QSet>
 #include <QWidget>
+#include <QStackedWidget>
 
 class QComboBox;
 class QLabel;
-class QStackedWidget;
 class QWidget;
 
 
@@ -56,16 +58,19 @@ public:
     void addPage( const QString & pageLabel, QWidget * page );
 
     /**
-     * Declare a previously added page to be the one where the whole widget
-     * stack will be minimized (hidden) whenever that combo box entry is
-     * selected.
+     * Add an empty page. 'pageLabel' will be the user-visible combo box entry
+     * for that page.
      *
-     * This will usually be an empty page; like the "All Packages" page in
-     * YQPkgSecondaryFilter: it doesn't need all that screen space that is
-     * reserved for the other secondary filters, so that whole widget tack can
-     * be collapsed.
+     * When an empty page is selected, the whole widget stack will be minimized
+     * (hidden) whenever that combo box entry is selected to save screen space.
+     * The "All Packages" page in YQPkgSecondaryFilter is an example.
      **/
-    void setMinimizePage( QWidget * page );
+    void addEmptyPage( const QString & pageLabel, QWidget * page );
+
+    /**
+     * Return the current page.
+     **/
+    QWidget * currentPage() const { return _widgetStack->currentWidget(); }
 
 
 signals:
@@ -102,7 +107,7 @@ protected:
     QLabel		* _comboLabel;
     QStackedWidget 	* _widgetStack;
     QHash<int, QWidget *> _pages;
-    QWidget            *  _minimizePage;
+    QSet<QWidget *>       _emptyPages;
 };
 
 
