@@ -60,9 +60,6 @@ QPixmap YQIconPool::disabledPkgProtected()      { return instance()->cachedIcon(
 
 QPixmap YQIconPool::normalPkgConflict()         { return instance()->cachedIcon( "emblem-warning",            true  ); }
 
-QPixmap YQIconPool::treePlus()                  { return instance()->cachedIcon( "list-add",                  true  ); }
-QPixmap YQIconPool::treeMinus()                 { return instance()->cachedIcon( "list-remove",               true  ); }
-
 QPixmap YQIconPool::warningSign()               { return instance()->cachedIcon( "emblem-warning",            true  ); }
 QPixmap YQIconPool::pkgSatisfied()              { return instance()->cachedIcon( "package-supported",         true  ); }
 

@@ -13,8 +13,6 @@
     <file alias="emoji-sick">icons/emoji-sick.svg</file>
     <file alias="empty-40x22">icons/empty-40x22.png</file>
     <file alias="hamburger">icons/hamburger.svg</file>
-    <file alias="list-add">icons/list-add.svg</file>
-    <file alias="list-remove">icons/list-remove.svg</file>
     <file alias="package-available">icons/package-available.svg</file>
     <file alias="package-available-locked">icons/package-available-locked.svg</file>
     <file alias="package-downgrade">icons/package-downgrade.svg</file>

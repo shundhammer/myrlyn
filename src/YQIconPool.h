@@ -48,9 +48,6 @@ public:
 
     static QPixmap normalPkgConflict();
 
-    static QPixmap treePlus();
-    static QPixmap treeMinus();
-
     static QPixmap warningSign();
     static QPixmap pkgSatisfied();
 
