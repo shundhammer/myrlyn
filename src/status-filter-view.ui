@@ -200,7 +200,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/package-installed-updated</pixmap>
+         <pixmap resource="icons.qrc">:/package-installed</pixmap>
         </property>
        </widget>
       </item>
