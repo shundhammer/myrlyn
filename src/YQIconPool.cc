@@ -14,8 +14,10 @@
  */
 
 
-#include <QPixmap>
+#include <QGuiApplication>
 #include <QIcon>
+#include <QPalette>
+#include <QPixmap>
 #include <QSettings>
 
 #include "Logger.h"
@@ -83,6 +85,34 @@ YQIconPool::~YQIconPool()
 {
     // This is most likely never called, but we can't be sure.
     writeSettings();
+}
+
+
+bool YQIconPool::usingDarkTheme()
+{
+    static bool usingDarkTheme      = false;
+    static bool checkedForDarkTheme = false;
+
+    if ( ! checkedForDarkTheme )
+    {
+        usingDarkTheme = detectDarkWidgetTheme();
+        checkedForDarkTheme = true;
+    }
+
+    return usingDarkTheme;
+}
+
+
+bool YQIconPool::detectDarkWidgetTheme()
+{
+    QColor background     = QGuiApplication::palette().color( QPalette::Active, QPalette::Base );
+    bool   usingDarkTheme = ( background.lightness() < 128 ); // 0 (black) .. 255 (white)
+
+    logInfo() << "Using a "
+              << ( usingDarkTheme ? "dark" : "light" )
+              << " widget theme" << endl;
+
+    return usingDarkTheme;
 }
 
 

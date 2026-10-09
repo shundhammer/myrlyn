@@ -55,12 +55,21 @@ public:
     static QPixmap arrowDown();
     static QPixmap checkmark();
 
+    static bool usingDarkTheme();
+    static bool usingLightTheme() { return ! usingDarkTheme(); }
+
 protected:
 
     /**
      * Return the global icon pool.
      **/
     static YQIconPool * instance();
+
+    /**
+     * Detect the widget theme (dark or light).
+     * Return 'true' for a dark widget theme, 'false' for a light theme.
+     **/
+    static bool detectDarkWidgetTheme();
 
     /**
      * Return the cached icon for 'iconName'. If the icon isn't in the cache
