@@ -59,9 +59,7 @@ QPixmap YQIconPool::disabledPkgNoInst()         { return instance()->cachedIcon(
 QPixmap YQIconPool::disabledPkgProtected()      { return instance()->cachedIcon( "package-installed-locked",  false ); }
 
 QPixmap YQIconPool::normalPkgConflict()         { return instance()->cachedIcon( "emblem-warning",            true  ); }
-
 QPixmap YQIconPool::warningSign()               { return instance()->cachedIcon( "emblem-warning",            true  ); }
-QPixmap YQIconPool::pkgSatisfied()              { return instance()->cachedIcon( "package-supported",         true  ); }
 
 QPixmap YQIconPool::tabRemove()                 { return instance()->cachedIcon( "tab-close",                 true  ); }
 QPixmap YQIconPool::arrowLeft()                 { return instance()->cachedIcon( "arrow-left",                true  ); }

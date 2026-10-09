@@ -13,6 +13,9 @@
     <file alias="emoji-sick">icons/emoji-sick.svg</file>
     <file alias="empty-40x22">icons/empty-40x22.png</file>
     <file alias="hamburger">icons/hamburger.svg</file>
+    <file alias="wrench">icons/wrench.svg</file>
+    <file alias="tab-close">icons/tab-close.svg</file>
+
     <file alias="package-available">icons/package-available.svg</file>
     <file alias="package-available-locked">icons/package-available-locked.svg</file>
     <file alias="package-downgrade">icons/package-downgrade.svg</file>
@@ -22,10 +25,7 @@
     <file alias="package-installed">icons/package-installed.svg</file>
     <file alias="package-remove">icons/package-remove.svg</file>
     <file alias="package-remove-auto">icons/package-remove-auto.svg</file>
-    <file alias="package-supported">icons/package-supported.svg</file>
     <file alias="package-upgrade">icons/package-upgrade.svg</file>
     <file alias="package-upgrade-auto">icons/package-upgrade-auto.svg</file>
-    <file alias="wrench">icons/wrench.svg</file>
-    <file alias="tab-close">icons/tab-close.svg</file>
   </qresource>
 </RCC>

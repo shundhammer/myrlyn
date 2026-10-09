@@ -47,9 +47,7 @@ public:
     static QPixmap disabledPkgUpdate();
 
     static QPixmap normalPkgConflict();
-
     static QPixmap warningSign();
-    static QPixmap pkgSatisfied();
 
     static QPixmap tabRemove();
     static QPixmap arrowLeft();
