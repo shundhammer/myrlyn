@@ -166,7 +166,7 @@ void MyrlynApp::createMainWin()
     CHECK_NEW( _mainWin );
 
     setWindowTitle( _mainWin );
-    _mainWin->setWindowIcon( QIcon( ":artwork/Myrlyn-48x48.png" ) );
+    _mainWin->setWindowIcon( QIcon( ":/Myrlyn" ) );
     _mainWin->installEventFilter( this );
     _mainWin->show();
 }

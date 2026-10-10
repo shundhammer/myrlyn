@@ -272,26 +272,15 @@ install( FILES
 
 # From:
 #
-#   artwork/Myrlyn-16x16.png
-#   artwork/Myrlyn-22x22.png
-#   artwork/Myrlyn-24x24.png
-#   artwork/Myrlyn-32x32.png
-#   artwork/Myrlyn-48x48.png
-#   artwork/Myrlyn-72x72.png
+#   artwork/Myrlyn.svg
 #
 # To:
 #
-#   /usr/share/icons/hicolor/16x16/apps/Myrlyn.png
-#   /usr/share/icons/hicolor/22x22/apps/Myrlyn.png
-#   /usr/share/icons/hicolor/24x24/apps/Myrlyn.png
-#   /usr/share/icons/hicolor/32x32/apps/Myrlyn.png
-#   /usr/share/icons/hicolor/48x48/apps/Myrlyn.png
-#   /usr/share/icons/hicolor/72x72/apps/Myrlyn.png
+#   /usr/share/icons/hicolor/scalable/apps/Myrlyn.png
 
 set( ICONS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/icons" )
 
-foreach( resolution 16 22 24 32 48 72 )
-  set( SRC_ICON  "artwork/Myrlyn-${resolution}x${resolution}.png" )
-  set( DEST_ICON_DIR "${ICONS_INSTALL_DIR}/hicolor/${resolution}x${resolution}/apps" )
-  install( FILES ${SRC_ICON} DESTINATION ${DEST_ICON_DIR} RENAME "Myrlyn.png" )
-endforeach()
+set( SRC_ICON      "artwork/Myrlyn.svg" )
+set( DEST_ICON_DIR "${ICONS_INSTALL_DIR}/hicolor/scalable/apps" )
+install( FILES ${SRC_ICON} DESTINATION ${DEST_ICON_DIR} )
+# install( FILES ${SRC_ICON} DESTINATION ${DEST_ICON_DIR} RENAME "Myrlyn.svg" )

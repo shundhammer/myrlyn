@@ -92,6 +92,6 @@ CMAKE_OPTS="-DCMAKE_BUILD_TYPE=RELEASE"
 %{_bindir}/myrlyn-askpass
 %{_bindir}/myrlyn-sudo
 %{_datadir}/applications/%{name}-*.desktop
-%{_datadir}/icons/hicolor/*/apps/Myrlyn.png
+%{_datadir}/icons/hicolor/scalable/apps/Myrlyn.svg
 
 %changelog

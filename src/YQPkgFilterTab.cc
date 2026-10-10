@@ -109,9 +109,10 @@ YQPkgFilterTab::YQPkgFilterTab( QWidget * parent )
     // Logo in the top right corner
     //
 
-    PopupLogo * logo = new PopupLogo( ":/artwork/Myrlyn-32x32",
-                                     ":/artwork/Myrlyn-256x256" );
+    PopupLogo * logo = new PopupLogo( ":/Myrlyn-32x32", // small icon in the top right corner
+                                      ":/Myrlyn" );     // large popup logo
     CHECK_NEW( logo );
+    logo->resize( 32, 32 );
     setCornerWidget( logo, Qt::TopRightCorner );
 #endif
 
