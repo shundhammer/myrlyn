@@ -58,6 +58,8 @@ public:
     static bool usingDarkTheme();
     static bool usingLightTheme() { return ! usingDarkTheme(); }
 
+    static void setVerboseIconLoader( bool val = true ) { _verboseIconLoader = val; }
+
 protected:
 
     /**
@@ -81,10 +83,26 @@ protected:
 
     /**
      * Load the icon for 'iconName' from the icon theme or, if that fails,
-     * from the compiled-in icons (using the Qt resource system). Return a null
-     * pixmap if there is no such icon.
+     * from the compiled-in icons (using the Qt resource system).
+     *
+     * Return a null pixmap if there is no such icon.
      **/
     QPixmap loadIcon( const QString & iconName, bool enabled );
+
+    /**
+     * Load the icon for 'iconName' from the icon theme.
+     *
+     * Return a null pixmap if there is no such icon.
+     **/
+    QPixmap loadThemeIcon( const QString & iconName, bool enabled );
+
+    /**
+     * Load a built-in icon for 'iconName' from the compiled-in Qt resource
+     * file.
+     *
+     * Return a null pixmap if there is no such icon.
+     **/
+    QPixmap loadBuiltinIcon( const QString & iconName, bool enabled );
 
 
 private:
@@ -110,6 +128,7 @@ private:
 
     static YQIconPool *             _instance;
     static bool                     _useThemeIcons;
+    static bool                     _verboseIconLoader;
     QHash< const QString, QPixmap > _iconCache;
 };
 

@@ -24,9 +24,9 @@
 #include "YQIconPool.h"
 
 
-
-YQIconPool * YQIconPool::_instance      = 0;
-bool         YQIconPool::_useThemeIcons = true;
+YQIconPool * YQIconPool::_instance          = 0;
+bool         YQIconPool::_useThemeIcons     = true;
+bool         YQIconPool::_verboseIconLoader = false;
 
 
 YQIconPool * YQIconPool::instance()
@@ -122,6 +122,13 @@ void YQIconPool::readSettings()
     settings.beginGroup( "Icons" );
     _useThemeIcons = settings.value( "useThemeIcons", true ).toBool();
     settings.endGroup();
+
+    if ( _verboseIconLoader )
+    {
+        logInfo() << "_useThemeIcons: " << _useThemeIcons << endl;
+        logInfo() << "Icon theme name: " << QIcon::themeName() << endl;
+        logInfo() << "Icon theme search paths: " << QIcon::themeSearchPaths() << endl;
+    }
 }
 
 
@@ -164,20 +171,11 @@ YQIconPool::loadIcon( const QString & iconName, bool enabled )
 {
     QPixmap iconPixmap;
 
-    if ( _useThemeIcons && QIcon::hasThemeIcon( iconName ) )
-    {
-        // logVerbose() << "Loading theme icon " << iconName << endl;
+    if ( _useThemeIcons )
+        iconPixmap = loadThemeIcon( iconName, enabled );
 
-        QIcon icon = QIcon::fromTheme( iconName, QIcon( ":/" + iconName ) );
-        iconPixmap = icon.pixmap( QSize( 16, 16 ), enabled ? QIcon::Normal : QIcon::Disabled );
-    }
-    else
-    {
-        // logVerbose() << "Loading built-in icon " << iconName << endl;
-
-        QIcon icon = QIcon( ":/" + iconName );
-        iconPixmap = icon.pixmap( QSize( 16, 16 ), enabled ? QIcon::Normal : QIcon::Disabled );
-    }
+    if ( iconPixmap.isNull() )
+        iconPixmap = loadBuiltinIcon( iconName, enabled );
 
     if ( iconPixmap.isNull() )
         logError() << "Could not load icon " << iconName << endl;
@@ -185,3 +183,52 @@ YQIconPool::loadIcon( const QString & iconName, bool enabled )
     return iconPixmap;
 }
 
+
+QPixmap
+YQIconPool::loadThemeIcon( const QString & iconName, bool enabled )
+{
+    QPixmap iconPixmap;
+
+    QString themeIconName = iconName.startsWith( "package-" ) ?
+        iconName : QString( "myrlyn-" ) + iconName;
+
+    if ( QIcon::hasThemeIcon( themeIconName ) )
+    {
+        if ( _verboseIconLoader )
+            logDebug() << "Loading theme icon " << themeIconName << endl;
+
+        QIcon icon = QIcon::fromTheme( themeIconName, QIcon( ":/" + iconName ) );
+        iconPixmap = icon.pixmap( QSize( 32, 32 ), enabled ? QIcon::Normal : QIcon::Disabled );
+    }
+    else //  ! hasThemeIcon
+    {
+        if ( _verboseIconLoader )
+            logDebug() << "  No theme icon " << themeIconName << endl;
+    }
+
+    return iconPixmap;
+}
+
+
+QPixmap
+YQIconPool::loadBuiltinIcon( const QString & rawIconName, bool enabled )
+{
+    QPixmap iconPixmap;
+    QString iconName = rawIconName;
+
+    if ( usingDarkTheme() )
+    {
+        QString darkIconName = "dark-" + rawIconName;
+
+        if ( QFile::exists( ":/" + darkIconName ) )
+            iconName = darkIconName;
+    }
+
+    if ( _verboseIconLoader )
+        logDebug() << "Loading built-in icon " << iconName << endl;
+
+    QIcon icon = QIcon( ":/" + iconName );
+    iconPixmap = icon.pixmap( QSize( 16, 16 ), enabled ? QIcon::Normal : QIcon::Disabled );
+
+    return iconPixmap;
+}

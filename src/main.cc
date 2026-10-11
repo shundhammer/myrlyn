@@ -23,6 +23,7 @@
 #include "MyrlynApp.h"
 #include "Translator.h"
 #include "ZyppHistory.h"
+#include "YQIconPool.h"
 #include "utf8.h"
 
 
@@ -46,6 +47,7 @@ void usage()
 	 << "  -n | --dry-run\n"
 	 << "  -d | --download-only\n"
          << "  -f | --no-repo-refresh\n"
+         << "  -i | --verbose-icon-loader\n"
          << "  -v | --force-service-view\n"
          << "  -z | --zypp-history </path/to/zypp/history>\n"
 	 << "  -h | --help \n"
@@ -134,17 +136,18 @@ parseCommandLineOptions( QStringList & argList )
 {
     MyrlynAppOptions optFlags;
 
-    if ( commandLineSwitch( "--read-only",          "-r", argList ) ) optFlags |= OptReadOnly;
-    if ( commandLineSwitch( "--dry-run",            "-n", argList ) ) optFlags |= OptDryRun;
-    if ( commandLineSwitch( "--download-only",      "-d", argList ) ) optFlags |= OptDownloadOnly;
-    if ( commandLineSwitch( "--no-repo-refresh",    "-f", argList ) ) optFlags |= OptNoRepoRefresh;
-    if ( commandLineSwitch( "--force-service-view", "-v", argList ) ) optFlags |= OptForceServiceView;
-    if ( commandLineSwitch( "--fake-root",          "",   argList ) ) optFlags |= OptFakeRoot;
-    if ( commandLineSwitch( "--fake-commit",        "",   argList ) ) optFlags |= OptFakeCommit;
-    if ( commandLineSwitch( "--fake-summary",       "",   argList ) ) optFlags |= OptFakeSummary;
-    if ( commandLineSwitch( "--fake-translations",  "",   argList ) ) Translator::useFakeTranslations();
-    if ( commandLineSwitch( "--slow-repo-refresh",  "",   argList ) ) optFlags |= OptSlowRepoRefresh;
-    if ( commandLineSwitch( "--help",               "-h", argList ) ) usage(); // this will exit
+    if ( commandLineSwitch( "--read-only",           "-r", argList ) ) optFlags |= OptReadOnly;
+    if ( commandLineSwitch( "--dry-run",             "-n", argList ) ) optFlags |= OptDryRun;
+    if ( commandLineSwitch( "--download-only",       "-d", argList ) ) optFlags |= OptDownloadOnly;
+    if ( commandLineSwitch( "--no-repo-refresh",     "-f", argList ) ) optFlags |= OptNoRepoRefresh;
+    if ( commandLineSwitch( "--verbose-icon-loader", "-i", argList ) ) YQIconPool::setVerboseIconLoader();
+    if ( commandLineSwitch( "--force-service-view",  "-v", argList ) ) optFlags |= OptForceServiceView;
+    if ( commandLineSwitch( "--fake-root",           "",   argList ) ) optFlags |= OptFakeRoot;
+    if ( commandLineSwitch( "--fake-commit",         "",   argList ) ) optFlags |= OptFakeCommit;
+    if ( commandLineSwitch( "--fake-summary",        "",   argList ) ) optFlags |= OptFakeSummary;
+    if ( commandLineSwitch( "--fake-translations",   "",   argList ) ) Translator::useFakeTranslations();
+    if ( commandLineSwitch( "--slow-repo-refresh",   "",   argList ) ) optFlags |= OptSlowRepoRefresh;
+    if ( commandLineSwitch( "--help",                "-h", argList ) ) usage(); // this will exit
 
     QString zyppHistFile = commandLineOptionWithArg( "--zypp-history", "-z", argList );
 
