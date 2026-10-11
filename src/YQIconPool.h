@@ -25,36 +25,33 @@ class YQIconPool
 {
 public:
 
+    static QIcon pkgInstall();
+    static QIcon pkgUpdate();
+    static QIcon pkgDel();
     static QIcon pkgAutoDel();
     static QIcon pkgAutoInstall();
     static QIcon pkgAutoUpdate();
-    static QIcon pkgDel();
-    static QIcon pkgInstall();
     static QIcon pkgKeepInstalled();
     static QIcon pkgNoInst();
     static QIcon pkgProtected();
     static QIcon pkgTaboo();
-    static QIcon pkgUpdate();
 
-    static QIcon disabledPkgAutoDel();
-    static QIcon disabledPkgAutoInstall();
-    static QIcon disabledPkgAutoUpdate();
-    static QIcon disabledPkgDel();
-    static QIcon disabledPkgInstall();
-    static QIcon disabledPkgKeepInstalled();
-    static QIcon disabledPkgNoInst();
-    static QIcon disabledPkgProtected();
-    static QIcon disabledPkgTaboo();
-    static QIcon disabledPkgUpdate();
-
-    static QIcon normalPkgConflict();
-    static QIcon warningSign();
-
-    static QIcon tabRemove();
     static QIcon arrowLeft();
     static QIcon arrowRight();
     static QIcon arrowDown();
     static QIcon checkmark();
+    static QIcon pkgConflict();
+    static QIcon tabClose();
+
+    static QIcon download();
+    static QIcon downloadDone();
+    static QIcon downloadOngoing();
+    static QIcon downloadPlaceholder();
+    static QIcon emojiSad();
+    static QIcon emojiSick();
+    static QIcon hamburger();
+    static QIcon wrench();
+
 
     static bool usingDarkTheme();
     static bool usingLightTheme() { return ! usingDarkTheme(); }

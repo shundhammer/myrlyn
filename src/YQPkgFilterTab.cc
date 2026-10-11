@@ -246,7 +246,7 @@ void YQPkgFilterTab::createActions()
     _priv->actionMovePageRight->setShortcut( shortcut->key() );
 
 
-    _priv->actionClosePage = new QAction( YQIconPool::tabRemove(), _( "&Close page" ), actionParent );
+    _priv->actionClosePage = new QAction( YQIconPool::tabClose(), _( "&Close page" ), actionParent );
     CHECK_NEW( _priv->actionClosePage );
 
     shortcut = new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_W ), this, SLOT( closePage() ) );

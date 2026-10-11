@@ -1,44 +1,43 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource>
-    <file alias="arrow-down">icons/arrow-down.svg</file>
+    <file alias="package-install">icons/package-install.svg</file>
+    <file alias="package-upgrade">icons/package-upgrade.svg</file>
+    <file alias="package-remove">icons/package-remove.svg</file>
+    <file alias="package-install-auto">icons/package-install-auto.svg</file>
+    <file alias="package-upgrade-auto">icons/package-upgrade-auto.svg</file>
+    <file alias="package-remove-auto">icons/package-remove-auto.svg</file>
+    <file alias="package-installed">icons/package-installed.svg</file>
+    <file alias="package-available">icons/package-available.svg</file>
+    <file alias="package-installed-locked">icons/package-installed-locked.svg</file>
+    <file alias="package-available-locked">icons/package-available-locked.svg</file>
+
     <file alias="arrow-left">icons/arrow-left.svg</file>
     <file alias="arrow-right">icons/arrow-right.svg</file>
+    <file alias="arrow-down">icons/arrow-down.svg</file>
     <file alias="checkmark">icons/checkmark.svg</file>
     <file alias="download">icons/download.svg</file>
-    <file alias="download-done">icons/download-done.svg</file>
     <file alias="download-ongoing">icons/download-ongoing.svg</file>
+    <file alias="download-done">icons/download-done.svg</file>
+    <file alias="empty-40x22">icons/empty-40x22.png</file>
     <file alias="emblem-warning">icons/emblem-warning.svg</file>
     <file alias="emoji-sad">icons/emoji-sad.svg</file>
     <file alias="emoji-sick">icons/emoji-sick.svg</file>
-    <file alias="empty-40x22">icons/empty-40x22.png</file>
     <file alias="hamburger">icons/hamburger.svg</file>
     <file alias="wrench">icons/wrench.svg</file>
     <file alias="tab-close">icons/tab-close.svg</file>
 
-    <file alias="dark-arrow-down">icons/dark-theme/arrow-down.svg</file>
     <file alias="dark-arrow-left">icons/dark-theme/arrow-left.svg</file>
     <file alias="dark-arrow-right">icons/dark-theme/arrow-right.svg</file>
+    <file alias="dark-arrow-down">icons/dark-theme/arrow-down.svg</file>
     <file alias="dark-checkmark">icons/dark-theme/checkmark.svg</file>
     <file alias="dark-theme-download">icons/dark-theme/download.svg</file>
-    <file alias="dark-theme-download-done">icons/dark-theme/download-done.svg</file>
     <file alias="dark-theme-download-ongoing">icons/dark-theme/download-ongoing.svg</file>
+    <file alias="dark-theme-download-done">icons/dark-theme/download-done.svg</file>
     <file alias="dark-emoji-sad">icons/dark-theme/emoji-sad.svg</file>
     <file alias="dark-emoji-sick">icons/dark-theme/emoji-sick.svg</file>
     <file alias="dark-hamburger">icons/dark-theme/hamburger.svg</file>
     <file alias="dark-wrench">icons/dark-theme/wrench.svg</file>
     <file alias="dark-tab-close">icons/dark-theme/tab-close.svg</file>
-    
-    <file alias="package-available">icons/package-available.svg</file>
-    <file alias="package-available-locked">icons/package-available-locked.svg</file>
-    <file alias="package-downgrade">icons/package-downgrade.svg</file>
-    <file alias="package-install">icons/package-install.svg</file>
-    <file alias="package-install-auto">icons/package-install-auto.svg</file>
-    <file alias="package-installed-locked">icons/package-installed-locked.svg</file>
-    <file alias="package-installed">icons/package-installed.svg</file>
-    <file alias="package-remove">icons/package-remove.svg</file>
-    <file alias="package-remove-auto">icons/package-remove-auto.svg</file>
-    <file alias="package-upgrade">icons/package-upgrade.svg</file>
-    <file alias="package-upgrade-auto">icons/package-upgrade-auto.svg</file>
   </qresource>
 </RCC>

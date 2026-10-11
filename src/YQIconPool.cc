@@ -38,25 +38,35 @@ YQIconPool * YQIconPool::instance()
 }
 
 
-QIcon YQIconPool::pkgTaboo()                  { return instance()->cachedIcon( "package-available-locked" ); }
-QIcon YQIconPool::pkgDel()                    { return instance()->cachedIcon( "package-remove"           ); }
-QIcon YQIconPool::pkgUpdate()                 { return instance()->cachedIcon( "package-upgrade"          ); }
 QIcon YQIconPool::pkgInstall()                { return instance()->cachedIcon( "package-install"          ); }
+QIcon YQIconPool::pkgUpdate()                 { return instance()->cachedIcon( "package-upgrade"          ); }
+QIcon YQIconPool::pkgDel()                    { return instance()->cachedIcon( "package-remove"           ); }
+
 QIcon YQIconPool::pkgAutoInstall()            { return instance()->cachedIcon( "package-install-auto"     ); }
 QIcon YQIconPool::pkgAutoUpdate()             { return instance()->cachedIcon( "package-upgrade-auto"     ); }
 QIcon YQIconPool::pkgAutoDel()                { return instance()->cachedIcon( "package-remove-auto"      ); }
+
 QIcon YQIconPool::pkgKeepInstalled()          { return instance()->cachedIcon( "package-installed"        ); }
 QIcon YQIconPool::pkgNoInst()                 { return instance()->cachedIcon( "package-available"        ); }
 QIcon YQIconPool::pkgProtected()              { return instance()->cachedIcon( "package-installed-locked" ); }
+QIcon YQIconPool::pkgTaboo()                  { return instance()->cachedIcon( "package-available-locked" ); }
 
-QIcon YQIconPool::normalPkgConflict()         { return instance()->cachedIcon( "emblem-warning"           ); }
-QIcon YQIconPool::warningSign()               { return instance()->cachedIcon( "emblem-warning"           ); }
-
-QIcon YQIconPool::tabRemove()                 { return instance()->cachedIcon( "tab-close"                ); }
 QIcon YQIconPool::arrowLeft()                 { return instance()->cachedIcon( "arrow-left"               ); }
 QIcon YQIconPool::arrowRight()                { return instance()->cachedIcon( "arrow-right"              ); }
 QIcon YQIconPool::arrowDown()                 { return instance()->cachedIcon( "arrow-down"               ); }
 QIcon YQIconPool::checkmark()                 { return instance()->cachedIcon( "checkmark"                ); }
+QIcon YQIconPool::pkgConflict()               { return instance()->cachedIcon( "emblem-warning"           ); }
+QIcon YQIconPool::tabClose()                  { return instance()->cachedIcon( "tab-close"                ); }
+
+QIcon YQIconPool::download()                  { return instance()->cachedIcon( "download"                 ); }
+QIcon YQIconPool::downloadDone()              { return instance()->cachedIcon( "download-done"            ); }
+QIcon YQIconPool::downloadOngoing()           { return instance()->cachedIcon( "download-ongoing"         ); }
+QIcon YQIconPool::downloadPlaceholder()       { return instance()->cachedIcon( "empty-40x22"              ); }
+QIcon YQIconPool::emojiSad()                  { return instance()->cachedIcon( "emoji-sad"                ); }
+QIcon YQIconPool::emojiSick()                 { return instance()->cachedIcon( "emoji-sick"               ); }
+QIcon YQIconPool::hamburger()                 { return instance()->cachedIcon( "hamburger"                ); }
+QIcon YQIconPool::wrench()                    { return instance()->cachedIcon( "wrench"                   ); }
+
 
 
 YQIconPool::YQIconPool()

@@ -226,7 +226,7 @@ YQPkgConflict::formatHeading()
     QHBoxLayout * hbox  = new QHBoxLayout( frame );
 
     QLabel * warningIconLabel = new QLabel( this );
-    warningIconLabel->setPixmap( YQIconPool::normalPkgConflict().pixmap( QSize( 32, 32 ) ) );
+    warningIconLabel->setPixmap( YQIconPool::pkgConflict().pixmap( QSize( 32, 32 ) ) );
     hbox->addWidget( warningIconLabel );
 
     QString  text = fromUTF8( problem()->description() );
