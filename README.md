@@ -13,7 +13,7 @@ This started in the 11/2024 SUSE Hack Week to make the SUSE YaST Qt package
 selector usable as a standalone Qt program without any YaST or Ruby
 dependencies, but it has grown beyond that since then.
 
-[<img src="https://raw.githubusercontent.com/shundhammer/yqpkg/refs/heads/master/src/artwork/Myrlyn-256x256.png">](https://raw.githubusercontent.com/shundhammer/yqpkg/refs/heads/master/src/artwork/Myrlyn-256x256.png)
+[<img src="https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg">](https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg)
 
 
 ## License
