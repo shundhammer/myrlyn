@@ -16,6 +16,19 @@
     <file alias="wrench">icons/wrench.svg</file>
     <file alias="tab-close">icons/tab-close.svg</file>
 
+    <file alias="dark-arrow-down">icons/dark-theme/arrow-down.svg</file>
+    <file alias="dark-arrow-left">icons/dark-theme/arrow-left.svg</file>
+    <file alias="dark-arrow-right">icons/dark-theme/arrow-right.svg</file>
+    <file alias="dark-checkmark">icons/dark-theme/checkmark.svg</file>
+    <file alias="dark-theme-download">icons/dark-theme/download.svg</file>
+    <file alias="dark-theme-download-done">icons/dark-theme/download-done.svg</file>
+    <file alias="dark-theme-download-ongoing">icons/dark-theme/download-ongoing.svg</file>
+    <file alias="dark-emoji-sad">icons/dark-theme/emoji-sad.svg</file>
+    <file alias="dark-emoji-sick">icons/dark-theme/emoji-sick.svg</file>
+    <file alias="dark-hamburger">icons/dark-theme/hamburger.svg</file>
+    <file alias="dark-wrench">icons/dark-theme/wrench.svg</file>
+    <file alias="dark-tab-close">icons/dark-theme/tab-close.svg</file>
+    
     <file alias="package-available">icons/package-available.svg</file>
     <file alias="package-available-locked">icons/package-available-locked.svg</file>
     <file alias="package-downgrade">icons/package-downgrade.svg</file>
