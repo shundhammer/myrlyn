@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
-    <height>463</height>
+    <width>718</width>
+    <height>588</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -127,7 +127,8 @@ Stefan Hundhammer (GitHub: @shundhammer)
 ### Contributors
 
 - Christoph Grüninger (GitHub: @gruenich)
-- @Arthurium-On-Linux</string>
+- @Arthurium-On-Linux
+- @byDMA</string>
          </property>
          <property name="textFormat">
           <enum>Qt::TextFormat::MarkdownText</enum>
