@@ -162,7 +162,7 @@ void RepoTableItem::setText( int col, const QString & txt )
 }
 
 
-QPixmap
+QIcon
 RepoTableItem::checkmarkIcon()
 {
     return YQIconPool::checkmark();

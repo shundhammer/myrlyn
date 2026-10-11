@@ -18,7 +18,7 @@
 #define YQPkgObjList_h
 
 #include <QColor>
-#include <QPixmap>
+#include <QIcon>
 #include <QRegularExpression>
 #include <QMenu>
 #include <QEvent>
@@ -123,14 +123,9 @@ public:
     virtual QMenu * addAllInListSubMenu( QMenu * menu );
 
     /**
-     * Returns the suitable icon for a zypp::ResObject status - the regular
-     * icon if 'enabled' is 'true' or the insensitive icon if 'enabled' is
-     * 'false.  'bySelection' is relevant only for auto-states: This uses the
-     * icon for 'auto-by-selection" rather than the default auto-icon.
+     * Returns the suitable icon for a zypp::ResObject status.
      **/
-    virtual QPixmap statusIcon( ZyppStatus status,
-                                bool       enabled     = true,
-                                bool       bySelection = false );
+    virtual QIcon statusIcon( ZyppStatus status );
 
     /**
      * Returns a short (one line) descriptive text for a zypp::ResObject status.
@@ -376,8 +371,7 @@ protected:
      * 'key' is only a descriptive text, no true accelerator.
      **/
     QAction * createAction( const QString & text,
-                            const QPixmap & icon            = QPixmap(),
-                            const QPixmap & insensitiveIcon = QPixmap(),
+                            const QIcon   & icon            = QIcon(),
                             const QString & key             = QString(),
                             bool            enabled         = false );
 

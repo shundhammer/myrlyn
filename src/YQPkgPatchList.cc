@@ -624,7 +624,7 @@ YQPkgPatchCategoryItem::setTreeIcon()
     setIcon( _patchList->iconCol(),
              isExpanded() ?
              YQIconPool::arrowDown() :
-             YQIconPool::arrowRight()   );
+             YQIconPool::arrowRight() );
 }
 
 

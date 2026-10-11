@@ -18,6 +18,7 @@
 #define RepoTable_h
 
 #include <string>
+#include <QIcon>
 
 #include "MyrlynRepoManager.h"
 #include "YQZypp.h"
@@ -142,7 +143,7 @@ protected:
     /**
      * Return a "checkmark" icon.
      **/
-    QPixmap checkmarkIcon();
+    QIcon checkmarkIcon();
 
     /**
      * Return an empty icon.

@@ -23,6 +23,7 @@
 #include <QDateTime>
 #include <QFileDialog>
 #include <QLabel>
+#include <QPixmap>
 #include <QMessageBox>
 #include <QRadioButton>
 #include <QVBoxLayout>
@@ -224,9 +225,9 @@ YQPkgConflict::formatHeading()
 
     QHBoxLayout * hbox  = new QHBoxLayout( frame );
 
-    QLabel * pix = new QLabel( this );
-    pix->setPixmap( YQIconPool::normalPkgConflict() );
-    hbox->addWidget( pix );
+    QLabel * warningIconLabel = new QLabel( this );
+    warningIconLabel->setPixmap( YQIconPool::normalPkgConflict().pixmap( QSize( 32, 32 ) ) );
+    hbox->addWidget( warningIconLabel );
 
     QString  text = fromUTF8( problem()->description() );
     QLabel * heading = new QLabel( text, this );

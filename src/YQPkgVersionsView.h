@@ -18,9 +18,10 @@
 #define YQPkgVersionsView_h
 
 
-#include <QScrollArea>
-#include <QRadioButton>
 #include <QCheckBox>
+#include <QIcon>
+#include <QRadioButton>
+#include <QScrollArea>
 
 #include <zypp/ResTraits.h>
 #include <zypp/ui/Selectable.h>
@@ -264,7 +265,7 @@ protected:
 
     void setStatus( ZyppStatus newStatus );
 
-    QPixmap statusIcon( ZyppStatus status );
+    QIcon statusIcon( ZyppStatus status );
 
     //
     // Data members

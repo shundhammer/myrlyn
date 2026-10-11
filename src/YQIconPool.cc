@@ -38,36 +38,25 @@ YQIconPool * YQIconPool::instance()
 }
 
 
-QPixmap YQIconPool::pkgTaboo()                  { return instance()->cachedIcon( "package-available-locked",  true  ); }
-QPixmap YQIconPool::pkgDel()                    { return instance()->cachedIcon( "package-remove",            true  ); }
-QPixmap YQIconPool::pkgUpdate()                 { return instance()->cachedIcon( "package-upgrade",           true  ); }
-QPixmap YQIconPool::pkgInstall()                { return instance()->cachedIcon( "package-install",           true  ); }
-QPixmap YQIconPool::pkgAutoInstall()            { return instance()->cachedIcon( "package-install-auto",      true  ); }
-QPixmap YQIconPool::pkgAutoUpdate()             { return instance()->cachedIcon( "package-upgrade-auto",      true  ); }
-QPixmap YQIconPool::pkgAutoDel()                { return instance()->cachedIcon( "package-remove-auto",       true  ); }
-QPixmap YQIconPool::pkgKeepInstalled()          { return instance()->cachedIcon( "package-installed",         true  ); }
-QPixmap YQIconPool::pkgNoInst()                 { return instance()->cachedIcon( "package-available",         true  ); }
-QPixmap YQIconPool::pkgProtected()              { return instance()->cachedIcon( "package-installed-locked",  true  ); }
+QIcon YQIconPool::pkgTaboo()                  { return instance()->cachedIcon( "package-available-locked" ); }
+QIcon YQIconPool::pkgDel()                    { return instance()->cachedIcon( "package-remove"           ); }
+QIcon YQIconPool::pkgUpdate()                 { return instance()->cachedIcon( "package-upgrade"          ); }
+QIcon YQIconPool::pkgInstall()                { return instance()->cachedIcon( "package-install"          ); }
+QIcon YQIconPool::pkgAutoInstall()            { return instance()->cachedIcon( "package-install-auto"     ); }
+QIcon YQIconPool::pkgAutoUpdate()             { return instance()->cachedIcon( "package-upgrade-auto"     ); }
+QIcon YQIconPool::pkgAutoDel()                { return instance()->cachedIcon( "package-remove-auto"      ); }
+QIcon YQIconPool::pkgKeepInstalled()          { return instance()->cachedIcon( "package-installed"        ); }
+QIcon YQIconPool::pkgNoInst()                 { return instance()->cachedIcon( "package-available"        ); }
+QIcon YQIconPool::pkgProtected()              { return instance()->cachedIcon( "package-installed-locked" ); }
 
-QPixmap YQIconPool::disabledPkgTaboo()          { return instance()->cachedIcon( "package-available-locked",  false ); }
-QPixmap YQIconPool::disabledPkgDel()            { return instance()->cachedIcon( "package-remove",            false ); }
-QPixmap YQIconPool::disabledPkgUpdate()         { return instance()->cachedIcon( "package-upgrade",           false ); }
-QPixmap YQIconPool::disabledPkgInstall()        { return instance()->cachedIcon( "package-install",           false ); }
-QPixmap YQIconPool::disabledPkgAutoInstall()    { return instance()->cachedIcon( "package-install-auto",      false ); }
-QPixmap YQIconPool::disabledPkgAutoUpdate()     { return instance()->cachedIcon( "package-upgrade-auto",      false ); }
-QPixmap YQIconPool::disabledPkgAutoDel()        { return instance()->cachedIcon( "package-remove-auto",       false ); }
-QPixmap YQIconPool::disabledPkgKeepInstalled()  { return instance()->cachedIcon( "package-installed",         false ); }
-QPixmap YQIconPool::disabledPkgNoInst()         { return instance()->cachedIcon( "package-available",         false ); }
-QPixmap YQIconPool::disabledPkgProtected()      { return instance()->cachedIcon( "package-installed-locked",  false ); }
+QIcon YQIconPool::normalPkgConflict()         { return instance()->cachedIcon( "emblem-warning"           ); }
+QIcon YQIconPool::warningSign()               { return instance()->cachedIcon( "emblem-warning"           ); }
 
-QPixmap YQIconPool::normalPkgConflict()         { return instance()->cachedIcon( "emblem-warning",            true  ); }
-QPixmap YQIconPool::warningSign()               { return instance()->cachedIcon( "emblem-warning",            true  ); }
-
-QPixmap YQIconPool::tabRemove()                 { return instance()->cachedIcon( "tab-close",                 true  ); }
-QPixmap YQIconPool::arrowLeft()                 { return instance()->cachedIcon( "arrow-left",                true  ); }
-QPixmap YQIconPool::arrowRight()                { return instance()->cachedIcon( "arrow-right",               true  ); }
-QPixmap YQIconPool::arrowDown()                 { return instance()->cachedIcon( "arrow-down",                true  ); }
-QPixmap YQIconPool::checkmark()                 { return instance()->cachedIcon( "checkmark",                 true  ); }
+QIcon YQIconPool::tabRemove()                 { return instance()->cachedIcon( "tab-close"                ); }
+QIcon YQIconPool::arrowLeft()                 { return instance()->cachedIcon( "arrow-left"               ); }
+QIcon YQIconPool::arrowRight()                { return instance()->cachedIcon( "arrow-right"              ); }
+QIcon YQIconPool::arrowDown()                 { return instance()->cachedIcon( "arrow-down"               ); }
+QIcon YQIconPool::checkmark()                 { return instance()->cachedIcon( "checkmark"                ); }
 
 
 YQIconPool::YQIconPool()
@@ -140,54 +129,56 @@ void YQIconPool::writeSettings()
     settings.endGroup();
 }
 
-QPixmap
-YQIconPool::cachedIcon( const QString & iconName, bool enabled )
+
+QIcon
+YQIconPool::cachedIcon( const QString & iconName )
 {
     Q_INIT_RESOURCE( icons );
-    QString cachedIconName  = iconName + ( enabled ? 'e' : 'd' );
-    QPixmap iconPixmap      = _iconCache[ cachedIconName ];
 
-    if ( iconPixmap.isNull() )
+    QIcon icon = _iconCache[ iconName ];
+
+    if ( icon.isNull() )
     {
-        iconPixmap = loadIcon( iconName, enabled );
+        icon = loadIcon( iconName );
 
-        if ( iconPixmap.isNull() )
+        if ( icon.isNull() )
         {
             // Create an icon for the cache to avoid more than one complaint
             // and to have a clearly visible error icon (a small red square)
-            iconPixmap = QPixmap( 8, 8 );
-            iconPixmap.fill( Qt::red );
+            QPixmap errorPixmap( 12, 12 );
+            errorPixmap.fill( Qt::red );
+            icon = QIcon( errorPixmap );
         }
     }
 
-    _iconCache.insert( cachedIconName, iconPixmap );
+    _iconCache.insert( iconName, icon );
 
-    return iconPixmap;
+    return icon;
 }
 
 
-QPixmap
-YQIconPool::loadIcon( const QString & iconName, bool enabled )
+QIcon
+YQIconPool::loadIcon( const QString & iconName )
 {
-    QPixmap iconPixmap;
+    QIcon icon;
 
     if ( _useThemeIcons )
-        iconPixmap = loadThemeIcon( iconName, enabled );
+        icon = loadThemeIcon( iconName );
 
-    if ( iconPixmap.isNull() )
-        iconPixmap = loadBuiltinIcon( iconName, enabled );
+    if ( icon.isNull() )
+        icon = loadBuiltinIcon( iconName );
 
-    if ( iconPixmap.isNull() )
+    if ( icon.isNull() )
         logError() << "Could not load icon " << iconName << endl;
 
-    return iconPixmap;
+    return icon;
 }
 
 
-QPixmap
-YQIconPool::loadThemeIcon( const QString & iconName, bool enabled )
+QIcon
+YQIconPool::loadThemeIcon( const QString & iconName )
 {
-    QPixmap iconPixmap;
+    QIcon icon;
 
     QString themeIconName = iconName.startsWith( "package-" ) ?
         iconName : QString( "myrlyn-" ) + iconName;
@@ -197,8 +188,7 @@ YQIconPool::loadThemeIcon( const QString & iconName, bool enabled )
         if ( _verboseIconLoader )
             logDebug() << "Loading theme icon " << themeIconName << endl;
 
-        QIcon icon = QIcon::fromTheme( themeIconName, QIcon( ":/" + iconName ) );
-        iconPixmap = icon.pixmap( QSize( 32, 32 ), enabled ? QIcon::Normal : QIcon::Disabled );
+        icon = QIcon::fromTheme( themeIconName, QIcon( ":/" + iconName ) );
     }
     else //  ! hasThemeIcon
     {
@@ -206,14 +196,13 @@ YQIconPool::loadThemeIcon( const QString & iconName, bool enabled )
             logDebug() << "  No theme icon " << themeIconName << endl;
     }
 
-    return iconPixmap;
+    return icon;
 }
 
 
-QPixmap
-YQIconPool::loadBuiltinIcon( const QString & rawIconName, bool enabled )
+QIcon
+YQIconPool::loadBuiltinIcon( const QString & rawIconName )
 {
-    QPixmap iconPixmap;
     QString iconName = rawIconName;
 
     if ( usingDarkTheme() )
@@ -227,8 +216,5 @@ YQIconPool::loadBuiltinIcon( const QString & rawIconName, bool enabled )
     if ( _verboseIconLoader )
         logDebug() << "Loading built-in icon " << iconName << endl;
 
-    QIcon icon = QIcon( ":/" + iconName );
-    iconPixmap = icon.pixmap( QSize( 16, 16 ), enabled ? QIcon::Normal : QIcon::Disabled );
-
-    return iconPixmap;
+    return QIcon( ":/" + iconName );
 }

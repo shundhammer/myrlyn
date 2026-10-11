@@ -17,48 +17,50 @@
 #ifndef YQIconPool_h
 #define YQIconPool_h
 
-#include <qpixmap.h>
+#include <QIcon>
 #include <QHash>
+
 
 class YQIconPool
 {
 public:
 
-    static QPixmap pkgAutoDel();
-    static QPixmap pkgAutoInstall();
-    static QPixmap pkgAutoUpdate();
-    static QPixmap pkgDel();
-    static QPixmap pkgInstall();
-    static QPixmap pkgKeepInstalled();
-    static QPixmap pkgNoInst();
-    static QPixmap pkgProtected();
-    static QPixmap pkgTaboo();
-    static QPixmap pkgUpdate();
+    static QIcon pkgAutoDel();
+    static QIcon pkgAutoInstall();
+    static QIcon pkgAutoUpdate();
+    static QIcon pkgDel();
+    static QIcon pkgInstall();
+    static QIcon pkgKeepInstalled();
+    static QIcon pkgNoInst();
+    static QIcon pkgProtected();
+    static QIcon pkgTaboo();
+    static QIcon pkgUpdate();
 
-    static QPixmap disabledPkgAutoDel();
-    static QPixmap disabledPkgAutoInstall();
-    static QPixmap disabledPkgAutoUpdate();
-    static QPixmap disabledPkgDel();
-    static QPixmap disabledPkgInstall();
-    static QPixmap disabledPkgKeepInstalled();
-    static QPixmap disabledPkgNoInst();
-    static QPixmap disabledPkgProtected();
-    static QPixmap disabledPkgTaboo();
-    static QPixmap disabledPkgUpdate();
+    static QIcon disabledPkgAutoDel();
+    static QIcon disabledPkgAutoInstall();
+    static QIcon disabledPkgAutoUpdate();
+    static QIcon disabledPkgDel();
+    static QIcon disabledPkgInstall();
+    static QIcon disabledPkgKeepInstalled();
+    static QIcon disabledPkgNoInst();
+    static QIcon disabledPkgProtected();
+    static QIcon disabledPkgTaboo();
+    static QIcon disabledPkgUpdate();
 
-    static QPixmap normalPkgConflict();
-    static QPixmap warningSign();
+    static QIcon normalPkgConflict();
+    static QIcon warningSign();
 
-    static QPixmap tabRemove();
-    static QPixmap arrowLeft();
-    static QPixmap arrowRight();
-    static QPixmap arrowDown();
-    static QPixmap checkmark();
+    static QIcon tabRemove();
+    static QIcon arrowLeft();
+    static QIcon arrowRight();
+    static QIcon arrowDown();
+    static QIcon checkmark();
 
     static bool usingDarkTheme();
     static bool usingLightTheme() { return ! usingDarkTheme(); }
 
     static void setVerboseIconLoader( bool val = true ) { _verboseIconLoader = val; }
+
 
 protected:
 
@@ -79,7 +81,7 @@ protected:
      *
      * Return a red square as an error icon if there is no icon by that name.
      **/
-    QPixmap cachedIcon( const QString & iconName, bool enabled );
+    QIcon cachedIcon( const QString & iconName );
 
     /**
      * Load the icon for 'iconName' from the icon theme or, if that fails,
@@ -87,14 +89,14 @@ protected:
      *
      * Return a null pixmap if there is no such icon.
      **/
-    QPixmap loadIcon( const QString & iconName, bool enabled );
+    QIcon loadIcon( const QString & iconName );
 
     /**
      * Load the icon for 'iconName' from the icon theme.
      *
      * Return a null pixmap if there is no such icon.
      **/
-    QPixmap loadThemeIcon( const QString & iconName, bool enabled );
+    QIcon loadThemeIcon( const QString & iconName );
 
     /**
      * Load a built-in icon for 'iconName' from the compiled-in Qt resource
@@ -102,7 +104,7 @@ protected:
      *
      * Return a null pixmap if there is no such icon.
      **/
-    QPixmap loadBuiltinIcon( const QString & iconName, bool enabled );
+    QIcon loadBuiltinIcon( const QString & iconName );
 
 
 private:
@@ -126,10 +128,10 @@ private:
     // Data members
     //
 
-    static YQIconPool *             _instance;
-    static bool                     _useThemeIcons;
-    static bool                     _verboseIconLoader;
-    QHash< const QString, QPixmap > _iconCache;
+    static YQIconPool *           _instance;
+    static bool                   _useThemeIcons;
+    static bool                   _verboseIconLoader;
+    QHash< const QString, QIcon > _iconCache;
 };
 
 

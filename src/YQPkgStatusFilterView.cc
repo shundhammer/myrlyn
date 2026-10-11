@@ -90,16 +90,25 @@ YQPkgStatusFilterView::fixupIcons()
     // Replace the resource icons from the .ui file with dynamically loaded
     // icons from the desktop theme (issue #63)
 
-    _ui->iconInstall->setPixmap      ( YQIconPool::pkgInstall()       );
-    _ui->iconUpdate->setPixmap       ( YQIconPool::pkgUpdate()        );
-    _ui->iconDel->setPixmap          ( YQIconPool::pkgDel()           );
-    _ui->iconAutoInstall->setPixmap  ( YQIconPool::pkgAutoInstall()   );
-    _ui->iconAutoUpdate->setPixmap   ( YQIconPool::pkgAutoUpdate()    );
-    _ui->iconAutoDel->setPixmap      ( YQIconPool::pkgAutoDel()       );
-    _ui->iconTaboo->setPixmap        ( YQIconPool::pkgTaboo()         );
-    _ui->iconProtected->setPixmap    ( YQIconPool::pkgProtected()     );
-    _ui->iconKeepInstalled->setPixmap( YQIconPool::pkgKeepInstalled() );
-    _ui->iconNoInst->setPixmap       ( YQIconPool::pkgNoInst()        );
+    setStatusLabelIcon( _ui->iconInstall,       YQIconPool::pkgInstall()       );
+    setStatusLabelIcon( _ui->iconUpdate,        YQIconPool::pkgUpdate()        );
+    setStatusLabelIcon( _ui->iconDel,           YQIconPool::pkgDel()           );
+    setStatusLabelIcon( _ui->iconAutoInstall,   YQIconPool::pkgAutoInstall()   );
+    setStatusLabelIcon( _ui->iconAutoUpdate,    YQIconPool::pkgAutoUpdate()    );
+    setStatusLabelIcon( _ui->iconAutoDel,       YQIconPool::pkgAutoDel()       );
+    setStatusLabelIcon( _ui->iconTaboo,         YQIconPool::pkgTaboo()         );
+    setStatusLabelIcon( _ui->iconProtected,     YQIconPool::pkgProtected()     );
+    setStatusLabelIcon( _ui->iconKeepInstalled, YQIconPool::pkgKeepInstalled() );
+    setStatusLabelIcon( _ui->iconNoInst,        YQIconPool::pkgNoInst()        );
+}
+
+
+void
+YQPkgStatusFilterView::setStatusLabelIcon( QLabel * label, const QIcon & icon )
+{
+    CHECK_PTR( label );
+
+    label->setPixmap( icon.pixmap( QSize( 22, 22 ) ) );
 }
 
 

@@ -442,7 +442,7 @@ void ZyppHistoryBrowser::fillPkgItem( QTreeWidgetItem * item, Event * event )
     PkgEvent * pkgEvent = dynamic_cast<PkgEvent *>( event );
     CHECK_DYNAMIC_CAST( pkgEvent, "ZyppHistoryEvents::PkgEvent" );
 
-    QPixmap icon = event->eventType == EventType::PkgInstall ?
+    QIcon icon = event->eventType == EventType::PkgInstall ?
         YQIconPool::pkgInstall() : YQIconPool::pkgDel();
 
     item->setText( NameCol,      pkgEvent->name      );

@@ -200,7 +200,7 @@ YQPkgVersionsView::showDetails( ZyppSel selectable )
                 instLayout->setContentsMargins( 0, 0, 0, 0 );
 
                 QLabel * icon = new QLabel( installedVersion );
-                icon->setPixmap( YQIconPool::checkmark() );
+                icon->setPixmap( YQIconPool::checkmark().pixmap( QSize( 22, 22 ) ) );
                 instLayout->addWidget( icon );
 
                 QLabel * textLabel = new QLabel( text, installedVersion );
@@ -702,26 +702,27 @@ void YQPkgMultiVersion::paintEvent(QPaintEvent *)
 
     // Calculate the position and draw the status icon
 
-    QRect elementRect = style()->subElementRect ( QStyle::SE_CheckBoxIndicator, &opt );
-    QPixmap icon = statusIcon( _selectable->pickStatus( _zyppPoolItem ) );
+    QRect   elementRect = style()->subElementRect ( QStyle::SE_CheckBoxIndicator, &opt );
+    QIcon   icon        = statusIcon( _selectable->pickStatus( _zyppPoolItem ) );
+    QPixmap pixmap      = icon.pixmap( QSize( 16, 16 ) );
 
-    QPoint start = elementRect.center() - icon.rect().center();
-    QRect  rect  = QRect( start.x(), start.y(), icon.width(), icon.height() );
+    QPoint  start = elementRect.center() - pixmap.rect().center();
+    QRect   rect  = QRect( start.x(), start.y(), pixmap.width(), pixmap.height() );
 
-    painter.drawItemPixmap( rect, 0, icon );
+    painter.drawItemPixmap( rect, 0, pixmap );
 }
 
 
-QPixmap YQPkgMultiVersion::statusIcon( ZyppStatus status )
+QIcon YQPkgMultiVersion::statusIcon( ZyppStatus status )
 {
-    QPixmap icon = YQIconPool::pkgNoInst();
+    QIcon icon = YQIconPool::pkgNoInst();
 
     switch ( status )
     {
         case S_Del:           icon = YQIconPool::pkgDel();            break;
         case S_Install:       icon = YQIconPool::pkgInstall();        break;
         case S_KeepInstalled: icon = YQIconPool::pkgKeepInstalled();  break;
-        case S_NoInst:        icon = QPixmap();                       break;
+        case S_NoInst:        icon = QIcon();                         break;
         case S_Protected:     icon = YQIconPool::pkgProtected();      break;
         case S_Taboo:         icon = YQIconPool::pkgTaboo();          break;
         case S_Update:        icon = YQIconPool::pkgUpdate();         break;
@@ -733,6 +734,7 @@ QPixmap YQPkgMultiVersion::statusIcon( ZyppStatus status )
             // Intentionally omitting 'default' branch so the compiler can
             // catch unhandled enum states
     }
+
     return icon;
 }
 

@@ -21,6 +21,8 @@
 #include <QWidget>
 #include "YQZypp.h"
 
+class QIcon;
+
 
 // Generated with 'uic' from a Qt designer .ui form: status-filter-view.ui
 //
@@ -133,6 +135,10 @@ protected:
      **/
     void fixupIcons();
 
+    /**
+     * Set a label's pixmap from an icon from the icon pool.
+     **/
+    void setStatusLabelIcon( QLabel * label, const QIcon & icon );
 
 
     // Data members

@@ -21,7 +21,6 @@
 #include <QHeaderView>
 #include <QKeyEvent>
 #include <QMenu>
-#include <QPixmap>
 
 #include <zypp/ZYppFactory.h>
 
@@ -207,50 +206,27 @@ YQPkgObjList::resetContent()
 }
 
 
-QPixmap
-YQPkgObjList::statusIcon( ZyppStatus status, bool enabled, bool bySelection )
+QIcon
+YQPkgObjList::statusIcon( ZyppStatus status )
 {
-    QPixmap icon = YQIconPool::pkgNoInst();
+    QIcon icon = YQIconPool::pkgNoInst();
 
-    if ( enabled )
+    switch ( status )
     {
-        switch ( status )
-        {
-            case S_Del:            icon = YQIconPool::pkgDel();            break;
-            case S_Install:        icon = YQIconPool::pkgInstall();        break;
-            case S_KeepInstalled:  icon = YQIconPool::pkgKeepInstalled();  break;
-            case S_NoInst:         icon = YQIconPool::pkgNoInst();         break;
-            case S_Protected:      icon = YQIconPool::pkgProtected();      break;
-            case S_Taboo:          icon = YQIconPool::pkgTaboo();          break;
-            case S_Update:         icon = YQIconPool::pkgUpdate();         break;
+        case S_Del:            icon = YQIconPool::pkgDel();            break;
+        case S_Install:        icon = YQIconPool::pkgInstall();        break;
+        case S_KeepInstalled:  icon = YQIconPool::pkgKeepInstalled();  break;
+        case S_NoInst:         icon = YQIconPool::pkgNoInst();         break;
+        case S_Protected:      icon = YQIconPool::pkgProtected();      break;
+        case S_Taboo:          icon = YQIconPool::pkgTaboo();          break;
+        case S_Update:         icon = YQIconPool::pkgUpdate();         break;
 
-            case S_AutoDel:        icon = YQIconPool::pkgAutoDel();        break;
-            case S_AutoInstall:    icon = YQIconPool::pkgAutoInstall();    break;
-            case S_AutoUpdate:     icon = YQIconPool::pkgAutoUpdate();     break;
+        case S_AutoDel:        icon = YQIconPool::pkgAutoDel();        break;
+        case S_AutoInstall:    icon = YQIconPool::pkgAutoInstall();    break;
+        case S_AutoUpdate:     icon = YQIconPool::pkgAutoUpdate();     break;
 
-                // Intentionally omitting 'default' branch so the compiler can
-                // catch unhandled enum states
-        }
-    }
-    else
-    {
-        switch ( status )
-        {
-            case S_Del:            icon = YQIconPool::disabledPkgDel();            break;
-            case S_Install:        icon = YQIconPool::disabledPkgInstall();        break;
-            case S_KeepInstalled:  icon = YQIconPool::disabledPkgKeepInstalled();  break;
-            case S_NoInst:         icon = YQIconPool::disabledPkgNoInst();         break;
-            case S_Protected:      icon = YQIconPool::disabledPkgProtected();      break;
-            case S_Taboo:          icon = YQIconPool::disabledPkgTaboo();          break;
-            case S_Update:         icon = YQIconPool::disabledPkgUpdate();         break;
-
-            case S_AutoDel:        icon = YQIconPool::disabledPkgAutoDel();        break;
-            case S_AutoInstall:    icon = YQIconPool::disabledPkgAutoInstall();    break;
-            case S_AutoUpdate:     icon = YQIconPool::disabledPkgAutoUpdate();     break;
-
-                // Intentionally omitting 'default' branch so the compiler can
-                // catch unhandled enum states
-        }
+            // Intentionally omitting 'default' branch so the compiler can
+            // catch unhandled enum states
     }
 
     return icon;
@@ -262,9 +238,6 @@ YQPkgObjList::statusText( ZyppStatus status ) const
 {
     switch ( status )
     {
-        case S_AutoDel:        return _( "Autodelete"                 );
-        case S_AutoInstall:    return _( "Autoinstall"                );
-        case S_AutoUpdate:     return _( "Autoupdate"                 );
         case S_Del:            return _( "Delete"                     );
         case S_Install:        return _( "Install"                    );
         case S_KeepInstalled:  return _( "Keep"                       );
@@ -272,6 +245,10 @@ YQPkgObjList::statusText( ZyppStatus status ) const
         case S_Protected:      return _( "Protected -- Do Not Modify" );
         case S_Taboo:          return _( "Taboo -- Never Install"     );
         case S_Update:         return _( "Update"                     );
+
+        case S_AutoDel:        return _( "Autodelete"                 );
+        case S_AutoInstall:    return _( "Autoinstall"                );
+        case S_AutoUpdate:     return _( "Autoupdate"                 );
     }
 
     return QString();
@@ -389,8 +366,7 @@ YQPkgObjList::createActions()
     actionSetCurrentUpdate        = createAction( S_Update,        "[>], [+]" );
 
     actionSetCurrentUpdateForce   = createAction( _( "Update unconditionally" ),
-                                                  statusIcon( S_Update, true ),
-                                                  statusIcon( S_Update, false ) ,
+                                                  statusIcon( S_Update ),
                                                   "",
                                                   true ) ;
 
@@ -405,14 +381,12 @@ YQPkgObjList::createActions()
     actionSetListProtected        = createAction( S_Protected,     "", true );
 
     actionSetListUpdate           = createAction( _( "Update if newer version available" ),
-                                                  statusIcon( S_Update, true ),
-                                                  statusIcon( S_Update, false ),
+                                                  statusIcon( S_Update ),
                                                   "",
                                                   true );
 
     actionSetListUpdateForce      = createAction( _( "Update unconditionally" ),
-                                                  statusIcon( S_Update, true ),
-                                                  statusIcon( S_Update, false ),
+                                                  statusIcon( S_Update ),
                                                   "",
                                                   true );
 
@@ -444,8 +418,7 @@ YQPkgObjList::createAction( ZyppStatus      status,
                             bool            enabled )
 {
     return createAction( statusText( status ),
-                         statusIcon( status, true ),
-                         statusIcon( status, false ),
+                         statusIcon( status ),
                          key,
                          enabled );
 }
@@ -453,8 +426,7 @@ YQPkgObjList::createAction( ZyppStatus      status,
 
 QAction *
 YQPkgObjList::createAction( const QString & text,
-                            const QPixmap & icon,
-                            const QPixmap & insensitiveIcon,
+                            const QIcon   & icon,
                             const QString & key,
                             bool            enabled )
 {
@@ -463,18 +435,11 @@ YQPkgObjList::createAction( const QString & text,
     if ( ! key.isEmpty() )
         label += "\t" + key;
 
-    QIcon iconSet ( icon );
-
-    if ( ! insensitiveIcon.isNull() )
-    {
-        iconSet.addPixmap( insensitiveIcon, QIcon::Disabled );
-    }
-
     QAction * action = new QAction( label,      // text
                                     this );     // parent
     Q_CHECK_PTR( action );
     action->setEnabled( enabled );
-    action->setIcon( iconSet );
+    action->setIcon( icon );
 
     return action;
 }
@@ -1103,8 +1068,7 @@ YQPkgObjListItem::setStatusIcon()
 {
     if ( statusCol() >= 0 )
     {
-        bool enabled = editable() && _pkgObjList->editable();
-        setIcon( statusCol(), _pkgObjList->statusIcon( status(), enabled, bySelection() ) );
+        setIcon( statusCol(), _pkgObjList->statusIcon( status() ) );
     }
 }
 
