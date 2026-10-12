@@ -217,7 +217,7 @@ YQIconPool::loadBuiltinIcon( const QString & rawIconName )
 
     if ( usingDarkTheme() )
     {
-        QString darkIconName = "dark-" + rawIconName;
+        QString darkIconName = "dark-theme-" + rawIconName;
 
         if ( QFile::exists( ":/" + darkIconName ) )
             iconName = darkIconName;

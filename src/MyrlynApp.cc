@@ -33,7 +33,6 @@
 #include "SummaryPage.h"
 #include "Translator.h"
 #include "Workflow.h"
-#include "YQIconPool.h"
 #include "YQPkgSelector.h"
 #include "YQi18n.h"
 #include "ZyppLogger.h"
@@ -73,7 +72,6 @@ MyrlynApp::MyrlynApp( MyrlynAppOptions optFlags )
 
     logDebug() << "_optFlags: 0x" << hex << _optFlags << dec << endl;
     logQtEnv();
-    YQIconPool::usingDarkTheme(); // just for logging the theme (light / dark)
 
     Translator * translator = new Translator( "myrlyn", this );
     qApp->installTranslator( translator );

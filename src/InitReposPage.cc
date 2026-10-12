@@ -22,6 +22,7 @@
 #include "MyrlynApp.h"
 #include "MyrlynRepoManager.h"
 #include "utf8.h"
+#include "YQIconPool.h"
 #include "YQZypp.h"
 #include "InitReposPage.h"
 
@@ -85,9 +86,9 @@ void InitReposPage::loadIcons()
     QSize iconSize( 40, 22 );
 
     _emptyIcon           = QPixmap( ":/empty-40x22" );
-    _downloadOngoingIcon = QIcon( ":/download-ongoing" ).pixmap( iconSize );
-    _downloadDoneIcon    = QIcon( ":/download-done"    ).pixmap( iconSize );
-    _downloadErrorIcon   = QIcon( ":/emoji-sad"        ).pixmap( iconSize );
+    _downloadOngoingIcon = YQIconPool::downloadOngoing().pixmap( iconSize );
+    _downloadDoneIcon    = YQIconPool::downloadDone().pixmap( iconSize );
+    _downloadErrorIcon   = YQIconPool::emojiSad().pixmap( iconSize );
 }
 
 

@@ -33,6 +33,7 @@
 #include "SearchFilter.h"
 #include "YQi18n.h"
 #include "utf8.h"
+#include "YQIconPool.h"
 #include "YQPkgObjList.h"
 #include "YQPkgSelector.h"
 #include "YQPkgSearchFilterView.h"
@@ -72,6 +73,9 @@ YQPkgSearchFilterView::YQPkgSearchFilterView( QWidget * parent, SearchFields sea
         _ui->searchInProvides->hide();
         _ui->searchInFileList->hide();
     }
+
+    // Set the wrench icon again to pick the correct one for a dark widget theme
+    _ui->changeAutoDefaultButton->setIcon( YQIconPool::wrench() );
 
 
     connect( _ui->searchButton, SIGNAL( clicked() ),

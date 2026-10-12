@@ -29,6 +29,7 @@
 #include "PkgTaskListWidget.h"
 #include "ProgressDialog.h"
 #include "MyrlynApp.h"
+#include "YQIconPool.h"
 #include "YQZypp.h"
 #include "YQi18n.h"
 #include "utf8.h"
@@ -279,8 +280,8 @@ void PkgCommitPage::loadIcons()
 
     QSize iconSize( 40, 22 );
 
-    _downloadOngoingIcon = QIcon( ":/download-ongoing" ).pixmap( iconSize );
-    _downloadDoneIcon    = QIcon( ":/download-done"    ).pixmap( iconSize );
+    _downloadOngoingIcon = YQIconPool::downloadOngoing().pixmap( iconSize );
+    _downloadDoneIcon    = YQIconPool::downloadDone().pixmap( iconSize );
 }
 
 

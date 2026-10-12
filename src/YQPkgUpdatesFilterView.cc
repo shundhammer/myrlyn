@@ -17,6 +17,7 @@
 #include "Exception.h"
 #include "Logger.h"
 #include "MyrlynApp.h"
+#include "YQIconPool.h"
 #include "YQPkgConflictDialog.h"
 #include "YQPkgSelector.h"
 #include "YQPkgList.h"
@@ -35,8 +36,9 @@ YQPkgUpdatesFilterView::YQPkgUpdatesFilterView( QWidget * parent )
     _ui->setupUi( this ); // Actually create the widgets from the .ui form
     MyrlynApp::setHeadingFont( _ui->headingLabel );
 
-    _leftoverPkgIcon = QIcon( ":/emoji-sick" );
-    _updateOkIcon    = QIcon( ":/checkmark"  );
+    QSize iconSize( 22, 22 );
+    _leftoverPkgIcon = YQIconPool::emojiSick().pixmap( iconSize );
+    _updateOkIcon    = YQIconPool::checkmark().pixmap( iconSize );
 
     // See ui_updates-filter-view.h  in the build/ tree for the widget names.
     //

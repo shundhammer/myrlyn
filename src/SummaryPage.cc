@@ -27,6 +27,7 @@
 #include "MyrlynApp.h"
 #include "PkgTasks.h"
 #include "MyrlynApp.h"
+#include "YQIconPool.h"
 #include "YQi18n.h"
 #include "SummaryPage.h"
 
@@ -163,6 +164,9 @@ void SummaryPage::timeout()
 
 void SummaryPage::setupCountdownMenuButton()
 {
+    // Set the icon again in case we have a dark widget theme
+    _ui->countdownMenuButton->setIcon( YQIconPool::hamburger() );
+
     if ( _countdownMenu )
         return;
 
