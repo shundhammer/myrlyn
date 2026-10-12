@@ -314,6 +314,13 @@ static void qt_logger( QtMsgType                  msgType,
         if ( msg.contains( "OpenType support missing" ) )
             continue;
 
+
+        // Ignore Qt SVG renderer complaints about Myrlyn.svg being too complex
+
+        if ( msg.contains( "The requested buffer size is too big" ) )
+            continue;
+
+
         // Remove utterly misleading message that will just dump a ton of bug
         // reports on the application maintainers just because some clueless
         // moron put this message into the Qt libs
