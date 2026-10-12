@@ -21,6 +21,7 @@
 #include <QHeaderView>
 #include <QKeyEvent>
 #include <QMenu>
+#include <QRegularExpression>
 
 #include <zypp/ZYppFactory.h>
 
@@ -909,7 +910,7 @@ YQPkgObjListItem::init()
                 if ( zyppObj() != installed  &&
                      zyppObj() != candidate )
                 {
-                    setText( versionCol(), zyppObj()->edition());
+                    setText( versionCol(), formatEdition( zyppObj()->edition() ) );
                 }
                 else
                 {
@@ -917,21 +918,21 @@ YQPkgObjListItem::init()
                     {
                         setText( versionCol(),
                                  QString( "%1 (%2)" )
-                                 .arg( installed->edition().c_str() )
-                                 .arg( candidate->edition().c_str() ) );
+                                 .arg( formatEdition( installed->edition() ) )
+                                 .arg( formatEdition( candidate->edition() ) ) );
                     }
                     else // no candidate or both versions are the same anyway
                     {
-                        setText( versionCol(), installed->edition() );
+                        setText( versionCol(), formatEdition( installed->edition() ) );
                     }
                 }
             }
             else
             {
                 if ( candidate )
-                    setText( versionCol(), QString( "(%1)" ).arg( candidate->edition().c_str() ) );
+                    setText( versionCol(), QString( "(%1)" ).arg( formatEdition( candidate->edition() ) ) );
                 else
-                    setText( versionCol(), zyppObj()->edition() );
+                    setText( versionCol(), formatEdition( zyppObj()->edition() ) );
             }
 
             if ( _installedIsNewer )
@@ -948,7 +949,7 @@ YQPkgObjListItem::init()
         {
             if ( installed )
             {
-                setText( instVersionCol(), installed->edition() );
+                setText( instVersionCol(), formatEdition( installed->edition() ) );
 
                 if ( _installedIsNewer )
                     setForeground( instVersionCol(), redTextColor()  );
@@ -964,11 +965,11 @@ YQPkgObjListItem::init()
             if ( zyppObj() != installed &&
                  zyppObj() != candidate )
             {
-                setText( versionCol(), zyppObj()->edition() );
+                setText( versionCol(), formatEdition( zyppObj()->edition() ) );
             }
             else if ( candidate )
             {
-                setText( versionCol(), candidate->edition() );
+                setText( versionCol(), formatEdition( candidate->edition() ) );
 
                 if ( _installedIsNewer )
                     setForeground( versionCol(), redTextColor()  );
@@ -984,6 +985,29 @@ YQPkgObjListItem::init()
 }
 
 
+QString
+YQPkgObjListItem::formatEdition( const zypp::Edition & edition )
+{
+    return formatEdition( fromUTF8( edition.asString() ) );
+}
+
+
+QString
+YQPkgObjListItem::formatEdition( const QString & orig )
+{
+    QString result = orig;
+
+    //                                           ".sr20381228"
+    static QRegularExpression slowrollVersion( "\\.sr\\d{8}$" );
+    static QString unicodeEllipsis = fromUTF8( "\u2026" );
+
+    if ( orig.contains( slowrollVersion ) )
+        result.replace( slowrollVersion,".sr" + unicodeEllipsis );
+
+    return result;
+}
+
+
 void
 YQPkgObjListItem::updateData()
 {
@@ -995,13 +1019,6 @@ void
 YQPkgObjListItem::setText( int column, const string & text )
 {
     QTreeWidgetItem::setText( column, fromUTF8( text.c_str() ) );
-}
-
-
-void
-YQPkgObjListItem::setText( int column, const zypp::Edition & edition )
-{
-    setText( column, edition.asString() );
 }
 
 
@@ -1364,9 +1381,9 @@ bool YQPkgObjListItem::operator<( const QTreeWidgetItem & otherListViewItem ) co
             int thisPoints  = this->versionPoints();
             int otherPoints = other->versionPoints();
 
-            if (thisPoints == otherPoints )
-                return ( QString (this->zyppObj()->edition().c_str() ) <
-                         QString (other->zyppObj()->edition().c_str() ) );
+            if ( thisPoints == otherPoints )
+                return ( QString( this->zyppObj()->edition().c_str() ) <
+                         QString( other->zyppObj()->edition().c_str() ) );
             else
                 return ( thisPoints < otherPoints );
         }

@@ -443,6 +443,13 @@ public:
      **/
     YQPkgObjListItem( YQPkgObjList * pkgObjList );
 
+    /**
+     * Format a package edition (version number):
+     * Shorten certain insanely long version numbers like 47.11.sr20381228
+     **/
+    static QString formatEdition( const QString       & editionStr );
+    static QString formatEdition( const zypp::Edition & edition    );
+
 
 protected:
 
@@ -650,7 +657,9 @@ protected:
      **/
     void setText( int column, const string & text );
 
+
 public:
+
     /**
      * Re-declare ordinary setText() method so the compiler doesn't get
      * confused which one to use.
@@ -658,12 +667,8 @@ public:
     void setText( int column, const QString & text )
         { QTreeWidgetItem::setText( column, text ); }
 
-protected:
-    /**
-     * Set a column text via Edition.
-     **/
-    void setText( int column, const zypp::Edition & edition );
 
+protected:
 
     //
     // Data members
