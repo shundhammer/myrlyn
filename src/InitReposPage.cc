@@ -78,8 +78,8 @@ void InitReposPage::connectSignals()
 void InitReposPage::loadIcons()
 {
     _downloadPlaceholderIcon = YQIconPool::downloadPlaceholder();
-    _downloadOngoingIcon     = YQIconPool::download();
-    _downloadDoneIcon        = YQIconPool::checkmark();
+    _downloadOngoingIcon     = YQIconPool::downloadOngoing();
+    _downloadDoneIcon        = YQIconPool::downloadDone();
     _downloadErrorIcon       = YQIconPool::emojiSad();
 }
 

@@ -32,8 +32,8 @@
     <file alias="dark-theme-arrow-down">icons/dark-theme/arrow-down.svg</file>
     <file alias="dark-theme-checkmark">icons/dark-theme/checkmark.svg</file>
     <file alias="dark-theme-download">icons/dark-theme/download.svg</file>
-    <file alias="dark-theme-download-ongoing">icons/dark-theme/download-ongoing.svg</file>
-    <file alias="dark-theme-download-done">icons/dark-theme/download-done.svg</file>
+    <file alias="dark-theme-download-ongoing">icons/dark-theme/download.svg</file>
+    <file alias="dark-theme-download-done">icons/dark-theme/checkmark.svg</file>
     <file alias="dark-theme-emoji-sad">icons/dark-theme/emoji-sad.svg</file>
     <file alias="dark-theme-emoji-sick">icons/dark-theme/emoji-sick.svg</file>
     <file alias="dark-theme-hamburger">icons/dark-theme/hamburger.svg</file>
