@@ -18,7 +18,7 @@
 #define InitReposPage_h
 
 
-#include <QPixmap>
+#include <QIcon>
 #include <QWidget>
 
 #include "YQZypp.h"
@@ -101,7 +101,7 @@ protected:
      * the item (or 0 if not found).
      **/
     QListWidgetItem * setItemIcon( const ZyppRepoInfo & repo,
-                                   const QPixmap &      icon );
+                                   const QIcon &        icon );
 
     /**
      * Return the item for the specified repo in the repos list widget
@@ -120,10 +120,10 @@ protected:
     int                 _reposCount;
     int                 _refreshDoneCount;
 
-    QPixmap             _emptyIcon;
-    QPixmap             _downloadOngoingIcon;
-    QPixmap             _downloadDoneIcon;
-    QPixmap             _downloadErrorIcon;
+    QIcon               _downloadPlaceholderIcon;
+    QIcon               _downloadOngoingIcon;
+    QIcon               _downloadDoneIcon;
+    QIcon               _downloadErrorIcon;
 };
 
 

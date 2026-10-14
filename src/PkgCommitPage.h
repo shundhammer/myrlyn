@@ -373,8 +373,8 @@ protected:
     float               _pkgDownloadWeight;  // 0.0 .. 1.0
     float               _pkgActionWeight;    // 0.0 .. 1.0
 
-    QPixmap             _downloadOngoingIcon;
-    QPixmap             _downloadDoneIcon;
+    QIcon               _downloadOngoingIcon;
+    QIcon               _downloadDoneIcon;
 
     static PkgCommitPage * _instance;
 };

@@ -14,6 +14,7 @@
  */
 
 
+#include <QFontMetrics>
 #include <zypp/RepoInfo.h>
 
 #include "Logger.h"
@@ -76,19 +77,10 @@ void InitReposPage::connectSignals()
 
 void InitReposPage::loadIcons()
 {
-    // Both download icons need to be double-wide (not just 22x22) to have
-    // enough space for the checkmark for the "download done" icon,
-    // and to keep the text aligned also for the "download ongoing" icon.
-    //
-    // This is also the difference between "download-ongoing.svg" and
-    // "download.svg" (22x22).
-
-    QSize iconSize( 40, 22 );
-
-    _emptyIcon           = QPixmap( ":/empty-40x22" );
-    _downloadOngoingIcon = YQIconPool::downloadOngoing().pixmap( iconSize );
-    _downloadDoneIcon    = YQIconPool::downloadDone().pixmap( iconSize );
-    _downloadErrorIcon   = YQIconPool::emojiSad().pixmap( iconSize );
+    _downloadPlaceholderIcon = YQIconPool::downloadPlaceholder();
+    _downloadOngoingIcon     = YQIconPool::download();
+    _downloadDoneIcon        = YQIconPool::checkmark();
+    _downloadErrorIcon       = YQIconPool::emojiSad();
 }
 
 
@@ -110,7 +102,7 @@ void InitReposPage::foundRepo( const ZyppRepoInfo & repo )
     _ui->progressBar->setMaximum( ++_reposCount );
     QListWidgetItem * item = new QListWidgetItem( fromUTF8( repo.name() ) );
     CHECK_NEW( item );
-    item->setIcon( _emptyIcon );
+    item->setIcon( _downloadPlaceholderIcon );
     _ui->reposList->addItem( item );
 
     MainWindow::processEvents();
@@ -157,7 +149,7 @@ void InitReposPage::refreshRepoError( const ZyppRepoInfo & repo )
 
 QListWidgetItem *
 InitReposPage::setItemIcon( const ZyppRepoInfo & repo,
-                            const QPixmap &        icon )
+                            const QIcon &        icon )
 {
     QListWidgetItem * item = findRepoItem( repo );
 

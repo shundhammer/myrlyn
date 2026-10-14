@@ -61,7 +61,7 @@ QIcon YQIconPool::tabClose()                  { return instance()->cachedIcon( "
 QIcon YQIconPool::download()                  { return instance()->cachedIcon( "download"                 ); }
 QIcon YQIconPool::downloadDone()              { return instance()->cachedIcon( "download-done"            ); }
 QIcon YQIconPool::downloadOngoing()           { return instance()->cachedIcon( "download-ongoing"         ); }
-QIcon YQIconPool::downloadPlaceholder()       { return instance()->cachedIcon( "empty-40x22"              ); }
+QIcon YQIconPool::downloadPlaceholder()       { return instance()->cachedIcon( "download-placeholder"     ); }
 QIcon YQIconPool::emojiSad()                  { return instance()->cachedIcon( "emoji-sad"                ); }
 QIcon YQIconPool::emojiSick()                 { return instance()->cachedIcon( "emoji-sick"               ); }
 QIcon YQIconPool::hamburger()                 { return instance()->cachedIcon( "hamburger"                ); }

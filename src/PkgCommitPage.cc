@@ -271,17 +271,8 @@ void PkgCommitPage::reset()
 
 void PkgCommitPage::loadIcons()
 {
-    // Both download icons need to be double-wide (not just 22x22) to have
-    // enough space for the checkmark for the "download done" icon,
-    // and to keep the text aligned also for the "download ongoing" icon.
-    //
-    // This is also the difference between "download-ongoing.svg" and
-    // "download.svg" (22x22).
-
-    QSize iconSize( 40, 22 );
-
-    _downloadOngoingIcon = YQIconPool::downloadOngoing().pixmap( iconSize );
-    _downloadDoneIcon    = YQIconPool::downloadDone().pixmap( iconSize );
+    _downloadOngoingIcon = YQIconPool::downloadOngoing();
+    _downloadDoneIcon    = YQIconPool::downloadDone();
 }
 
 
