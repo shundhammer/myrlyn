@@ -19,6 +19,7 @@
 #include <QPalette>
 #include <QPixmap>
 #include <QSettings>
+#include <QStyleHints>
 
 #include "Logger.h"
 #include "YQIconPool.h"
@@ -104,8 +105,24 @@ bool YQIconPool::usingDarkTheme()
 
 bool YQIconPool::detectDarkWidgetTheme()
 {
-    QColor background     = QGuiApplication::palette().color( QPalette::Active, QPalette::Base );
-    bool   usingDarkTheme = ( background.lightness() < 128 ); // 0 (black) .. 255 (white)
+    bool usingDarkTheme = false;
+
+    switch ( QGuiApplication::styleHints()->colorScheme() )
+    {
+        case Qt::ColorScheme::Dark:
+            usingDarkTheme = true;
+            break;
+
+        case Qt::ColorScheme::Light:
+            usingDarkTheme = false;
+            break;
+
+        default:
+            logDebug() << "Fallback detection method" << endl;
+            QColor background = QGuiApplication::palette().color( QPalette::Active, QPalette::Base );
+            usingDarkTheme = ( background.lightness() < 128 ); // 0 (black) .. 255 (white)
+            break;
+    }
 
     logInfo() << "Using a "
               << ( usingDarkTheme ? "dark" : "light" )

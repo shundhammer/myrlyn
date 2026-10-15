@@ -123,6 +123,7 @@ void MyrlynApp::logQtEnv() const
     {
         if ( envVar.startsWith( "QT"     ) ||
              envVar.startsWith( "MYRLYN" ) ||
+             envVar.startsWith( "XFCE"   ) ||
              envVar.startsWith( "XDG_CURRENT_DESKTOP" ) )
         {
             logDebug() << envVar << endl;
