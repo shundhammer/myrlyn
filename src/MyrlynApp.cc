@@ -121,11 +121,15 @@ void MyrlynApp::logQtEnv() const
 
     for ( const QString & envVar: env )
     {
-        if ( envVar.startsWith( "QT" ) )
+        if ( envVar.startsWith( "QT"     ) ||
+             envVar.startsWith( "MYRLYN" ) ||
+             envVar.startsWith( "XDG_CURRENT_DESKTOP" ) )
         {
             logDebug() << envVar << endl;
         }
     }
+
+    logDebug() << "----------" << endl;
 }
 
 
@@ -153,8 +157,6 @@ void MyrlynApp::run()
 
 void MyrlynApp::createMainWin()
 {
-    logDebug() << endl;
-
     if ( _mainWin )
         return;
 

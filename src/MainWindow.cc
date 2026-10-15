@@ -18,6 +18,7 @@
 #include <QCloseEvent>
 #include <QEventLoop>
 #include <QScreen>
+#include <QStyle>
 #include <QVBoxLayout>
 
 #include "Exception.h"
@@ -42,6 +43,7 @@ MainWindow::MainWindow( QWidget * parent )
     logDebug() << "Physical dpi: " << screen()->physicalDotsPerInch() << endl;
     logDebug() << "Default font: " << qApp->font().key() << endl;
     logDebug() << "Heading font: " << MyrlynApp::headingFont().key() << endl;
+    logDebug() << "QStyle: " << qApp->style()->objectName() << endl;
 
      // Set a reasonable initial size if there is nothing in the settings
 
