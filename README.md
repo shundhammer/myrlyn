@@ -31,9 +31,10 @@ Production ready. Suitable for everyday use.
 
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-01-init-repos.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-01-init-repos.png)
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-11-updates-view.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-11-updates-view.png)
+[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-11-updates-view.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-11-updates-view.png)
 
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-01-init-repos-dark.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-01-init-repos-dark.png)
-[<img width="500" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-10-search-view-dark.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-10-search-view-dark.png)
+[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-10-search-view-dark.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-10-search-view-dark.png)
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-11-updates-view-dark.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-11-updates-view-dark.png)
 
 
