@@ -32,7 +32,7 @@
     <file alias="dark-theme-package-install-auto">icons/dark-theme/package-install-auto.svg</file>
     <file alias="dark-theme-package-upgrade-auto">icons/dark-theme/package-upgrade-auto.svg</file>
     <file alias="dark-theme-package-remove-auto">icons/dark-theme/package-remove-auto.svg</file>
-    <file alias="dark-theme-package-installed">icons/dark-theme/package-installed-updated.svg</file>
+    <file alias="dark-theme-package-installed-updated">icons/dark-theme/package-installed-updated.svg</file>
     <file alias="dark-theme-package-available">icons/dark-theme/package-available.svg</file>
     <file alias="dark-theme-package-installed-locked">icons/dark-theme/package-installed-locked.svg</file>
     <file alias="dark-theme-package-available-locked">icons/dark-theme/package-available-locked.svg</file>
