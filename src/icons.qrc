@@ -20,10 +20,10 @@
     <file alias="download-placeholder">icons/download-placeholder.svg</file>
     <file alias="download-symbolic">icons/download-symbolic.svg</file>
     <file alias="emblem-warning">icons/emblem-warning.svg</file>
+    <file alias="emoji-sick">icons/emoji-sick.svg</file>
     <file alias="pan-down-symbolic">icons/pan-down-symbolic.svg</file>
     <file alias="state-error-symbolic">icons/state-error-symbolic.svg</file>
     <file alias="tab-close-symbolic">icons/tab-close-symbolic.svg</file>
-    <file alias="vcs-conflicting">icons/vcs-conflicting.svg</file>
 
 
     <file alias="dark-theme-package-install">icons/dark-theme/package-install.svg</file>
@@ -37,6 +37,7 @@
     <file alias="dark-theme-package-installed-locked">icons/dark-theme/package-installed-locked.svg</file>
     <file alias="dark-theme-package-available-locked">icons/dark-theme/package-available-locked.svg</file>
 
+    <file alias="dark-emoji-sick">icons/dark-theme/emoji-sick.svg</file>
     <file alias="dark-theme-application-menu-symbolic">icons/dark-theme/application-menu-symbolic.svg</file>
     <file alias="dark-theme-arrow-left-symbolic">icons/dark-theme/arrow-left-symbolic.svg</file>
     <file alias="dark-theme-arrow-right-symbolic">icons/dark-theme/arrow-right-symbolic.svg</file>
@@ -48,6 +49,5 @@
     <file alias="dark-theme-pan-down-symbolic">icons/dark-theme/pan-down-symbolic.svg</file>
     <file alias="dark-theme-state-error-symbolic">icons/dark-theme/state-error-symbolic.svg</file>
     <file alias="dark-theme-tab-close-symbolic">icons/dark-theme/tab-close-symbolic.svg</file>
-    <file alias="dark-theme-vcs-conflicting">icons/dark-theme/vcs-conflicting.svg</file>
   </qresource>
 </RCC>

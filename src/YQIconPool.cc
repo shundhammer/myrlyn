@@ -71,7 +71,7 @@ QIcon YQIconPool::downloadDone()         { return ic( "checkmark-symbolic"      
 QIcon YQIconPool::downloadOngoing()      { return ic( "download-symbolic"         ); }
 QIcon YQIconPool::downloadPlaceholder()  { return ic( "download-placeholder"      ); }
 QIcon YQIconPool::emojiSad()             { return ic( "state-error-symbolic"      ); }
-QIcon YQIconPool::emojiSick()            { return ic( "vcs-conflicting"           ); }
+QIcon YQIconPool::emojiSick()            { return ic( "emoji-sick"                ); }
 QIcon YQIconPool::hamburger()            { return ic( "application-menu-symbolic" ); }
 QIcon YQIconPool::wrench()               { return ic( "configure-symbolic"        ); }
 
