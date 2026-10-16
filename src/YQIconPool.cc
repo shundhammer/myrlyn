@@ -59,20 +59,19 @@ QIcon YQIconPool::pkgNoInst()            { return ic( "package-available"       
 QIcon YQIconPool::pkgProtected()         { return ic( "package-installed-locked"  ); }
 QIcon YQIconPool::pkgTaboo()             { return ic( "package-available-locked"  ); }
 
+QIcon YQIconPool::arrowDown()            { return ic( "pan-down-symbolic"         ); }
 QIcon YQIconPool::arrowLeft()            { return ic( "arrow-left-symbolic"       ); }
 QIcon YQIconPool::arrowRight()           { return ic( "arrow-right-symbolic"      ); }
-QIcon YQIconPool::arrowDown()            { return ic( "pan-down-symbolic"         ); }
 QIcon YQIconPool::checkmark()            { return ic( "checkmark-symbolic"        ); }
-QIcon YQIconPool::pkgConflict()          { return ic( "emblem-warning"            ); }
-QIcon YQIconPool::tabClose()             { return ic( "tab-close-symbolic"        ); }
-
 QIcon YQIconPool::download()             { return ic( "download-symbolic"         ); }
 QIcon YQIconPool::downloadDone()         { return ic( "checkmark-symbolic"        ); }
 QIcon YQIconPool::downloadOngoing()      { return ic( "download-symbolic"         ); }
 QIcon YQIconPool::downloadPlaceholder()  { return ic( "download-placeholder"      ); }
-QIcon YQIconPool::emojiSad()             { return ic( "state-error-symbolic"      ); }
+QIcon YQIconPool::emojiSad()             { return ic( "emoji-sad"                 ); }
 QIcon YQIconPool::emojiSick()            { return ic( "emoji-sick"                ); }
 QIcon YQIconPool::hamburger()            { return ic( "application-menu-symbolic" ); }
+QIcon YQIconPool::pkgConflict()          { return ic( "emblem-warning"            ); }
+QIcon YQIconPool::tabClose()             { return ic( "tab-close-symbolic"        ); }
 QIcon YQIconPool::wrench()               { return ic( "configure-symbolic"        ); }
 
 
