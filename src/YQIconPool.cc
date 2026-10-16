@@ -39,35 +39,44 @@ YQIconPool * YQIconPool::instance()
 }
 
 
-QIcon YQIconPool::pkgInstall()                { return instance()->cachedIcon( "package-install"          ); }
-QIcon YQIconPool::pkgUpdate()                 { return instance()->cachedIcon( "package-upgrade"          ); }
-QIcon YQIconPool::pkgDel()                    { return instance()->cachedIcon( "package-remove"           ); }
+// Just a shortcut
+QIcon YQIconPool::ic( const QString & iconName )
+{
+    return YQIconPool::instance()->cachedIcon( iconName );
+}
 
-QIcon YQIconPool::pkgAutoInstall()            { return instance()->cachedIcon( "package-install-auto"     ); }
-QIcon YQIconPool::pkgAutoUpdate()             { return instance()->cachedIcon( "package-upgrade-auto"     ); }
-QIcon YQIconPool::pkgAutoDel()                { return instance()->cachedIcon( "package-remove-auto"      ); }
 
-QIcon YQIconPool::pkgKeepInstalled()          { return instance()->cachedIcon( "package-installed"        ); }
-QIcon YQIconPool::pkgNoInst()                 { return instance()->cachedIcon( "package-available"        ); }
-QIcon YQIconPool::pkgProtected()              { return instance()->cachedIcon( "package-installed-locked" ); }
-QIcon YQIconPool::pkgTaboo()                  { return instance()->cachedIcon( "package-available-locked" ); }
+QIcon YQIconPool::pkgInstall()           { return ic( "package-install"           ); }
+QIcon YQIconPool::pkgUpdate()            { return ic( "package-upgrade"           ); }
+QIcon YQIconPool::pkgDel()               { return ic( "package-remove"            ); }
 
-QIcon YQIconPool::arrowLeft()                 { return instance()->cachedIcon( "arrow-left"               ); }
-QIcon YQIconPool::arrowRight()                { return instance()->cachedIcon( "arrow-right"              ); }
-QIcon YQIconPool::arrowDown()                 { return instance()->cachedIcon( "arrow-down"               ); }
-QIcon YQIconPool::checkmark()                 { return instance()->cachedIcon( "checkmark"                ); }
-QIcon YQIconPool::pkgConflict()               { return instance()->cachedIcon( "emblem-warning"           ); }
-QIcon YQIconPool::tabClose()                  { return instance()->cachedIcon( "tab-close"                ); }
+QIcon YQIconPool::pkgAutoInstall()       { return ic( "package-install-auto"      ); }
+QIcon YQIconPool::pkgAutoUpdate()        { return ic( "package-upgrade-auto"      ); }
+QIcon YQIconPool::pkgAutoDel()           { return ic( "package-remove-auto"       ); }
 
-QIcon YQIconPool::download()                  { return instance()->cachedIcon( "download"                 ); }
-QIcon YQIconPool::downloadDone()              { return instance()->cachedIcon( "download-done"            ); }
-QIcon YQIconPool::downloadOngoing()           { return instance()->cachedIcon( "download-ongoing"         ); }
-QIcon YQIconPool::downloadPlaceholder()       { return instance()->cachedIcon( "download-placeholder"     ); }
-QIcon YQIconPool::emojiSad()                  { return instance()->cachedIcon( "emoji-sad"                ); }
-QIcon YQIconPool::emojiSick()                 { return instance()->cachedIcon( "emoji-sick"               ); }
-QIcon YQIconPool::hamburger()                 { return instance()->cachedIcon( "hamburger"                ); }
-QIcon YQIconPool::wrench()                    { return instance()->cachedIcon( "wrench"                   ); }
+QIcon YQIconPool::pkgKeepInstalled()     { return ic( "package-installed-updated" ); }
+QIcon YQIconPool::pkgNoInst()            { return ic( "package-available"         ); }
+QIcon YQIconPool::pkgProtected()         { return ic( "package-installed-locked"  ); }
+QIcon YQIconPool::pkgTaboo()             { return ic( "package-available-locked"  ); }
 
+QIcon YQIconPool::arrowLeft()            { return ic( "arrow-left-symbolic"       ); }
+QIcon YQIconPool::arrowRight()           { return ic( "arrow-right-symbolic"      ); }
+QIcon YQIconPool::arrowDown()            { return ic( "pan-down-symbolic"         ); }
+QIcon YQIconPool::checkmark()            { return ic( "checkmark-symbolic"        ); }
+QIcon YQIconPool::pkgConflict()          { return ic( "emblem-warning"            ); }
+QIcon YQIconPool::tabClose()             { return ic( "tab-close-symbolic"        ); }
+
+QIcon YQIconPool::download()             { return ic( "download-symbolic"         ); }
+QIcon YQIconPool::downloadDone()         { return ic( "checkmark-symbolic"        ); }
+QIcon YQIconPool::downloadOngoing()      { return ic( "download-symbolic"         ); }
+QIcon YQIconPool::downloadPlaceholder()  { return ic( "download-placeholder"      ); }
+QIcon YQIconPool::emojiSad()             { return ic( "state-error-symbolic"      ); }
+QIcon YQIconPool::emojiSick()            { return ic( "vcs-conflicting"           ); }
+QIcon YQIconPool::hamburger()            { return ic( "application-menu-symbolic" ); }
+QIcon YQIconPool::wrench()               { return ic( "configure-symbolic"        ); }
+
+
+//-----------------------------------------------------------------------
 
 
 YQIconPool::YQIconPool()
@@ -189,7 +198,7 @@ YQIconPool::loadIcon( const QString & iconName )
 {
     QIcon icon;
 
-    if ( _useThemeIcons )
+    if ( _useThemeIcons && ! iconName.startsWith( "package-" ) )
         icon = loadThemeIcon( iconName );
 
     if ( icon.isNull() )
@@ -207,20 +216,17 @@ YQIconPool::loadThemeIcon( const QString & iconName )
 {
     QIcon icon;
 
-    QString themeIconName = iconName.startsWith( "package-" ) ?
-        iconName : QString( "myrlyn-" ) + iconName;
-
-    if ( QIcon::hasThemeIcon( themeIconName ) )
+    if ( QIcon::hasThemeIcon( iconName ) )
     {
         if ( _verboseIconLoader )
-            logDebug() << "Loading theme icon " << themeIconName << endl;
+            logDebug() << "Loading theme icon " << iconName << endl;
 
-        icon = QIcon::fromTheme( themeIconName, QIcon( ":/" + iconName ) );
+        icon = QIcon::fromTheme( iconName, QIcon( ":/" + iconName ) );
     }
     else //  ! hasThemeIcon
     {
         if ( _verboseIconLoader )
-            logDebug() << "  No theme icon " << themeIconName << endl;
+            logDebug() << "  No theme icon " << iconName << endl;
     }
 
     return icon;

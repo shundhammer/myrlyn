@@ -7,37 +7,47 @@
     <file alias="package-install-auto">icons/package-install-auto.svg</file>
     <file alias="package-upgrade-auto">icons/package-upgrade-auto.svg</file>
     <file alias="package-remove-auto">icons/package-remove-auto.svg</file>
-    <file alias="package-installed">icons/package-installed.svg</file>
+    <file alias="package-installed-updated">icons/package-installed-updated.svg</file>
     <file alias="package-available">icons/package-available.svg</file>
     <file alias="package-installed-locked">icons/package-installed-locked.svg</file>
     <file alias="package-available-locked">icons/package-available-locked.svg</file>
 
-    <file alias="arrow-left">icons/arrow-left.svg</file>
-    <file alias="arrow-right">icons/arrow-right.svg</file>
-    <file alias="arrow-down">icons/arrow-down.svg</file>
-    <file alias="checkmark">icons/checkmark.svg</file>
-    <file alias="download">icons/download.svg</file>
-    <file alias="download-ongoing">icons/download.svg</file>
-    <file alias="download-done">icons/checkmark.svg</file>
+    <file alias="application-menu-symbolic">icons/application-menu-symbolic.svg</file>
+    <file alias="arrow-left-symbolic">icons/arrow-left-symbolic.svg</file>
+    <file alias="arrow-right-symbolic">icons/arrow-right-symbolic.svg</file>
+    <file alias="checkmark-symbolic">icons/checkmark-symbolic.svg</file>
+    <file alias="configure-symbolic">icons/configure-symbolic.svg</file>
     <file alias="download-placeholder">icons/download-placeholder.svg</file>
+    <file alias="download-symbolic">icons/download-symbolic.svg</file>
     <file alias="emblem-warning">icons/emblem-warning.svg</file>
-    <file alias="emoji-sad">icons/emoji-sad.svg</file>
-    <file alias="emoji-sick">icons/emoji-sick.svg</file>
-    <file alias="hamburger">icons/hamburger.svg</file>
-    <file alias="wrench">icons/wrench.svg</file>
-    <file alias="tab-close">icons/tab-close.svg</file>
+    <file alias="pan-down-symbolic">icons/pan-down-symbolic.svg</file>
+    <file alias="state-error-symbolic">icons/state-error-symbolic.svg</file>
+    <file alias="tab-close-symbolic">icons/tab-close-symbolic.svg</file>
+    <file alias="vcs-conflicting">icons/vcs-conflicting.svg</file>
 
-    <file alias="dark-theme-arrow-left">icons/dark-theme/arrow-left.svg</file>
-    <file alias="dark-theme-arrow-right">icons/dark-theme/arrow-right.svg</file>
-    <file alias="dark-theme-arrow-down">icons/dark-theme/arrow-down.svg</file>
-    <file alias="dark-theme-checkmark">icons/dark-theme/checkmark.svg</file>
-    <file alias="dark-theme-download">icons/dark-theme/download.svg</file>
-    <file alias="dark-theme-download-ongoing">icons/dark-theme/download.svg</file>
-    <file alias="dark-theme-download-done">icons/dark-theme/checkmark.svg</file>
-    <file alias="dark-theme-emoji-sad">icons/dark-theme/emoji-sad.svg</file>
-    <file alias="dark-theme-emoji-sick">icons/dark-theme/emoji-sick.svg</file>
-    <file alias="dark-theme-hamburger">icons/dark-theme/hamburger.svg</file>
-    <file alias="dark-theme-wrench">icons/dark-theme/wrench.svg</file>
-    <file alias="dark-theme-tab-close">icons/dark-theme/tab-close.svg</file>
+
+    <file alias="dark-theme-package-install">icons/dark-theme/package-install.svg</file>
+    <file alias="dark-theme-package-upgrade">icons/dark-theme/package-upgrade.svg</file>
+    <file alias="dark-theme-package-remove">icons/dark-theme/package-remove.svg</file>
+    <file alias="dark-theme-package-install-auto">icons/dark-theme/package-install-auto.svg</file>
+    <file alias="dark-theme-package-upgrade-auto">icons/dark-theme/package-upgrade-auto.svg</file>
+    <file alias="dark-theme-package-remove-auto">icons/dark-theme/package-remove-auto.svg</file>
+    <file alias="dark-theme-package-installed">icons/dark-theme/package-installed-updated.svg</file>
+    <file alias="dark-theme-package-available">icons/dark-theme/package-available.svg</file>
+    <file alias="dark-theme-package-installed-locked">icons/dark-theme/package-installed-locked.svg</file>
+    <file alias="dark-theme-package-available-locked">icons/dark-theme/package-available-locked.svg</file>
+
+    <file alias="dark-theme-application-menu-symbolic">icons/dark-theme/application-menu-symbolic.svg</file>
+    <file alias="dark-theme-arrow-left-symbolic">icons/dark-theme/arrow-left-symbolic.svg</file>
+    <file alias="dark-theme-arrow-right-symbolic">icons/dark-theme/arrow-right-symbolic.svg</file>
+    <file alias="dark-theme-checkmark-symbolic">icons/dark-theme/checkmark-symbolic.svg</file>
+    <file alias="dark-theme-configure-symbolic">icons/dark-theme/configure-symbolic.svg</file>
+    <file alias="dark-theme-download-placeholder">icons/dark-theme/download-placeholder.svg</file>
+    <file alias="dark-theme-download-symbolic">icons/dark-theme/download-symbolic.svg</file>
+    <file alias="dark-theme-emblem-warning">icons/dark-theme/emblem-warning.svg</file>
+    <file alias="dark-theme-pan-down-symbolic">icons/dark-theme/pan-down-symbolic.svg</file>
+    <file alias="dark-theme-state-error-symbolic">icons/dark-theme/state-error-symbolic.svg</file>
+    <file alias="dark-theme-tab-close-symbolic">icons/dark-theme/tab-close-symbolic.svg</file>
+    <file alias="dark-theme-vcs-conflicting">icons/dark-theme/vcs-conflicting.svg</file>
   </qresource>
 </RCC>

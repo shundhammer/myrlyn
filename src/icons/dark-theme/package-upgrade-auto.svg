@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16">
+   <style type="text/css" id="current-color-scheme">.ColorScheme-Text { color: #fcfcfc; } </style>
+   <rect fill="#3daee9" height="16" rx="2" width="16" id="rect1"/>
+   <path id="path2" d="M 8 4 L 2 10 L 3.4140625 11.414062 L 8 6.828125 L 12.585938 11.414062 L 14 10 L 8 4 z M 3 13 L 3 15 L 5 15 L 5 13 L 3 13 z M 7 13 L 7 15 L 9 15 L 9 13 L 7 13 z M 11 13 L 11 15 L 13 15 L 13 13 L 11 13 z " fill="#fff"/>
+   <path d="M2 0C.892 0 0 .892 0 2v12c0 1.108.892 2 2 2h12c1.108 0 2-.892 2-2V2c0-1.108-.892-2-2-2zm0 1h12c.554 0 1 .446 1 1v12c0 .554-.446 1-1 1H2c-.554 0-1-.446-1-1V2c0-.554.446-1 1-1z" style="fill:currentColor;fill-opacity:0.6;stroke:none" class="ColorScheme-Text" id="path1"/>
+</svg>

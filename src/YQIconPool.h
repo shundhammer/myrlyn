@@ -120,6 +120,8 @@ private:
     void readSettings();
     void writeSettings();
 
+    static QIcon ic( const QString & iconName );
+
 
     //
     // Data members

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <defs id="defs3051">
+    <style type="text/css" id="current-color-scheme">
+      .ColorScheme-Text {
+      color:#fcfcfc;
+      }
+    </style>
+  </defs>
+  <rect fill="#3daee9" height="16" rx="2" width="16" id="rect1"/>
+  <path d="m2 0c-1.108 0-2 .892-2 2v12c0 1.108.892 2 2 2h12c1.108 0 2-.892 2-2v-12c0-1.108-.892-2-2-2zm0 1h12c.554 0 1 .446 1 1v12c0 .554-.446 1-1 1h-12c-.554 0-1-.446-1-1v-12c0-.554.446-1 1-1z" style="fill:currentColor;fill-opacity:0.6;stroke:none" class="ColorScheme-Text" id="path1"/>
+  <g fill="#fff" id="g5">
+    <path id="path2" d="M 7 2 L 7 6 L 3 6 L 3 8 L 7 8 L 7 12 L 9 12 L 9 8 L 13 8 L 13 6 L 9 6 L 9 2 L 7 2 z M 3 13 L 3 15 L 5 15 L 5 13 L 3 13 z M 7 13 L 7 15 L 9 15 L 9 13 L 7 13 z M 11 13 L 11 15 L 13 15 L 13 13 L 11 13 z "/>
+  </g>
+</svg>
