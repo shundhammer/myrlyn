@@ -36,9 +36,8 @@ YQPkgUpdatesFilterView::YQPkgUpdatesFilterView( QWidget * parent )
     _ui->setupUi( this ); // Actually create the widgets from the .ui form
     MyrlynApp::setHeadingFont( _ui->headingLabel );
 
-    QSize iconSize( 22, 22 );
-    _leftoverPkgIcon = YQIconPool::emojiSick().pixmap( iconSize );
-    _updateOkIcon    = YQIconPool::checkmark().pixmap( iconSize );
+    _leftoverPkgIcon = YQIconPool::emojiSick();
+    _updateOkIcon    = YQIconPool::checkmark();
 
     // See ui_updates-filter-view.h  in the build/ tree for the widget names.
     //

@@ -108,7 +108,7 @@ YQPkgStatusFilterView::setStatusLabelIcon( QLabel * label, const QIcon & icon )
 {
     CHECK_PTR( label );
 
-    label->setPixmap( icon.pixmap( QSize( 22, 22 ) ) );
+    label->setPixmap( icon.pixmap( QSize( 16, 16 ) ) );
 }
 
 

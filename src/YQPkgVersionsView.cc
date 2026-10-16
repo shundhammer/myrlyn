@@ -200,7 +200,7 @@ YQPkgVersionsView::showDetails( ZyppSel selectable )
                 instLayout->setContentsMargins( 0, 0, 0, 0 );
 
                 QLabel * icon = new QLabel( installedVersion );
-                icon->setPixmap( YQIconPool::checkmark().pixmap( QSize( 22, 22 ) ) );
+                icon->setPixmap( YQIconPool::checkmark().pixmap( QSize( 16, 16 ) ) );
                 instLayout->addWidget( icon );
 
                 QLabel * textLabel = new QLabel( text, installedVersion );
