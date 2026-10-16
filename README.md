@@ -28,15 +28,20 @@ Production ready. Suitable for everyday use.
 
 ## Screenshots
 
-[<img width="500" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-10-search-view.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-10-search-view.png)
-
 
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-01-init-repos.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-01-init-repos.png)
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-11-updates-view.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-11-updates-view.png)
+
+[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-01-init-repos-dark.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-01-init-repos-dark.png)
+[<img width="500" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-10-search-view-dark.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-10-search-view-dark.png)
+[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-11-updates-view-dark.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-11-updates-view-dark.png)
+
+
+
+
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-20-pkg-commit-default.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-20-pkg-commit-default.png)
 
-[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-21-pkg-commit-details-1.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-21-pkg-commit-details-1.png)
-[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-22-pkg-commit-details-2.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-22-pkg-commit-details-2.png)
+[<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-21-pkg-commit-details.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-21-pkg-commit-details-1.png)
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-30-summary.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-30-summary.png)
 
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-40-repo-config.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-40-repo-config.png)
