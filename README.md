@@ -41,7 +41,6 @@ Production ready. Suitable for everyday use.
 
 
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-20-pkg-commit-default.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-20-pkg-commit-default.png)
-
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-21-pkg-commit-details.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-21-pkg-commit-details-1.png)
 [<img width="250" src="https://github.com/shundhammer/myrlyn/blob/master/screenshots/Myrlyn-30-summary.png">](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-30-summary.png)
 
