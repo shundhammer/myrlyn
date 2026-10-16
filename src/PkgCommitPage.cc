@@ -271,6 +271,8 @@ void PkgCommitPage::reset()
 
 void PkgCommitPage::loadIcons()
 {
+    _ui->downloadsList->setIconSize( QSize( 16, 16 ) );
+
     _downloadOngoingIcon = YQIconPool::downloadOngoing();
     _downloadDoneIcon    = YQIconPool::downloadDone();
 }

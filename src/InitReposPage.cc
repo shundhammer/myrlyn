@@ -77,6 +77,8 @@ void InitReposPage::connectSignals()
 
 void InitReposPage::loadIcons()
 {
+    _ui->reposList->setIconSize( QSize( 16, 16 ) );
+
     _downloadPlaceholderIcon = YQIconPool::downloadPlaceholder();
     _downloadOngoingIcon     = YQIconPool::downloadOngoing();
     _downloadDoneIcon        = YQIconPool::downloadDone();
