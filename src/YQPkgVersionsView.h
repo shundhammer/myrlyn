@@ -162,13 +162,38 @@ protected:
      **/
     void unselectAllMultiVersion();
 
+
+    // Create widgets
+
+    void rebuildWidgets();
+    void addPkgNameHeading();
+    void addVersionsTable();
+    void addTableHeader();
+    void addMultiVersionItems();
+    void addNormalItems();
+    void addNormalInstalledItems();
+    void addNormalAvailableItems();
+    void addStaticColumns( ZyppPoolItem zyppPoolItem, bool isInstalled = false );
+
+    /**
+     * Create and return a QLabel with 'text' and add it to the table grid
+     * at row '_gridRow' and column 'col'.
+     **/
+    QLabel * addGridText( int col, const std::string  & text );
+    QLabel * addGridText( int col, const QString      & text );
+
+
+
+
     // Data members
 
     QTabWidget  *  _parentTab;
     ZyppSel        _selectable;
     bool           _isMixedMultiVersion;
     QButtonGroup * _buttonGroup;
-    QVBoxLayout *  _layout;
+    QVBoxLayout *  _outerVBox;
+    QGridLayout *  _grid;
+    int            _gridRow;
 };
 
 

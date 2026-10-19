@@ -15,6 +15,8 @@
 
 
 #include <QButtonGroup>
+#include <QGridLayout>
+#include <QGuiApplication>
 #include <QLabel>
 #include <QMessageBox>
 #include <QSignalBlocker>
@@ -22,7 +24,6 @@
 #include <QStylePainter>
 #include <QTabWidget>
 #include <QVBoxLayout>
-
 
 #include <zypp/Arch.h>
 #include <zypp/Edition.h>
@@ -48,10 +49,19 @@
 #endif
 
 
+enum TableColumns
+{
+    VersionCol = 0,
+    ArchCol,
+    RepoCol,
+    VendorCol
+};
+
+
 YQPkgVersionsView::YQPkgVersionsView( QWidget * parent )
     : QScrollArea( parent )
     , _buttonGroup( 0 )
-    , _layout( 0 )
+    , _outerVBox( 0 )
 {
     _selectable          = 0;
     _isMixedMultiVersion = false;
@@ -112,143 +122,279 @@ YQPkgVersionsView::showDetails( ZyppSel selectable )
 {
     _selectable          = selectable;
     _isMixedMultiVersion = isMixedMultiVersion( selectable );
-    QWidget * content    = widget();
+
+    rebuildWidgets();
+}
+
+
+void
+YQPkgVersionsView::rebuildWidgets()
+{
+    QWidget * content = widget();
 
     delete content; // This recursively deletes all child widgets and qobjects
 
     content      = new QWidget( this );
     _buttonGroup = new QButtonGroup( content );
-    _layout      = new QVBoxLayout( content );
-    content->setLayout( _layout );
+    _outerVBox   = new QVBoxLayout( content );
+    content->setLayout( _outerVBox );
 
-    if ( ! selectable )
+    if ( ! _selectable )
     {
         setWidget( content );   // Prevent mem leak
         return;
     }
 
-    QLabel * pkgNameLabel = new QLabel( this );
+    addPkgNameHeading();
+    _outerVBox->addSpacing( 13 );
 
-    if ( ! selectable->theObj() )
-        return;
-
-    _layout->addWidget( pkgNameLabel );
-
-    QFont font = pkgNameLabel->font();
-    font.setBold( true );
-
-    QFontMetrics fm( font) ;
-    font.setPixelSize( (int) ( fm.height() * 1.1 ) );
-
-    pkgNameLabel->setFont( font );
-    pkgNameLabel->setText( fromUTF8(selectable->theObj()->name().c_str()) );
-
-    if ( selectable->multiversionInstall() ) // at least one (!) PoolItem is multiversion
-    {
-        //
-        // Find installed and available objects (for multiversion view)
-        //
-        {
-            for ( zypp::ui::Selectable::picklist_iterator it = selectable->picklistBegin();
-                  it != selectable->picklistEnd();
-                  ++it )
-            {
-                YQPkgMultiVersion * version = new YQPkgMultiVersion( this, selectable, *it );
-
-                _layout->addWidget( version );
-
-                connect( version, SIGNAL( statusChanged() ),
-                         this,    SIGNAL( statusChanged() ) );
-
-                connect( this,    SIGNAL( statusChanged() ),
-                         version, SLOT  ( update()        ) );
-            }
-        }
-    }
-    else
-    {
-        //
-        // Fill installed objects
-        //
-        {
-            for ( zypp::ui::Selectable::installed_iterator it = selectable->installedBegin();
-                  it != selectable->installedEnd();
-                  ++it )
-            {
-                // Cache this, it's somewhat expensive
-                bool retracted = installedIsRetracted( selectable, *it );
-                QString text;
-
-                if ( retracted )
-                {
-                    text = _( "%1-%2 [RETRACTED] from vendor %3 (installed)" )
-                        .arg( fromUTF8( (*it)->edition().asString().c_str() ) )
-                        .arg( fromUTF8( (*it)->arch().asString().c_str() ) )
-                        .arg( fromUTF8( (*it)->vendor().c_str() ) ) ;
-
-                }
-                else
-                {
-                    text = _( "%1-%2 from vendor %3 (installed)" )
-                        .arg( fromUTF8( (*it)->edition().asString().c_str() ) )
-                        .arg( fromUTF8( (*it)->arch().asString().c_str() ) )
-                        .arg( fromUTF8( (*it)->vendor().c_str() ) ) ;
-                }
-
-                QWidget * installedVersion = new QWidget( this );
-                QHBoxLayout * instLayout = new QHBoxLayout( installedVersion );
-                instLayout->setContentsMargins( 0, 0, 0, 0 );
-
-                QLabel * icon = new QLabel( installedVersion );
-                icon->setPixmap( YQIconPool::checkmark().pixmap( QSize( 16, 16 ) ) );
-                instLayout->addWidget( icon );
-
-                QLabel * textLabel = new QLabel( text, installedVersion );
-                instLayout->addWidget( textLabel );
-                instLayout->addStretch();
-
-                if ( retracted )
-                    setRetractedColor( textLabel );
-
-                _layout->addWidget( installedVersion );
-            }
-        }
-
-
-        //
-        // Fill available objects
-        //
-        {
-            for ( zypp::ui::Selectable::available_iterator it = selectable->availableBegin();
-                  it != selectable->availableEnd();
-                  ++it)
-            {
-                YQPkgVersion *radioButton = new YQPkgVersion( this, selectable, *it );
-
-                connect( radioButton, SIGNAL( clicked( bool )            ),
-                         this,        SLOT  ( checkForChangedCandidate() ) );
-
-                _buttonGroup->addButton( radioButton );
-                _layout->addWidget( radioButton );
-
-                if ( ! _buttonGroup->checkedButton() &&
-                     selectable->hasCandidateObj() &&
-                     selectable->candidateObj()->edition() == (*it)->edition() &&
-                     selectable->candidateObj()->arch()    == (*it)->arch() )
-                {
-                    radioButton->setChecked( true );
-                }
-            }
-        }
-    }
-
-    _layout->addStretch();
+    addVersionsTable();
+    _outerVBox->addStretch();
 
     // This really needs to wait until this point, or the content will never
     // get its correct size and become visible.
 
     setWidget( content );
     content->show();
+}
+
+
+void
+YQPkgVersionsView::addPkgNameHeading()
+{
+    if ( ! _selectable || ! _selectable->theObj() )
+        return;
+
+    QString  pkgName      = fromUTF8( _selectable->theObj()->name().c_str() );
+    QLabel * pkgNameLabel = new QLabel( pkgName, this );
+
+    _outerVBox->addWidget( pkgNameLabel );
+
+    QFont headingFont = QGuiApplication::font();
+    headingFont.setBold( true );
+
+    QFontMetrics fm( headingFont) ;
+    headingFont.setPixelSize( (int) ( fm.height() * 1.1 ) );
+    pkgNameLabel->setFont( headingFont );
+}
+
+
+void
+YQPkgVersionsView::addVersionsTable()
+{
+    QHBoxLayout * gridHBox = new QHBoxLayout();
+    _outerVBox->addLayout( gridHBox );
+
+    _grid = new QGridLayout();
+    _grid->setHorizontalSpacing( 20 );
+    _grid->setVerticalSpacing  ( 12 );
+    gridHBox->addLayout( _grid );
+
+    _gridRow = 0;
+    addTableHeader();
+
+
+    // Table content
+
+    if ( _selectable->multiversionInstall() ) // at least one (!) PoolItem is multiversion?
+    {
+        addMultiVersionItems(); // Multi-select: A QCheckBox for each item
+    }
+    else
+    {
+        addNormalItems();       // Single-select: A QRadioBox for each item
+    }
+
+
+    // No stretching for all table rows and columns
+
+    for ( int col=0; col < _grid->columnCount(); col++ )
+        _grid->setColumnStretch( col, 0 );
+
+    for ( int row=0; row < _grid->rowCount(); row++ )
+        _grid->setRowStretch( row, 0 );
+
+
+    // Add a HStretch to the right of the table to take up all excess width
+
+    gridHBox->addStretch( 1 ); // stretchFactor
+}
+
+
+void
+YQPkgVersionsView::addTableHeader()
+{
+    QStringList tableHeaders;
+    tableHeaders << QString( "       %1" ).arg( _( "Version"      ) )
+                 << _( "Architecture" )
+                 << _( "Repository"   )
+                 << _( "Vendor"       );
+
+    QFont headerFont = QGuiApplication::font();
+    headerFont.setBold( true );
+
+    int col = 0;
+
+    for ( const QString & headerText: tableHeaders )
+    {
+        QLabel * headerLabel = new QLabel( this );
+        headerLabel->setText( headerText );
+        headerLabel->setFont( headerFont );
+
+        _grid->addWidget( headerLabel, _gridRow, col++ );
+    }
+}
+
+
+void
+YQPkgVersionsView::addNormalItems()
+{
+    addNormalInstalledItems();
+    addNormalAvailableItems();
+}
+
+
+void
+YQPkgVersionsView::addNormalInstalledItems()
+{
+    //
+    // Fill installed objects
+    //
+
+    for ( zypp::ui::Selectable::installed_iterator it = _selectable->installedBegin();
+          it != _selectable->installedEnd();
+          ++it )
+    {
+        QHBoxLayout * instHBox = new QHBoxLayout();
+        instHBox->setSpacing( 10 );
+
+        QLabel * iconLabel = new QLabel( this );
+        iconLabel->setPixmap( YQIconPool::checkmark().pixmap( QSize( 16, 16 ) ) );
+        iconLabel->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed ) );
+        instHBox->addWidget( iconLabel );
+
+        QString versionText = fromUTF8( (*it)->edition().asString().c_str() );
+        bool retracted      = installedIsRetracted( _selectable, *it );
+
+        if ( retracted )
+            versionText += QString( " [%1]" ).arg( _( "[RETRACTED]" ) );
+
+        QLabel * versionLabel = new QLabel( versionText, this );
+        instHBox->addWidget( versionLabel );
+
+        if ( retracted )
+            setRetractedColor( versionLabel );
+
+        _grid->addLayout( instHBox, ++_gridRow, VersionCol );
+        addStaticColumns( *it, true );  // isInstalled
+    }
+}
+
+
+void
+YQPkgVersionsView::addNormalAvailableItems()
+{
+    //
+    // Fill normal available objects (as a QRadioButton each)
+    //
+
+    for ( zypp::ui::Selectable::available_iterator it = _selectable->availableBegin();
+          it != _selectable->availableEnd();
+          ++it)
+    {
+        YQPkgVersion * radioButton = new YQPkgVersion( this, _selectable, *it );
+        _grid->addWidget( radioButton, ++_gridRow, VersionCol );
+        _buttonGroup->addButton( radioButton );
+        addStaticColumns( *it );
+
+        connect( radioButton, SIGNAL( clicked( bool )            ),
+                 this,        SLOT  ( checkForChangedCandidate() ) );
+
+
+        // Select the candidate version
+
+        if ( ! _buttonGroup->checkedButton() &&
+             _selectable->hasCandidateObj()  &&
+             _selectable->candidateObj()->edition() == (*it)->edition() &&
+             _selectable->candidateObj()->arch()    == (*it)->arch() )
+        {
+            radioButton->setChecked( true );
+        }
+    }
+}
+
+
+void
+YQPkgVersionsView::addMultiVersionItems()
+{
+    //
+    // Add installed and available objects for multiversion view as QCheckBox widgets.
+    // Unlike for the normal items, installed versions don't get any special treatment:
+    // They are added as the same kind of QCheckBox each, but checked.
+    // The user can uncheck each one individually.
+    //
+
+    for ( zypp::ui::Selectable::picklist_iterator it = _selectable->picklistBegin();
+          it != _selectable->picklistEnd();
+          ++it )
+    {
+        YQPkgMultiVersion * version = new YQPkgMultiVersion( this, _selectable, *it );
+        _grid->addWidget( version, ++_gridRow, VersionCol );
+        addStaticColumns( *it );
+
+        connect( version, SIGNAL( statusChanged() ),
+                 this,    SIGNAL( statusChanged() ) );
+
+        connect( this,    SIGNAL( statusChanged() ),
+                 version, SLOT  ( update()        ) );
+    }
+}
+
+
+void
+YQPkgVersionsView::addStaticColumns( ZyppPoolItem item, bool isInstalled )
+{
+    addGridText( ArchCol, item->arch().asString() );
+
+    if ( isInstalled )
+    {
+        QLabel * label = addGridText( RepoCol, _( "(installed)" ) );
+
+        QFont font = label->font();
+        font.setItalic( true );
+        label->setFont( font );
+    }
+    else
+    {
+        addGridText( RepoCol,   item->repository().info().name() );
+    }
+
+    QString vendor = fromUTF8( item->vendor() );
+
+    if ( vendor.startsWith( "VideoLAN Project (", Qt::CaseInsensitive ) )
+        vendor = "VideoLAN"; // cut off cruft
+
+    if ( vendor.contains( "Packman", Qt::CaseInsensitive ) )
+        vendor = "Packman";
+
+    addGridText( VendorCol, vendor );
+}
+
+
+QLabel *
+YQPkgVersionsView::addGridText( int col, const std::string & text )
+{
+    return addGridText( col, fromUTF8( text ) );
+}
+
+
+QLabel *
+YQPkgVersionsView::addGridText( int col, const QString & text )
+{
+    QLabel * label = new QLabel( text, this );
+    _grid->addWidget( label, _gridRow, col );
+
+    return label;
 }
 
 
@@ -302,7 +448,7 @@ YQPkgVersionsView::checkForChangedCandidate()
 
                 ZyppStatus status = _selectable->status();
 
-                if ( !_selectable->installedEmpty() &&
+                if ( ! _selectable->installedEmpty() &&
                      _selectable->installedObj()->arch()    == newCandidate->arch() &&
                      _selectable->installedObj()->edition() == newCandidate->edition() )
                 {
@@ -537,44 +683,15 @@ YQPkgVersion::YQPkgVersion( QWidget * parent,
     , _selectable( selectable )
     , _zyppObj( zyppObj )
 {
+    QString versionText = fromUTF8( zyppObj->edition().asString() );
+
     if ( zyppObj->isRetracted() )
     {
-        // Translators: %1 is a package version, %2 the package architecture,
-        // %3 describes the repository where it comes from,
-        // %4 is the repository's priority
-        // %5 is the vendor of the package
-        // Examples:
-        //         2.5.23-i568 from Packman with priority 100 and vendor openSUSE
-        //         3.17.4-i386 from openSUSE-11.1 update repository with priority 20 and vendor openSUSE
-        //         ^^^^^^ ^^^^      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^               ^^            ^^^^^^^^
-        //            %1   %2                %3                                   %4                %5
-        setText( _( "%1-%2 [RETRACTED] from %3 with priority %4 and vendor %5" )
-                 .arg( fromUTF8( zyppObj->edition().asString().c_str() ) )
-                 .arg( fromUTF8( zyppObj->arch().asString().c_str() ) )
-                 .arg( fromUTF8( zyppObj->repository().info().name().c_str() ) )
-                 .arg( zyppObj->repository().info().priority() )
-                 .arg( fromUTF8( zyppObj->vendor().c_str() ) ) );
-
+        versionText += QString( " [%1]" ).arg( _( "[RETRACTED]" ) );
         YQPkgVersionsView::setRetractedColor( this );
     }
-    else
-    {
-        // Translators: %1 is a package version, %2 the package architecture,
-        // %3 describes the repository where it comes from,
-        // %4 is the repository's priority
-        // %5 is the vendor of the package
-        // Examples:
-        //         2.5.23-i568 from Packman with priority 100 and vendor openSUSE
-        //         3.17.4-i386 from openSUSE-11.1 update repository with priority 20 and vendor openSUSE
-        //         ^^^^^^ ^^^^      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^               ^^            ^^^^^^^^
-        //            %1   %2                %3                                   %4                %5
-        setText( _( "%1-%2 from %3 with priority %4 and vendor %5" )
-                 .arg( fromUTF8( zyppObj->edition().asString().c_str() ) )
-                 .arg( fromUTF8( zyppObj->arch().asString().c_str() ) )
-                 .arg( fromUTF8( zyppObj->repository().info().name().c_str() ) )
-                 .arg( zyppObj->repository().info().priority() )
-                 .arg( fromUTF8( zyppObj->vendor().c_str() ) ) );
-    }
+
+    setText( versionText );
 }
 
 
@@ -594,12 +711,7 @@ YQPkgMultiVersion::YQPkgMultiVersion( YQPkgVersionsView * parent,
     , _selectable( selectable )
     , _zyppPoolItem( zyppPoolItem )
 {
-    setText (_( "%1-%2 from %3 with priority %4 and vendor %5" )
-             .arg( fromUTF8( zyppPoolItem->edition().asString().c_str() ) )
-             .arg( fromUTF8( zyppPoolItem->arch().asString().c_str() ) )
-             .arg( fromUTF8( zyppPoolItem->repository().info().name().c_str() ) )
-             .arg( zyppPoolItem->repository().info().priority() )
-             .arg( fromUTF8( zyppPoolItem->vendor().c_str() ) ));
+    setText( fromUTF8( zyppPoolItem->edition().asString() ) );
 
     connect( this, SIGNAL( toggled( bool)    ),
              this, SLOT  ( slotIconClicked() ) );
@@ -690,7 +802,7 @@ void YQPkgMultiVersion::setStatus( ZyppStatus newStatus )
 }
 
 
-void YQPkgMultiVersion::paintEvent(QPaintEvent *)
+void YQPkgMultiVersion::paintEvent( QPaintEvent * )
 {
     // Draw the usual checkbox
 
@@ -713,23 +825,24 @@ void YQPkgMultiVersion::paintEvent(QPaintEvent *)
 }
 
 
-QIcon YQPkgMultiVersion::statusIcon( ZyppStatus status )
+QIcon
+YQPkgMultiVersion::statusIcon( ZyppStatus status )
 {
     QIcon icon = YQIconPool::pkgNoInst();
 
     switch ( status )
     {
-        case S_Del:           icon = YQIconPool::pkgDel();            break;
-        case S_Install:       icon = YQIconPool::pkgInstall();        break;
         case S_KeepInstalled: icon = YQIconPool::pkgKeepInstalled();  break;
+        case S_Install:       icon = YQIconPool::pkgInstall();        break;
+        case S_Update:        icon = YQIconPool::pkgUpdate();         break;
+        case S_Del:           icon = YQIconPool::pkgDel();            break;
         case S_NoInst:        icon = QIcon();                         break;
         case S_Protected:     icon = YQIconPool::pkgProtected();      break;
         case S_Taboo:         icon = YQIconPool::pkgTaboo();          break;
-        case S_Update:        icon = YQIconPool::pkgUpdate();         break;
 
-        case S_AutoDel:       icon = YQIconPool::pkgAutoDel();        break;
         case S_AutoInstall:   icon = YQIconPool::pkgAutoInstall();    break;
         case S_AutoUpdate:    icon = YQIconPool::pkgAutoUpdate();     break;
+        case S_AutoDel:       icon = YQIconPool::pkgAutoDel();        break;
 
             // Intentionally omitting 'default' branch so the compiler can
             // catch unhandled enum states
