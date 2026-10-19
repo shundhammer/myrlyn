@@ -1078,14 +1078,24 @@ YQPkgSelector::makeConnections()
     // Connect package versions view
     //
 
-    if ( _pkgVersionsView && _pkgList )
+    if ( _pkgVersionsView )
     {
-        connect( _pkgVersionsView,      SIGNAL( candidateChanged( ZyppObj ) ),
-                 _pkgList,              SLOT  ( updateItemData()    ) );
+        if ( _pkgList )
+        {
+            connect( _pkgVersionsView,      SIGNAL( candidateChanged( ZyppObj ) ),
+                     _pkgList,              SLOT  ( updateItemData()    ) );
 
-        connect( _pkgVersionsView,      SIGNAL( statusChanged()  ),
-                 _pkgList,              SLOT  ( updateItemData() ) );
+            connect( _pkgVersionsView,      SIGNAL( statusChanged()  ),
+                     _pkgList,              SLOT  ( updateItemData() ) );
+        }
+
+        if ( _pkgConflictDialog )
+        {
+            connect( _pkgConflictDialog,    SIGNAL( updatePackages() ),
+                     _pkgVersionsView,      SIGNAL( statusChanged()  ) );
+        }
     }
+
 
 
     //

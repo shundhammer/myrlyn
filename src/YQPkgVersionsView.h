@@ -268,6 +268,7 @@ public:
      **/
     void paintEvent(QPaintEvent *);
 
+
 signals:
 
     /**
