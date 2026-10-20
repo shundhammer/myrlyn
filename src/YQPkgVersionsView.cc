@@ -340,32 +340,28 @@ YQPkgVersionsView::setVersionColor( QWidget * widget, ZyppObj candidate )
 {
     ZyppObj installed = selectable()->installedObj();
 
-    if ( candidate && installed )
+    if ( ! installed )
+        return;
+
+    if ( installed->arch() != candidate->arch() )
+        return; // No blue for different arch candidate
+
+    bool candidateIsNewer = false;
+
+    if ( installed->edition() < candidate->edition() )
+        candidateIsNewer = true;
+
+    bool candidateVersionChanged =
+        candidate && installed && candidateIsNewer &&
+        ( candidate->edition().epoch()   != installed->edition().epoch() ||
+          candidate->edition().version() != installed->edition().version() );
+
+    if ( candidateIsNewer )
     {
-        bool candidateIsNewer = false;
-        bool installedIsNewer = false;
+        setTextColor( widget, blueTextColor() );
 
-        if ( candidate->edition() < installed->edition() )
-            installedIsNewer = true;
-        else if ( installed->edition() < candidate->edition() )
-            candidateIsNewer = true;
-
-        bool candidateVersionChanged =
-            candidate && installed && candidateIsNewer &&
-            ( candidate->edition().epoch()   != installed->edition().epoch() ||
-              candidate->edition().version() != installed->edition().version() );
-
-        if ( candidateIsNewer )
-        {
-            setTextColor( widget, blueTextColor() );
-
-            if ( candidateVersionChanged )
-                widget->setFont( MyrlynApp::boldFont() );
-        }
-        else if ( installedIsNewer )
-        {
-            setTextColor( widget, redTextColor() );
-        }
+        if ( candidateVersionChanged )
+            widget->setFont( MyrlynApp::boldFont() );
     }
 }
 
@@ -400,8 +396,8 @@ YQPkgVersionsView::addMultiVersionItems()
 void
 YQPkgVersionsView::addStaticColumns( ZyppObj item, bool isInstalled )
 {
-    QString  arch  = fromUTF8( item->arch().asString() );
-    QLabel * label = addGridText( ArchCol, arch );
+    QString  arch    = fromUTF8( item->arch().asString() );
+    QLabel * label   = addGridText( ArchCol, arch );
 
     if ( _selectable->installedObj() &&
          _selectable->installedObj()->arch() != item->arch() &&
