@@ -19,9 +19,9 @@
 #include <QPalette>
 #include <QPixmap>
 #include <QSettings>
-#include <QStyleHints>
 
 #include "Logger.h"
+#include "MyrlynApp.h"
 #include "YQIconPool.h"
 
 
@@ -93,50 +93,6 @@ YQIconPool::~YQIconPool()
 {
     // This is most likely never called, but we can't be sure.
     writeSettings();
-}
-
-
-bool YQIconPool::usingDarkTheme()
-{
-    static bool usingDarkTheme      = false;
-    static bool checkedForDarkTheme = false;
-
-    if ( ! checkedForDarkTheme )
-    {
-        usingDarkTheme = detectDarkWidgetTheme();
-        checkedForDarkTheme = true;
-    }
-
-    return usingDarkTheme;
-}
-
-
-bool YQIconPool::detectDarkWidgetTheme()
-{
-    bool usingDarkTheme = false;
-
-    switch ( QGuiApplication::styleHints()->colorScheme() )
-    {
-        case Qt::ColorScheme::Dark:
-            usingDarkTheme = true;
-            break;
-
-        case Qt::ColorScheme::Light:
-            usingDarkTheme = false;
-            break;
-
-        default:
-            logDebug() << "Fallback detection method" << endl;
-            QColor background = QGuiApplication::palette().color( QPalette::Active, QPalette::Base );
-            usingDarkTheme = ( background.lightness() < 128 ); // 0 (black) .. 255 (white)
-            break;
-    }
-
-    logInfo() << "Using a "
-              << ( usingDarkTheme ? "dark" : "light" )
-              << " widget theme" << endl;
-
-    return usingDarkTheme;
 }
 
 
@@ -237,7 +193,7 @@ YQIconPool::loadBuiltinIcon( const QString & rawIconName )
 {
     QString iconName = rawIconName;
 
-    if ( usingDarkTheme() )
+    if ( MyrlynApp::usingDarkTheme() )
     {
         QString darkIconName = "dark-theme-" + rawIconName;
 

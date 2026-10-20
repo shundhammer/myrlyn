@@ -198,6 +198,16 @@ public:
      **/
     static void setHeadingFont( QWidget * widget );
 
+    /**
+     * Return 'true' if we are using a dark widget theme, 'false' otherwise.
+     **/
+    static bool usingDarkTheme();
+
+    /**
+     * Return 'true' if we are using a light widget theme, 'false' otherwise.
+     **/
+    static bool usingLightTheme() { return ! usingDarkTheme(); }
+
 
 public slots:
 
@@ -236,6 +246,12 @@ public slots:
      * Ask for confirmation if 'askForConfirmation' is 'true'.
      **/
     void quit( bool askForConfirmation = false );
+
+    /**
+     * Detect the widget theme (dark or light).
+     * Return 'true' for a dark widget theme, 'false' for a light theme.
+     **/
+    static bool detectDarkWidgetTheme();
 
 
 protected:

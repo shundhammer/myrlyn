@@ -22,6 +22,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QProcessEnvironment>
+#include <QStyleHints>
 
 #include "Exception.h"
 #include "Logger.h"
@@ -530,3 +531,48 @@ void MyrlynApp::setHeadingFont( QWidget * widget )
     if ( widget )
         widget->setFont( headingFont() );
 }
+
+
+bool MyrlynApp::usingDarkTheme()
+{
+    static bool usingDarkTheme      = false;
+    static bool checkedForDarkTheme = false;
+
+    if ( ! checkedForDarkTheme )
+    {
+        usingDarkTheme = detectDarkWidgetTheme();
+        checkedForDarkTheme = true;
+    }
+
+    return usingDarkTheme;
+}
+
+
+bool MyrlynApp::detectDarkWidgetTheme()
+{
+    bool usingDarkTheme = false;
+
+    switch ( QGuiApplication::styleHints()->colorScheme() )
+    {
+        case Qt::ColorScheme::Dark:
+            usingDarkTheme = true;
+            break;
+
+        case Qt::ColorScheme::Light:
+            usingDarkTheme = false;
+            break;
+
+        default:
+            logDebug() << "Fallback detection method" << endl;
+            QColor background = QGuiApplication::palette().color( QPalette::Active, QPalette::Base );
+            usingDarkTheme = ( background.lightness() < 128 ); // 0 (black) .. 255 (white)
+            break;
+    }
+
+    logInfo() << "Using a "
+              << ( usingDarkTheme ? "dark" : "light" )
+              << " widget theme" << endl;
+
+    return usingDarkTheme;
+}
+
