@@ -188,6 +188,17 @@ public:
     void createZyppLogger();
 
     /**
+     * Return the applicaton standard font.
+     * This is the same as QGuiApplication::font().
+     **/
+    static QFont font();
+
+    /**
+     * Return the bold version of the application standard font.
+     **/
+    static QFont boldFont();
+
+    /**
      * Return a font that is suitable for headings:
      * A little big larger than the default font, and bold.
      **/
@@ -301,8 +312,6 @@ protected:
 
     static MyrlynApp *      _instance;
     static MyrlynAppOptions _optFlags;
-    static QFont            _headingFont;
-    static bool             _headingFontInitialized;
 };
 
 #endif // MyrlynApp_h

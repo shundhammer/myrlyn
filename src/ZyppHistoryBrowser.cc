@@ -22,6 +22,7 @@
 #include "Exception.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "MyrlynApp.h"
 #include "WindowSettings.h"
 #include "utf8.h"
 #include "YQi18n.h"
@@ -426,10 +427,7 @@ void ZyppHistoryBrowser::fillCommandItem( QTreeWidgetItem * item, Event * event 
     }
 
     item->setText( 0, text );
-
-    static QFont boldFont( item->font( 0 ) );
-    boldFont.setBold( true );
-    item->setFont( 0, boldFont );
+    item->setFont( 0, MyrlynApp::boldFont() );
 
     item->setExpanded( true );
     item->setFirstColumnSpanned( true );

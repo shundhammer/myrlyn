@@ -25,6 +25,7 @@
 #include <zypp/ui/Status.h>
 
 #include "Logger.h"
+#include "MyrlynApp.h"
 #include "QY2IconLoader.h"
 #include "YQIconPool.h"
 #include "YQi18n.h"
@@ -538,12 +539,7 @@ YQPkgPatternCategoryItem::YQPkgPatternCategoryItem( YQPkgPatternList * patternLi
 
     setExpanded( true );
     setTreeIcon();
-
-    QFont categoryFont = font( _patternList->summaryCol() );
-    categoryFont.setBold(true);
-    QFontMetrics fontMetrics( categoryFont );
-    categoryFont.setPixelSize( (int) ( fontMetrics.height() * 1.1 ) );
-    setFont( _patternList->summaryCol(), categoryFont );
+    setFont( _patternList->summaryCol(), MyrlynApp::headingFont() );
 }
 
 

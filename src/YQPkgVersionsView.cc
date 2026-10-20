@@ -37,6 +37,7 @@
 #include <zypp/ui/Status.h>
 
 #include "Logger.h"
+#include "MyrlynApp.h"
 #include "YQIconPool.h"
 #include "YQZypp.h"
 #include "YQi18n.h"
@@ -169,13 +170,7 @@ YQPkgVersionsView::addPkgNameHeading()
     QLabel * pkgNameLabel = new QLabel( pkgName, this );
 
     _outerVBox->addWidget( pkgNameLabel );
-
-    QFont headingFont = QGuiApplication::font();
-    headingFont.setBold( true );
-
-    QFontMetrics fm( headingFont) ;
-    headingFont.setPixelSize( (int) ( fm.height() * 1.1 ) );
-    pkgNameLabel->setFont( headingFont );
+    pkgNameLabel->setFont( MyrlynApp::headingFont() );
 }
 
 
@@ -225,21 +220,17 @@ void
 YQPkgVersionsView::addTableHeader()
 {
     QStringList tableHeaders;
-    tableHeaders << QString( "       %1" ).arg( _( "Version"      ) )
+    tableHeaders << QString( "     %1" ).arg( _( "Version"      ) )
                  << _( "Architecture" )
                  << _( "Repository"   )
                  << _( "Vendor"       );
-
-    QFont headerFont = QGuiApplication::font();
-    headerFont.setBold( true );
 
     int col = 0;
 
     for ( const QString & headerText: tableHeaders )
     {
-        QLabel * headerLabel = new QLabel( this );
-        headerLabel->setText( headerText );
-        headerLabel->setFont( headerFont );
+        QLabel * headerLabel = new QLabel( headerText, this );
+        headerLabel->setFont( MyrlynApp::boldFont() );
 
         _grid->addWidget( headerLabel, _gridRow, col++ );
     }
@@ -266,7 +257,7 @@ YQPkgVersionsView::addNormalInstalledItems()
           ++it )
     {
         QHBoxLayout * instHBox = new QHBoxLayout();
-        instHBox->setSpacing( 10 );
+        instHBox->setSpacing( 2 );
 
         QLabel * iconLabel = new QLabel( this );
         iconLabel->setPixmap( YQIconPool::checkmark().pixmap( QSize( 16, 16 ) ) );

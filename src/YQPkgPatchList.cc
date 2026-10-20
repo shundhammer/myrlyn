@@ -20,6 +20,7 @@
 #include <QTreeWidgetItem>
 
 #include "Logger.h"
+#include "MyrlynApp.h"
 #include "YQIconPool.h"
 #include "YQi18n.h"
 #include "utf8.h"
@@ -550,14 +551,7 @@ YQPkgPatchCategoryItem::YQPkgPatchCategoryItem( YQPkgPatchCategory category,
 
     setExpanded( true );
     setTreeIcon();
-
-    QFont categoryFont = font( _patchList->summaryCol() );
-    categoryFont.setBold(true);
-
-    QFontMetrics metrics( categoryFont );
-    categoryFont.setPixelSize( int ( metrics.height() * 1.05 ) );
-
-    setFont( _patchList->summaryCol(), categoryFont );
+    setFont( _patchList->summaryCol(), MyrlynApp::headingFont() );
 }
 
 
