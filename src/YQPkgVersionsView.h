@@ -173,7 +173,13 @@ protected:
     void addNormalItems();
     void addNormalInstalledItems();
     void addNormalAvailableItems();
-    void addStaticColumns( ZyppPoolItem zyppPoolItem, bool isInstalled = false );
+    void addStaticColumns( ZyppObj zyppPoolItem, bool isInstalled = false );
+
+    /**
+     * Set the color and if applicable a bold font for 'widget' depending on
+     * whether the installed or the candidate is newer.
+     **/
+    void setVersionColor( QWidget * widget, ZyppObj candidate );
 
     /**
      * Create and return a QLabel with 'text' and add it to the table grid

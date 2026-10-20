@@ -59,6 +59,23 @@ enum TableColumns
 };
 
 
+// Text colors
+
+QColor normalTextColor() { return MyrlynApp::normalTextColor(); }
+QColor blueTextColor()   { return MyrlynApp::blueTextColor();   }
+QColor redTextColor()    { return MyrlynApp::redTextColor();    }
+
+void setTextColor( QWidget * widget, const QColor & color )
+{
+    QPalette pal = widget->palette();
+    pal.setColor( QPalette::WindowText, color );
+    widget->setPalette( pal );
+}
+
+
+//----------------------------------------------------------------------
+
+
 YQPkgVersionsView::YQPkgVersionsView( QWidget * parent )
     : QScrollArea( parent )
     , _buttonGroup( 0 )
@@ -293,10 +310,13 @@ YQPkgVersionsView::addNormalAvailableItems()
           it != _selectable->availableEnd();
           ++it)
     {
-        YQPkgVersion * radioButton = new YQPkgVersion( this, _selectable, *it );
+        ZyppObj item = *it;
+
+        YQPkgVersion * radioButton = new YQPkgVersion( this, _selectable, item );
         _grid->addWidget( radioButton, ++_gridRow, VersionCol );
         _buttonGroup->addButton( radioButton );
-        addStaticColumns( *it );
+        setVersionColor( radioButton, item );
+        addStaticColumns( item );
 
         connect( radioButton, SIGNAL( clicked( bool )            ),
                  this,        SLOT  ( checkForChangedCandidate() ) );
@@ -306,10 +326,45 @@ YQPkgVersionsView::addNormalAvailableItems()
 
         if ( ! _buttonGroup->checkedButton() &&
              _selectable->hasCandidateObj()  &&
-             _selectable->candidateObj()->edition() == (*it)->edition() &&
-             _selectable->candidateObj()->arch()    == (*it)->arch() )
+             _selectable->candidateObj()->edition() == item->edition() &&
+             _selectable->candidateObj()->arch()    == item->arch() )
         {
             radioButton->setChecked( true );
+        }
+    }
+}
+
+
+void
+YQPkgVersionsView::setVersionColor( QWidget * widget, ZyppObj candidate )
+{
+    ZyppObj installed = selectable()->installedObj();
+
+    if ( candidate && installed )
+    {
+        bool candidateIsNewer = false;
+        bool installedIsNewer = false;
+
+        if ( candidate->edition() < installed->edition() )
+            installedIsNewer = true;
+        else if ( installed->edition() < candidate->edition() )
+            candidateIsNewer = true;
+
+        bool candidateVersionChanged =
+            candidate && installed && candidateIsNewer &&
+            ( candidate->edition().epoch()   != installed->edition().epoch() ||
+              candidate->edition().version() != installed->edition().version() );
+
+        if ( candidateIsNewer )
+        {
+            setTextColor( widget, blueTextColor() );
+
+            if ( candidateVersionChanged )
+                widget->setFont( MyrlynApp::boldFont() );
+        }
+        else if ( installedIsNewer )
+        {
+            setTextColor( widget, redTextColor() );
         }
     }
 }
@@ -343,13 +398,21 @@ YQPkgVersionsView::addMultiVersionItems()
 
 
 void
-YQPkgVersionsView::addStaticColumns( ZyppPoolItem item, bool isInstalled )
+YQPkgVersionsView::addStaticColumns( ZyppObj item, bool isInstalled )
 {
-    addGridText( ArchCol, item->arch().asString() );
+    QString  arch  = fromUTF8( item->arch().asString() );
+    QLabel * label = addGridText( ArchCol, arch );
+
+    if ( _selectable->installedObj() &&
+         _selectable->installedObj()->arch() != item->arch() &&
+         arch == "i586" )
+    {
+        setTextColor( label, redTextColor() );
+    }
 
     if ( isInstalled )
     {
-        QLabel * label = addGridText( RepoCol, _( "(installed)" ) );
+        label = addGridText( RepoCol, _( "(installed)" ) );
 
         QFont font = label->font();
         font.setItalic( true );
@@ -396,9 +459,7 @@ YQPkgVersionsView::addGridText( int col, const QString & text )
 
 void YQPkgVersionsView::setRetractedColor( QWidget * widget )
 {
-    QPalette pal = widget->palette();
-    pal.setColor( QPalette::WindowText, Qt::red );
-    widget->setPalette( pal );
+    setTextColor( widget, redTextColor() );
 }
 
 
@@ -707,7 +768,7 @@ YQPkgMultiVersion::YQPkgMultiVersion( YQPkgVersionsView * parent,
     , _selectable( selectable )
     , _zyppPoolItem( zyppPoolItem )
 {
-    setText( fromUTF8( zyppPoolItem->edition().asString() ) );
+    setText( " " + fromUTF8( zyppPoolItem->edition().asString() ) );
 
     connect( this, SIGNAL( toggled( bool)    ),
              this, SLOT  ( slotIconClicked() ) );
