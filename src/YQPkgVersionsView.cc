@@ -377,6 +377,11 @@ YQPkgVersionsView::addStaticColumns( ZyppPoolItem item, bool isInstalled )
     if ( vendor.contains( "Packman", Qt::CaseInsensitive ) )
         vendor = "Packman";
 
+    if ( vendor == "NVIDIA" ||
+         ( vendor.startsWith( "obs", Qt::CaseInsensitive ) &&
+           vendor.contains( "Proprietary:X11:Drivers", Qt::CaseInsensitive ) ) )
+        vendor = "NVidia";
+
     addGridText( VendorCol, vendor );
 }
 
