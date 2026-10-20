@@ -20,6 +20,7 @@
 #include <unistd.h>     // geteuid()
 
 #include <QObject>
+#include <QColor>
 #include <QFont>
 #include <QFlags>
 
@@ -220,6 +221,13 @@ public:
     static bool usingLightTheme() { return ! usingDarkTheme(); }
 
 
+    // Text colors
+
+    static QColor normalTextColor() { return _normalTextColor; }
+    static QColor blueTextColor()   { return _blueTextColor;   }
+    static QColor redTextColor()    { return _redTextColor;    }
+
+
 public slots:
 
     /**
@@ -296,6 +304,11 @@ protected:
      **/
     virtual bool eventFilter( QObject * watchedObj, QEvent * event ) override;
 
+    /**
+     * Initialize the text colors depending on the widget theme (dark or light).
+     **/
+    static void initTextColors();
+
 
     //
     // Data members
@@ -312,6 +325,9 @@ protected:
 
     static MyrlynApp *      _instance;
     static MyrlynAppOptions _optFlags;
+    static QColor           _normalTextColor;
+    static QColor           _redTextColor;
+    static QColor           _blueTextColor;
 };
 
 #endif // MyrlynApp_h

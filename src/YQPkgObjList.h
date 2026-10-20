@@ -17,7 +17,6 @@
 #ifndef YQPkgObjList_h
 #define YQPkgObjList_h
 
-#include <QColor>
 #include <QIcon>
 #include <QRegularExpression>
 #include <QMenu>
@@ -31,6 +30,7 @@
 #include <zypp/ui/Status.h>
 
 #include "FSize.h"
+#include "MyrlynApp.h"
 #include "QY2ListView.h"
 #include "YQZypp.h"
 
@@ -78,11 +78,11 @@ public:
     int instVersionCol() const { return _instVersionCol; }
 
 
-    // Text colors
+    // Text colors (depending on light or dark widget theme)
 
-    QColor normalTextColor() { return _normalTextColor; }
-    QColor blueTextColor()   { return _blueTextColor;   }
-    QColor redTextColor()    { return _redTextColor;    }
+    QColor normalTextColor() { return MyrlynApp::normalTextColor(); }
+    QColor blueTextColor()   { return MyrlynApp::blueTextColor();   }
+    QColor redTextColor()    { return MyrlynApp::redTextColor();    }
 
 
     /**
@@ -385,10 +385,6 @@ protected:
     int     _versionCol;
     int     _instVersionCol;
 
-    QColor  _normalTextColor;
-    QColor  _redTextColor;
-    QColor  _blueTextColor;
-
     bool    _editable;
     bool    _debug;
     int     _excludedItemsCount;
@@ -614,9 +610,9 @@ public:
 
     // Text colors
 
-    QColor normalTextColor() { return _pkgObjList->normalTextColor(); }
-    QColor blueTextColor()   { return _pkgObjList->blueTextColor();   }
-    QColor redTextColor()    { return _pkgObjList->redTextColor();    }
+    QColor normalTextColor() { return MyrlynApp::normalTextColor(); }
+    QColor blueTextColor()   { return MyrlynApp::blueTextColor();   }
+    QColor redTextColor()    { return MyrlynApp::redTextColor();    }
 
 
 protected:

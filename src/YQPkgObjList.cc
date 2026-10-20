@@ -76,7 +76,6 @@ YQPkgObjList::YQPkgObjList( QWidget * parent )
 
     _excludedItemsCount = 0;
 
-    initColors();
     createActions();
 
     connect( this,      SIGNAL( columnClicked             ( int, QTreeWidgetItem *, int, const QPoint & ) ),
@@ -97,25 +96,6 @@ YQPkgObjList::YQPkgObjList( QWidget * parent )
 
 YQPkgObjList::~YQPkgObjList()
 {
-}
-
-
-void YQPkgObjList::initColors()
-{
-    _normalTextColor = palette().color( QPalette::Active, QPalette::Text );
-    QColor backgroundColor = palette().color( QPalette::Active, QPalette::Base );
-
-    if ( backgroundColor.lightness() >= 128 )  // light Theme: 0 (black) .. 255 (white)
-    {
-        _blueTextColor = Qt::blue;
-        _redTextColor  = Qt::red;
-    }
-    else  // dark Theme
-    {
-        _blueTextColor = Qt::cyan;
-        _redTextColor  = Qt::red;
-    }
-
 }
 
 
@@ -265,7 +245,7 @@ YQPkgObjList::setCurrentStatus( ZyppStatus newStatus, bool doSelectNextItem, boo
 
     YQPkgObjListItem * item = dynamic_cast<YQPkgObjListItem *> (listViewItem);
 
-    if ( item && item->editable() && _editable && ( item->candidateIsNewer() || !ifNewerOnly ) )
+    if ( item && item->editable() && _editable && ( item->candidateIsNewer() || ! ifNewerOnly ) )
     {
         if ( newStatus != item->status() )
         {

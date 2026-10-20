@@ -18,6 +18,7 @@
 
 #include <QApplication>
 #include <QCloseEvent>
+#include <QColor>
 #include <QLabel>
 #include <QMessageBox>
 #include <QProcess>
@@ -45,6 +46,10 @@ using LogStr::dec;
 
 MyrlynApp *      MyrlynApp::_instance = 0;
 MyrlynAppOptions MyrlynApp::_optFlags( OptNone );
+
+QColor           MyrlynApp::_normalTextColor = Qt::black;
+QColor           MyrlynApp::_redTextColor    = Qt::red;
+QColor           MyrlynApp::_blueTextColor   = Qt::blue;
 
 
 MyrlynApp::MyrlynApp( MyrlynAppOptions optFlags )
@@ -75,6 +80,7 @@ MyrlynApp::MyrlynApp( MyrlynAppOptions optFlags )
     Translator * translator = new Translator( "myrlyn", this );
     qApp->installTranslator( translator );
 
+    initTextColors();
     createMainWin(); // Create this early to get early visual feedback
     logDebug() << "Creating MyrlynApp done" << endl;
 }
@@ -599,3 +605,20 @@ bool MyrlynApp::detectDarkWidgetTheme()
     return usingDarkTheme;
 }
 
+
+void MyrlynApp::initTextColors()
+{
+    _normalTextColor = QGuiApplication::palette().color( QPalette::Active, QPalette::Text );
+
+    if ( usingLightTheme() )
+    {
+        _blueTextColor = Qt::blue;
+        _redTextColor  = Qt::red;
+    }
+    else // Dark Theme
+    {
+        _blueTextColor = Qt::cyan;
+        _redTextColor  = Qt::red;
+
+    }
+}
