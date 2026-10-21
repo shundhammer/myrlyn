@@ -35,7 +35,7 @@ QY2ListView::QY2ListView( QWidget * parent )
     , _mouseButton1PressedInHeader( false )
     , _finalSizeChangeExpected( false )
 {
-    setRootIsDecorated(false);
+    setRootIsDecorated( false );
 
     if ( header() )
     {
