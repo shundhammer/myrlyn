@@ -619,6 +619,5 @@ void MyrlynApp::initTextColors()
     {
         _blueTextColor = "#1d99f3";
         _redTextColor  = "#d24d57";
-
     }
 }
