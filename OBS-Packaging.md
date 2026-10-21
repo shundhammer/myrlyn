@@ -92,7 +92,7 @@ osc ci
 ## Submit from the Home Project to the Devel Project
 
 ```
-osc sr home:shundhammer:myrlyn-stable/myrlyn system:packagemanager/myrlyn
+osc sr home:huha:myrlyn-stable/myrlyn system:packagemanager/myrlyn
 ```
 
 Check the pending requests:
