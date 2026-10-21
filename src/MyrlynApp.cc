@@ -612,8 +612,9 @@ void MyrlynApp::initTextColors()
 
     if ( usingLightTheme() )
     {
-        _blueTextColor = "#1d99f3";
-        _redTextColor  = "#d24d57";
+        _blueTextColor = "#0000ff";
+        _redTextColor  = "#e1004b";
+        // _redTextColor  = "#ff0050";
     }
     else // Dark Theme
     {
