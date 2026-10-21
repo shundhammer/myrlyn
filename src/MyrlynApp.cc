@@ -612,13 +612,13 @@ void MyrlynApp::initTextColors()
 
     if ( usingLightTheme() )
     {
-        _blueTextColor = Qt::blue;
-        _redTextColor  = Qt::red;
+        _blueTextColor = "#1d99f3";
+        _redTextColor  = "#d24d57";
     }
     else // Dark Theme
     {
-        _blueTextColor = Qt::cyan;
-        _redTextColor  = Qt::red;
+        _blueTextColor = "#1d99f3";
+        _redTextColor  = "#d24d57";
 
     }
 }

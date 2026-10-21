@@ -155,6 +155,7 @@ YQPkgVersionsView::rebuildWidgets()
     content      = new QWidget( this );
     _buttonGroup = new QButtonGroup( content );
     _outerVBox   = new QVBoxLayout( content );
+    _outerVBox->setContentsMargins( 12, 12, 8, 8 ); // left / top / right / bottom
     content->setLayout( _outerVBox );
 
     if ( ! _selectable )
