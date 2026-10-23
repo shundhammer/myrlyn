@@ -8,7 +8,7 @@
     ---------------------------------------------------------
 
     Project:  Myrlyn Package Manager GUI
-    Copyright (c) 2024-25 SUSE LLC
+    Copyright (c) 2024-26 SUSE LLC
     License:  GPL V2 - See file LICENSE for details.
 
  */
@@ -902,17 +902,13 @@ YQPkgSelector::addMenus()
     // Note: The help functions and their texts are moved out
     // to a separate source file YQPkgSelHelp.cc
 
-    // Opening a hyperlink in the user's Internet browser is only supported
-    // if not running via sudo or xdg-su
-    bool canOpenInBrowser = ( geteuid() != 0 );
-
-    if ( canOpenInBrowser )
+    if ( canOpenInBrowser() )
         helpMenu->addAction( _( "&Overview" ), this, SLOT( help()    ) );
 
     helpMenu->addAction( _( "About &Myrlyn" ), this, SLOT( about()   ) );
     helpMenu->addAction( _( "About &Qt"     ), qApp, SLOT( aboutQt() ) );
 
-    if ( canOpenInBrowser )
+    if ( canOpenInBrowser() )
     {
         helpMenu->addSeparator();
         helpMenu->addAction( _( "Rep&ository Configuration" ), this, SLOT( helpRepoConfig() ) );

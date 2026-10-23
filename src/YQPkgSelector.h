@@ -24,10 +24,12 @@
 #include "YQPkgObjList.h"
 
 class QLabel;
-class QPushButton;
-class QTabWidget;
 class QMenu;
 class QMenuBar;
+class QProcess;
+class QProcessEnvironment;
+class QPushButton;
+class QTabWidget;
 
 class YQPkgChangeLogView;
 class YQPkgDependenciesView;
@@ -278,12 +280,24 @@ protected slots:
      */
     void normalCursor();
 
+    /**
+     * Check if an URL can safely be opened in the user's standard web browser:
+     * Either if we are not running as root anyway, or if we are running as
+     * root, but from a 'sudo' session so privileges can be dropped and the
+     * environment set up for a normal user. This requires several environment
+     * variables to be set like SUDO_USER.
+     **/
+    static bool canOpenInBrowser();
+
 
 public:
 
     /**
      * Open a URL in the desktop's default browser
      * (using the /usr/bin/xdg-open command).
+     *
+     * If running as root, this drops privileges first.
+     * If this is not possible, this call will fail.
      **/
     static void openInBrowser( const QString & url );
 
@@ -433,6 +447,16 @@ protected:
      * Basic HTML formatting: Embed text into <li> ... </li>
      **/
     static QString listItem( const QString & text );
+
+    /**
+     * Drop root privileges to the normal user in environment variables
+     * SUDO_UID, SUDO_GID, SUDO_USER with SUDO_HOME and adapt the environment
+     * accordingly.
+     *
+     * Return 'true' on success, 'false' on error.
+     **/
+    static bool dropPrivileges( QProcess *            process,
+                                QProcessEnvironment * env );
 
 
     //
