@@ -186,19 +186,14 @@ public slots:
      * Display online help.
      * This opens the project's home page in an external web browser.
      **/
-    void help();
+    void help() const;
 
-    /**
-     * Help about repository configuration
-     * (opens in external web browser)
-     **/
-    void helpRepoConfig();
-
-    /**
-     * Help about root authentication
-     * (opens in external web browser)
-     **/
-    void helpRootAuth();
+    // Help topics
+    // They all open in an external web browser.
+    void helpRepoConfig()        const;
+    void helpRootAuth()          const;
+    void helpDevelopmentStatus() const;
+    void helpLatestRelease()     const;
 
     /**
      * Display an about page.

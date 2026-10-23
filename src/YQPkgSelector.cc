@@ -911,10 +911,11 @@ YQPkgSelector::addMenus()
     if ( canOpenInBrowser() )
     {
         helpMenu->addSeparator();
-        helpMenu->addAction( _( "Rep&ository Configuration" ), this, SLOT( helpRepoConfig() ) );
-        helpMenu->addAction( _( "Root &Authentication"      ), this, SLOT( helpRootAuth()   ) );
+        helpMenu->addAction( _( "Rep&ository Configuration" ), this, SLOT( helpRepoConfig()        ) );
+        helpMenu->addAction( _( "Root &Authentication"      ), this, SLOT( helpRootAuth()          ) );
+        helpMenu->addAction( _( "&Development Status"       ), this, SLOT( helpDevelopmentStatus() ) );
+        helpMenu->addAction( _( "&Latest Release"           ), this, SLOT( helpLatestRelease()     ) );
     }
-
 
 
     //

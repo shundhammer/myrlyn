@@ -24,21 +24,33 @@
 #include "YQPkgSelector.h"
 
 
-void YQPkgSelector::help()
+void YQPkgSelector::help() const
 {
     openInBrowser( "https://github.com/shundhammer/myrlyn/blob/master/README.md" );
 }
 
 
-void YQPkgSelector::helpRepoConfig()
+void YQPkgSelector::helpRepoConfig() const
 {
     openInBrowser( "https://github.com/shundhammer/myrlyn/issues/69" );
 }
 
 
-void YQPkgSelector::helpRootAuth()
+void YQPkgSelector::helpRootAuth() const
 {
     openInBrowser( "https://github.com/shundhammer/myrlyn/issues/99" );
+}
+
+
+void YQPkgSelector::helpDevelopmentStatus() const
+{
+    openInBrowser( "https://github.com/shundhammer/myrlyn/issues/1" );
+}
+
+
+void YQPkgSelector::helpLatestRelease() const
+{
+    openInBrowser( "https://github.com/shundhammer/myrlyn/releases" );
 }
 
 
@@ -114,8 +126,16 @@ bool YQPkgSelector::dropPrivileges( QProcess *            process,
 
     process->setChildProcessModifier( [ sudoUid, sudoGid ]
         {
-            setuid( sudoUid );
+            // Get rid of group 0 (root) first
             setgid( sudoGid );
+
+            const gid_t groups[] = { (gid_t) sudoGid };
+
+            // This needs root permissions, so we need to do it before setuid()
+            setgroups( sizeof( groups ) / sizeof( gid_t ), groups );
+
+            // Drop privileges
+            setuid( sudoUid );
         } );
 
     return true; // success
