@@ -89,7 +89,7 @@ YQPkgFilterTab::YQPkgFilterTab( QWidget * parent )
     // Nasty hack: Disconnect the base class from signals from its tab bar.
     // We will handle that signal on our own.
 
-    disconnect( tabBar(), SIGNAL( currentChanged( int ) ) );
+    disconnect( tabBar(), SIGNAL( currentChanged( int ) ), 0, 0 );
 
 
     //
