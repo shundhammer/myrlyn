@@ -96,6 +96,11 @@ YQPkgObjList::YQPkgObjList( QWidget * parent )
 
 YQPkgObjList::~YQPkgObjList()
 {
+    // We own the exclude rules; see the ExcludeRule constructor
+    for ( ExcludeRule * rule: _excludeRules )
+        delete rule;
+
+    _excludeRules.clear();
 }
 
 
