@@ -121,6 +121,10 @@ void MainWindow::clearClientArea()
 
         if ( layoutItem && layoutItem->widget() )
             layoutItem->widget()->hide();
+
+        // takeAt() transfers ownership of the layout item to us.
+        // This does not delete the widget, only the item wrapping it.
+        delete layoutItem;
     }
 }
 

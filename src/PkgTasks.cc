@@ -169,12 +169,13 @@ PkgTaskList::filtered( PkgTaskAction    filterAction,
 {
     PkgTaskList result( QString( "filtered %1" ).arg( _name ) );
 
-    for ( const PkgTask * task: *this )
+    for ( PkgTask * task: *this )
     {
         if ( ( task->action()    & filterAction    ) &&
              ( task->requester() & filterRequester )    )
         {
-            result.append( new PkgTask( *task ) );
+            // Not a copy: The original list keeps the ownership
+            result.append( task );
         }
     }
 
