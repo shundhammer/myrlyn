@@ -88,6 +88,10 @@ ZyppHistoryBrowser::~ZyppHistoryBrowser()
     if ( _filter )
         delete _filter;
 
+    // The filtered events are shallow clones that we own,
+    // but their child events are owned by ZyppHistory.
+    qDeleteAll( _filteredEvents );
+
     delete _ui;
 }
 
@@ -540,6 +544,7 @@ ZyppHistoryBrowser::events()
 
 void ZyppHistoryBrowser::filterEvents()
 {
+    qDeleteAll( _filteredEvents ); // Shallow clones; see below
     _filteredEvents.clear();
     _filteredEventsDirty = false;
 
