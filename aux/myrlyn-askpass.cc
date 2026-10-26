@@ -67,6 +67,7 @@ int main( int argc, char *argv[] )
     if ( ! argList.isEmpty() )
     {
         prompt = argList.first();
+        prompt.remove( "[sudo] " );
 
         if ( prompt.contains( "password for", Qt::CaseInsensitive ) )
         {
@@ -76,7 +77,7 @@ int main( int argc, char *argv[] )
     }
 
     if ( prompt.isEmpty() )
-        prompt = QObject::tr( "Password:" );
+        prompt = QObject::tr( "Password" );
 
     Translator translator( "myrlyn" ); // Using the same textdomain as Myrlyn
     qApp->installTranslator( &translator );
