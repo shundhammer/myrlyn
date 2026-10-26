@@ -19,6 +19,7 @@
 #include <QApplication>
 #include <QString>
 #include <QByteArray>
+#include "Translator.h"
 #include "myrlyn-askpass.h"
 
 
@@ -60,15 +61,25 @@ int main( int argc, char *argv[] )
     // 'sudo' calls this with one of
     // "[sudo] password for root"
     // "[sudo] password for kilroy"
+    //    0       1      2    3      (sections)
+    //   -4      -3     -2   -1
 
     if ( ! argList.isEmpty() )
     {
         prompt = argList.first();
-        prompt.replace( "[sudo] ", "" );
 
-        if ( prompt.startsWith( "password" ) )
-            prompt.front() = 'P'; // toUpper() doesn't work here (?!)
+        if ( prompt.contains( "password for", Qt::CaseInsensitive ) )
+        {
+            QString user = prompt.section( ' ', -1 ); // The rightmost word
+            prompt = QObject::tr( "Password for %1" ).arg( user );
+        }
     }
+
+    if ( prompt.isEmpty() )
+        prompt = QObject::tr( "Password:" );
+
+    Translator translator( "myrlyn" ); // Using the same textdomain as Myrlyn
+    qApp->installTranslator( &translator );
 
     AskPassWin dialog( prompt );
     dialog.exec();

@@ -16,11 +16,9 @@
 
 #include <string.h>             // strlen()
 #include <libintl.h>            // dgettext(), bindtextdomain()
-#include "Logger.h"
 #include "Translator.h"
 
 #define ENABLE_QT_INTERNAL_MESSAGES     0
-#define VERBOSE_QT_INTERNAL_MESSAGES    1
 
 
 bool Translator::_useFakeTranslations = false;
@@ -75,13 +73,6 @@ Translator::translate( const char * context_str,
          && context != "QObject"           // Used for all kinds of things
          && context != "QIODevice" )
     {
-#if VERBOSE_QT_INTERNAL_MESSAGES
-        logVerbose() << "Qt-internal message: "
-                     << "context: " << context
-                     << " msg: "    << sourceText
-                     << endl;
-#endif
-
         // For libQt-internal texts (file dialogs etc.), use the parent class
         // for Qt's built-in translations.
 

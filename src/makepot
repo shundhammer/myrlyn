@@ -36,13 +36,14 @@ CC_POT="cc-files.pot"
 RESULT_TMP="myrlyn-tmp.pot"
 RESULT_POT="myrlyn.pot"
 SRC_DIR=.
+AUX_DIR=../aux
 
 
 # Extract messages from the Qt Designer .ui files
 # using Qt6 Linguist tools that understand that file format
 # but convert immediately to gettext .pot format.
 
-lupdate6  -silent $SRC_DIR/*.ui -ts $UI_TS
+lupdate6  -silent $SRC_DIR/*.ui $AUX_DIR/*.ui -ts $UI_TS
 lconvert6 $UI_TS -o $UI_TMP
 
 # Remove msgctxt lines and merge duplicate msgids
@@ -56,7 +57,8 @@ msguniq -o $UI_POT $UI_TMP
 xgettext --language=c++ -k --keyword=_ --qt \
          --omit-header          \
          --output=$CC_POT       \
-         $SRC_DIR/*.cc
+         $SRC_DIR/*.cc          \
+         $AUX_DIR/*.cc
 
 # .h files don't normally contain any translatable messages.
 #

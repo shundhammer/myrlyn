@@ -7,7 +7,7 @@ include( GNUInstallDirs )
 set( CMAKE_AUTOUIC ON )
 
 set( TARGETBIN myrlyn-askpass )
-set( SOURCES   myrlyn-askpass.cc )
+set( SOURCES   myrlyn-askpass.cc Translator.cc )
 set( UI_FILES  myrlyn-askpass.ui )
 
 
