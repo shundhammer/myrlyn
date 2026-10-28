@@ -162,7 +162,7 @@ YQPkgClassificationFilterView::filter()
                       it != selectable->picklistEnd() && ! match;
                       ++it )
 		{
-		    check( selectable, tryCastToZyppPkg( *it ) );
+		    match = check( selectable, tryCastToZyppPkg( *it ) );
 		}
 	    }
 	}

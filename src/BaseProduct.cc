@@ -34,13 +34,23 @@ BaseProduct::instance()
         CHECK_NEW( inst );
 
         zypp::Target_Ptr target = zypp::getZYpp()->target();
-        zypp::Product::constPtr product = target->baseProduct();
+        zypp::Product::constPtr product;
 
-        inst->_name      = fromUTF8( product->name()              );
-        inst->_summary   = fromUTF8( product->summary()           );
-        inst->_shortName = fromUTF8( product->shortName()         );
-        inst->_version   = fromUTF8( product->edition().version() );
-        inst->_vendor    = fromUTF8( product->vendor()            );
+        if ( target )
+            product = target->baseProduct();
+
+        if ( product )
+        {
+            inst->_name      = fromUTF8( product->name()              );
+            inst->_summary   = fromUTF8( product->summary()           );
+            inst->_shortName = fromUTF8( product->shortName()         );
+            inst->_version   = fromUTF8( product->edition().version() );
+            inst->_vendor    = fromUTF8( product->vendor()            );
+        }
+        else
+        {
+            logWarning() << "No base product found" << endl;
+        }
     }
 
     return inst;
