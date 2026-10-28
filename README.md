@@ -26,6 +26,15 @@ GPL V2; see file LICENSE.
 Production ready. Suitable for everyday use.
 
 
+### Help Wanted for Translations
+
+If you don't see translations for your language in Myrlyn and you feel up to
+the task, volunteers for translating the program messages are welcome! Check
+here:
+
+https://translate.codeberg.org/engage/myrlyn-lang/
+
+
 ## Screenshots
 
 
