@@ -19,6 +19,7 @@
 #include <QProcess>
 
 #include "Logger.h"
+#include "utf8.h"
 #include "ui_about-dialog.h"
 
 #include "YQPkgSelector.h"
@@ -63,6 +64,15 @@ void YQPkgSelector::about()
     QString text = ui->heading->text();
     text += QString( " %1" ).arg( VERSION );
     ui->heading->setText( text );
+
+    QStringList contributors = QStringList() << "\n"  // The "\n" is needed for the join()
+        << fromUTF8( "@gruenich (Christoph Grüninger)" )
+        << "@Arthurium-On-Linux"
+        << "@byDMA"
+        << "@slothsnow"
+        << "@Sauerlandlinux (Stephan Hemeier)"
+        ;
+    ui->contributorsText->setText( contributors.join( "\n- " ) );;
 
     aboutDialog.exec();
     delete ui;
