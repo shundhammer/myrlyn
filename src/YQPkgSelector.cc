@@ -1009,6 +1009,12 @@ YQPkgSelector::makeConnections()
 
         connect( _repoFilterView,       SIGNAL( unProtectAll()         ),
                  _pkgList,              SLOT  ( setListKeepInstalled() ) );
+
+        connect( _repoFilterView,       SIGNAL( protectAll()           ),
+                 this,                  SLOT  ( updatePageLabels()     ) );
+
+        connect( _repoFilterView,       SIGNAL( unProtectAll()           ),
+                 this,                  SLOT  ( updatePageLabels()     ) );
     }
 
     if ( _serviceFilterView && _pkgList )

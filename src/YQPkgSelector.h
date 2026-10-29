@@ -124,6 +124,12 @@ public slots:
     void autoResolveDependencies();
 
     /**
+     * Update the tab labels of filter views that can have a numeric value with
+     * that number: "Patches (4)", "Updates (17)"
+     **/
+    void updatePageLabels();
+
+    /**
      * Install any -devel package for packages that are installed or marked for
      * installation
      **/
@@ -342,12 +348,6 @@ protected:
     void createPkgClassificationFilterView();
     void createLanguagesFilterView();
     void createStatusFilterView();
-
-    /**
-     * Update the tab labels of filter views that can have a numeric value with
-     * that number: "Patches (4)", "Updates (17)"
-     **/
-    void updatePageLabels();
 
     /**
      * Update the tab label of a filter view page with a number. Leave it empty
