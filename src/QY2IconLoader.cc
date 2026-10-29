@@ -71,13 +71,13 @@ QIcon QY2IconLoader::loadBuiltInIcon( const QString & iconName )
     if ( QFile( iconPath ).exists() )
         // Using QFile because it can handle Qt resources and their aliases
     {
-        // logVerbose() << "Using built-in icon " << iconName << endl;
+        // logVerbose() << "Loading built-in icon " << iconName << endl;
 
         return QIcon( iconPath );
     }
     else
     {
-        // logWarning() << "No built-in icon " << iconName << endl;
+        logWarning() << "No built-in icon " << iconName << endl;
 
         return QIcon();
     }

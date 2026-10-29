@@ -1,0 +1,16 @@
+<svg version="1.1" viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="a" x1="-50.45" x2="-50.45" y1="-.040987" y2="-22.041" gradientTransform="matrix(1.2727 0 0 1.2727 -987.15 -1.9478)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#e66100" offset="0"/>
+   <stop stop-color="#e66100" offset=".071429"/>
+   <stop stop-color="#ffa348" offset=".21429"/>
+   <stop stop-color="#e66100" offset=".46429"/>
+   <stop stop-color="#e66100" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g transform="translate(0 -1020.4)">
+  <rect transform="matrix(0,-1,-1,0,0,0)" x="-1051.4" y="-30" width="28" height="28" rx="14" ry="14" fill="url(#a)" stroke-width=".7"/>
+  <rect transform="matrix(0,-1,-1,0,0,0)" x="-1050.4" y="-30" width="28" height="28" rx="14" ry="14" fill="#ff7800" stroke-width=".7"/>
+  <path d="m16 1025.4c-6.371 0-11.5 5.129-11.5 11.5s5.129 11.5 11.5 11.5 11.5-5.129 11.5-11.5-5.129-11.5-11.5-11.5zm0 2c5.263 0 9.5 4.237 9.5 9.5 0 0.7692-0.10049 1.5131-0.27148 2.2285l-4.7285-4.7285-6 7 3-6-1-2-8.1797 9.0898c-1.141-1.5676-1.8203-3.4939-1.8203-5.5898 0-5.263 4.237-9.5 9.5-9.5z" fill="#fff" fill-opacity=".93333" fill-rule="evenodd"/>
+ </g>
+</svg>

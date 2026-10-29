@@ -115,8 +115,9 @@ set( SOURCES
 
 # Qt resource files
 set( QRC_FILES
-     icons.qrc     # Compiled-in resources: icons
-     artwork.qrc ) # Compiled-in resources: artwork
+     icons.qrc          # Compiled-in resources: icons
+     pattern-icons.qrc  # Compiled-in resources: pattern icons
+     artwork.qrc )      # Compiled-in resources: artwork
 
 #
 # .ui widget forms generated with Qt designer (designer-qt6) or Qt Creator

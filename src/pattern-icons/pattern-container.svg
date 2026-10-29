@@ -1,0 +1,18 @@
+<svg version="1" viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(.037551 0 0 .037551 2.5 2)">
+  <rect x="13.315" y="26.63" width="692.39" height="692.39" ry="0" fill="#a51d2d"/>
+  <rect x="13.315" y="26.63" width="692.39" height="639.13" ry="0" fill="#e01b24"/>
+  <rect x="66.576" y="53.261" width="53.261" height="559.24" ry="0" fill="#a51d2d"/>
+  <rect x="66.576" y="79.891" width="53.261" height="559.24" ry="0" fill="#c01c28"/>
+  <rect x="173.1" y="53.261" width="53.261" height="559.24" ry="0" fill="#a51d2d"/>
+  <rect x="173.1" y="79.891" width="53.261" height="559.24" ry="0" fill="#c01c28"/>
+  <rect x="279.62" y="53.261" width="53.261" height="559.24" ry="0" fill="#a51d2d"/>
+  <rect x="279.62" y="79.891" width="53.261" height="559.24" ry="0" fill="#c01c28"/>
+  <rect x="386.14" y="53.261" width="53.261" height="559.24" ry="0" fill="#a51d2d"/>
+  <rect x="386.14" y="79.891" width="53.261" height="559.24" ry="0" fill="#c01c28"/>
+  <rect x="492.66" y="53.261" width="53.261" height="559.24" ry="7.3589e-5" fill="#a51d2d"/>
+  <rect x="492.66" y="79.891" width="53.261" height="559.24" ry="6.5472e-5" fill="#c01c28"/>
+  <rect x="599.18" y="53.261" width="53.261" height="559.24" ry="0" fill="#a51d2d"/>
+  <rect x="599.18" y="79.891" width="53.261" height="559.24" ry="6.5472e-5" fill="#c01c28"/>
+ </g>
+</svg>

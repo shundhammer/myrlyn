@@ -1,0 +1,101 @@
+<svg version="1.1" viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="a" x1="2" x2="30" y1="27" y2="27" gradientTransform="translate(0,-1)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#5e5c64" offset="0"/>
+   <stop stop-color="#9a9996" offset=".035714"/>
+   <stop stop-color="#5e5c64" offset=".071429"/>
+   <stop stop-color="#5e5c64" offset=".92857"/>
+   <stop stop-color="#9a9996" offset=".96429"/>
+   <stop stop-color="#5e5c64" offset="1"/>
+  </linearGradient>
+  <linearGradient id="d" x1="2" x2="30" y1="21" y2="21" gradientUnits="userSpaceOnUse" xlink:href="#a"/>
+  <linearGradient id="c" x1="2" x2="30" y1="15" y2="15" gradientUnits="userSpaceOnUse" xlink:href="#a"/>
+  <linearGradient id="b" x1="2" x2="30" y1="9" y2="9" gradientUnits="userSpaceOnUse" xlink:href="#a"/>
+ </defs>
+ <g>
+  <rect x="2" y="6" width="28" height="6" ry="1" fill="url(#b)"/>
+  <rect x="2" y="12" width="28" height="6" ry="1" fill="url(#c)"/>
+  <rect x="2" y="18" width="28" height="6" ry="1.0587" fill="url(#d)"/>
+ </g>
+ <rect x="2" y="23" width="28" height="5" ry="1" fill="url(#a)"/>
+ <g fill="#9a9996">
+  <rect x="2" y="3" width="28" height="5" ry="1"/>
+  <rect x="2" y="9" width="28" height="5" ry="1"/>
+  <rect x="2" y="15" width="28" height="5" ry="1"/>
+  <rect x="2" y="21" width="28" height="5" ry="1"/>
+ </g>
+ <rect x="14" y="4" width="15" height="3" ry="0" fill="#3d3846"/>
+ <rect x="14" y="5" width="15" height="2" ry="0" fill="#5e5c64"/>
+ <rect x="14" y="10" width="15" height="3" ry="0" fill="#3d3846"/>
+ <rect x="14" y="11" width="15" height="2" ry="0" fill="#5e5c64"/>
+ <rect x="14" y="16" width="15" height="3" ry="0" fill="#3d3846"/>
+ <rect x="14" y="17" width="15" height="2" ry="0" fill="#5e5c64"/>
+ <rect x="14" y="22" width="15" height="3" ry="0" fill="#3d3846"/>
+ <rect x="14" y="23" width="15" height="2" ry="0" fill="#5e5c64"/>
+ <rect x="4" y="5" width="1" height="1" ry=".5" fill="#f6d32d"/>
+ <rect x="6" y="5" width="1" height="1" ry=".5" fill="#33d17a"/>
+ <rect x="4" y="11" width="1" height="1" ry=".5" fill="#33d17a"/>
+ <rect x="6" y="11" width="1" height="1" ry=".5" fill="#e01b24"/>
+ <rect x="4" y="17" width="1" height="1" ry=".5" fill="#e01b24"/>
+ <rect x="6" y="17" width="1" height="1" ry=".5" fill="#f6d32d"/>
+ <rect x="4" y="23" width="1" height="1" ry=".5" fill="#f6d32d"/>
+ <rect x="6" y="23" width="1" height="1" ry=".5" fill="#33d17a"/>
+ <rect x="15" y="11" width="1" height="2" fill="#3d3846"/>
+ <rect x="15" y="10" width="1" height="1" fill="#241f31"/>
+ <rect x="17" y="11" width="1" height="2" fill="#3d3846"/>
+ <rect x="17" y="10" width="1" height="1" fill="#241f31"/>
+ <rect x="19" y="11" width="1" height="2" fill="#3d3846"/>
+ <rect x="19" y="10" width="1" height="1" fill="#241f31"/>
+ <rect x="21" y="11" width="1" height="2" fill="#3d3846"/>
+ <rect x="21" y="10" width="1" height="1" fill="#241f31"/>
+ <rect x="23" y="11" width="1" height="2" fill="#3d3846"/>
+ <rect x="23" y="10" width="1" height="1" fill="#241f31"/>
+ <rect x="25" y="11" width="1" height="2" fill="#3d3846"/>
+ <rect x="25" y="10" width="1" height="1" fill="#241f31"/>
+ <rect x="27" y="11" width="1" height="2" fill="#3d3846"/>
+ <rect x="27" y="10" width="1" height="1" fill="#241f31"/>
+ <rect x="15" y="5" width="1" height="2" fill="#3d3846"/>
+ <rect x="15" y="4" width="1" height="1" fill="#241f31"/>
+ <rect x="17" y="5" width="1" height="2" fill="#3d3846"/>
+ <rect x="17" y="4" width="1" height="1" fill="#241f31"/>
+ <rect x="19" y="5" width="1" height="2" fill="#3d3846"/>
+ <rect x="19" y="4" width="1" height="1" fill="#241f31"/>
+ <rect x="21" y="5" width="1" height="2" fill="#3d3846"/>
+ <rect x="21" y="4" width="1" height="1" fill="#241f31"/>
+ <rect x="23" y="5" width="1" height="2" fill="#3d3846"/>
+ <rect x="23" y="4" width="1" height="1" fill="#241f31"/>
+ <rect x="25" y="5" width="1" height="2" fill="#3d3846"/>
+ <rect x="25" y="4" width="1" height="1" fill="#241f31"/>
+ <rect x="27" y="5" width="1" height="2" fill="#3d3846"/>
+ <rect x="27" y="4" width="1" height="1" fill="#241f31"/>
+ <rect x="15" y="17" width="1" height="2" fill="#3d3846"/>
+ <rect x="15" y="16" width="1" height="1" fill="#241f31"/>
+ <rect x="17" y="17" width="1" height="2" fill="#3d3846"/>
+ <rect x="17" y="16" width="1" height="1" fill="#241f31"/>
+ <rect x="19" y="17" width="1" height="2" fill="#3d3846"/>
+ <rect x="19" y="16" width="1" height="1" fill="#241f31"/>
+ <rect x="21" y="17" width="1" height="2" fill="#3d3846"/>
+ <rect x="21" y="16" width="1" height="1" fill="#241f31"/>
+ <rect x="23" y="17" width="1" height="2" fill="#3d3846"/>
+ <rect x="23" y="16" width="1" height="1" fill="#241f31"/>
+ <rect x="25" y="17" width="1" height="2" fill="#3d3846"/>
+ <rect x="25" y="16" width="1" height="1" fill="#241f31"/>
+ <rect x="27" y="17" width="1" height="2" fill="#3d3846"/>
+ <rect x="27" y="16" width="1" height="1" fill="#241f31"/>
+ <rect x="15" y="23" width="1" height="2" fill="#3d3846"/>
+ <rect x="15" y="22" width="1" height="1" fill="#241f31"/>
+ <rect x="17" y="23" width="1" height="2" fill="#3d3846"/>
+ <rect x="17" y="22" width="1" height="1" fill="#241f31"/>
+ <rect x="19" y="23" width="1" height="2" fill="#3d3846"/>
+ <rect x="19" y="22" width="1" height="1" fill="#241f31"/>
+ <rect x="21" y="23" width="1" height="2" fill="#3d3846"/>
+ <rect x="21" y="22" width="1" height="1" fill="#241f31"/>
+ <rect x="23" y="23" width="1" height="2" fill="#3d3846"/>
+ <rect x="23" y="22" width="1" height="1" fill="#241f31"/>
+ <rect x="25" y="23" width="1" height="2" fill="#3d3846"/>
+ <rect x="25" y="22" width="1" height="1" fill="#241f31"/>
+ <rect x="27" y="23" width="1" height="2" fill="#3d3846"/>
+ <rect x="27" y="22" width="1" height="1" fill="#241f31"/>
+ <rect x="16" y="16" width="16" height="16" ry="1" fill="#f6f5f4"/>
+ <path d="m23 17-0.77734 2.332c-0.09023 0.03387-0.17946 0.07034-0.26758 0.10938l-2.1973-1.0977-1.4141 1.4141 1.0996 2.1992c-0.04097 0.08741-0.07939 0.17599-0.11523 0.26562l-2.3281 0.77734v2l2.332 0.77734c0.03387 0.09023 0.07034 0.17946 0.10938 0.26758l-1.0977 2.1973 1.4141 1.4141 2.1992-1.0996c0.08741 0.04097 0.17599 0.0794 0.26562 0.11523l0.77734 2.3281h2l0.77734-2.332c0.09023-0.03387 0.17946-0.07034 0.26758-0.10938l2.1973 1.0977 1.4141-1.4141-1.0996-2.1992c0.04097-0.08741 0.0794-0.17599 0.11523-0.26562l2.3281-0.77734v-2l-2.332-0.77734c-0.03387-0.09023-0.07034-0.17946-0.10938-0.26758l1.0977-2.1973-1.4141-1.4141-2.1992 1.0996c-0.08741-0.04097-0.17599-0.0794-0.26562-0.11523l-0.77734-2.3281zm1 4c1.6569 0 3 1.3431 3 3s-1.3431 3-3 3-3-1.3431-3-3 1.3431-3 3-3z" fill="#3d3846"/>
+</svg>

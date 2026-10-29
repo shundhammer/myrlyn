@@ -1,0 +1,33 @@
+<svg version="1.1" viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="a">
+   <stop stop-color="#deddda" offset="0"/>
+   <stop stop-color="#f6f5f4" offset="1"/>
+  </linearGradient>
+  <linearGradient id="e" x1="6.9987" x2="20.001" y1="17.5" y2="17.5" gradientTransform="translate(-1)" gradientUnits="userSpaceOnUse" xlink:href="#a"/>
+  <linearGradient id="c" x1="6.9987" x2="20.001" y1="17.5" y2="17.5" gradientTransform="translate(-1 .16211)" gradientUnits="userSpaceOnUse" xlink:href="#a"/>
+  <linearGradient id="d" x1="6.9987" x2="20.001" y1="17.5" y2="17.5" gradientTransform="translate(7,-2)" gradientUnits="userSpaceOnUse" xlink:href="#a"/>
+  <linearGradient id="b" x1="6.9987" x2="20.001" y1="17.5" y2="17.5" gradientTransform="translate(7 -1.8379)" gradientUnits="userSpaceOnUse" xlink:href="#a"/>
+ </defs>
+ <g>
+  <path d="m17 6.1621c-0.55226 5.5e-5 -0.99994 0.44774-1 1v1c5.5e-5 0.55226 0.44774 0.99994 1 1v5.8379l-2.9492 8.8457c-0.21596 0.64779 0.26638 1.3167 0.94922 1.3164h11c0.68284 3.12e-4 1.1652-0.66862 0.94922-1.3164l-2.9492-8.8457v-5.8379c0.55226-5.5e-5 0.99994-0.44774 1-1v-1c-5.5e-5 -0.55226-0.44774-0.99994-1-1z" fill="url(#b)" stroke="#deddda" stroke-width="2"/>
+  <path d="m17 6c-0.55226 5.5e-5 -0.99994 0.44774-1 1v1c5.5e-5 0.55226 0.44774 0.99994 1 1v5.8379l-2.9492 8.8457c-0.21596 0.64779 0.26638 1.3167 0.94922 1.3164h11c0.68284 3.12e-4 1.1652-0.66862 0.94922-1.3164l-2.9492-8.8457v-5.8379c0.55226-5.5e-5 0.99994-0.44774 1-1v-1c-5.5e-5 -0.55226-0.44774-0.99994-1-1z" fill="url(#d)"/>
+  <path d="m17 12v2.8379l-2.9492 8.8457c-0.21596 0.64779 0.26638 1.3167 0.94922 1.3164h11c0.68284 3.12e-4 1.1652-0.66862 0.94922-1.3164l-2.9492-8.8457v-2.8379z" fill="#3584e4"/>
+  <path d="m21 15a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1z" fill="#1c71d8"/>
+ </g>
+ <path d="m25 22a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1z" fill="#98c1f1" fill-opacity=".94737"/>
+ <g>
+  <path d="m9 8.1621c-0.55226 5.52e-5 -0.99994 0.44774-1 1v1c5.5e-5 0.55226 0.44774 0.99994 1 1v5.8379l-2.9492 8.8457c-0.21596 0.64779 0.26638 1.3167 0.94922 1.3164h11c0.68284 3.12e-4 1.1652-0.66862 0.94922-1.3164l-2.9492-8.8457v-5.8379c0.55226-5.5e-5 0.99994-0.44774 1-1v-1c-5.5e-5 -0.55226-0.44774-0.99994-1-1z" fill="url(#c)" stroke="#deddda" stroke-width="2"/>
+  <path d="m9 8c-0.55226 5.52e-5 -0.99994 0.44774-1 1v1c5.52e-5 0.55226 0.44774 0.99994 1 1v5.8379l-2.9492 8.8457c-0.21596 0.64779 0.26638 1.3167 0.94922 1.3164h11c0.68284 3.12e-4 1.1652-0.66862 0.94922-1.3164l-2.9492-8.8457v-5.8379c0.55226-5.5e-5 0.99994-0.44774 1-1v-1c-5.5e-5 -0.55226-0.44774-0.99994-1-1z" fill="url(#e)"/>
+  <path d="m9 14v2.8379l-2.9492 8.8457c-0.21596 0.64779 0.26638 1.3167 0.94922 1.3164h11c0.68284 3.12e-4 1.1652-0.66862 0.94922-1.3164l-2.9492-8.8457v-2.8379z" fill="#33d17a"/>
+  <path d="m17 24a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1z" fill="#57e389"/>
+ </g>
+ <g fill-opacity=".94737">
+  <circle cx="11" cy="23" r="1" fill="#2ec27e"/>
+  <circle cx="14" cy="20" r="1" fill="#26a269" opacity=".7"/>
+  <circle cx="11" cy="14" r="2" fill="#33d17a" opacity=".7"/>
+  <circle cx="11" cy="16" r="1" fill="#57e389" opacity=".7"/>
+  <circle cx="13" cy="14" r="1" fill="#33d17a" opacity=".7"/>
+  <circle cx="21" cy="12" r="1" fill="#3584e4" opacity=".7"/>
+ </g>
+</svg>

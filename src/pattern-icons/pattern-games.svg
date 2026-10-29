@@ -1,0 +1,33 @@
+<svg version="1.1" viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="c" x1="16" x2="16" y1="9" y2="26" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#9a9996" offset="0"/>
+   <stop stop-color="#c0bfbc" offset="1"/>
+  </linearGradient>
+  <linearGradient id="d" x1="2" x2="30" y1="17.5" y2="17.5" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#77767b" offset="0"/>
+   <stop stop-color="#77767b" offset=".071429"/>
+   <stop stop-color="#9a9996" offset=".32143"/>
+   <stop stop-color="#77767b" offset=".42857"/>
+   <stop stop-color="#77767b" offset=".60714"/>
+   <stop stop-color="#9a9996" offset=".75"/>
+   <stop stop-color="#77767b" offset=".92857"/>
+   <stop stop-color="#77767b" offset="1"/>
+  </linearGradient>
+ </defs>
+ <path d="m9 8c-3.5 0-7 5-7 13 0 4 2 6 3 6 3 0 5-6 11-6s8 6 11 6c1 0 3-2 3-6 0-8-3.5-13-7-13-3 0-5 2-7 2s-4-2-7-2z" fill="url(#d)"/>
+ <path d="m9 7c-3.5 0-7 5-7 13 0 4 2 6 3 6 3 0 5-6 11-6s8 6 11 6c1 0 3-2 3-6 0-8-3.5-13-7-13-3 0-5 2-7 2s-4-2-7-2z" fill="url(#c)"/>
+ <path d="m18.5 11a0.5 0.5 0 0 0-0.5 0.5 0.5 0.5 0 0 0 0.5 0.5 0.5 0.5 0 0 0 0.5-0.5 0.5 0.5 0 0 0-0.5-0.5z" fill="#f6f5f4"/>
+ <circle cx="13.5" cy="11.5" r=".5" fill="#f6f5f4"/>
+ <circle cx="24" cy="13" r="1" fill="#e01b24"/>
+ <path d="m26 10a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1z" fill="#f6d32d"/>
+ <path d="m22 10a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1z" fill="#33d17a"/>
+ <path d="m24 8a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1z" fill="#0bbaf4"/>
+ <path d="m20 14a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2z" fill="#241f31"/>
+ <path d="m20 13a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2z" fill="#5e5c64"/>
+ <circle cx="16" cy="12" r="1" fill="#241f31"/>
+ <path d="m12 14a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2z" fill="#241f31"/>
+ <path d="m12 13a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2z" fill="#5e5c64"/>
+ <path d="m9 9a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2z" fill="#241f31"/>
+ <path d="m9 8a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2z" fill="#5e5c64"/>
+</svg>
