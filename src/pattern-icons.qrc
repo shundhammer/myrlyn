@@ -1,10 +1,19 @@
+<?xml version="1.0"?>
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource>
+    <file alias="package_edutainment">pattern-icons/package_edutainment.svg</file>
+    <file alias="package_games">pattern-icons/package_games.svg</file>
+    <file alias="package_graphics">pattern-icons/package_graphics.svg</file>
+    <file alias="package_internet_webbrowser">pattern-icons/package_internet_webbrowser.svg</file>
+    <file alias="package_multimedia">pattern-icons/package_multimedia.svg</file>
+    <file alias="package_network">pattern-icons/package_network.svg</file>
+    <file alias="package_utilities">pattern-icons/package_utilities.svg</file>
+    <file alias="package_wordprocessing">pattern-icons/package_wordprocessing.svg</file>
     <file alias="pattern-apparmor">pattern-icons/pattern-apparmor.svg</file>
+    <file alias="pattern-basis">pattern-icons/pattern-basis.svg</file>
     <file alias="pattern-basis-addon">pattern-icons/pattern-basis-addon.svg</file>
     <file alias="pattern-basis-devel">pattern-icons/pattern-basis-devel.svg</file>
-    <file alias="pattern-basis">pattern-icons/pattern-basis.svg</file>
     <file alias="pattern-budgie">pattern-icons/pattern-budgie.svg</file>
     <file alias="pattern-c-devel">pattern-icons/pattern-c-devel.svg</file>
     <file alias="pattern-cinnamon">pattern-icons/pattern-cinnamon.svg</file>
@@ -17,15 +26,15 @@
     <file alias="pattern-enlightenment">pattern-icons/pattern-enlightenment.svg</file>
     <file alias="pattern-games">pattern-icons/pattern-games.svg</file>
     <file alias="pattern-generic">pattern-icons/pattern-generic.svg</file>
-    <file alias="pattern-gnome-devel">pattern-icons/pattern-gnome-devel.svg</file>
     <file alias="pattern-gnome">pattern-icons/pattern-gnome.svg</file>
+    <file alias="pattern-gnome-devel">pattern-icons/pattern-gnome-devel.svg</file>
     <file alias="pattern-gnome-wayland">pattern-icons/pattern-gnome-wayland.svg</file>
     <file alias="pattern-gnome-xorg">pattern-icons/pattern-gnome-xorg.svg</file>
     <file alias="pattern-java-devel">pattern-icons/pattern-java-devel.svg</file>
+    <file alias="pattern-kde">pattern-icons/pattern-kde.svg</file>
     <file alias="pattern-kde-addon">pattern-icons/pattern-kde-addon.svg</file>
     <file alias="pattern-kde-devel">pattern-icons/pattern-kde-devel.svg</file>
     <file alias="pattern-kde-pim">pattern-icons/pattern-kde-pim.svg</file>
-    <file alias="pattern-kde">pattern-icons/pattern-kde.svg</file>
     <file alias="pattern-kernel-devel">pattern-icons/pattern-kernel-devel.svg</file>
     <file alias="pattern-kubic">pattern-icons/pattern-kubic.svg</file>
     <file alias="pattern-laptop">pattern-icons/pattern-laptop.svg</file>
@@ -42,10 +51,11 @@
     <file alias="pattern-qt-devel">pattern-icons/pattern-qt-devel.svg</file>
     <file alias="pattern-rpm-devel">pattern-icons/pattern-rpm-devel.svg</file>
     <file alias="pattern-ruby-devel">pattern-icons/pattern-ruby-devel.svg</file>
+    <file alias="pattern-selinux">pattern-icons/pattern-selinux.svg</file>
     <file alias="pattern-server">pattern-icons/pattern-server.svg</file>
     <file alias="pattern-software-management">pattern-icons/pattern-software-management.svg</file>
-    <file alias="pattern-sway-openSUSE">pattern-icons/pattern-sway-openSUSE.svg</file>
     <file alias="pattern-sway">pattern-icons/pattern-sway.svg</file>
+    <file alias="pattern-sway-openSUSE">pattern-icons/pattern-sway-openSUSE.svg</file>
     <file alias="pattern-tcltk-devel">pattern-icons/pattern-tcltk-devel.svg</file>
     <file alias="pattern-technical-writing">pattern-icons/pattern-technical-writing.svg</file>
     <file alias="pattern-tests">pattern-icons/pattern-tests.svg</file>
@@ -53,6 +63,5 @@
     <file alias="pattern-web-devel">pattern-icons/pattern-web-devel.svg</file>
     <file alias="pattern-x11">pattern-icons/pattern-x11.svg</file>
     <file alias="pattern-xfce">pattern-icons/pattern-xfce.svg</file>
-    <file alias="pattern-yast-devel">pattern-icons/pattern-yast-devel.svg</file>
   </qresource>
 </RCC>
