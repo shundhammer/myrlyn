@@ -41,6 +41,7 @@ void SysUtil::openInBrowser( const QString & url )
     process.setProgram( OPEN_CMD );
     process.setArguments( QStringList() << url );
     process.setProcessEnvironment( env );
+    process.setStandardOutputFile( QProcess::nullDevice() );
 
     logDebug() << "Opening URL " << url << endl;
     process.startDetached();
