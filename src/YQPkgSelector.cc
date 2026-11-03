@@ -903,17 +903,25 @@ YQPkgSelector::addMenus()
     // Note: The help functions and their texts are moved out
     // to a separate source file YQPkgSelHelp.cc
 
-    if ( SysUtil::canOpenInBrowser() )
-        helpMenu->addAction( _( "&Overview" ), this, SLOT( help()    ) );
-
     helpMenu->addAction( _( "About &Myrlyn" ), this, SLOT( about()   ) );
     helpMenu->addAction( _( "About &Qt"     ), qApp, SLOT( aboutQt() ) );
 
     if ( SysUtil::canOpenInBrowser() )
     {
+        helpMenu->addAction( _( "Myrlyn Home &Page" ), this, SLOT( myrlynHomePage()    ) );
         helpMenu->addSeparator();
-        helpMenu->addAction( _( "Rep&ository Configuration" ), this, SLOT( helpRepoConfig()        ) );
+        helpMenu->addAction( _( "&Help Center"              ), this, SLOT( helpCenter()            ) );
+
+        QMenu * subMenu = helpMenu->addMenu( _( "Customization FAQs" ) );
+
+        subMenu->addAction( _( "Font Si&ze"                ), this, SLOT( helpFontSize()          ) );
+        subMenu->addAction( _( "&GUI Scaling (HiDPI)"      ), this, SLOT( helpGuiScaling()        ) );
+        subMenu->addAction( _( "&Dark Theme"               ), this, SLOT( helpDarkTheme()         ) );
+
         helpMenu->addAction( _( "Root &Authentication"      ), this, SLOT( helpRootAuth()          ) );
+        helpMenu->addAction( _( "Rep&ository Configuration" ), this, SLOT( helpRepoConfig()        ) );
+
+        helpMenu->addSeparator();
         helpMenu->addAction( _( "&Development Status"       ), this, SLOT( helpDevelopmentStatus() ) );
         helpMenu->addAction( _( "&Latest Release"           ), this, SLOT( helpLatestRelease()     ) );
     }

@@ -22,12 +22,51 @@
 #include "SysUtil.h"
 #include "YQPkgSelector.h"
 
+
+#define DEBUG_HELP 1
+
+#ifdef DEBUG_HELP
+#  define HELP_BASE "https://github.com/shundhammer/myrlyn/blob/huha-help/help/"
+#else
+#  define HELP_BASE "https://github.com/shundhammer/myrlyn/blob/master/help/"
+#endif
+
 using SysUtil::openInBrowser;
 
 
-void YQPkgSelector::help() const
+void YQPkgSelector::myrlynHomePage() const
 {
-    openInBrowser( "https://github.com/shundhammer/myrlyn/blob/master/README.md" );
+    openInBrowser( "https://github.com/shundhammer/myrlyn/" );
+}
+
+
+void YQPkgSelector::helpLatestRelease() const
+{
+    openInBrowser( "https://github.com/shundhammer/myrlyn/releases" );
+}
+
+
+void YQPkgSelector::helpCenter() const
+{
+    openInBrowser( HELP_BASE "help-center.md" );
+}
+
+
+void YQPkgSelector::helpFontSize() const
+{
+    openInBrowser( HELP_BASE "font-size.md" );
+}
+
+
+void YQPkgSelector::helpGuiScaling() const
+{
+    openInBrowser( HELP_BASE "gui-scaling.md" );
+}
+
+
+void YQPkgSelector::helpDarkTheme() const
+{
+    openInBrowser( HELP_BASE "dark-theme.md" );
 }
 
 
@@ -46,12 +85,6 @@ void YQPkgSelector::helpRootAuth() const
 void YQPkgSelector::helpDevelopmentStatus() const
 {
     openInBrowser( "https://github.com/shundhammer/myrlyn/issues/1" );
-}
-
-
-void YQPkgSelector::helpLatestRelease() const
-{
-    openInBrowser( "https://github.com/shundhammer/myrlyn/releases" );
 }
 
 

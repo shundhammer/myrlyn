@@ -188,17 +188,25 @@ public slots:
      **/
     void pkgAllowVendorChangeChanged( bool on );
 
+
     /**
      * Display online help.
      * This opens the project's home page in an external web browser.
      **/
-    void help() const;
+    void helpCenter() const;
 
     // Help topics
     // They all open in an external web browser.
+
+    void helpFontSize()          const;
+    void helpGuiScaling()        const;
+    void helpDarkTheme()         const;
+
     void helpRepoConfig()        const;
     void helpRootAuth()          const;
     void helpDevelopmentStatus() const;
+
+    void myrlynHomePage()        const;
     void helpLatestRelease()     const;
 
     /**
