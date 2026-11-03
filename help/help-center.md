@@ -15,7 +15,7 @@ _[↗ Go to topic](permissions.md)_
   - Limitations
 
 
-### How to get root privileges
+### How to Get Root Privileges
 
 - sudo / myrlyn-sudo
 - kdesu / gnomesu
@@ -24,7 +24,7 @@ _[↗ Go to topic](permissions.md)_
 - run0 / myrlyn-run0
 
 
-### How to configure my normal user account to use sudo
+### How to Configure my Normal User Account to Use sudo
 
 - Needed packages
 - Adding my user account to the wheel group
@@ -37,7 +37,7 @@ _[↗ Go to topic](permissions.md)_
 
 _[↗ Go to topic](customization.md)_
 
-### Changing desktop settings for the root user
+### Changing Desktop Settings for the Root User
 
 - Why do I need that?
 - No root password set?
@@ -45,13 +45,17 @@ _[↗ Go to topic](customization.md)_
 - Using qt6ct
   - Setting QT_QPA_PLATFORMTHEME
   - Using myrlyn-sudo.conf
+- Checking the log
 
 
 ### Customization FAQs
 
-- Font size
-- GUI scaling
-- Dark theme
+- [↗ Font size](font-size.md)
+
+- [↗ GUI scaling](gui-scaling.md)
+
+- [↗ Dark theme](dark-theme.md)
+
 
 -------------------------
 
@@ -62,7 +66,7 @@ _[↗ Go to topic](customization.md)_
 - Excluding third-party repos from dup / up
 
 
-## Package search
+## Package Search
 
 - Search modes
 - Auto search mode
