@@ -24,6 +24,7 @@
 #include <QLayout>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QRegularExpression>
 #include <QSettings>
 
 #include <zypp/PoolQuery.h>
@@ -365,7 +366,7 @@ YQPkgSearchFilterView::filterInternal()
 
                 case SearchFilter::StartsWith:
                     query.setMatchRegex();
-                    searchPattern = "^" + searchPattern;
+                    searchPattern = "^" + toUTF8( QRegularExpression::escape( searchFilter.pattern() ) );
                     break;
 
                 case SearchFilter::ExactMatch:
