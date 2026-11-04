@@ -2,6 +2,8 @@
 
 _Up: [↗ Help Center](help-center.md)_
 
+<img height="200" src="https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-01-init-repos.png"> &nbsp;&nbsp;&nbsp; <img height="200" src="https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-01-init-repos-dark.png">
+
 -------------------------
 
 

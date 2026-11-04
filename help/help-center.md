@@ -2,7 +2,7 @@
 
 This is the landing page for help topics around the Myrlyn package manager GUI.
 
-[<img height="150" src="https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg">](https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg)
+<img height="150" src="https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg">
 
 
 ## Permissions and Privileges
@@ -20,10 +20,9 @@ _[↗ Go to topic](permissions.md)_
 ### How to Get Root Privileges
 
 - sudo / myrlyn-sudo
+  - sudo -E
+  - Help menu entries / dropping privileges
 - kdesu / gnomesu
-- Plain su
-  - Permissions for the X11 or Wayland display
-- run0 / myrlyn-run0
 
 
 ### How to Configure my Normal User Account to Use sudo
