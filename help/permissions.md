@@ -26,7 +26,7 @@ will change the system:
 
 You can use Myrlyn as a normal user without _root_ user privileges, but only in
 a _read-only_ mode, i.e. without being able to change anything. This is not as
-pointless as it may sound: You can explore and experiment.
+pointless as it may sound: You can still explore and experiment.
 
 
 ### Exploring Packages
@@ -53,8 +53,9 @@ the active repositories. To name just a few:
 ### Experimenting Without Danger
 
 You can even mark packages for installation, update or removal and see what
-that would mean: The package dependencies will be resolved, you will see any
-dependency problems, and you can choose solutions for them.
+that would mean (of course you can't actually execute those changes): The
+package dependencies will be resolved, you will see any dependency problems,
+and you can choose solutions for them.
 
 You can see what it would mean to remove packages that a whole lot of other
 packages depend on; you can choose even radical destructive solutions of the
@@ -72,9 +73,9 @@ one.
 
 ### Limitations
 
-In read-only, you cannot actually change anything on your system: The "Accept"
-button is disabled. You can look, you can touch, but you cannot perform any
-changes.
+In read-only mode, you cannot actually change anything on your system: The
+"Accept" button is disabled. You can look, you can touch, but you cannot
+perform any changes.
 
 Likewise, when starting Myrlyn in _read-only_ mode (as a non-privileged user),
 the active repos are loaded, but not refreshed; because refreshing would
@@ -82,7 +83,7 @@ already mean changing the system (libzypp's package metadata cache).
 
 Another annoying, but sadly real life limitation is that you also cannot view
 the zypp history: Its parent directory has very restrictive permissions
-(see [issue #136](https://github.com/shundhammer/myrlyn/issues/136).
+(see [issue #136](https://github.com/shundhammer/myrlyn/issues/136)).
 
 
 
@@ -212,7 +213,7 @@ If not:
 sh@meteor:~> sudo usermod -aG wheel $USER
 ```
 
-Important: You will need to enter the _root_ password here onle last time
+Important: You will need to enter the _root_ password here one last time
 (until you are a member of the _wheel_ group).
 
 Also notice `-aG wheel` to _add_ the _wheel_ group.
@@ -223,11 +224,11 @@ lose access to your other groups like _video_, _cdrom_, _audio_ and more.
 
 #### Root Password or my Normal User Account's Password?
 
-`sudo-policy-wheel-auth-self` This is the package with the `sudo` rule that
-members of the _wheel_ group need to enter their own password.
+`sudo-policy-wheel-auth-self` is the package with the `sudo` rule that members
+of the _wheel_ group need to enter their own password.
 
 If you don't like that, and you would prefer to always enter the _root_
-password for `sudo`, don't install / remove this package.
+password for `sudo`, don't install this package or remove it.
 
 
 ## Further Reading
