@@ -125,8 +125,8 @@ See also [↗ Customization](customization.md).
 #### sudo -E
 
 If `myrlyn-sudo` does not work for you, try `sudo -E myrlyn`. The `-E`
-parameter argument keeps _all_ environment variables; but your `sudo`
-configuration might prohibit this (in rare extreme cases).
+parameter keeps _all_ environment variables; but your `sudo` configuration
+might prohibit this (in rare extreme cases).
 
 
 #### Help Menu Entries / Dropping Privileges
