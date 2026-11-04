@@ -181,7 +181,7 @@ https://github.com/shundhammer/myrlyn/blob/master/help/help-center.md
 ```
 
 
-## How to Configure my Normal User Account to Use sudo
+## How to Configure Your Normal User Account to Use sudo
 
 The `sudo` package is installed by default on a standard openSUSE installation.
 
@@ -201,10 +201,11 @@ happened, so you may need to do it manually.
   for using your own password, not the _root_ password (see below)
 
 
-#### Adding my User Account to the Wheel Group
+#### Adding Your User Account to the Wheel Group
 
 ```console
 sh@meteor:~> groups
+users vnc nm-openvpn wheel systemd-timesync video cdrom
 ```
 If _wheel_ appears here, you are already a member of that group.
 If not:
@@ -213,22 +214,26 @@ If not:
 sh@meteor:~> sudo usermod -aG wheel $USER
 ```
 
-Important: You will need to enter the _root_ password here one last time
+**Important:** You will need to enter the _root_ password here one last time
 (until you are a member of the _wheel_ group).
 
-Also notice `-aG wheel` to _add_ the _wheel_ group.
+Also notice `-aG wheel` to _add_ the _wheel_ group.  Only `-G wheel` would make
+the _wheel_ group your only (!) group, and you would lose access to your other
+groups like _video_, _cdrom_, _audio_ and more.
 
-Only `-G wheel` would make the _wheel_ group your only (!) group, and you would
-lose access to your other groups like _video_, _cdrom_, _audio_ and more.
 
-
-#### Root Password or my Normal User Account's Password?
+#### Root Password or Your Normal User Account's Password?
 
 `sudo-policy-wheel-auth-self` is the package with the `sudo` rule that members
 of the _wheel_ group need to enter their own password.
 
 If you don't like that, and you would prefer to always enter the _root_
-password for `sudo`, don't install this package or remove it.
+password for `sudo`, don't install this package or, if it's already installed,
+remove it:
+
+```console
+sh@meteor:~> sudo zypper rm sudo-policy-wheel-auth-self
+```
 
 
 ## Further Reading

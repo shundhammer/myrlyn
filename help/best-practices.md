@@ -29,7 +29,7 @@ an update of the NVidia drivers; check carefully if the versions match (use the
 "Versions" tab) and accept the changes when you are very, very sure that you
 won't be greeted by a black screen after the next reboot.
 
-But in general, work in quick sprints, not in a long marathon.
+But in general, work in short sprints, not in a long marathon.
 
 
 ### Updates
@@ -63,7 +63,7 @@ Myrlyn is quick to start. Use it to your advantage.
 This is one more reason not to spend an hour or more on a carefully
 hand-crafted package selection: It would hurt to lose all those changes. So try
 to work in a way where that simply doesn't matter: Don't accumulate so many
-changes in the first place. Work in quick sprints, not in a long marathon.
+changes in the first place. Work in short sprints, not in a long marathon.
 
 
 

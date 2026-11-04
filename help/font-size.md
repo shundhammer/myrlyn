@@ -14,15 +14,20 @@ that you have to set the fonts for the root user account.
 
 The easy and recommended way is to log in as as root in the graphical login
 manager with the same session type (KDE Plasma, GNOME, Xfce, ...) that you use
-as a normal (non-privileged) user, set the font family and size and then log
+as a normal (non-privileged) user, set the font family and size, and then log
 out again.
 
 If that does not work for any reason, try running `qt6ct` as root and set the
 font family and size there.
 
-Don't forget to set `export QT_QPA_PLATFORMTHEME=qt6ct` in your normal user's
-`~/.config/openSUSE/myrlyn-sudo.conf` (if you use `myrlyn-sudo) or, if that
-fails, in `/root/.bashrc`.
+Don't forget to add
+
+```
+export QT_QPA_PLATFORMTHEME=qt6ct
+ ```
+
+ to your (normal user's!)  `~/.config/openSUSE/myrlyn-sudo.conf` (if you use
+`myrlyn-sudo) or to `/root/.bashrc`.
 
 For more details about both methods, see [↗ Customization](customization.md).
 

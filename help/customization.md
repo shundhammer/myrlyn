@@ -45,8 +45,8 @@ Notice that the default sudo password for Leap 16.0 is **your normal user's pass
 
 If you wish to delete the root password again:
 
-```
-sudo passwd -d root
+```console
+sh@meteor:~> sudo passwd -d root
 ```
 
 
@@ -72,26 +72,31 @@ Qt's `qt6ct` utility to do some GUI settings.
 
 Make sure that package `qt6ct` is installed:
 
-```
-sudo zypper in qt6ct
-```
-
-Call `qt6ct` for your normal user account and also for the root user:
-
-```
-qt6ct
+```console
+sh@meteor:~> sudo zypper in qt6ct
 ```
 
-```
-sudo -E qt6ct
+Call `qt6ct` for your normal user account, change the settings to your liking,
+save the result, and then do the same for the root user.
+
+With `qt6ct`, you can set the widget style, the color scheme ("darker" and
+"dusk" are dark themes) the fonts, and some other things. Don't forget to hit
+the "OK" or "Apply" button to save the settings.
+
+For your normal user account:
+
+```console
+sh@meteor:~> qt6ct
 ```
 
-For root, you may have to temporarily grant the root user access to your normal
-user's X11 or Wayland display.
+For the root user:
 
-You can set the widget style, the color scheme ("darker" and "dusk" are dark
-themes) the fonts, and some other things. Don't forget to hit the "OK" button
-or the "Apply" button to save the settings.
+```console
+sh@meteor:~> sudo -E qt6ct
+```
+
+You may have to temporarily grant the root user access to your normal user's
+X11 or Wayland display.
 
 
 #### Setting QT_QPA_PLATFORMTHEME
@@ -103,9 +108,9 @@ also need to set the `QT_QPA_PLATFORMTHEME` environment variable to `qt6ct`:
 sh@meteor:~> export QT_QPA_PLATFORMTHEME=qt6ct
 ```
 
-You can add that to your `~/.bashrc` for use with Myrlyn without root
-privileges. But for use _with_ root privileges, you need to add it to the
-environment of the root user.
+You can add that to your shell startup files like `~/.bashrc` for use with
+Myrlyn without root privileges. But for use _with_ root privileges, you need to
+add it to the environment of the root user.
 
 You can either edit `/root/.bashrc` or, better yet, add it to your normal
 user's `~/.config/openSUSE/myrlyn-sudo.conf` file (for use with `myrlyn-sudo`,
@@ -116,18 +121,17 @@ not with `kdesu` or `sudo -E`) - see next section.
 
 You can override any of the environment variables in the `env_keep` block in
 [`myrlyn-sudo`](https://github.com/shundhammer/myrlyn/blob/huha-help/src/myrlyn-sudo)
-in the `myrlyn-sudo.conf`) file in your (normal user's!) `~/.config/openSUSE/'
-directory, including
+in your (normal user's!) `~/.config/openSUSE/myrlyn-sudo.conf` file, including
 
 - `QT_QPA_PLATFORMTHEME` (typically `qt6ct`)
 - `QT_ENABLE_HIGHDPI_SCALING` (`0` or `1`)
 - `QT_SCALE_FACTOR` (`1.0`, `1.25`, `1.5`, ...)
 
 Just use a text editor (`vi`, `emacs`, `nano`, or the one from your KDE / GNOME
-/ Xfce destkop environment) to create it as a new file and add the variables in
+/ Xfce desktop environment) to create it as a new file and add the variables in
 bash syntax.
 
-No execute permissions are needed; `myrlyn-sudo` will will read the file with
+No execute permissions are needed: `myrlyn-sudo` will will read the file with
 the bash `source` command.
 
 Example:
@@ -186,11 +190,11 @@ Notice that there are different log files for different users:
 
 # Customization FAQs
 
-- [↗ Font size](font-size.md)_
+- [↗ Font size](font-size.md)
 
-- [↗ GUI scaling](gui-scaling.md)_
+- [↗ GUI scaling](gui-scaling.md)
 
-- [↗ Dark theme](dark-theme.md)_
+- [↗ Dark theme](dark-theme.md)
 
 
 -------------------------

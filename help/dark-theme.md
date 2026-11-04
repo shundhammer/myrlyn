@@ -2,6 +2,7 @@
 
 _Up: [↗ Customization](customization.md)_
 
+<img height="200" src="https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-01-init-repos-dark.png"> &nbsp;&nbsp;&nbsp; <img height="200" src="https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-11-updates-view-dark.png">
 
 -------------------------
 
@@ -13,13 +14,24 @@ that you have to set the theme for the root user account.
 
 The easy and recommended way is to log in as as root in the graphical login
 manager with the same session type (KDE Plasma, GNOME, Xfce, ...) that you use
-as a normal (non-privileged) user, set the widget theme and then log out again.
+as a normal (non-privileged) user, set the widget theme, and then log out again.
 
-If that does not work for any reason, try running `qt6ct` as root and set one
-of the dark color schemes ("darker" or "dusk"). Don't forget to set `export
-QT_QPA_PLATFORMTHEME=qt6ct` in your normal user's
-`~/.config/openSUSE/myrlyn-sudo.conf` (if you use `myrlyn-sudo`) or, if that
-fails, in `/root/.bashrc`.
+If that does not work for any reason, try running `qt6ct` as root:
+
+```console
+sh@meteor:~> sudo -E qt6ct
+```
+
+and set one of the dark color schemes ("darker" or "dusk").
+
+Don't forget to set
+
+```
+export QT_QPA_PLATFORMTHEME=qt6ct
+```
+
+in your normal user's `~/.config/openSUSE/myrlyn-sudo.conf` (if you use
+`myrlyn-sudo`) or in `/root/.bashrc`.
 
 For more details about both methods, see [↗ Customization](customization.md).
 
@@ -36,7 +48,8 @@ sh@meteor:~> sudo grep "QT_" /tmp/myrlyn-root/myrlyn.log
 `QT_QPA_PLATFORMTHEME` will override whatever you set in root's desktop
 environment. If that is not what you want, check `/root/.bashrc` and other
 shell startup files where this might come from. If all else fails, and you are
-using `myrlyn-sudo` (which is recommended anyway), unset it in `myrlyn-sudo.conf`:
+using `myrlyn-sudo` (which is recommended anyway), unset it in
+`myrlyn-sudo.conf`:
 
 ```console
 sh@meteor:~> cat ~/.config/openSUSE/myrlyn-sudo.conf
@@ -63,7 +76,6 @@ At the time of this writing (11/2026), that would be the following packages:
   - `adwaita-qt5`
 
 This list may be incomplete. Please consult your preferred web search engine.
-
 
 
 -------------------------

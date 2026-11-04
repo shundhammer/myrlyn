@@ -6,23 +6,32 @@ _Up: [↗ Customization](customization.md)_
 -------------------------
 
 If you are using a hiDPI (4k) display, or even just a laptop with a full-HD
-(1920x1080, 1920x1200) 14", 13" or smaller display, only selecting larger fonts
-may come to its limits: You might want to scale up the entire GUI (graphical
-user interface), including icons and window subelements like borders and
-margins.
+(1920x1080, 1920x1200) display with a size of 14", 13" or smaller, only
+selecting larger fonts may come to its limits: You might want to scale up the
+entire GUI (graphical user interface), including icons and window subelements
+like borders and margins.
 
 Myrlyn uses the Qt6 libraries that have good support for this, automatically as
 well as with environment variables that you can set it in your shell startup
 files like `~/.bashrc`.
 
-By default, Qt automatically scales up when a certain DPI (dots per inch) value
-is reached, but that may not always be desired: If you are using a laptop that
-is just at the edge of Qt's automatic scaling, Myrlyn's window might lose some
-edges and look like pixel mush. In that case, you may want to set
-`export QT_ENABLE_HIGHDPI_SCALING=0`.
+By default, Qt automatically scales up the whole application when a certain DPI
+(dots per inch) value is reached, but that may not always be desired: If you
+are using a laptop that is just at the edge of Qt's automatic scaling, Myrlyn's
+window might begin to lose some fine details like thin vertical or horizontal
+lines, and the result may look like pixel mush. In that case, you may want to
+set
 
-On the flip side, you may really want some higher scale factor to make
-everything larger. In that case, set `export QT_SCALE_FACTOR=2` (or 3 or more).
+```
+export QT_ENABLE_HIGHDPI_SCALING=0
+```
+
+On the flip side, you may actually want some higher scale factor to make
+everything larger. In that case, set
+```
+export QT_SCALE_FACTOR=2
+```
+(or 3 or more).
 
 Multiples of 0.25 may also work: 1.25, 1.5, 1.75, 2.0, 2.25, ...
 

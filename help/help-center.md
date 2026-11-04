@@ -25,11 +25,11 @@ _[↗ Go to topic](permissions.md)_
 - kdesu / gnomesu
 
 
-### How to Configure my Normal User Account to Use sudo
+### How to Configure Your Normal User Account to Use sudo
 
 - Needed packages
-- Adding my user account to the wheel group
-- Root password or my normal user account's password?
+- Adding your user account to the wheel group
+- Root password or your normal user account's password?
 
 -------------------------
 
