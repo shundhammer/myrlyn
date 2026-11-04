@@ -23,9 +23,9 @@
 #include "YQPkgSelector.h"
 
 
-#define DEBUG_HELP 1
+#define DEBUG_HELP 0
 
-#ifdef DEBUG_HELP
+#if DEBUG_HELP
 #  define HELP_BASE "https://github.com/shundhammer/myrlyn/blob/huha-help/help/"
 #else
 #  define HELP_BASE "https://github.com/shundhammer/myrlyn/blob/master/help/"
