@@ -18,7 +18,7 @@ as a normal (non-privileged) user, set the widget theme and then log out again.
 If that does not work for any reason, try running `qt6ct` as root and set one
 of the dark color schemes ("darker" or "dusk"). Don't forget to set `export
 QT_QPA_PLATFORMTHEME=qt6ct` in your normal user's
-`~/.config/openSUSE/myrlyn-sudo.conf' (if you use `myrlyn-sudo) or, if that
+`~/.config/openSUSE/myrlyn-sudo.conf` (if you use `myrlyn-sudo) or, if that
 fails, in `/root/.bashrc`.
 
 For more details about both methods, see [↗ Customization](customization.md).

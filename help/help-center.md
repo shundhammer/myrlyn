@@ -128,7 +128,10 @@ _[↗ Go to topic](customization.md)_
 
 ## Best Practices
 
+_[↗ Go to topic](best-practices.md)_
+
 - Do many small changes, not one huge change
+  - Updates
 - Be prepared to start over
 - Handling dependency problems
 

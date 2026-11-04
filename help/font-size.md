@@ -21,7 +21,7 @@ If that does not work for any reason, try running `qt6ct` as root and set the
 font family and size there.
 
 Don't forget to set `export QT_QPA_PLATFORMTHEME=qt6ct` in your normal user's
-`~/.config/openSUSE/myrlyn-sudo.conf' (if you use `myrlyn-sudo) or, if that
+`~/.config/openSUSE/myrlyn-sudo.conf` (if you use `myrlyn-sudo) or, if that
 fails, in `/root/.bashrc`.
 
 For more details about both methods, see [↗ Customization](customization.md).
