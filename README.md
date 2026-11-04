@@ -15,6 +15,8 @@ dependencies, but it has grown beyond that since then.
 
 [<img src="https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg">](https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg)
 
+_[↗ Myrlyn Help Center](help/help-center.md)_
+
 
 ## License
 
@@ -358,6 +360,8 @@ myrlyn
 
 
 ## Reference
+
+- [Myrlyn Help Center](help/help-center.md)
 
 - Development status and screenshots: [issue #1](https://github.com/shundhammer/myrlyn/issues/1)
 

@@ -2,6 +2,8 @@
 
 This is the landing page for help topics around the Myrlyn package manager GUI.
 
+[<img height="150" src="https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg">](https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg)
+
 
 ## Permissions and Privileges
 
