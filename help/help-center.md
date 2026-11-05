@@ -62,8 +62,18 @@ _[↗ Go to topic](customization.md)_
 
 ## Updates
 
-- The difference between dup and up
-- Packages from third party repos causing dependency problems
+_[↗ Go to topic](updates.md)_
+
+- What's in the package list?
+- The difference between up and dup
+  - Up
+  - Dup
+  - Point releases vs. Rolling releases
+  - Update rules
+  - Patches vs. Updates
+- Checkmarks and sad faces
+- Dependency resolver state
+- Packages from third-party repos causing dependency problems
 - Excluding third-party repos from dup / up
 
 
