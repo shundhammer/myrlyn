@@ -1,5 +1,7 @@
 # Myrlyn Font Size
 
+_Author: Stefan Hundhammer (GitHub: @shundhammer)_
+
 _Up: [↗ Customization](customization.md)_
 
 

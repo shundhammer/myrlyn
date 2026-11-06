@@ -1,5 +1,7 @@
 # Myrlyn Help: Package Search
 
+_Author: Stefan Hundhammer (GitHub: @shundhammer)_
+
 _Up: [↗ Help Center](help-center.md)_
 
  <img width="1000" src="https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-10-search-view.png">
@@ -36,10 +38,10 @@ sensitive" check below all the other search options.
 
 - Starts with: Find the search term at the beginning of the selected fields.
   This is most useful if searching only in the package name.
-  A search term "emacs" returns "emacs", "emacs23", "emacs-client", but not "libemacs".
+  A search term "emacs" returns "emacs", "emacs31", "emacs-client", but not "libemacs".
 
 - Exact match: The field has to match your search term exactly; no more, no less.
-  A search term "emacs" returns only "emacs", not "emacs23", "emacs-client",
+  A search term "emacs" returns only "emacs", not "emacs31", "emacs-client",
   "libemacs".
 
 - Wildcards: This allows you to use shell-like wildcards `*` and `?`.

@@ -1,5 +1,7 @@
 # Myrlyn Help: Best Practices
 
+_Author: Stefan Hundhammer (GitHub: @shundhammer)_
+
 _Up: [↗ Help Center](help-center.md)_
 
 -------------------------

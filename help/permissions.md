@@ -1,5 +1,7 @@
 # Myrlyn Help: Permissions and Privileges
 
+_Author: Stefan Hundhammer (GitHub: @shundhammer)_
+
 _Up: [↗ Help Center](help-center.md)_
 
 <img height="150" src="https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg">

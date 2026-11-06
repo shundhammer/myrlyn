@@ -1,5 +1,7 @@
 # Dark Theme for Myrlyn
 
+_Author: Stefan Hundhammer (GitHub: @shundhammer)_
+
 _Up: [↗ Customization](customization.md)_
 
 <img height="200" src="https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-01-init-repos-dark.png"> &nbsp;&nbsp;&nbsp; <img height="200" src="https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-11-updates-view-dark.png">

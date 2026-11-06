@@ -1,5 +1,7 @@
 # Myrlyn Help: Updates
 
+_Author: Stefan Hundhammer (GitHub: @shundhammer)_
+
 _Up: [↗ Help Center](help-center.md)_
 
  <img width="1000" src="https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-11-updates-view.png">
@@ -33,7 +35,7 @@ The updates view offers two update operations:
 - "Dist-Upgrade". This is the same as the `zypper dup` command.
 
 Both operations are done by the libzypp _dependency resolver_, in Myrlyn as in
-`zypper`. Both run the exact same libzypp code.
+`zypper`. Both Myrlyn and `zypper` ruun the exact same libzypp code.
 
 
 ### Up
@@ -148,7 +150,7 @@ things:
   For each one of them:
   - It tries to set its status to "update".
   - It checks if that causes dependency problems:
-    - If there are no problems, it keeps the "update" state.
+    - If there are no problems, it keeps the "update" status.
     - If there are dependency problems, it reverts that package's status to "keep installed".
 
 - Myrlyn iterates over the list again.
@@ -166,13 +168,13 @@ you "better luck next time".
 
 A package with a sad face does have a newer version, but you still can't update
 it to that version; something else in the distribution that it needs might
-still be mising. It might need a newer version of a library package that is not
-yet available.
+still be mising. It might need a newer version that is not yet available of a
+library package.
 
 If you are curious what prevents the update, try setting it manually to status
-"update". You will get a dependency problem that describes the problem. Of
-course you need to _undo_ that attempt to update: Select the "do not install
-foo-47.11" or "keep obsolete foo-47.11" solution from the list.
+"update". You will get a dependency problem report that describes what is
+wrong. Of course you need to _undo_ that attempt to update: Select the "do not
+install foo-47.11" or "keep obsolete foo-47.11" solution from the list.
 
 
 ## Dependency Resolver State

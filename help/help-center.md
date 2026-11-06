@@ -1,5 +1,8 @@
 # Myrlyn Help Center
 
+_Author: Stefan Hundhammer (GitHub: @shundhammer)_
+
+
 This is the landing page for help topics around the Myrlyn package manager GUI.
 
 <img height="150" src="https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg">
@@ -159,3 +162,14 @@ _[↗ Go to topic](best-practices.md)_
 
 - Status taboo and protected
 - Zypp history
+
+
+-----------------
+
+## Feedback and Errors in this Document
+
+Please use the GitHub issue tracker or a pull request.
+For short comments, feedback and emojis, there is already
+[issue #196](https://github.com/shundhammer/myrlyn/issues/169).
+
+Please do not write personal mail.

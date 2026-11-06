@@ -1,5 +1,7 @@
 # Myrlyn Help: Third Party Repos and Updates
 
+_Author: Stefan Hundhammer (GitHub: @shundhammer)_
+
 _Up: [↗ Updates](updates.md)_
 
  <img width="1000" src="https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/screenshots/Myrlyn-12-repos-view.png">
