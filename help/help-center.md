@@ -73,8 +73,15 @@ _[↗ Go to topic](updates.md)_
   - Patches vs. Updates
 - Checkmarks and sad faces
 - Dependency resolver state
+
+
+### Third Party Repos and Updates
+
+_[↗ Go to topic](third-party-repos.md)_
+
 - Packages from third-party repos causing dependency problems
 - Excluding third-party repos from dup / up
+
 
 
 ## Package Search
