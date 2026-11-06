@@ -86,6 +86,8 @@ _[↗ Go to topic](third-party-repos.md)_
 
 ## Package Search
 
+_[↗ Go to topic](search.md)_
+
 - Search modes
 - Auto search mode
 - Default for auto search mode
