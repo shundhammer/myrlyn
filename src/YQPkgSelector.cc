@@ -925,13 +925,13 @@ YQPkgSelector::addMenus()
     {
         helpMenu->addAction( _( "Myrlyn Home &Page" ), this, SLOT( myrlynHomePage()    ) );
         helpMenu->addSeparator();
-        helpMenu->addAction( _( "&Help Center"              ), this, SLOT( helpCenter()            ) );
+        helpMenu->addAction( _( "&Help Center" ), Qt::Key_F1, this, SLOT( helpCenter() ) );
 
         QMenu * subMenu = helpMenu->addMenu( _( "Customization FAQs" ) );
 
-        subMenu->addAction( _( "Font Si&ze"                ), this, SLOT( helpFontSize()          ) );
-        subMenu->addAction( _( "&GUI Scaling (HiDPI)"      ), this, SLOT( helpGuiScaling()        ) );
-        subMenu->addAction( _( "&Dark Theme"               ), this, SLOT( helpDarkTheme()         ) );
+        subMenu->addAction( _( "Font Si&ze"                 ), this, SLOT( helpFontSize()          ) );
+        subMenu->addAction( _( "&GUI Scaling (HiDPI)"       ), this, SLOT( helpGuiScaling()        ) );
+        subMenu->addAction( _( "&Dark Theme"                ), this, SLOT( helpDarkTheme()         ) );
 
         helpMenu->addAction( _( "Root &Authentication"      ), this, SLOT( helpRootAuth()          ) );
         helpMenu->addAction( _( "Rep&ository Configuration" ), this, SLOT( helpRepoConfig()        ) );
