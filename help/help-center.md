@@ -75,9 +75,9 @@ _[↗ Go to topic](updates.md)_
 - The difference between up and dup
   - Up
   - Dup
-  - Point releases vs. Rolling releases
+  - Point releases vs.rolling releases
   - Update rules
-  - Patches vs. Updates
+  - Patches vs. updates
 - Checkmarks and sad faces
 - Dependency resolver state
 
@@ -109,9 +109,13 @@ _[↗ Go to topic](patterns.md)_
 - Invisible patterns as building blocks
 - What is a pattern technically?
 
-- Anatomy of a pattern pseudo-package
-  (for nerds)
+
+### Anatomy of a Pattern Pseudo-Package
+
+(for nerds)
+  
 _[↗ Go to topic](pattern-anatomy.md)_
+
   - In Myrlyn
   - With zypper
   - With an rpm command line

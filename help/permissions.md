@@ -117,10 +117,15 @@ is a simple shell script that keeps certain environment variables from your
 normal user alive across the `sudo` call. They keep the connection to your X11
 or Wayland display alive, and also certain desktop settings.
 
-But remember that Myrlyn with elevated permissions is running as the _root_
-user, and you may have to configure desktop settings such as the widget theme
-(light or dark), font sizes, GUI scaling for the _root_ user to match your
-preferences.
+If you have problems accessing your Wayland display, especially from KDE
+Plasma, try the latest `myrlyn-sudo` directly from the GitHub source repository
+[here](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/src/myrlyn-sudo)
+(right click -> "Save Link As").
+
+in any case, remember that Myrlyn with elevated permissions is running as the
+_root_ user, and you may have to configure desktop settings such as the widget
+theme (light or dark), font sizes, GUI scaling for the _root_ user to match
+your preferences.
 
 See also [↗ Customization](customization.md).
 
