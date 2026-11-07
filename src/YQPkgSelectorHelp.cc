@@ -23,14 +23,6 @@
 #include "YQPkgSelector.h"
 
 
-#define DEBUG_HELP 0
-
-#if DEBUG_HELP
-#  define HELP_BASE "https://github.com/shundhammer/myrlyn/blob/huha-help/help/"
-#else
-#  define HELP_BASE "https://github.com/shundhammer/myrlyn/blob/master/help/"
-#endif
-
 using SysUtil::openInBrowser;
 
 
@@ -48,25 +40,25 @@ void YQPkgSelector::helpLatestRelease() const
 
 void YQPkgSelector::helpCenter() const
 {
-    openInBrowser( HELP_BASE "help-center.md" );
+    openInBrowser( _helpBaseUrl + "help-center.md" );
 }
 
 
 void YQPkgSelector::helpFontSize() const
 {
-    openInBrowser( HELP_BASE "font-size.md" );
+    openInBrowser( _helpBaseUrl + "font-size.md" );
 }
 
 
 void YQPkgSelector::helpGuiScaling() const
 {
-    openInBrowser( HELP_BASE "gui-scaling.md" );
+    openInBrowser( _helpBaseUrl + "gui-scaling.md" );
 }
 
 
 void YQPkgSelector::helpDarkTheme() const
 {
-    openInBrowser( HELP_BASE "dark-theme.md" );
+    openInBrowser( _helpBaseUrl + "dark-theme.md" );
 }
 
 

@@ -89,6 +89,8 @@
 #define ENABLE_VERIFY_SYSTEM_MODE_ACTION       0
 #define DEPENDENCY_FEEDBACK_IF_OK              1
 #define GLOBAL_UPDATE_CONFIRMATION_THRESHOLD  20
+#define HELP_BASE_URL "https://github.com/shundhammer/myrlyn/blob/master/help/"
+
 
 // Users can override this in their ~/.config/openSUSE/Myrlyn.conf
 // (/root/.config/openSUSE/Myrlyn.conf for root, of course)
@@ -161,6 +163,19 @@ YQPkgSelector::YQPkgSelector( QWidget * parent )
 
     if ( _filters->diskUsageList() )
         _filters->diskUsageList()->updateDiskUsage();
+
+    _helpBaseUrl = QString::fromUtf8( qgetenv( "MYRLYN_HELP" ) );
+
+    if ( _helpBaseUrl.isEmpty() )
+        _helpBaseUrl = HELP_BASE_URL;
+    else
+    {
+        if ( ! _helpBaseUrl.endsWith( '/' ) )
+            _helpBaseUrl += '/';
+
+        logInfo() << "Using MYRLYN_HELP base URL \""
+                  << _helpBaseUrl << "\"" << endl;
+    }
 
     _blockResolver = false;
     firstSolverRun();

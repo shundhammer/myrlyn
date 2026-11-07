@@ -475,6 +475,7 @@ protected:
     YQPkgObjList::ExcludeRule *         _excludeDebugInfoPkgs;
 
     bool                                _useRpmGroups;
+    QString                             _helpBaseUrl;
 
     static YQPkgSelector *              _instance;
 };
