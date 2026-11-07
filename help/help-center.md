@@ -103,10 +103,18 @@ _[↗ Go to topic](search.md)_
 
 ## Patterns
 
+_[↗ Go to topic](patterns.md)_
+
 - The idea behind patterns
 - Invisible patterns as building blocks
 - What is a pattern technically?
-- How to inspect a pattern pseudo-package
+
+- Anatomy of a pattern pseudo-package
+  (for nerds)
+_[↗ Go to topic](pattern-anatomy.md)_
+  - In Myrlyn
+  - With zypper
+  - With an rpm command line
 
 
 ## Installation Summary
