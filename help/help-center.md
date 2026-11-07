@@ -5,6 +5,10 @@ _Author: Stefan Hundhammer (GitHub: @shundhammer)_
 
 This is the landing page for help topics around the Myrlyn package manager GUI.
 
+
+## Work in Progress!
+
+
 <img height="150" src="https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg">
 
 
@@ -114,6 +118,8 @@ _[↗ Go to topic](search.md)_
 
 ## Package Classification View
 
+_[↗ Go to topic](classification.md)_
+
 - Orphaned packages
 - Unneeded packages
 - Retracted packages
@@ -170,6 +176,7 @@ _[↗ Go to topic](best-practices.md)_
 
 Please use the GitHub issue tracker or a pull request.
 For short comments, feedback and emojis, there is already
-[issue #196](https://github.com/shundhammer/myrlyn/issues/169).
+[issue #169](https://github.com/shundhammer/myrlyn/issues/169).
 
-Please do not write personal mail.
+Please do not write personal mail, so all communication is in the open and
+recorded in a public place, and other users can benefit from answers.
