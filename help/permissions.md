@@ -188,7 +188,7 @@ https://github.com/shundhammer/myrlyn/blob/master/help/help-center.md
 ```
 
 
-## How to Configure Your Normal User Account to Use sudo
+### How to Configure sudo for Your Normal User Account
 
 The `sudo` package is installed by default on a standard openSUSE installation.
 

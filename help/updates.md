@@ -169,7 +169,7 @@ you "better luck next time".
 
 A package with a sad face does have a newer version, but you still can't update
 it to that version; something else in the distribution that it needs might
-still be mising. It might need a newer version that is not yet available of a
+still be mising. It might need a newer version (that is not yet available) of a
 library package.
 
 If you are curious what prevents the update, try setting it manually to status

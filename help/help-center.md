@@ -29,7 +29,7 @@ _[↗ Go to topic](permissions.md)_
 - kdesu / gnomesu
 
 
-### How to Configure Your Normal User Account to Use sudo
+### How to Configure sudo for Your Normal User Account
 
 - Needed packages
 - Adding your user account to the wheel group
@@ -45,7 +45,7 @@ _[↗ Go to topic](customization.md)_
 ### Changing Desktop Settings for the Root User
 
 - Why do I need that?
-- No root password set?
+- No root password configured?
 - Logging into the root user's desktop
 - Using qt6ct
   - Setting QT_QPA_PLATFORMTHEME
@@ -72,7 +72,7 @@ _[↗ Go to topic](updates.md)_
 - The difference between up and dup
   - Up
   - Dup
-  - Point releases vs.rolling releases
+  - Point releases vs. rolling releases
   - Update rules
   - Patches vs. updates
 - Checkmarks and sad faces
@@ -184,11 +184,11 @@ _[↗ Go to topic](misc.md)_
 
 -----------------
 
-## Feedback and Errors in this Document
+## Feedback and Errors in This Document
 
 Please use the GitHub issue tracker or a pull request.
 For short comments, feedback and emojis, there is already
 [issue #169](https://github.com/shundhammer/myrlyn/issues/169).
 
-Please do not write personal mail, so all communication is in the open and
-recorded in a public place, and other users can benefit from answers.
+Please do not send personal mail, so that all communication remains public and
+recorded, and other users can benefit from answers.

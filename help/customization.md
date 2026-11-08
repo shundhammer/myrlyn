@@ -23,7 +23,7 @@ defaults like the font size are much too small or much too large, or if you
 prefer a dark theme, you may want to do that for the _root_ user as well.
 
 
-### No Root Password Set?
+### No Root Password Configured?
 
 In recent openSUSE releases (from Leap 16.0 on), the default is not to set a
 _root_ password: If you create a first user account during the system
