@@ -89,6 +89,6 @@ next time you use it.
 
 -------------------------
 
-_Next: [↗ Package Classification](pkg-classification.md)_
+_Next: [↗ Package Classification View](classification.md)_
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 _Previous: [↗ Patterns](patterns.md)_

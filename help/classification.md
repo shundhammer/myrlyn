@@ -90,6 +90,6 @@ More information in the
 
 -------------------------
 
-_Next: [↗ Installation Summary](inst-summary.md)_
+_Next: [↗ Repositories View](repos-view.md)_
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-_Previous: [↗ Managing Repositories](repos-management.md)_
+_Previous: [↗ Installation Summary](inst-summary.md)_

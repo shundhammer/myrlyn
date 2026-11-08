@@ -6,9 +6,6 @@ _Author: Stefan Hundhammer (GitHub: @shundhammer)_
 This is the landing page for help topics around the Myrlyn package manager GUI.
 
 
-## Work in Progress!
-
-
 <img height="150" src="https://raw.githubusercontent.com/shundhammer/Myrlyn/refs/heads/master/src/artwork/Myrlyn.svg">
 
 
@@ -140,18 +137,9 @@ _[↗ Go to topic](classification.md)_
 - Retracted packages
 
 
-## Managing Repositories
-
-- issue #106: Repository Management
-- Community Repositories
-  - Codecs: Packman and VideoLAN
-  - NVidia proprietary drivers
-- Working with third-party repositories
-- Using a local directory as repository
-- Why the need to restart
-
-
 ## Repositories View
+
+_[↗ Go to topic](repos-view.md)_
 
 - Filtering by one repository
 - Protect all / un-protect all
@@ -160,13 +148,20 @@ _[↗ Go to topic](classification.md)_
   - Installed packages
   - Not installed packages
   - Search
-  - By status
+  - Status
 
 - Versions details view
   - Package versions
   - Repositories and vendors
   - Architectures
   - Multi-version packages
+
+
+## Managing Repositories
+
+- [Issue #106: Repository Management](https://github.com/shundhammer/myrlyn/issues/69)
+- Using a local directory as repository:
+  [Issue #106 comment #3](https://github.com/shundhammer/myrlyn/issues/69#issuecomment-3491286166)
 
 
 ## Best Practices
