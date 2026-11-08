@@ -8,6 +8,7 @@ _Up: [↗ Help Center](help-center.md)_
 
 -------------------------
 
+
 This is about Myrlyn's "Package Classification" view. If you don't see it, use
 the "View" button at the left of the open tabs, then "Package Classification".
 
@@ -85,7 +86,6 @@ The normal case is that "Retracted Installed Packages" is empty.
 
 More information in the
 [original pull request](https://github.com/libyui/libyui-qt-pkg/pull/82).
-
 
 
 -------------------------

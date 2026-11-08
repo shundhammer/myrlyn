@@ -4,8 +4,8 @@ _Author: Stefan Hundhammer (GitHub: @shundhammer)_
 
 _Up: [↗ Customization](customization.md)_
 
-
 -------------------------
+
 
 If you are using a hiDPI (4k) display, or even just a laptop with a full-HD
 (1920x1080, 1920x1200) display with a size of 14", 13" or smaller, only
@@ -88,7 +88,6 @@ sh@meteor:~> sudo head -n 22 /tmp/myrlyn-root/myrlyn.log
 
 - [↗ Qt6 Reference Documentation: HighDPI](https://doc.qt.io/qt-6/highdpi.html)
 - [↗ Myrlyn issue #79: Qt 6 HiDPI Automatic Scales Everything to Pixel Mush](https://github.com/shundhammer/myrlyn/issues/79)
-
 
 
 -------------------------

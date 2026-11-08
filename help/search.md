@@ -8,6 +8,7 @@ _Up: [↗ Help Center](help-center.md)_
 
 -------------------------
 
+
 This is about Myrlyn's "Search" view. If you don't see it, use the "View"
 button at the left of the open tabs, then "Search".
 

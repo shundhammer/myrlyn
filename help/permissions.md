@@ -54,7 +54,7 @@ the active repositories. To name just a few:
 
 ### Experimenting Without Danger
 
-You can even mark packages for installation, update or removal and see what
+You can even mark packages for installation, update or deletion and see what
 that would mean (of course you can't actually execute those changes): The
 package dependencies will be resolved, you will see any dependency problems,
 and you can choose solutions for them.

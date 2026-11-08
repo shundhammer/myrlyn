@@ -4,6 +4,9 @@ _Author: Stefan Hundhammer (GitHub: @shundhammer)_
 
 _Up: [↗ Patterns](patterns.md)_
 
+-------------------------
+
+
 **This is for nerds.**
 But hey, we are Linux people. Aren't we all more or less nerdy?
 

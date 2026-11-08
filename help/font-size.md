@@ -4,7 +4,6 @@ _Author: Stefan Hundhammer (GitHub: @shundhammer)_
 
 _Up: [↗ Customization](customization.md)_
 
-
 -------------------------
 
 
@@ -61,7 +60,6 @@ sh@meteor:~> sudo head -n 20 /tmp/myrlyn-root/myrlyn.log
 
 Notice that highDPI scaling and `QT_SCALE_FACTOR` may also change the effective font sizes.
 If in doubt, try `QT_ENABLE_HIGHDPI_SCALING=0` and `QT_SCALE_FACTOR=1`.
-
 
 
 -------------------------

@@ -123,9 +123,12 @@ _[↗ Go to topic](pattern-anatomy.md)_
 
 ## Installation Summary
 
+_[↗ Go to topic](inst-summary.md)_
+
+- The general idea
 - Managing huge updates
-- Check for auto-added packages
-- Check for auto-deleted packages
+  - Check for auto-installed packages
+  - Check for auto-deleted packages
 
 
 ## Package Classification View
@@ -177,6 +180,8 @@ _[↗ Go to topic](best-practices.md)_
 
 
 ## Misc
+
+_[↗ Go to topic](misc.md)_
 
 - Status taboo and protected
 - Zypp history
