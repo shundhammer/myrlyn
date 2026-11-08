@@ -48,7 +48,7 @@ sensitive" check below all the other search options.
 - Wildcards: This allows you to use shell-like wildcards `*` and `?`.
 
 - Regular expression: This allows you to use full-fledged regular expressions
-  like in Perl / `grep -E`. Notice that this defaults to "contains"; you may
+  like in Perl / `grep -E`. Note that this defaults to "contains"; you may
   have to use regexp _anchors_ like `^` (start of the string) and `$` (end of
   the string) if this is not what you want.
 
@@ -81,7 +81,7 @@ If nothing else is detected, "Auto" mode defaults to "Starts with". If you
 don't like that, use the little wrench icon to its right to toggle between
 "Starts with" and "Contains".
 
-Notice that "Contains" mode can _very_ easily also be achieved with a search
+Note that "Contains" mode can _very_ easily also be achieved with a search
 term like `*foo*`, end "Ends with" (not in the list) with `*foo`.
 
 

@@ -144,7 +144,7 @@ Invisible patterns simply don't provide this symbol.
 ```
 
 This is the pattern _category_, the headline under which this is displayed in
-the pattern list in the "Patterns" view. Notice that the blank in the name is
+the pattern list in the "Patterns" view. Note that the blank in the name is
 HTML-escaped with `%20` to avoid a syntax error in the RPM "provides"
 dependency.
 
@@ -217,7 +217,7 @@ Here it pulls in some more packages, but only as "recommended" packages,
 i.e. they are not absolutely required. We can see that this depends on what
 product is installed.
 
-Notice that `system-group-*` packages ensure that certain user groups are
+Note that `system-group-*` packages ensure that certain user groups are
 created in `/etc/group`, and the real action happens in the
 pre-/post-transaction scripts:
 

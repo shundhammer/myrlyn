@@ -12,7 +12,7 @@ _Up: [↗ Help Center](help-center.md)_
 This is about Myrlyn's "Repositories" view. If you don't see it, use the "View"
 button at the left of the open tabs, then "Repositories".
 
-Notice that the repositories _management_ where you can add, edit and remove
+Note that the repositories _management_ where you can add, edit and remove
 repositories is in a different place: Menu "Extras" -> "Configure
 Repositories". See also
 [Issue #106: Repository Management](https://github.com/shundhammer/myrlyn/issues/69).

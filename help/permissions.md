@@ -9,7 +9,7 @@ _Up: [↗ Help Center](help-center.md)_
 -------------------------
 
 
-## Why do I Need Root Privileges for Myrlyn?
+## Why Do I Need Root Privileges for Myrlyn?
 
 For any serious package management, you need _root_ privileges, because you
 will change the system:
@@ -26,7 +26,7 @@ will change the system:
 
 ##  Myrlyn Without Root Privileges (Read-Only Mode)
 
-You can use Myrlyn as a normal user without _root_ user privileges, but only in
+You can use Myrlyn as a normal user without _root_ privileges, but only in
 a _read-only_ mode, i.e. without being able to change anything. This is not as
 pointless as it may sound: You can still explore and experiment.
 
@@ -64,7 +64,7 @@ packages depend on; you can choose even radical destructive solutions of the
 dependency resolver that would remove whole subsystems (such as all of KDE or
 all of Qt) without fear of wrecking your system.
 
-When you are done with the destructive experiment, switch to the "Installation
+When you are done with your destructive experiment, switch to the "Installation
 Summary" view and see the result: What packages would be removed, and what
 packages would remain untouched.
 
@@ -83,7 +83,7 @@ Likewise, when starting Myrlyn in _read-only_ mode (as a non-privileged user),
 the active repos are loaded, but not refreshed; because refreshing would
 already mean changing the system (libzypp's package metadata cache).
 
-Another annoying, but sadly real life limitation is that you also cannot view
+Another annoying but sadly real life limitation is that you also cannot view
 the zypp history: Its parent directory has very restrictive permissions
 (see [issue #136](https://github.com/shundhammer/myrlyn/issues/136)).
 
@@ -98,17 +98,17 @@ like Myrlyn with _root_ privileges.
 
 ### sudo / myrlyn-sudo
 
-The preferred way is using `myrlyn-sudo`. This is what the provided "Myrlyn" /
-"Full root access (via sudo)" (`myrlyn-sudo.desktop`) launcher / starter menu
+The preferred way is to use `myrlyn-sudo`. This is what the provided "Myrlyn" /
+"Full root access (via sudo)" (`myrlyn-sudo.desktop`) launcher / start-menu
 entry uses.
 
 The `sudo` package is installed by default on openSUSE distributions (Leap,
-Tumbleweed, Slowroll). If you chose not to install it, you need to use
-something else (see below).
+Tumbleweed, Slowroll). If you chose during system installation not to install
+it, you need to use something else (see below).
 
-Prior to Leap 16.0, the `sudo` configuration on openSUSE required you to enter
+Before Leap 16.0, the `sudo` configuration on openSUSE required you to enter
 the _root_ password. From Leap 16.0 on, your first user account on a new
-installation is added to the _wheel_ user group, and then you need to enter
+installation is added to the _wheel_ group, and then you need to enter
 _your own_ password, not the _root_ password.
 
 
@@ -118,11 +118,11 @@ normal user alive across the `sudo` call. They keep the connection to your X11
 or Wayland display alive, and also certain desktop settings.
 
 If you have problems accessing your Wayland display, especially from KDE
-Plasma, try the latest `myrlyn-sudo` directly from the GitHub source repository
+Plasma, try the latest version of `myrlyn-sudo` directly from the GitHub source repository
 [here](https://raw.githubusercontent.com/shundhammer/myrlyn/refs/heads/master/src/myrlyn-sudo)
-(right click -> "Save Link As").
+(right-click -> "Save Link As").
 
-in any case, remember that Myrlyn with elevated permissions is running as the
+In any case, remember that Myrlyn with elevated permissions is running as the
 _root_ user, and you may have to configure desktop settings such as the widget
 theme (light or dark), font sizes, GUI scaling for the _root_ user to match
 your preferences.
@@ -134,12 +134,12 @@ See also [↗ Customization](customization.md).
 
 If `myrlyn-sudo` does not work for you, try `sudo -E myrlyn`. The `-E`
 parameter keeps _all_ environment variables; but your `sudo` configuration
-might prohibit this (in rare extreme cases).
+might prohibit this in exceptional cases.
 
 
 #### Help Menu Entries / Dropping Privileges
 
-Using `sudo` / `myrlyn-sudo` also brings another benefit: They make it possible
+Using `sudo` / `myrlyn-sudo` also has another benefit: They make it possible
 to _drop_ the _root_ privileges again, because `sudo` saves a lot of settings
 in special `SUDO_*` environment variables:
 
@@ -154,11 +154,11 @@ SUDO_HOME=/work/home/sh
 SUDO_UID=1000
 ```
 
-Dropping the privileges and restoring a shell environment to match the one of
-the previous non-privileged user makes it possible to call `xdg-open` with a
-URL which will then be opened in the user's standard browser.
+Dropping privileges and restoring a shell environment matching that of the
+previous unprivileged user makes it possible to call `xdg-open` with a URL,
+which will then be opened in the user's default web browser.
 
-This does not work without dropping the privileges and restoring that
+This does not work without dropping privileges and restoring that
 environment. `sudo` lets us do this; `su`, `kdesu`, `gnomesu` etc. don't
 preserve that environment.
 
@@ -172,9 +172,9 @@ as a normal unprivileged user, or use `sudo` / `myrlyn-sudo`.
 (`gnomesu`) to start graphical applications with _root_ privileges. They both
 use the `su` command internally, and you need to enter the _root_ password.
 
-They both keep the connection to the X11 or Wayland display alive, and they
-should also both make the started application use the desktop settings of the
-normal user like widget theme (light or dark), fonts, GUI scaling.
+Both preserve the connection to the X11 or Wayland display and should also make
+the started application use the normal user's desktop settings, such as the
+widget theme (light or dark), fonts, and GUI scaling.
 
 But as mentioned above, `su` does not keep those environment variables alive
 that would allow Myrlyn to drop privileges for an `xdg-open` call, so you will
@@ -193,7 +193,7 @@ https://github.com/shundhammer/myrlyn/blob/master/help/help-center.md
 The `sudo` package is installed by default on a standard openSUSE installation.
 
 Starting with Leap 16.0, the first user created during the installation is
-added by default to the _wheel_ user group which gives that user elevated
+added by default to the _wheel_ group, which gives that user elevated
 privileges.
 
 But if you migrated from an older openSUSE version, this might not have
@@ -224,9 +224,9 @@ sh@meteor:~> sudo usermod -aG wheel $USER
 **Important:** You will need to enter the _root_ password here one last time
 (until you are a member of the _wheel_ group).
 
-Also notice `-aG wheel` to _add_ the _wheel_ group.  Only `-G wheel` would make
-the _wheel_ group your only (!) group, and you would lose access to your other
-groups like _video_, _cdrom_, _audio_ and more.
+Also note that `-aG wheel` to _add_ the _wheel_ group.  Only `-G wheel` would
+make the _wheel_ group your only (!) group, and you would lose access to your
+other groups like _video_, _cdrom_, _audio_ and more.
 
 
 #### Root Password or Your Normal User Account's Password?

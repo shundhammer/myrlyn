@@ -58,7 +58,7 @@ sh@meteor:~> sudo head -n 20 /tmp/myrlyn-root/myrlyn.log
 ...  MainWindow.cc:45 MainWindow():  Heading font: Droid Sans,11,-1,5,700,0,0,0,0,0,0,0,0,0,0,1,Regular,0,0
 ```
 
-Notice that highDPI scaling and `QT_SCALE_FACTOR` may also change the effective font sizes.
+Note that highDPI scaling and `QT_SCALE_FACTOR` may also change the effective font sizes.
 If in doubt, try `QT_ENABLE_HIGHDPI_SCALING=0` and `QT_SCALE_FACTOR=1`.
 
 
