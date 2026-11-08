@@ -18,9 +18,9 @@ but with some more semantics:
 - Protected: Installed and locked. Never delete this package because of
   dependencies, and never update it.
 
-These terms were introduced in the YaST2 package manager long before zypper and
-even libzypp even existed. Unfortunately, libzypp / zypper introduced their own
-conflicting naming scheme afterwards, which now adds confusion.
+This terminology was introduced in the YaST2 package manager long before zypper
+and even libzypp even existed. Unfortunately, libzypp / zypper introduced their
+own conflicting terminology afterwards, which now adds confusion.
 
 Still, in the context of Myrlyn, "Taboo" and "Protected" are a better fit,
 because they imply a not "installed" / "installed" status at the same time of
@@ -31,9 +31,9 @@ buttons in the "Repositories" view: It does not leave a doubt that those
 buttons only affect packages that are already installed, and it leaves packages
 with status "Taboo" (e.g. in the VideoLAN repo "ffmpeg-7-mini-libs" and
 "ffmpeg-8-mini-libs") untouched: Just because you want to un-protect
-(i.e. remove the lock) the other packages in that repo that doesn't mean that
-you also want to remove the lock from those taboo'ed packages. This makes the
-handling _much_ more convenient.
+(i.e. remove the lock from) the other packages in that repo that doesn't mean
+that you also want to remove the lock from those taboo'ed packages. This makes
+the handling _much_ more convenient.
 
 
 

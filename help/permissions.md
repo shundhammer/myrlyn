@@ -140,8 +140,8 @@ might prohibit this (in rare extreme cases).
 #### Help Menu Entries / Dropping Privileges
 
 Using `sudo` / `myrlyn-sudo` also brings another benefit: They make it possible
-to _drop_ the root privileges again, because `sudo` saves a lot of settings in
-special `SUDO_*` environment variables:
+to _drop_ the _root_ privileges again, because `sudo` saves a lot of settings
+in special `SUDO_*` environment variables:
 
 ```console
 sh@meteor:~> sudo bash

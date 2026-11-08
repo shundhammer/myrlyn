@@ -12,14 +12,14 @@ _Up: [↗ Customization](customization.md)_
 Myrlyn as a non-privileged user should use your desktop environment's widget
 theme out of the box.
 
-But the normal case is to start Myrlyn with root privileges, and that means
-that you have to set the theme for the root user account.
+But the normal case is to start Myrlyn with _root_ privileges, and that means
+that you have to set the theme for the _root_ user account.
 
-The easy and recommended way is to log in as as root in the graphical login
+The easy and recommended way is to log in as as _root_ in the graphical login
 manager with the same session type (KDE Plasma, GNOME, Xfce, ...) that you use
 as a normal (non-privileged) user, set the widget theme, and then log out again.
 
-If that does not work for any reason, try running `qt6ct` as root:
+If that does not work for any reason, try running `qt6ct` as _root_ :
 
 ```console
 sh@meteor:~> sudo -E qt6ct
@@ -48,10 +48,10 @@ sh@meteor:~> sudo grep "QT_" /tmp/myrlyn-root/myrlyn.log
 ...  MyrlynApp.cc:134 logQtEnv():  QT_QPA_PLATFORMTHEME=qt6ct
 ```
 
-`QT_QPA_PLATFORMTHEME` will override whatever you set in root's desktop
-environment. If that is not what you want, check `/root/.bashrc` and other
-shell startup files where this might come from. If all else fails, and you are
-using `myrlyn-sudo` (which is recommended anyway), unset it in
+`QT_QPA_PLATFORMTHEME` will override whatever you set in the _root_ user's
+desktop environment. If that is not what you want, check `/root/.bashrc` and
+other shell startup files where this might come from. If all else fails, and
+you are using `myrlyn-sudo` (which is recommended anyway), unset it in
 `myrlyn-sudo.conf`:
 
 ```console

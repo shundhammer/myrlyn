@@ -13,28 +13,28 @@ _Up: [↗ Help Center](help-center.md)_
 
 ### Why do I Need That?
 
-In most cases, you will need to run Myrlyn as root (with `sudo` / `myrlyn-sudo`
+In most cases, you will need to run Myrlyn as _root_ (with `sudo` / `myrlyn-sudo`
 or with `kdesu` / `gnomesu`). But that will use the desktop settings of the
-root user, not the ones that you customized for your normal user account.
+_root_ user, not the ones that you customized for your normal user account.
 
 If you didn't do much customizing in your desktop environment (KDE Plasma,
 GNOME, Xfce, ...), that may not be necessary. But if you did because some
 defaults like the font size are much too small or much too large, or if you
-prefer a dark theme, you may want to do that for the root account as well.
+prefer a dark theme, you may want to do that for the _root_ user as well.
 
 
 ### No Root Password Set?
 
 In recent openSUSE releases (from Leap 16.0 on), the default is not to set a
-root password: If you create a first user account during the system
+_root_ password: If you create a first user account during the system
 installation, that user account is implicitly added to the _wheel_ user group
-and is granted root privileges for `sudo`. In that case, you are no longer
-required to set a root password.
+and is granted _root_ privileges for `sudo`. In that case, you are no longer
+required to set a _root_ password.
 
-Notice that in all cases a root user account (UID 0) still exists; it might
-just not have a password, so you may not be able to log in as root.
+Notice that in all cases a _root_ user account (UID 0) still exists; it might
+just not have a password, so you may not be able to log in as _root_.
 
-But you can always add a root password later:
+But you can always add a _root_ password later:
 
 ```console
 sh@meteor:~> sudo passwd root
@@ -45,7 +45,7 @@ Retype new password:
 
 Notice that the default sudo password for Leap 16.0 is **your normal user's password**.
 
-If you wish to delete the root password again:
+If you wish to delete the _root_ password again:
 
 ```console
 sh@meteor:~> sudo passwd -d root
@@ -54,23 +54,24 @@ sh@meteor:~> sudo passwd -d root
 
 ### Logging into the Root User's Desktop
 
-The simplest way to set desktop settings for the root user is to log in as root
-from the graphical login manager. Make sure to select the same session type
-(KDE Plasma / GNOME / Xfce / ...) that you also use as a normal user.
+The simplest way to set desktop settings for the _root_ user is to log in as
+_root_ from the graphical login manager. Make sure to select the same session
+type (KDE Plasma / GNOME / Xfce / ...) that you also use as a normal user.
 
-If no root password was set during installation, see the previous section "No
-root password set?" how to set one, and after you log out of the root desktop
-session again, to delete it again (if you wish; you don't need to).
+If no _root_ password was set during installation, see the previous section "No
+_root_ password set?" how to set one, and after you log out of the _root_
+user's desktop session again, to delete it again (if you wish; you don't need
+to).
 
-Log into the desktop as root and set the fonts, widget theme, icon theme etc.
+Log into the desktop as _root_ and set the fonts, widget theme, icon theme etc.
 Also look for settings like "[ ] Apply to non-GNOME applications". This may
 vary between different desktop environments.
 
 
 ### Using qt6ct
 
-If you can't or don't wish to log into a desktop session as root, you can use
-Qt's `qt6ct` utility to do some GUI settings.
+If you can't or don't wish to log into a desktop session as _root_, you can use
+Qt's `qt6ct` utility to change some GUI settings.
 
 Make sure that package `qt6ct` is installed:
 
@@ -79,7 +80,7 @@ sh@meteor:~> sudo zypper in qt6ct
 ```
 
 Call `qt6ct` for your normal user account, change the settings to your liking,
-save the result, and then do the same for the root user.
+save the result, and then do the same for the _root_ user.
 
 With `qt6ct`, you can set the widget style, the color scheme ("darker" and
 "dusk" are dark themes) the fonts, and some other things. Don't forget to hit
@@ -91,13 +92,13 @@ For your normal user account:
 sh@meteor:~> qt6ct
 ```
 
-For the root user:
+For the _root_ user:
 
 ```console
 sh@meteor:~> sudo -E qt6ct
 ```
 
-You may have to temporarily grant the root user access to your normal user's
+You may have to temporarily grant the _root_ user access to your normal user's
 X11 or Wayland display.
 
 
@@ -111,8 +112,8 @@ sh@meteor:~> export QT_QPA_PLATFORMTHEME=qt6ct
 ```
 
 You can add that to your shell startup files like `~/.bashrc` for use with
-Myrlyn without root privileges. But for use _with_ root privileges, you need to
-add it to the environment of the root user.
+Myrlyn without _root_ privileges. But for use _with_ _root_ privileges, you
+need to add it to the environment of the _root_ user.
 
 You can either edit `/root/.bashrc` or, better yet, add it to your normal
 user's `~/.config/openSUSE/myrlyn-sudo.conf` file (for use with `myrlyn-sudo`,
@@ -186,7 +187,7 @@ sh@meteor:~> sudo head -n 22 /tmp/myrlyn-root/myrlyn.log
 
 Notice that there are different log files for different users:
 
-- root: `/tmp/myrlyn-root/myrlyn.log` (and `zypp.log`)
+- _root_ user: `/tmp/myrlyn-root/myrlyn.log` (and `zypp.log`)
 - Normal user: `/tmp/myrlyn-$USER/myrlyn.log` (and `zypp.log`)
 
 

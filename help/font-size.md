@@ -10,15 +10,15 @@ _Up: [↗ Customization](customization.md)_
 Myrlyn as a non-privileged user should use your desktop environment's font
 settings out of the box.
 
-But the normal case is to start Myrlyn with root privileges, and that means
-that you have to set the fonts for the root user account.
+But the normal case is to start Myrlyn with _root_ privileges, and that means
+that you have to set the fonts for the _root_ user account.
 
-The easy and recommended way is to log in as as root in the graphical login
+The easy and recommended way is to log in as as _root_ in the graphical login
 manager with the same session type (KDE Plasma, GNOME, Xfce, ...) that you use
 as a normal (non-privileged) user, set the font family and size, and then log
 out again.
 
-If that does not work for any reason, try running `qt6ct` as root and set the
+If that does not work for any reason, try running `qt6ct` as _root_ and set the
 font family and size there.
 
 Don't forget to add
