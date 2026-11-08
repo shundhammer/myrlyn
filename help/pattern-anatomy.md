@@ -214,7 +214,7 @@ Recommends     : [16]
 ```
 
 Here it pulls in some more packages, but only as "recommended" packages,
-i.e. they are not absolutely required. We can see that this depends on what
+i.e., they are not absolutely required. We can see that this depends on what
 product is installed.
 
 Note that `system-group-*` packages ensure that certain user groups are

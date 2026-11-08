@@ -19,7 +19,7 @@ Note that the tab for this view displays a number; in this example "Updates
 ## What's in the Package List?
 
 In this view, the package list contains only installed packages for which a
-newer version is available, i.e. an _update candidate_. You can also tell this
+newer version is available, i.e., an _update candidate_. You can also tell this
 from the blue version number.
 
 Note that this does not guarantee that updating to that version will be

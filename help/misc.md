@@ -31,7 +31,7 @@ buttons in the "Repositories" view: It does not leave a doubt that those
 buttons only affect packages that are already installed, and it leaves packages
 with status "Taboo" (e.g. in the VideoLAN repo "ffmpeg-7-mini-libs" and
 "ffmpeg-8-mini-libs") untouched: Just because you want to un-protect
-(i.e. remove the lock from) the other packages in that repo that doesn't mean
+(i.e., remove the lock from) the other packages in that repo that doesn't mean
 that you also want to remove the lock from those taboo'ed packages. This makes
 the handling _much_ more convenient.
 

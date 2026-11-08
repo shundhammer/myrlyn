@@ -23,9 +23,9 @@ selection, the one to rule them all: Something might go wrong, and then you'd
 lose all that work.
 
 Rather, select some packages, check on the "Installation Summary" page if
-that's really what you want, hit "Accept", watch the transaction (which can be
+that's really what you want, click "Accept", watch the transaction (which can be
 a deeply satisfying experience), and when you are on the final "Summary" page,
-hit "Back" for more.
+click "Back" for more.
 
 Of course this can be different when you are doing something critical such as
 an update of the NVidia drivers; check carefully if the versions match (use the
@@ -41,8 +41,8 @@ This is also true for updates: If you fear that your codecs from a third-party
 repo like Packman or VideoLAN might clash with those from the openSUSE OSS
 repo, do the "dup" in several steps: Use the "Protect All" button for the
 Packman or VideoLAN repo in the "Repositories" view, go to the "Updates" view,
-hit "Dist-Upgrade" (or "Package Update") there to do the "dup" / "up" only for
-the _other_ (non-Packman, non-VideoLAN) packages, hit "Accept".
+click "Dist-Upgrade" (or "Package Update") there to do the "dup" / "up" only for
+the _other_ (non-Packman, non-VideoLAN) packages, click "Accept".
 
 Then come back after the transaction, un-protect the protected Packman or
 VideoLAN repo again, go to the "Updates" view and try to "dup" / "up" those
@@ -92,7 +92,7 @@ it can't load the shared libs that it needs.
 During a "dup" there might be a dozen such problems if third-party repos like
 Packman or VideoLAN are involved. It can be simple to go through the list of
 dependency problems and always select the "Keep obsolete ..." solution for each
-one. But if it's too many, consider hitting "Cancel" to get out of the
+one. But if it's too many, consider clicking "Cancel" to get out of the
 dependency problems window (the problems don't just go away!), then "Cancel"
 again in the main window, abandon your changes and restart; this time maybe
 without that problematic repo: Use "Protect all" for that one.

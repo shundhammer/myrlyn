@@ -27,7 +27,7 @@ will change the system:
 ##  Myrlyn Without Root Privileges (Read-Only Mode)
 
 You can use Myrlyn as a normal user without _root_ privileges, but only in
-a _read-only_ mode, i.e. without being able to change anything. This is not as
+a _read-only_ mode, i.e., without being able to change anything. This is not as
 pointless as it may sound: You can still explore and experiment.
 
 

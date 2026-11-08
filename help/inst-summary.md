@@ -31,7 +31,7 @@ more than just very trivial changes in other views; for example:
 All of these actions may automatically mark other packages for installation,
 update or deletion because of dependencies. In that case, you will get a pop-up
 dialog with very much the same view for those automatic changes if you don't
-explicitly open this "Installation Summary" view before you hit the "Accept"
+explicitly open this "Installation Summary" view before you click the "Accept"
 button.
 
 But the "Installation Summary" shows you not only the automatic changes, but
