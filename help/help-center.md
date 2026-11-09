@@ -79,7 +79,7 @@ _[↗ Go to topic](updates.md)_
 - Dependency resolver state
 
 
-### Third Party Repos and Updates
+### Third-Party Repos and Updates
 
 _[↗ Go to topic](third-party-repos.md)_
 
@@ -152,9 +152,10 @@ _[↗ Go to topic](repos-view.md)_
 
 - Versions details view
   - Package versions
-  - Repositories and vendors
   - Architectures
-  - Multi-version packages
+  - Repositories and vendors
+    - Checking package vendors for consistency
+  - Multiversion packages
 
 
 ## Managing Repositories

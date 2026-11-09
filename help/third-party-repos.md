@@ -1,4 +1,4 @@
-# Myrlyn Help: Third Party Repos and Updates
+# Myrlyn Help: Third-Party Repos and Updates
 
 _Author: Stefan Hundhammer (GitHub: @shundhammer)_
 
@@ -13,7 +13,7 @@ _Up: [↗ Updates](updates.md)_
 
 Some third-party repos, such as Packman or VideoLAN, provide packages that are
 also present in the openSUSE OSS or update repos, but with more capabilities or
-supporting hardware acceleration for audio, video and similar algorithms.
+supporting hardware acceleration for audio, video and similar technologies.
 
 The main reason for using these third-party repositories is that they provide
 codecs or patent-encumbered software that SUSE's corporate lawyers don't want
