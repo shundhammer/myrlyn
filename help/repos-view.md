@@ -167,10 +167,10 @@ Check if they are all consistently from the same vendor.
 
 ### Multiversion Packages
 
-There are some packages like Linux kernels that can be installed in multiple
-versions in parallel. Those package version have square _check boxes_ instead
-of round _radio buttons_, indicating that you can select more than one at
-the same time.
+There are some packages like Linux kernels and kernel modules that can be
+installed in multiple versions in parallel. Those package version have square
+_check boxes_ instead of round _radio buttons_, indicating that you can select
+more than one at the same time.
 
 You can see what multi-version packages are in the distribution by switching to
 the "Package Classification" view, then "Multiversion".

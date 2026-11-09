@@ -57,7 +57,7 @@ changes. Simply restart Myrlyn - or just wait for another day or two.
 
 ## Be Prepared to Start Over
 
-Like descried above, if you get caught in a maze of dependency problems, don't
+Like described above, if you get caught in a maze of dependency problems, don't
 dwell on it - just cancel and abandon your changes and restart Myrlyn. This is
 often much easier than trying to solve all those dependency problems manually.
 
@@ -66,7 +66,9 @@ Myrlyn is quick to start. Use it to your advantage.
 This is one more reason not to spend an hour or more on a carefully
 hand-crafted package selection: It would hurt to lose all those changes. So try
 to work in a way where that simply doesn't matter: Don't accumulate so many
-changes in the first place. Work in short sprints, not in a long marathon.
+changes in the first place.
+
+Work in short sprints, not in a long marathon.
 
 
 
@@ -92,10 +94,11 @@ it can't load the shared libs that it needs.
 During a "dup" there might be a dozen such problems if third-party repos like
 Packman or VideoLAN are involved. It can be simple to go through the list of
 dependency problems and always select the "Keep obsolete ..." solution for each
-one. But if it's too many, consider clicking "Cancel" to get out of the
-dependency problems window (the problems don't just go away!), then "Cancel"
-again in the main window, abandon your changes and restart; this time maybe
-without that problematic repo: Use "Protect all" for that one.
+one. But if there are just too many of them, consider clicking "Cancel" to get
+out of the dependency problems window (of course, the problems don't just go
+away!), then "Cancel" again in the main window, abandon your changes and
+restart; this time maybe without that problematic repo: Use "Protect all" for
+that one.
 
 Avoid to get tangled up in dependency hell. You might have tried something that
 turned out too ambitious; maybe try it in smaller steps.

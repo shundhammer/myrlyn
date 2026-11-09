@@ -23,14 +23,13 @@ and even libzypp even existed. Unfortunately, libzypp / zypper introduced their
 own conflicting terminology afterwards, which now adds confusion.
 
 Still, in the context of Myrlyn, "Taboo" and "Protected" are a better fit,
-because they imply a not "installed" / "installed" status at the same time of
+because they imply a "not installed" / "installed" status at the same time of
 the "locked" status.
 
 You can directly benefit from this in the "Protect All" / "Un-Protect All"
 buttons in the "Repositories" view: It does not leave a doubt that those
 buttons only affect packages that are already installed, and it leaves packages
-with status "Taboo" (e.g. in the VideoLAN repo "ffmpeg-7-mini-libs" and
-"ffmpeg-8-mini-libs") untouched: Just because you want to un-protect
+with status "Taboo" untouched: Just because you want to un-protect
 (i.e., remove the lock from) the other packages in that repo that doesn't mean
 that you also want to remove the lock from those taboo'ed packages. This makes
 the handling _much_ more convenient.
