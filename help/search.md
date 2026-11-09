@@ -12,52 +12,61 @@ _Up: [↗ Help Center](help-center.md)_
 This is about Myrlyn's "Search" view. If you don't see it, use the "View"
 button at the left of the open tabs, then "Search".
 
-The centerpiece of this is the "Search" input field where you enter a _search
-term_ to look for.
+The centerpiece of this view is the "Search" input field where you enter a
+_search term_.
 
-You can select in what fields of an RPM package you want to search your search term:
+You can select which fields of an RPM package to search in:
 
 - Package name
 - Package summary (the short one-liner that you also see in the package list)
 - Package description (the multi-line text that you see in the "Description" tab)
-- RPM dependencies (see below):
+- RPM dependencies:
   - Provides
   - Requires
   - Recommends
 - File list (the names of the files that belong to the package).
 
-By default, all searches are case-insensitive - unless you check the "Case
-sensitive" check below all the other search options.
+By default, all searches are case-insensitive. You can change that with the
+"Case sensitive" checkbox below the other search options.
 
 
 ## Search Modes
 
 - Contains: Find the search term anywhere in the selected fields.
-  This is useful for nontrivial search terms, not for very short ones:
-  A search term "Qt" would flood you with irrelevant results, especially if you
-  search in name, summary, description at the same time.
+
+  This is useful for nontrivial search terms, not for very short ones: A search
+  term like `Qt` would flood you with irrelevant results, especially if you
+  search in name, summary, and description at the same time.
+
+  A search term `foo` returns `foo`, `foo42`, `foo-client`, `libfoo`.
 
 - Starts with: Find the search term at the beginning of the selected fields.
-  This is most useful if searching only in the package name.
-  A search term "emacs" returns "emacs", "emacs31", "emacs-client", but not "libemacs".
+  This is most useful when searching only in the package name.
+
+  A search term `foo` returns `foo`, `foo42`, `foo-client`, but not `libfoo`.
 
 - Exact match: The field has to match your search term exactly; no more, no less.
-  A search term "emacs" returns only "emacs", not "emacs31", "emacs-client",
-  "libemacs".
+
+  A search term `foo` returns only `foo`, not any of `foo42`, `foo-client`,
+  `libfoo`.
 
 - Wildcards: This allows you to use shell-like wildcards `*` and `?`.
 
 - Regular expression: This allows you to use full-fledged regular expressions
-  like in Perl / `grep -E`. Note that this defaults to "contains"; you may
-  have to use regexp _anchors_ like `^` (start of the string) and `$` (end of
-  the string) if this is not what you want.
+  like in Perl or `grep -E`. For example, use
+  `(firefox|chrome|chromium|opera|brave)` to search for the most popular web
+  browsers at the same time.
+
+  Note that this uses "contains" mode. If this is not what you want, you need
+  to use regexp _anchors_ like `^` (start of the string) and `$` (end of
+  the string).
 
 - Auto: Guess the mode - see below.
 
 
 ## Auto Search Mode
 
-The default search mode is "Auto" that guesses the mode from your input.
+The default search mode is "Auto" which guesses the mode from your input.
 
 - If a lone `*` or `?` is detected, e.g. `*qt*6*`: Wildcards mode.
 
@@ -66,23 +75,28 @@ The default search mode is "Auto" that guesses the mode from your input.
 
 - If your search term starts with `=`: Exact match.
 
-In "Auto" search mode, you can see in the line below the search mode combo box
-what mode is guessed. If no special characters are detected, it uses a default
-mode (see below). As you type, it changes as the first of the special
-characters listed above is detected.
+In "Auto" search mode, the line below the search mode combo box shows what mode
+was guessed. If no special characters are detected, it uses a default mode (see
+below). As you type, it changes as the first of the special characters listed
+above is detected.
 
-Of course a guess can also guess wrong. In that (rare) case, you may need to
-explicitly change the search mode to the one that you really want.
+Of course, a guess can also be wrong. In that (rare) case, you may need to use
+the combo box to explicitly set the search mode to the one that you really
+want.
 
 
 ## Default for Auto Search Mode
 
 If nothing else is detected, "Auto" mode defaults to "Starts with". If you
-don't like that, use the little wrench icon to its right to toggle between
+don't like that, use the small wrench icon to its right to toggle between
 "Starts with" and "Contains".
 
-Note that "Contains" mode can _very_ easily also be achieved with a search
-term like `*foo*`, end "Ends with" (not in the list) with `*foo`.
+Remember that regardless of this default mode, you can easily achieve different
+modes with wildcards:
+
+- `*foo*`: "Contains" mode
+- `foo*`: "Starts with" mode
+- `*foo`: "Ends with" mode (not in the list)
 
 
 ## Searching in RPM Provides, Requires, Recommends
@@ -93,20 +107,21 @@ find out what other package or pattern causes another package to be installed.
 **Important:** Make sure to uncheck the other fields like "Name", "Summary",
 "Description" to avoid false positive results.
 
-Check only "Requires" or "Recommends" or both to see what other package depends
+Check only "Requires" or "Recommends", or both to see what other package depends
 on a package like "MozillaFirefox". Switch to the "Dependencies" tab below the
 package list and scroll down to "Requires" or "Recommends" to see more details.
 
 "Requires" is a hard requirement; you cannot install a package B that requires
-package A without it. "Recommends" is more a suggestion that you can override.
+package A without it. "Recommends" is more of a suggestion that you can
+override.
 
 
 Searching in "Provides" can show "capabilities" of packages, such as "a user
 interface for YaST" where more than one exists (YaST-Qt, YaST-NCurses), but
 YaST needs at least one of them.
 
-This is how _patterns_ are implemented: They are just packages that only
-consist of dependencies, no actual files on the system. They all have a
+This is how _patterns_ are implemented: They are just packages that consist
+only of dependencies, with no actual files on the system. They all have a
 "Provides: pattern()" that identifies them as a pattern.
 
 Try it: Search for "pattern()", but with an explicit search mode "Starts with"
@@ -115,8 +130,8 @@ Try it: Search for "pattern()", but with an explicit search mode "Starts with"
 Search for "pattern-visible()" to see only the ones that are visible in the
 patterns view, not the building blocks such as "patterns-openSUSE-base".
 
-A package always implicitly provides its name, that's why those special
-capabilities tend to have weird characters like `()` in their "provides".
+A package always implicitly provides its name, which is why those special
+capabilities tend to have unusual characters like `()` in their "provides".
 
 
 ## Further Reading

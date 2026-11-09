@@ -103,7 +103,7 @@ _[↗ Go to topic](search.md)_
 _[↗ Go to topic](patterns.md)_
 
 - The idea behind patterns
-- Invisible patterns as building blocks
+- Building blocks
 - What is a pattern technically?
 
 
@@ -175,7 +175,7 @@ _[↗ Go to topic](best-practices.md)_
 - Handling dependency problems
 
 
-## Misc
+## Miscellaneous
 
 _[↗ Go to topic](misc.md)_
 

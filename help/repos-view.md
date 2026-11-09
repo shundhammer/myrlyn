@@ -12,7 +12,7 @@ _Up: [↗ Help Center](help-center.md)_
 This is about Myrlyn's "Repositories" view. If you don't see it, use the "View"
 button at the left of the open tabs, then "Repositories".
 
-Note that the repositories _management_ where you can add, edit and remove
+Note that the repositories _management_ where you can add, edit, and remove
 repositories is in a different place: Menu "Extras" -> "Configure
 Repositories". See also
 [Issue #106: Repository Management](https://github.com/shundhammer/myrlyn/issues/69).
@@ -20,36 +20,38 @@ Repositories". See also
 
 ## Filtering by One Repository
 
-The idea behind this view is to let you limit your actions to the packages from
-one repo: Select one repo in the repo list on the left, and the package list is
-filled with packages that have at least one version from that repo.
+The idea behind this view is to let you limit your actions to packages from
+just one repo: Select one repo in the repo list on the left, and the package
+list is filled with packages that have at least one version from that repo.
 
 This does not mean that the currently installed version of that package comes
-from that repo, or the _candidate_ version that would be picked if you were to
-mark the package for installation (if it isn't already installed), or for
+from that repo, or the _candidate_ version that would be selected if you were
+to mark the package for installation (if it isn't already installed), or for
 update (if it is installed). It really only means that this repo offers at
 least one version of that package.
 
-You can get a better overview of all the available package versions if you
-switch to the "Versions" details view below the package list.
+This view benefits a lot from switching to the "Versions" details view below
+the package list where you can see all versions of the currently selected
+package at once in a table.
 
-The topmost entry "@System" in the repos list is special: It represents the
-_installed system_, i.e., all the packages that are currently installed.
+In the repos list, the topmost entry, "@System", is special: It doesn't
+represent a real repo, but the _installed system_, i.e., all the packages that
+are currently installed.
 
 
 ## Protect All / Un-Protect All
 
 Some third-party repos, such as Packman or VideoLAN, provide packages that are
 also present in the openSUSE OSS or update repos. Those packages may have
-slightly different versions, and the repos may have a different release cycle
-than those from openSUSE.
+slightly different versions, and the repos may have different release cycles
+than the openSUSE repos.
 
 This can make updates difficult: You may have to solve dependency problems
-manually. A workaround is excluding the critical repos from an update.
+manually. One workaround is excluding the affected repos from an update.
 
-This is what the two buttons "Protect All" and "Un-Protect All" do: They
-set all installed packages in the package list for that repo to status
-"protected", or back to "keep installed".
+This is what the two buttons "Protect All" and "Un-Protect All" do: They set
+all installed packages in the package list to status "protected", or back to
+"keep installed".
 
 For more details, see _[↗ third party repos and updates](third-party-repos.md)_.
 
@@ -80,7 +82,7 @@ filters_. They are all limited to packages from the selected repo:
 
 The "Versions" details view below the package list is available in all filter
 views, but it is particularly useful in the "Repositories" view: It makes sense
-to use all related packages from the same repo.
+to use related packages from the same repo.
 
 For consistency, use all "vlc" packages either from the VideoLAN repo, or all
 from the openSUSE repo. Mixing them is asking for trouble.
@@ -125,7 +127,7 @@ _architecture_:
 - _binary_ packages containing binary machine code matching your CPU.
   On most PC hardware, this is "x86_64" or the older "i586".
 
-- "noarch" ("no architecture"): architecture independent content:
+- "noarch" ("no architecture"): architecture-independent content:
   - Scripting languages (bash, Python, Perl, Ruby etc.)
   - Text (e.g., documentation),
   - Other data that don't depend on the CPU architecture.
@@ -143,7 +145,7 @@ like "openSUSE" because they all come from the same organization.
 
 For example, vendor "openSUSE" is the same for these repos:
 
-- openSUSE "OSS" (Open Soure Software): The distribution's main repo.
+- openSUSE "OSS" (Open Source Software): The distribution's main repo.
 - openSUSE "Update": Updated packages.
 - openSUSE "non-OSS": Software with a license other than Open Source (GPL, BSD, MIT, Apache, ...).
 
@@ -152,7 +154,7 @@ For example, vendor "openSUSE" is the same for these repos:
 
 If you migrate from openSUSE packages to a third-party repo like Packman,
 VideoLAN, or NVidia, or if you update packages for any of those third-party
-repos, it is recommended to check if they all consistently have the same
+repos, it is recommended to check whether they all consistently have the same
 vendor.
 
 This is one more reason to update the normal system packages with the
@@ -161,16 +163,16 @@ All", and update them separately.
 
 Before clicking "Accept", switch to the "Versions" view, select the first
 package in the package list, and use the "Cursor Down" key to go through the
-list one by one and keep a close eye on the vendor of the selected verson:
+list one by one and keep a close eye on the vendor of the selected version:
 Check if they are all consistently from the same vendor.
 
 
 ### Multiversion Packages
 
 There are some packages like Linux kernels and kernel modules that can be
-installed in multiple versions in parallel. Those package version have square
-_check boxes_ instead of round _radio buttons_, indicating that you can select
-more than one at the same time.
+installed in multiple versions simultaneously. Those package versions have
+square _checkboxes_ instead of round _radio buttons_, indicating that you can
+select several at the same time.
 
 You can see what multi-version packages are in the distribution by switching to
 the "Package Classification" view, then "Multiversion".

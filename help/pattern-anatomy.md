@@ -8,17 +8,18 @@ _Up: [↗ Patterns](patterns.md)_
 
 
 **This is for nerds.**
-But hey, we are Linux people. Aren't we all more or less nerdy?
+But hey, we're Linux people. Aren't we all nerdy to some extent?
 
 
 ## In Myrlyn
 
 - Switch to the "Search" view
+- Search only in the "name" field
 - In "Auto" mode, search for `patterns-*`
-  or switch to "Starts With" mode and search for `patterns-`
+  or switch to "Starts with" mode and search for `patterns-`
 - Select any of the search results in the package list
 - Switch to the "Dependencies" details view below the package list
-- Scroll down to see
+- Scroll down to see:
   - Provides
   - Requires
   - Recommends
@@ -64,7 +65,7 @@ Summary        : Base System
 Description    :
     This is the base runtime system.  It contains only a basic multiuser
     booting system. For running on real hardware, you need to add additional
-    packages and pattern to make this pattern useful on its own.
+    packages and patterns to make this pattern useful on its own.
 
 Provides       : [9]
     pattern-visible()
@@ -122,7 +123,7 @@ Supplements    : ---
 Enhances       : ---
 ```
 
-Some interesting parts:
+Some interesting details:
 
 ```
     Summary : Base System
@@ -143,20 +144,19 @@ Invisible patterns simply don't provide this symbol.
     pattern-category() = Base%20Technologies
 ```
 
-This is the pattern _category_, the headline under which this is displayed in
-the pattern list in the "Patterns" view. Note that the blank in the name is
-HTML-escaped with `%20` to avoid a syntax error in the RPM "provides"
-dependency.
+This is the pattern _category_: the headline under which this is displayed in
+the pattern list in the "Patterns" view. Note that the space in the name is
+URL-encoded as `%20` to avoid a syntax error in the RPM "provides" dependency.
 
 ```
     pattern() = base
 ```
 
-This _looks_ like a user-visible name in the pattern list, but it's not:
+This _looks_ like a user-visible name in the pattern list, but it isn't:
 The RPM "summary" field is used for that purpose.
 
-This field is the _internal_ pattern name that can be used for "requires:" or
-"recommends:" in other patterns like this: `Requires: pattern() = base`.
+This field is the _internal_ pattern name that other patterns can use for
+"requires:" or "recommends:", like this: `Requires: pattern() = base`.
 
 
 ```
@@ -193,14 +193,14 @@ Requires       : [28]
 ```
 
 A real list of packages that are required for this pattern. Since this is one
-of the very fundamental building blocks, this contains more than an average
-number of packages. But...
+of the very fundamental building blocks, this contains more packages than an
+average pattern. But...
 
 ```
     pattern() = minimal_base
 ```
 
-...it's not the most fundamental one: It requires pattern "minimal_base".
+...it's not the most fundamental one: It requires the "minimal_base" pattern.
 
 ```
 Recommends     : [16]
@@ -213,8 +213,8 @@ Recommends     : [16]
     (zypper if (product(openSUSE) or product(SLES) or product(SLES-SAP)))
 ```
 
-Here it pulls in some more packages, but only as "recommended" packages,
-i.e., they are not absolutely required. We can see that this depends on what
+Here it pulls in some additional packages, but only as "recommended" packages,
+i.e., they are not absolutely required. We can see that this depends on which
 product is installed.
 
 Note that `system-group-*` packages ensure that certain user groups are
@@ -250,17 +250,17 @@ something as fundamental as the Linux kernel would be a hard requirement. No
 kernel - no booting - no fun.
 
 But you might want to install `kernel-longterm` instead. Or a custom kernel
-that one of the kernel developers gave you via Bugzilla to see if that one
-solves a hardware problem that you have on your brand new laptop. Or you might
-want to build your own.
+that one of the kernel developers gave you via Bugzilla to see if this solves a
+hardware problem that you have on your brand new laptop. Or you might want to
+build your own.
 
 
 ## With an rpm Command Line
 
-This is pretty much the same as with `zypper`, but it's limited to the patterns
-that you actually have installed because the `rpm` command knows nothing about
-your active repos, only about installed packages that are in the (local!) RPM
-database.
+This is pretty much the same as with `zypper`, but it is limited to the
+patterns that you actually have installed because the `rpm` command knows
+nothing about your active repos, only about installed packages that are in the
+(local!) RPM database.
 
 
 ```console
