@@ -60,7 +60,7 @@ packages separately:
   from that repo. It only checks whether a version of the package is
   available in that repo..
 
-- If there are more third-party repos that also contaian packages available in
+- If there are more third-party repos that also contain packages available in
   the openSUSE repos, and they also have updates, do the same with them.
 
 - Go to the "Updates" view. You will notice that there are now fewer updates in
