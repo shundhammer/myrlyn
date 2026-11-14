@@ -165,12 +165,7 @@ void InitReposStep::initRepos()
     catch ( ... )
     {
         normalCursor();
-        QString message = _( "Can't connect to the package manager!\n"
-                             "It may be busy in another window.\n" );
-
-        QMessageBox::warning( 0, // parent
-                              _( "Error" ),
-                              message );
+        MyrlynApp::zyppIsLockedPopup();
 
         throw;  // Nothing else that we can do here
     }

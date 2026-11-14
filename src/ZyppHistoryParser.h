@@ -76,9 +76,8 @@ protected:
      **/
     bool checkFieldsCount( const QStringList & fields, int requiredCount );
 
-    void    finalizeLastCommand();
-    QString prettyCommand( const QString & rawCommand );
-    void    addChildEvent( ZyppHistoryEvents::Event * event );
+    void finalizeLastCommand();
+    void addChildEvent( ZyppHistoryEvents::Event * event );
 
 
     //

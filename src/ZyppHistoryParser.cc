@@ -19,11 +19,11 @@
 #include <QElapsedTimer>
 
 #include "ZyppHistoryParser.h"
+#include "MyrlynApp.h"
 #include "Logger.h"
 #include "Exception.h"
 
 #define MAX_ERR_COUNT       100
-#define MAX_ZYPPER_ARG_LEN  100
 
 using namespace ZyppHistoryEvents;
 
@@ -174,7 +174,7 @@ ZyppHistoryParser::parseCommandEvent( const QStringList & fields )
     QString command = fields.at( 3 ).simplified();
     command.remove( '\'' ); // Remove all single quotes: 'zypper' 'in' 'xhost'
     event->rawCommand = command;
-    event->command    = prettyCommand( command );
+    event->command    = MyrlynApp::prettyCommand( command );
     _lastCommand      = event;
 
     // Intentionally not doing
@@ -378,56 +378,6 @@ void ZyppHistoryParser::finalizeLastCommand()
 
         _lastCommand = 0;
     }
-}
-
-
-QString ZyppHistoryParser::prettyCommand( const QString & rawCommandLine )
-{
-    // Sample input data:
-    //
-    // /usr/bin/myrlyn
-    // zypper in xhost
-    // zypper dup
-    //
-    // /usr/bin/ruby.ruby3.3 --encoding=utf-8 /usr/lib/YaST2/bin/y2start sw_single qt -name YaST2
-
-    QString commandLine = rawCommandLine.simplified();
-    QString result      = commandLine;
-    QString command     = commandLine.section( ' ', 0, 0 ); // first word only
-    QString args        = commandLine.section( ' ', 1 );    // the rest
-
-    command = command.section( '/', -1 ).toLower();  // basename only, no path
-
-    if ( command.contains( "myrlyn" ) )
-    {
-        result = "Myrlyn";
-    }
-    else if ( command.contains( "ruby" ) && args.contains( "y2start" ) )
-    {
-        result = "YaST";
-
-        if ( args.contains( " installation " ) )
-            result += " installation";
-        else if ( args.contains( " update " ) || args.contains( " upgrade ") )
-            result += " upgrade";
-        else if ( args.contains( " sw_single " ) )
-            result += " sw_single";
-    }
-    else if ( command.contains( "zypper" ) )
-    {
-        result = "zypper";
-
-        if ( args.size() < MAX_ZYPPER_ARG_LEN )
-            result += QString( " " ) + args;
-        else
-            result += QString( " " ) + args.left( MAX_ZYPPER_ARG_LEN ) + "...";
-    }
-    else if ( command.toLower().contains( "packagekit" ) )
-        result = command;
-
-    // logDebug() << result << " from \"" << rawCommandLine << "\"" << endl;
-
-    return result;
 }
 
 

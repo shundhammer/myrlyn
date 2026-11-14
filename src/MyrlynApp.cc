@@ -40,6 +40,8 @@
 #include "ZyppLogger.h"
 #include "MyrlynApp.h"
 
+#define MAX_ZYPPER_ARG_LEN  100
+
 using LogStr::hex;
 using LogStr::dec;
 
@@ -502,6 +504,122 @@ void MyrlynApp::quit( bool askForConfirmation )
         _mainWin->hide();  // For instant user feedback
 
     qApp->quit();
+}
+
+
+void
+MyrlynApp::zyppIsLockedPopup()
+{
+    QString message = _( "Can't connect to the package manager!\n"
+                         "It may be busy in another window.\n" );
+    QString msgDetails;
+
+    long pid = readZyppLockPid();
+
+    if ( pid > -1 )
+    {
+        msgDetails = _( "Locking process:\nPID %1   %2" )
+            .arg( pid )
+            .arg( prettyCommand( readPidCommandLine( pid ) ) );
+
+        message += "\n" + msgDetails;
+        logInfo() << msgDetails.simplified() << endl;
+    }
+
+    QMessageBox::warning( 0, // parent
+                          _( "Error" ),
+                          message );
+}
+
+
+long
+MyrlynApp::readZyppLockPid()
+{
+    QFile file( "/run/zypp.pid" );
+
+    if ( ! file.open( QIODevice::ReadOnly | QIODevice::Text ) )
+    {
+        logError() << "Can't open " << file.fileName() << endl;
+        return -1; // error
+    }
+
+    QTextStream stream( &file );
+
+    QString line = stream.readLine().trimmed();
+    bool    ok   = false;;
+    long    pid  = line.toLong( &ok );
+
+    return ok ? pid : -1;
+}
+
+
+QString
+MyrlynApp::readPidCommandLine( long pid )
+{
+    QFile file( QString( "/proc/%1/cmdline" ).arg( pid ) );
+
+    if ( ! file.open( QIODevice::ReadOnly | QIODevice::Text ) )
+    {
+        logError() << "Can't open " << file.fileName() << endl;
+        return QString();
+    }
+
+    QTextStream stream( &file );
+    QString line = stream.readLine();
+    line.replace( '\0', ' ' ); // Command line arguments are separated with '\0'
+
+    return line;
+}
+
+
+QString
+MyrlynApp::prettyCommand( const QString & rawCommandLine )
+{
+    // Sample input data:
+    //
+    // /usr/bin/myrlyn
+    // zypper in xhost
+    // zypper dup
+    //
+    // /usr/bin/ruby.ruby3.3 --encoding=utf-8 /usr/lib/YaST2/bin/y2start sw_single qt -name YaST2
+
+    QString commandLine = rawCommandLine.simplified();
+    QString result      = commandLine;
+    QString command     = commandLine.section( ' ', 0, 0 ); // first word only
+    QString args        = commandLine.section( ' ', 1 );    // the rest
+
+    command = command.section( '/', -1 ).toLower();  // basename only, no path
+
+    if ( command.contains( "myrlyn" ) )
+    {
+        result = "Myrlyn";
+    }
+    else if ( command.contains( "ruby" ) && args.contains( "y2start" ) )
+    {
+        result = "YaST";
+
+        if ( args.contains( " installation " ) )
+            result += " installation";
+        else if ( args.contains( " update " ) || args.contains( " upgrade ") )
+            result += " upgrade";
+        else if ( args.contains( " sw_single " ) )
+            result += " sw_single";
+    }
+    else if ( command.contains( "zypper" ) )
+    {
+        result = "zypper";
+
+        if ( args.size() < MAX_ZYPPER_ARG_LEN )
+            result += QString( " " ) + args;
+        else
+            result += QString( " " ) + args.left( MAX_ZYPPER_ARG_LEN ) + "...";
+    }
+    else if ( command.toLower().contains( "packagekit" ) )
+        result = command;
+
+    // logDebug() << result << " from \"" << rawCommandLine << "\"" << endl;
+
+    return result;
 }
 
 

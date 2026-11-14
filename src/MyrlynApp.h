@@ -97,6 +97,35 @@ public:
     void run();
 
     /**
+     * Post a "zypp is locked" popup, including the locking process and its
+     * program name.
+     **/
+    static void zyppIsLockedPopup();
+
+    /**
+     * Read the PID of the locking process from the /run/zypp.pid zypp lock file.
+     * Return -1 if error.
+     **/
+    static long readZyppLockPid();
+
+    /**
+     * Read the command line of a PID from /proc/<pid>/cmdline.
+     * Return an empty string if error.
+     **/
+    static QString readPidCommandLine( long pid );
+
+    /**
+     * Convert a raw command line into a pretty human readable command:
+     *   /usr/bin/myrlyn  -> Myrlyn
+     *   zypper in foo    -> zypper in foo
+     *   zypper dup       -> zypper dup
+     *
+     *   /usr/bin/ruby.ruby3.4 --encoding=utf-8 /usr/lib/YaST2/bin/y2start sw_single qt -name YaST2
+     *                    -> YaST sw_single
+     **/
+    static QString prettyCommand( const QString & rawCommand );
+
+    /**
      * Return 'true' if this program is running with root privileges
      * or if OptFakeRoot (--fake-root) is set.
      *
@@ -329,5 +358,6 @@ protected:
     static QColor           _redTextColor;
     static QColor           _blueTextColor;
 };
+
 
 #endif // MyrlynApp_h
