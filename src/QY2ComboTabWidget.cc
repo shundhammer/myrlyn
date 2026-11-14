@@ -92,7 +92,7 @@ QY2ComboTabWidget::showPageIndex( int index )
 {
     if ( _pages.contains(index) )
     {
-        QWidget * page = _pages[ index ];
+        QWidget * page = _pages.value( index );
         _widgetStack->setCurrentWidget( page );
         _widgetStack->setVisible( ! _emptyPages.contains( page ) );
 
@@ -112,7 +112,7 @@ QY2ComboTabWidget::showPage( QWidget * page )
     _widgetStack->setCurrentWidget( page );
     _widgetStack->setVisible( ! _emptyPages.contains( page ) );
 
-    if ( page == _pages[ _comboBox->currentIndex() ] )
+    if ( page == _pages.value( _comboBox->currentIndex() ) )
     {
         // Shortcut: If the requested page is the one that belongs to the item
         // currently selected in the combo box, don't bother searching the

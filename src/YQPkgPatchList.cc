@@ -75,7 +75,7 @@ YQPkgPatchList::~YQPkgPatchList()
 YQPkgPatchCategoryItem *
 YQPkgPatchList::category( YQPkgPatchCategory category )
 {
-    YQPkgPatchCategoryItem * cat = _categories[ category ];
+    YQPkgPatchCategoryItem * cat = _categories.value( category );
 
     if ( ! cat )
     {

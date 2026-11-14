@@ -173,7 +173,7 @@ YQPkgPatternList::category( const QString & categoryName )
     if ( categoryName.isEmpty() )
         return 0;
 
-    YQPkgPatternCategoryItem * cat = _categories[ categoryName ];
+    YQPkgPatternCategoryItem * cat = _categories.value( categoryName );
 
     if ( ! cat )
     {

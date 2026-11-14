@@ -126,7 +126,7 @@ YQIconPool::cachedIcon( const QString & iconName )
 {
     Q_INIT_RESOURCE( icons );
 
-    QIcon icon = _iconCache[ iconName ];
+    QIcon icon = _iconCache.value( iconName );
 
     if ( icon.isNull() )
     {

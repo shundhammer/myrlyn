@@ -164,7 +164,7 @@ void Workflow::start()
 void Workflow::restart()
 {
     _history.clear();
-    _currentStep = _steps.isEmpty() ? 0 : _steps.first();
+    _currentStep = _steps.isEmpty() ? 0 : _steps.constFirst();
 
     if ( _currentStep )
         _currentStep->activate( true ); // goingForward
