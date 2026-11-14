@@ -17,6 +17,8 @@
 #ifndef ZyppHistoryBrowser_h
 #define ZyppHistoryBrowser_h
 
+#include <memory>
+
 #include <QDialog>
 #include "ZyppHistoryEvents.h"
 
@@ -149,7 +151,7 @@ protected:
 
     // Data members
 
-    Ui::ZyppHistoryBrowser *     _ui;  // see ui_zypp-history-browser.h
+    std::unique_ptr<Ui::ZyppHistoryBrowser> _ui;  // see ui_zypp-history-browser.h
     QTreeWidgetItem        *     _lastTimeLineItem;
     int                          _trivialPkgInstallCount;
     int                          _trivialPkgRemoveCount;

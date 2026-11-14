@@ -18,6 +18,8 @@
 #define RepoEditDialog_h
 
 
+#include <memory>
+
 #include <QDialog>
 #include "YQZypp.h"     // ZyppRepoInfo
 
@@ -178,7 +180,7 @@ protected:
     //
 
     Mode             _mode;
-    Ui::RepoEdit *   _ui;
+    std::unique_ptr<Ui::RepoEdit> _ui;
     ZyppRepoInfo     _repoInfo;
     CommunityRepos * _communityRepos;
 

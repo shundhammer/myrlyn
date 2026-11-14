@@ -18,6 +18,8 @@
 #define RepoGpgKeyImportDialog_h
 
 
+#include <memory>
+
 #include <string>
 #include <zypp/PublicKey.h>
 #include <zypp/RepoInfo.h>
@@ -76,7 +78,7 @@ protected:
 
     // Data members
 
-    Ui::RepoGpgKeyImportDialog * _ui; // See ui_repo-gpg-key-import-dialog.ui
+    std::unique_ptr<Ui::RepoGpgKeyImportDialog> _ui; // See ui_repo-gpg-key-import-dialog.ui
     ZyppRepoInfo                 _repoInfo;
 };
 

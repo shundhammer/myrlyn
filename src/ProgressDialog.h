@@ -18,6 +18,8 @@
 #define ProgressDialog_h
 
 
+#include <memory>
+
 #include <QElapsedTimer>
 #include <QDialog>
 
@@ -112,7 +114,7 @@ public:
     // Data members
     //
 
-    Ui::ProgressDialog * _ui;
+    std::unique_ptr<Ui::ProgressDialog> _ui;
     QElapsedTimer        _timer;
     bool                 _shown;
 };

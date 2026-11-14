@@ -17,6 +17,8 @@
 #ifndef YQPkgSearchFilterView_h
 #define YQPkgSearchFilterView_h
 
+#include <memory>
+
 #include "YQZypp.h"
 #include <QWidget>
 #include <QEvent>
@@ -204,7 +206,7 @@ protected:
     // Data members
     //
 
-    Ui::SearchFilterView *   _ui;
+    std::unique_ptr<Ui::SearchFilterView> _ui;
     SearchFields             _searchFields;
     SearchFilter::FilterMode _defaultAutoMode;
 };

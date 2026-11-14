@@ -52,8 +52,6 @@ InitReposPage::InitReposPage( MyrlynRepoManager * repoManager,
 InitReposPage::~InitReposPage()
 {
     // logDebug() << "Destroying InitReposPage" << endl;
-
-    delete _ui;
 }
 
 

@@ -17,6 +17,8 @@
 #ifndef YQPkgStatusFilterView_h
 #define YQPkgStatusFilterView_h
 
+#include <memory>
+
 #include <QEvent>
 #include <QWidget>
 #include "YQZypp.h"
@@ -143,7 +145,7 @@ protected:
 
     // Data members
 
-    Ui::StatusFilterView * _ui;
+    std::unique_ptr<Ui::StatusFilterView> _ui;
 };
 
 

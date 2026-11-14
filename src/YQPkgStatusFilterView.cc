@@ -55,7 +55,6 @@ YQPkgStatusFilterView::YQPkgStatusFilterView( QWidget * parent )
 YQPkgStatusFilterView::~YQPkgStatusFilterView()
 {
     writeSettings();
-    delete _ui;
 }
 
 

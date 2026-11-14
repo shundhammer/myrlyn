@@ -57,8 +57,6 @@ ZyppHistoryFilterDialog::~ZyppHistoryFilterDialog()
 
     writeSettings();
     WindowSettings::write( this, "ZyppHistoryFilterDialog" );
-
-    delete _ui;
 }
 
 

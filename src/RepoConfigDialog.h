@@ -17,6 +17,8 @@
 #ifndef RepoConfigDialog_h
 #define RepoConfigDialog_h
 
+#include <memory>
+
 #include <QDialog>
 
 
@@ -147,7 +149,7 @@ protected:
 
     // Data members
 
-    Ui::RepoConfig * _ui;  // see ui_repo-config.h
+    std::unique_ptr<Ui::RepoConfig> _ui;  // see ui_repo-config.h
     RepoManager_Ptr  _repoManager;
     bool             _restartNeeded;
 };

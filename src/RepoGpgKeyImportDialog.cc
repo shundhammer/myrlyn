@@ -67,7 +67,7 @@ RepoGpgKeyImportDialog::RepoGpgKeyImportDialog( const zypp::PublicKey & key,
 
 RepoGpgKeyImportDialog::~RepoGpgKeyImportDialog()
 {
-    delete _ui;
+    // NOP
 }
 
 

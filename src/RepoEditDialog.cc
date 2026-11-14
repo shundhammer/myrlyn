@@ -75,7 +75,6 @@ RepoEditDialog::~RepoEditDialog()
     WindowSettings::write( this, _mode == AddRepo ? "RepoAddDialog" : "RepoEditDialog" );
 
     delete _communityRepos;
-    delete _ui;
 }
 
 

@@ -80,7 +80,6 @@ PkgCommitPage::PkgCommitPage( QWidget * parent )
 PkgCommitPage::~PkgCommitPage()
 {
     writeSettings();
-    delete _ui;
     // PkgCommitSignalForwarder::instance()->deleteLater();
 
     // No need to delete _fileConflictsProgressDialog:

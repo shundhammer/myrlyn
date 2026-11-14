@@ -54,7 +54,7 @@ YQPkgUpdatesFilterView::YQPkgUpdatesFilterView( QWidget * parent )
 
 YQPkgUpdatesFilterView::~YQPkgUpdatesFilterView()
 {
-    delete _ui;
+    // NOP
 }
 
 

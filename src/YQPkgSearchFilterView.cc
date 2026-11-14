@@ -99,7 +99,6 @@ YQPkgSearchFilterView::YQPkgSearchFilterView( QWidget * parent, SearchFields sea
 YQPkgSearchFilterView::~YQPkgSearchFilterView()
 {
     writeSettings();
-    delete _ui;
 }
 
 

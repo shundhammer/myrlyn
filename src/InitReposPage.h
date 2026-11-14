@@ -18,6 +18,8 @@
 #define InitReposPage_h
 
 
+#include <memory>
+
 #include <QIcon>
 #include <QWidget>
 
@@ -115,7 +117,7 @@ protected:
     //
 
     MyrlynRepoManager * _repoManager;
-    Ui::InitReposPage * _ui;       // See ui_init-repos-page.h
+    std::unique_ptr<Ui::InitReposPage> _ui;       // See ui_init-repos-page.h
 
     int                 _reposCount;
     int                 _refreshDoneCount;

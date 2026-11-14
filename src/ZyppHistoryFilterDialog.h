@@ -17,6 +17,8 @@
 #ifndef ZyppHistoryFilterDialog_h
 #define ZyppHistoryFilterDialog_h
 
+#include <memory>
+
 #include <QDialog>
 
 
@@ -85,7 +87,7 @@ protected:
 
     // Data members
 
-    Ui::ZyppHistoryFilterDialog * _ui;
+    std::unique_ptr<Ui::ZyppHistoryFilterDialog> _ui;
 };
 
 #endif  // ZyppHistoryFilterDialog_h

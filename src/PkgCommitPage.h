@@ -18,6 +18,8 @@
 #define PkgCommitPage_h
 
 
+#include <memory>
+
 #include <QStringList>
 #include <QWidget>
 
@@ -112,7 +114,7 @@ public:
     /**
      * Return the UI (the widget tree) of this page.
      **/
-    Ui::PkgCommitPage * ui() const { return _ui; }
+    Ui::PkgCommitPage * ui() const { return _ui.get(); }
 
     /**
      * Process the pending Qt events.
@@ -355,7 +357,7 @@ protected:
     // Data members
     //
 
-    Ui::PkgCommitPage * _ui;
+    std::unique_ptr<Ui::PkgCommitPage> _ui;
     PkgTasks *          _pkgTasks;
     bool                _showDetails;
     bool                _startedInstallingPkg;

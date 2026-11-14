@@ -70,7 +70,6 @@ SummaryPage::~SummaryPage()
     if ( _countdownMenu )
         delete _countdownMenu;
 
-    delete _ui;
     logDebug() << "Destroying SummaryPage done" << endl;
 }
 

@@ -70,8 +70,6 @@ RepoConfigDialog::RepoConfigDialog( QWidget * parent )
 RepoConfigDialog::~RepoConfigDialog()
 {
     WindowSettings::write( this, "RepoConfigDialog" );
-
-    delete _ui;
 }
 
 

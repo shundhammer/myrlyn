@@ -17,6 +17,8 @@
 #ifndef SummaryPage_h
 #define SummaryPage_h
 
+#include <memory>
+
 #include <QWidget>
 #include <QTimer>
 
@@ -199,7 +201,7 @@ protected:
     // Data members
     //
 
-    Ui::SummaryPage *   _ui;       // See ui_summary-page.h
+    std::unique_ptr<Ui::SummaryPage> _ui;       // See ui_summary-page.h
     int                 _countdownSec;
     QTimer              _countdownTimer;
     QTimer              _intervalTimer;

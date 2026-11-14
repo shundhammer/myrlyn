@@ -18,6 +18,8 @@
 #define YQPkgUpdatesFilterView_h
 
 
+#include <memory>
+
 #include <QWidget>
 #include <QIcon>
 #include "YQZypp.h"
@@ -149,7 +151,7 @@ protected:
 
     // Data members
 
-    Ui::UpdatesFilterView * _ui;
+    std::unique_ptr<Ui::UpdatesFilterView> _ui;
     QIcon                   _leftoverPkgIcon;
     QIcon                   _updateOkIcon;
 };
