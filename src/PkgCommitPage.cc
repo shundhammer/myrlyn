@@ -15,6 +15,7 @@
 
 
 #include <unistd.h>             // usleep()
+#include <chrono>
 
 #include <zypp/target/TargetException.h>
 
@@ -40,6 +41,8 @@
 #define VERBOSE_PROGRESS        0
 #define VERBOSE_TRANSACT        1
 #define SORT_TO_DO_LIST         1
+
+using namespace std::chrono_literals;
 
 
 PkgCommitPage * PkgCommitPage::_instance = 0;
@@ -321,8 +324,7 @@ void PkgCommitPage::wmClose()
         // Give libzypp some time to shut down properly: Execute yqapp->quit()
         // only after returning to event loop after some time has passed.
 
-        QTimer::singleShot( 500, // millisec
-                            MyrlynApp::instance(), SLOT( quit() ) );
+        QTimer::singleShot( 500ms, MyrlynApp::instance(), SLOT( quit() ) );
     }
 }
 

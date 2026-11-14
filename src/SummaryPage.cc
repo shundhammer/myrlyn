@@ -15,6 +15,7 @@
 
 
 #include <unistd.h>     // access()
+#include <chrono>
 
 #include <QAction>
 #include <QActionGroup>
@@ -30,6 +31,8 @@
 #include "YQIconPool.h"
 #include "YQi18n.h"
 #include "SummaryPage.h"
+
+using namespace std::chrono_literals;
 
 
 SummaryPage::SummaryPage( QWidget * parent )
@@ -131,11 +134,11 @@ void SummaryPage::startCountdown()
 {
     if ( _countdownSec > 0 )
     {
-        _intervalTimer.setInterval( 1000 ); // millisec
+        _intervalTimer.setInterval( 1s );
         _intervalTimer.start();
 
         _countdownTimer.setSingleShot( true );
-        _countdownTimer.start( _countdownSec * 1000 );
+        _countdownTimer.start( std::chrono::seconds( _countdownSec ) );
     }
 
     updateCountdownWidgets();
