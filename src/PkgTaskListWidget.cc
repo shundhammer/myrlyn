@@ -123,7 +123,7 @@ bool PkgTaskListWidgetItem::sortByInsertionSequence() const
         return false;
 
     PkgTaskListWidget * parentPkgTaskListWidget =
-        dynamic_cast<PkgTaskListWidget *> ( listWidget() );
+        qobject_cast<PkgTaskListWidget *> ( listWidget() );
 
     if ( parentPkgTaskListWidget )
 	return parentPkgTaskListWidget->sortByInsertionSequence();

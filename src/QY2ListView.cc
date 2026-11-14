@@ -337,7 +337,7 @@ QY2ListViewItem::QY2ListViewItem( QTreeWidgetItem * parentItem,
 {
     _serial = 0;
 
-    QY2ListView * parentListView = dynamic_cast<QY2ListView *> ( treeWidget() );
+    QY2ListView * parentListView = qobject_cast<QY2ListView *> ( treeWidget() );
 
     if ( parentListView )
         _serial = parentListView->nextSerial();
@@ -388,7 +388,7 @@ QY2ListViewItem::operator< ( const QTreeWidgetItem & otherListViewItem ) const
 bool
 QY2ListViewItem::sortByInsertionSequence() const
 {
-    QY2ListView * parentListView = dynamic_cast<QY2ListView *> (treeWidget());
+    QY2ListView * parentListView = qobject_cast<QY2ListView *> (treeWidget());
 
     if ( parentListView )
         return parentListView->sortByInsertionSequence();
@@ -440,7 +440,7 @@ QY2CheckListItem::QY2CheckListItem( QTreeWidgetItem * parentItem,
     : QY2ListViewItem( parentItem, text)
 {
     _serial = 0;
-    QY2ListView * parentListView = dynamic_cast<QY2ListView *> ( treeWidget() );
+    QY2ListView * parentListView = qobject_cast<QY2ListView *> ( treeWidget() );
 
     setFlags( Qt::ItemIsUserCheckable | Qt::ItemIsEnabled );
     setCheckState(0, Qt::Unchecked);
