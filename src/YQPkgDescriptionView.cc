@@ -304,11 +304,9 @@ YQPkgDescriptionView::findDesktopFiles( const list<string> & fileList ) const
 
 void YQPkgDescriptionView::initLang()
 {
-    const char *lang_cstr = getenv( "LANG" );
-
-    if ( lang_cstr )
+    if ( qEnvironmentVariableIsSet( "LANG" ) )
     {
-        _langWithCountry = lang_cstr;
+        _langWithCountry = qEnvironmentVariable( "LANG" );
 
          // remove .utf8 / @euro etc.
         _langWithCountry.replace( QRegularExpression( "[@\\.].*$" ), "" );

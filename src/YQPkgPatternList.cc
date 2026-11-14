@@ -64,15 +64,12 @@ YQPkgPatternList::YQPkgPatternList( QWidget * parent,
 
     // Set this environment variable to get an "Order" column in the patterns list
 
-    if ( getenv( "Y2_SHOW_PATTERNS_ORDER" ) )
+    if ( qEnvironmentVariableIsSet( "Y2_SHOW_PATTERNS_ORDER" ) )
     {
         headers << _( "Order" ); _orderCol = numCol++;
     }
 
-    if ( getenv( "Y2_SHOW_INVISIBLE_PATTERNS" ) )
-        _showInvisiblePatterns = true;
-    else
-        _showInvisiblePatterns = false;
+    _showInvisiblePatterns = qEnvironmentVariableIsSet( "Y2_SHOW_INVISIBLE_PATTERNS" );
 
     setHeaderLabels( headers );
     setColumnCount( numCol );
