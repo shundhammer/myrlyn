@@ -83,12 +83,12 @@ void YQPkgSelector::helpDevelopmentStatus() const
 void YQPkgSelector::about()
 {
     QDialog aboutDialog( this );
-    Ui::AboutDialog * ui( new Ui::AboutDialog );
-    ui->setupUi( &aboutDialog );
+    Ui::AboutDialog ui;
+    ui.setupUi( &aboutDialog );
 
-    QString text = ui->heading->text();
+    QString text = ui.heading->text();
     text += QString( " %1" ).arg( VERSION );
-    ui->heading->setText( text );
+    ui.heading->setText( text );
 
     QStringList contributors = QStringList() << "\n"  // The "\n" is needed for the join()
         << fromUTF8( "@gruenich (Christoph Grüninger)" )
@@ -97,9 +97,8 @@ void YQPkgSelector::about()
         << "@slothsnow"
         << "@Sauerlandlinux (Stephan Hemeier)"
         ;
-    ui->contributorsText->setText( contributors.join( "\n- " ) );;
+    ui.contributorsText->setText( contributors.join( "\n- " ) );;
 
     aboutDialog.exec();
-    delete ui;
 }
 
