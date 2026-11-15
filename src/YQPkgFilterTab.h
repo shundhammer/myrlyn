@@ -18,8 +18,6 @@
 #define YQPkgFilterTab_h
 
 
-#include <memory>
-
 #include <QAction>
 #include <QHash>
 #include <QKeySequence>
@@ -256,7 +254,7 @@ protected:
 
 private:
 
-    const std::unique_ptr<YQPkgFilterTabPrivate> _priv;
+    YQPkgFilterTabPrivate * _priv;
 };
 
 

@@ -223,6 +223,7 @@ YQPkgFilterTab::~YQPkgFilterTab()
         delete page;
 
     _priv->pages.clear();
+    delete _priv;
 }
 
 
