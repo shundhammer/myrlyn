@@ -18,7 +18,6 @@
 #define ZyppLogger_h
 
 
-#include <memory>
 #include <string>
 #include <QMutex>
 
