@@ -35,7 +35,7 @@ This situation can happen if
 See also [issue #71](https://github.com/shundhammer/myrlyn/issues/71).
 
 This situation is easy to avoid: Add a local directory as a repository with a
-`dir:´ URL like `dir:/work/rpms` and install packages from there. That way, a
+`dir:` URL like `dir:/work/rpms` and install packages from there. That way, a
 repository provides those RPMs, so they will not be displayed as orphaned.
 
 You will still not get any updates, of course, unless you build those RPMs
@@ -64,14 +64,14 @@ severe problems with that version, so that specific version was marked as
 _retracted_ on the update servers, and libzypp (both in `zypper` and Myrlyn)
 will not use that version as an update anymore.
 
-But some users may already have installed it. Those users should _downgrade_
-this package to the latest non-retracted version.
+But some users may already have installed it. Those users should now
+_downgrade_ this package to the latest non-retracted version.
 
 In the package list, a retracted version is displayed in red (very much like an
 _orphaned_ version), and it shows a message **"[RETRACTED]"** in the "Versions"
 view below the package list.
 
-If you start Myrlyn and it immediately switches to the "Package Classification"
+If you start Myrlyn, and it immediately switches to the "Package Classification"
 view and within that view to "Retracted Installed Packages", that means that
 you have retracted packages installed.
 

@@ -36,14 +36,14 @@ If this is the case, when you click the "Accept" button in any view other than
 changes.
 
 Unlike this pop-up dialog, the "Installation Summary" by default shows _all_
-pending changes, not only the automatic ones. You use the checkboxes in the
+xpending changes, not only the automatic ones. Use the checkboxes in the
 left panel to select which status values to show.
 
-By default, it will show all packages that will be newly installed, updated or
+By default, it shows all packages that will be newly installed, updated or
 removed, no matter whether they were selected explicitly by you or marked
-automatically because of dependencies. In addition to that, it will show you
-all packages in status "Protected" (installed and locked against change) or
-"Taboo" (not installed and locked against being installed).
+automatically because of dependencies. In addition to that, it shows all
+packages in status "Protected" (installed and locked against change) or "Taboo"
+(not installed and locked against being installed).
 
 If you have many packages in status "Protected" or "Taboo", consider
 deselecting them in the status checkboxes in the left panel so they don't
@@ -77,9 +77,8 @@ Click "Defaults" to restore the default settings for the checkboxes.
 
 ### Check for Auto-Deleted Packages
 
-Similar to above, select only "Auto-Delete" or middle-click it.
-
-The remaining packages were automatically marked for deletion because of
+Similar to above, select only "Auto-Delete" or middle-click it. The remaining
+packages in the list were automatically marked for deletion because of
 dependencies.
 
 This typically happens when another package that you requested has a

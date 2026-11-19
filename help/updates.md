@@ -72,10 +72,10 @@ release has a specific release day, and after a certain number of months, there
 is a new release with a new release number:
 Leap 15.6 -> Leap 16.0 -> Leap 16.1.
 
-They receive package updates for bug fixes and security fixes, but typically no
-new package versions with new features. These updates may be bundled into
-_patches_ that address specific bugs or security problems. A patch may contain
-one or more packages related to the particular issue.
+They receive package updates with fixes for bugs and security problems, but
+typically no new package versions with new features. These updates may be
+bundled into _patches_ that address specific bugs or security problems. A patch
+may contain one or more packages related to the particular issue.
 
 A point release will certainly not receive a completely new package like Myrlyn
 in the example above.
