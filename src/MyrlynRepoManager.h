@@ -155,10 +155,10 @@ protected:
     void loadRepos();
 
     /**
-     * Notify the user to run 'zypper dup' in a warning pop-up and on stderr.
+     * Notify the user to run 'zypper refresh' in a warning pop-up and on stderr.
      * This does not exit.
      **/
-    void notifyUserToRunZypperDup() const;
+    void notifyUserToRunZypperRefresh() const;
 
     /**
      * Show a popup dialog with the names of repos that failed to refresh.

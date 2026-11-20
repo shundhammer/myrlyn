@@ -182,7 +182,7 @@ void MyrlynRepoManager::attachRepos()
 
         if ( ! MyrlynApp::runningAsRealRoot() )
         {
-            notifyUserToRunZypperDup();
+            notifyUserToRunZypperRefresh();
 
             logInfo() << "Exiting." << endl;
             exit( 1 );
@@ -289,7 +289,7 @@ void MyrlynRepoManager::loadRepos()
 }
 
 
-void MyrlynRepoManager::notifyUserToRunZypperDup() const
+void MyrlynRepoManager::notifyUserToRunZypperRefresh() const
 {
     logInfo() << "Run 'sudo zypper refresh' and restart the program." << endl;
 
