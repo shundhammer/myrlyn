@@ -21,7 +21,9 @@
 #include <QMessageBox>
 
 #include <zypp/ZYppFactory.h>
+#include <zypp/KeyRing.h>
 #include <zypp/Locale.h>
+#include <zypp/PublicKey.h>
 #include <zypp/ZConfig.h>
 
 #include "Exception.h"
@@ -166,10 +168,36 @@ MyrlynRepoManager::zyppConnectInternal( int attempts, int waitSeconds )
 }
 
 
+void MyrlynRepoManager::checkRepoKeys()
+{
+    zypp::KeyRing_Ptr keyRing = zypp::getZYpp()->keyRing();
+    CHECK_PTR( keyRing );
+
+    int debugCount = qgetenv( "MYRLYN_DEBUG_GPG_KEYS" ).isEmpty() ? 0 : 2;
+
+    for ( const zypp::PublicKey & key: keyRing->trustedPublicKeys() )
+    {
+        logInfo() << "Checking GPG key: " << fromUTF8( key.name() ) << endl;
+
+        if ( key.expired() || --debugCount == 0 )
+        {
+            logWarning() << "  Key is EXPIRED! "
+                         << fromUTF8( key.expiresAsString() )
+                         << endl;
+            logWarning() << "  Remove with:  sudo rpm --erase --allmatches "
+                         << fromUTF8( key.rpmName() )
+                         << endl;
+        }
+        else
+        {
+            logInfo() << "  OK; days to live: " << key.daysToLive() << endl;
+        }
+    }
+}
+
+
 void MyrlynRepoManager::attachRepos()
 {
-    // TO DO: check and load services (?)
-
     try
     {
         findEnabledRepos();

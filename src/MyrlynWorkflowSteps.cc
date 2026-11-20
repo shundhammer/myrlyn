@@ -171,6 +171,7 @@ void InitReposStep::initRepos()
     }
 
     repoMan->initTarget();
+    repoMan->checkRepoKeys();
     repoMan->attachRepos();
     normalCursor();
 

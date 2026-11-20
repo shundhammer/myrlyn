@@ -67,6 +67,12 @@ public:
     void initTarget();
 
     /**
+     * Check the repos' GPG keys and warn about any expired keys or keys that
+     * are about to expire soon.
+     **/
+    void checkRepoKeys();
+
+    /**
      * Attach the active repos and load their resolvables.
      **/
     void attachRepos();
