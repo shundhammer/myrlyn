@@ -175,7 +175,7 @@ void MyrlynRepoManager::checkRepoKeys()
 
     int debugCount = qgetenv( "MYRLYN_DEBUG_GPG_KEYS" ).isEmpty() ? 0 : 2;
 
-    for ( const zypp::PublicKey & key: keyRing->trustedPublicKeys() )
+    for ( const zypp::PublicKeyData & key: keyRing->trustedPublicKeyData() )
     {
         logInfo() << "Checking GPG key: " << fromUTF8( key.name() ) << endl;
 
@@ -187,6 +187,18 @@ void MyrlynRepoManager::checkRepoKeys()
             logWarning() << "  Remove with:  sudo rpm --erase --allmatches "
                          << fromUTF8( key.rpmName() )
                          << endl;
+
+            if ( MyrlynApp::runningAsRealRoot() )
+            {
+#if 0
+                logInfo() << "  Trying to delete GPG key with ID "
+                          << fromUTF8( key.id() ) << endl;
+
+                // This seems to have no effect at all
+                keyRing->deleteKey( key.id(),
+                                    true );   // trusted
+#endif
+            }
         }
         else
         {
