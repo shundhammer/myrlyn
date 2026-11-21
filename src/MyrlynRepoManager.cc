@@ -28,6 +28,7 @@
 #include <zypp/target/rpm/RpmDb.h>
 
 #include "Exception.h"
+#include "ExpiredGpgKeyDialog.h"
 #include "KeyRingCallbacks.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -185,11 +186,14 @@ void MyrlynRepoManager::checkGpgKeys()
         }
         else if ( keyMatchesDelKeyEnvVar( key ) ) // $MYRLYN_DEL_KEY
         {
-            deleteGpgKey( key );
+            if ( confirmExpiredGpgKey( key ) ) // For debugging
+                deleteGpgKey( key );
         }
         else
         {
-            logInfo() << "  OK; days to live: " << key.daysToLive() << endl;
+            logInfo() << "  OK; days to live: " << key.daysToLive()
+                      << "  expires: " << key.expires().form( "%F" )  // ISO date
+                      << endl;
         }
     }
 }
@@ -376,8 +380,10 @@ void MyrlynRepoManager::showFailedRepos() const
 
 void MyrlynRepoManager::handleExpiredGpgKey( const zypp::PublicKey & key )
 {
-    logWarning() << "  Key is EXPIRED! " << key.expiresAsString() << endl;
-    deleteGpgKey( key );
+    logWarning() << "  Key is EXPIRED! " << key.expires().form( "%F" ) << endl;
+
+    if ( confirmExpiredGpgKey( key ) )
+        deleteGpgKey( key );
 }
 
 
@@ -424,4 +430,13 @@ bool MyrlynRepoManager::keyMatchesDelKeyEnvVar( const zypp::PublicKey & key ) co
         logInfo() << "Key name contains $" << envVarName << " \"" << delKey << "\"" << endl;
 
     return match;
+}
+
+
+bool MyrlynRepoManager::confirmExpiredGpgKey( const zypp::PublicKey & key ) const
+{
+    ExpiredGpgKeyDialog dialog( key );
+    int result = dialog.exec();
+
+    return result == QDialog::Accepted;
 }

@@ -192,6 +192,12 @@ protected:
      **/
     bool keyMatchesDelKeyEnvVar( const zypp::PublicKey & key ) const;
 
+    /**
+     * Open a dialog to confirm deleting an expired GPG key.
+     * Return 'true' if the user confirms, 'false' if not.
+     **/
+    bool confirmExpiredGpgKey( const zypp::PublicKey & key ) const;
+
 
     //
     // Data members

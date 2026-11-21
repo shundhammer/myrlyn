@@ -23,6 +23,7 @@ set( SOURCES
   Logger.cc
   LogStream.cc
   Exception.cc
+  ExpiredGpgKeyDialog.cc
   FSize.cc
   InitReposPage.cc
   KeyRingCallbacks.cc
@@ -134,6 +135,7 @@ set( QRC_FILES
 set( UI_FILES
      about-dialog.ui
      init-repos-page.ui
+     expired-gpg-key-dialog.ui
      pkg-commit-page.ui
      progress-dialog.ui
      repo-config.ui
