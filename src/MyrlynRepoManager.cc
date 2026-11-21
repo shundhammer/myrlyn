@@ -25,6 +25,7 @@
 #include <zypp/Locale.h>
 #include <zypp/PublicKey.h>
 #include <zypp/ZConfig.h>
+#include <zypp/target/rpm/RpmDb.h>
 
 #include "Exception.h"
 #include "KeyRingCallbacks.h"
@@ -170,33 +171,42 @@ MyrlynRepoManager::zyppConnectInternal( int attempts, int waitSeconds )
 
 void MyrlynRepoManager::checkRepoKeys()
 {
-    zypp::KeyRing_Ptr keyRing = zypp::getZYpp()->keyRing();
+    zypp::KeyRing_Ptr keyRing = zyppPtr()->keyRing();
     CHECK_PTR( keyRing );
 
-    int debugCount = qgetenv( "MYRLYN_DEBUG_GPG_KEYS" ).isEmpty() ? 0 : 2;
+    QString delKey = QString::fromUtf8( qgetenv( "MYRLYN_DEL_KEY" ) );
 
-    for ( const zypp::PublicKeyData & key: keyRing->trustedPublicKeyData() )
+    for ( const zypp::PublicKey & key: keyRing->trustedPublicKeys() )
     {
-        logInfo() << "Checking GPG key: " << fromUTF8( key.name() ) << endl;
+        logInfo() << "Checking GPG key: " << key.name() << endl;
 
-        if ( key.expired() || --debugCount == 0 )
+        bool doDel = false;
+
+        if ( key.expired() )
         {
-            logWarning() << "  Key is EXPIRED! "
-                         << fromUTF8( key.expiresAsString() )
-                         << endl;
-            logWarning() << "  Remove with:  sudo rpm --erase --allmatches "
-                         << fromUTF8( key.rpmName() )
+            doDel = true;
+            logWarning() << "  Key is EXPIRED! " << key.expiresAsString() << endl;
+        }
+        else if ( ! delKey.isEmpty() &&
+                  fromUTF8( key.name() ).contains( delKey, Qt::CaseInsensitive ) )
+        {
+            doDel = true;
+            logInfo() << "  Key contains $MYRLYN_DEL_KEY \"" << delKey << "\"" << endl;
+        }
+
+        if ( doDel )
+        {
+            logWarning() << "  Delete with:  sudo rpm --erase --allmatches "
+                         << key.rpmName()
                          << endl;
 
             if ( MyrlynApp::runningAsRealRoot() )
             {
-#if 0
-                logInfo() << "  Trying to delete GPG key with ID "
-                          << fromUTF8( key.id() ) << endl;
+#if 1
+                logInfo() << "  Trying to delete GPG key with ID " << key.id() << endl;
 
-                // This seems to have no effect at all
-                keyRing->deleteKey( key.id(),
-                                    true );   // trusted
+                keyRing->deleteKey( key.id(), /* trusted */ true );
+                zyppPtr()->target()->rpmDb().removePubkey( key );
 #endif
             }
         }
