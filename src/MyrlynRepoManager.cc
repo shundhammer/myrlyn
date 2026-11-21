@@ -169,46 +169,22 @@ MyrlynRepoManager::zyppConnectInternal( int attempts, int waitSeconds )
 }
 
 
-void MyrlynRepoManager::checkRepoKeys()
+void MyrlynRepoManager::checkGpgKeys()
 {
     zypp::KeyRing_Ptr keyRing = zyppPtr()->keyRing();
     CHECK_PTR( keyRing );
-
-    QString delKey = QString::fromUtf8( qgetenv( "MYRLYN_DEL_KEY" ) );
 
     for ( const zypp::PublicKey & key: keyRing->trustedPublicKeys() )
     {
         logInfo() << "Checking GPG key: " << key.name() << endl;
 
-        bool doDel = false;
-
         if ( key.expired() )
         {
-            doDel = true;
-            logWarning() << "  Key is EXPIRED! " << key.expiresAsString() << endl;
+            handleExpiredGpgKey( key );
         }
-        else if ( ! delKey.isEmpty() &&
-                  fromUTF8( key.name() ).contains( delKey, Qt::CaseInsensitive ) )
+        else if ( keyMatchesDelKeyEnvVar( key ) ) // $MYRLYN_DEL_KEY
         {
-            doDel = true;
-            logInfo() << "  Key contains $MYRLYN_DEL_KEY \"" << delKey << "\"" << endl;
-        }
-
-        if ( doDel )
-        {
-            logWarning() << "  Delete with:  sudo rpm --erase --allmatches "
-                         << key.rpmName()
-                         << endl;
-
-            if ( MyrlynApp::runningAsRealRoot() )
-            {
-#if 1
-                logInfo() << "  Trying to delete GPG key with ID " << key.id() << endl;
-
-                keyRing->deleteKey( key.id(), /* trusted */ true );
-                zyppPtr()->target()->rpmDb().removePubkey( key );
-#endif
-            }
+            deleteGpgKey( key );
         }
         else
         {
@@ -386,4 +362,55 @@ void MyrlynRepoManager::showFailedRepos() const
     QMessageBox::warning( MainWindow::instance(), // parent
                           _( "Warning" ),         // window title
                           msg );
+}
+
+
+void MyrlynRepoManager::handleExpiredGpgKey( const zypp::PublicKey & key )
+{
+    logWarning() << "  Key is EXPIRED! " << key.expiresAsString() << endl;
+    deleteGpgKey( key );
+}
+
+
+void MyrlynRepoManager::deleteGpgKey( const zypp::PublicKey & key )
+{
+    if ( ! MyrlynApp::runningAsRealRoot() )
+    {
+        logWarning() << "  Can't delete a GPG key without root privileges." << endl;
+        logWarning() << "  Delete it manually with:  sudo rpm --erase --allmatches "
+                     << key.rpmName()
+                     << endl;
+        return;
+    }
+
+    logInfo() << "  Deleting GPG " << key.name()    << endl;
+    logInfo() << "  ID: "          << key.id()      << endl;
+    logInfo() << "  RPM name: "    << key.rpmName() << endl;
+
+    try
+    {
+        zyppPtr()->keyRing()->deleteKey( key.id(), /* trusted */ true );
+        zyppPtr()->target()->rpmDb().removePubkey( key );
+    }
+    catch ( const zypp::Exception & ex )
+    {
+        logError() << "Caught zypp exception: " << ex.asString() << endl;
+    }
+}
+
+
+bool MyrlynRepoManager::keyMatchesDelKeyEnvVar( const zypp::PublicKey & key ) const
+{
+    static const char envVarName[] = "MYRLYN_DEL_KEY";
+    static QString    delKey = QString::fromUtf8( qgetenv( envVarName ) );
+
+    if ( delKey.isEmpty() )
+        return false; // no match
+
+    bool match = fromUTF8( key.name() ).contains( delKey, Qt::CaseInsensitive );
+
+    if ( match )
+        logInfo() << "Key name contains $" << envVarName << " \"" << delKey << "\"" << endl;
+
+    return match;
 }

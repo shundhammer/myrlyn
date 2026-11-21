@@ -70,7 +70,7 @@ public:
      * Check the repos' GPG keys and warn about any expired keys or keys that
      * are about to expire soon.
      **/
-    void checkRepoKeys();
+    void checkGpgKeys();
 
     /**
      * Attach the active repos and load their resolvables.
@@ -171,6 +171,26 @@ protected:
      * Do nothing if there weren't any.
      **/
     void showFailedRepos() const;
+
+    /**
+     * Handle an expired GPG key: Inform the user, and if confirmed, delete it.
+     **/
+    void handleExpiredGpgKey( const zypp::PublicKey & key );
+
+    /**
+     * Delete a GPG key from the key ring and from the RPM database.
+     **/
+    void deleteGpgKey( const zypp::PublicKey & key );
+
+    /**
+     * Return 'true' if the name of the specified key contains the value of the
+     * $MYRLYN_DEL_KEY environment variable.
+     *
+     * This is meant mostly for debugging:
+     *
+     *   MYRLYN_DEL_KEY=PackMan  sudo -E myrlyn
+     **/
+    bool keyMatchesDelKeyEnvVar( const zypp::PublicKey & key ) const;
 
 
     //
