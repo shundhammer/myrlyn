@@ -38,7 +38,8 @@
 #include "MyrlynRepoManager.h"
 
 
-MyrlynRepoManager::MyrlynRepoManager()
+MyrlynRepoManager::MyrlynRepoManager():
+    _cacheDirty( false )
 {
     logDebug() << "Creating MyrlynRepoManager" << endl;
 }
@@ -265,6 +266,13 @@ void MyrlynRepoManager::refreshRepos()
     {
         try
         {
+            if ( _cacheDirty )
+            {
+                logInfo() << "Cleaning metadata cache for repo " << repo.name() << endl;
+                repoManager()->cleanCache( repo );
+                repoManager()->cleanMetadata( repo );
+            }
+
             timer.start();
             logInfo() << "Refreshing repo " << repo.name() << "..." << endl;
             emit refreshRepoStart( repo );
@@ -294,6 +302,7 @@ void MyrlynRepoManager::refreshRepos()
         }
     }
 
+    _cacheDirty = false;
     showFailedRepos();
 }
 
@@ -383,9 +392,9 @@ void MyrlynRepoManager::deleteGpgKey( const zypp::PublicKey & key )
         return;
     }
 
-    logInfo() << "  Deleting GPG " << key.name()    << endl;
-    logInfo() << "  ID: "          << key.id()      << endl;
-    logInfo() << "  RPM name: "    << key.rpmName() << endl;
+    logInfo() << "  Deleting GPG key " << key.name()    << endl;
+    logInfo() << "  ID: "              << key.id()      << endl;
+    logInfo() << "  RPM name: "        << key.rpmName() << endl;
 
     try
     {
@@ -396,6 +405,8 @@ void MyrlynRepoManager::deleteGpgKey( const zypp::PublicKey & key )
     {
         logError() << "Caught zypp exception: " << ex.asString() << endl;
     }
+
+    _cacheDirty = true;
 }
 
 

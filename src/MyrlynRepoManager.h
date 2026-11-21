@@ -201,6 +201,7 @@ protected:
     RepoManager_Ptr _repo_manager_ptr;
     RepoInfoList    _repos;
     RepoInfoList    _failedRepos;
+    bool            _cacheDirty;
 };
 
 #endif // MyrlynRepoManager_h
