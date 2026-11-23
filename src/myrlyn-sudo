@@ -16,18 +16,11 @@ if [ -f $MYRLYN_SUDO_CONF ]; then
     source $MYRLYN_SUDO_CONF
 fi
 
-# Find out the Xfce theme on Xfce
-if [ $XDG_CURRENT_DESKTOP == "XFCE" -a -z $XFCE_THEME ]; then
-   if [ -x /usr/bin/xfconf-query ]; then
-       XFCE_THEME=$(/usr/bin/xfconf-query -c xsettings -p /Net/ThemeName)
-   fi
-fi
-
 
 # Environment variables to keep for the 'sudo' call
 ENV_KEEP="DISPLAY WAYLAND_DISPLAY XAUTHORITY \
 XDG_RUNTIME_DIR XDG_CURRENT_DESKTOP XDG_CONFIG_DIRS \
-KDE_FULL_SESSION XFCE_THEME MYRLYN_HELP MYRLYN_DEL_KEY \
+KDE_FULL_SESSION MYRLYN_HELP MYRLYN_DEL_KEY \
 QT_QPA_PLATFORMTHEME QT_ENABLE_HIGHDPI_SCALING QT_SCALE_FACTOR \
 LANG LANGUAGE LC_MESSAGES LC_COLLATE LC_NUMERIC LC_TIME LC_ALL"
 
