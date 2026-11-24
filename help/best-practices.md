@@ -93,7 +93,7 @@ solution.
 
 The same applies to updates: If `vlc-47.11` just became available, but that
 would require `libQtCore-58.22` which isn't available yet for your distro
-version, go the conservative way: Select the "keep obsolete vlc-58.22"
+version, go the conservative way: Select the "keep obsolete vlc-47.10"
 solution. "Obsolete" is a relative thing; better last week's version than a
 broken version because it can't load the shared libs that it needs.
 
