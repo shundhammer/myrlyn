@@ -63,8 +63,9 @@ changes. Simply restart Myrlyn - or just wait for another day or two.
 ## Be Prepared to Start Over
 
 As described above, if you get caught in a maze of dependency problems, don't
-dwell on it - just cancel and abandon your changes and restart Myrlyn. This is
-often much easier than trying to solve all those dependency problems manually.
+dwell on it - just cancel and abandon your changes, and then restart
+Myrlyn. This is often much easier than trying to solve all those dependency
+problems manually.
 
 Myrlyn is quick to start. Use it to your advantage.
 
