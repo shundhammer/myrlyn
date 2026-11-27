@@ -514,8 +514,8 @@ YQPkgSelector::layoutNotifications( QWidget * parent )
 
     // If the user clicks on a link on the label, we have to check
     // which repository upgrade job to add or remove, for that
-    // we will encode the links as repoupgradeadd://alias and
-    // repoupgraderemove:://alias
+    // we will encode the links as repo-upgrade-add:alias and
+    // repo-upgrade-remove:alias
 
     connect( _switchToRepoLabel,          SIGNAL( linkActivated( QString ) ),
              this,                        SLOT  ( switchToRepo ( QString ) ) );
@@ -1415,11 +1415,12 @@ YQPkgSelector::updateSwitchRepoLabels()
              ! repo.isSystemRepo() &&
              _repoFilterView->selectedRepo() == repo )
         {
-            QString html = _( "<p><a href=\"repoupgradeadd:///%1\">"
+            QString targetUrl = QString( "repo-upgrade-add:%1" ).arg( fromUTF8( repo.alias() ) );
+            QString html = _( "<p><a href=\"%1\">"
                               "Switch system packages</a> to the versions "
                               "in this repository (%2)</p>" )
-                .arg( fromUTF8( repo.alias().c_str() ) )
-                .arg( fromUTF8( repo.name().c_str()  ) );
+                .arg( targetUrl )
+                .arg( fromUTF8( repo.name()  ) );
 
             _switchToRepoLabel->setText( _switchToRepoLabel->text() + html );
         }
@@ -1435,16 +1436,17 @@ YQPkgSelector::updateSwitchRepoLabels()
     {
         zypp::Repository repo( *it );
 
-        // add the option to cancel the upgrade job against this repository
+        // Add the option to cancel the upgrade job against this repository
         // if there is a job for it
 
         if ( zypp::getZYpp()->resolver()->upgradingRepo(repo) )
         {
-            QString html = _( "<p><a href=\"repoupgraderemove:///%1\">"
+            QString targetUrl = QString( "repo-upgrade-remove:%1" ).arg( fromUTF8( repo.alias() ) );
+            QString html = _( "<p><a href=\"%1\">"
                               "Cancel switching</a> system packages to versions "
                               "in repository %2</p>" )
-                .arg( fromUTF8( repo.alias().c_str() ) )
-                .arg( fromUTF8( repo.name().c_str()  ) );
+                .arg( targetUrl )
+                .arg( fromUTF8( repo.name()  ) );
 
             _cancelSwitchingToRepoLabel->setText( _cancelSwitchingToRepoLabel->text() + html );
         }
@@ -1461,38 +1463,51 @@ YQPkgSelector::updateSwitchRepoLabels()
 void
 YQPkgSelector::switchToRepo( const QString & link )
 {
-    logDebug() << "link " << link << " clicked on label" << endl;
+    QUrl url( link ); // one of "repo-add-url:/my-repo-alias" or "repo-remove-url:/my-repo-alias"
+    QString operation( url.scheme() );  // Normalized to lower case according to RFC 3986!
+    QString repoAlias( url.path()   );
+    bool    addUpgradeRepo;
 
-    QUrl url( link );
-    if ( url.scheme() == "repoupgradeadd" )
+    logInfo() << "Link " << link << " clicked" << endl;
+
+    if ( operation == "repo-upgrade-add" )
     {
-        logDebug() << "looking for repo " << url.path() << endl;
-
-        std::string alias( url.path().remove( 0, 1 ).toStdString() );
-        zypp::Repository repo( zypp::getZYpp()->pool().reposFind( alias ) );
-
-        logDebug() << repo.name() << endl;
-
-        if ( repo != zypp::Repository::noRepository )
-        {
-            zypp::getZYpp()->resolver()->addUpgradeRepo( repo );
-
-            // Do not complain about vendor change when switching repos (bsc##1149391)
-            zypp::getZYpp()->resolver()->dupSetAllowVendorChange( true );
-        }
+        addUpgradeRepo = true;
     }
-    else if ( url.scheme() == "repoupgraderemove" )
+    else if ( operation == "repo-upgrade-remove" )
     {
-        std::string alias( url.path().remove( 0, 1 ).toStdString() );
-        zypp::Repository repo( zypp::getZYpp()->pool().reposFind( alias ) );
-
-        if (  repo != zypp::Repository::noRepository )
-            zypp::getZYpp()->resolver()->removeUpgradeRepo( repo );
+        addUpgradeRepo = false;
     }
     else
-        logDebug() << "unknown link operation " << url.scheme() << endl;
+    {
+        logError() << "Unknown link operation " << operation << endl;
+        return;
+    }
+
+    zypp::Repository repo( zypp::getZYpp()->pool().reposFind( toUTF8( repoAlias )  ) );
+
+    if ( repo == zypp::Repository::noRepository )
+    {
+        logError() << "Repo with alias \"" << repoAlias << "\" not found" << endl;
+        return;
+    }
+
+    if ( addUpgradeRepo )
+    {
+        logInfo() << "Adding upgrade repo " << repoAlias << endl;
+        zypp::getZYpp()->resolver()->addUpgradeRepo( repo );
+
+        // Don't complain about vendor change when switching repos (bsc#1149391)
+        zypp::getZYpp()->resolver()->dupSetAllowVendorChange( true );
+    }
+    else // remove
+    {
+        logInfo() << "Removing upgrade repo " << repoAlias << endl;
+        zypp::getZYpp()->resolver()->removeUpgradeRepo( repo );
+    }
 
     resolveDependencies();
+    updateSwitchRepoLabels();
 }
 
 
